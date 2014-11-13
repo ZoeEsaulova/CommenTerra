@@ -23,6 +23,10 @@ Nodeclipse is free open-source project that grows with your contributions.
 
 File > Import > Git > Project from Git > Clone URI > https://github.com/ZoeEsaulova/CommenTerra.git
 
+### Get newest project version:
+
+Team > Pull
+
 ### Add changes to local repository:
 
 Team > Add to index
