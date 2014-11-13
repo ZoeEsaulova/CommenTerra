@@ -34,3 +34,7 @@ Team > Commit > Add comments
 ### Push changes to GitHub:
 
 Team > Push to Upstream 
+
+### Create new branch: 
+
+Team > Push to branch
