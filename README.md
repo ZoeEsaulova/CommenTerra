@@ -43,4 +43,3 @@ Team > Push to Upstream
 
 Team > Push to branch
 
-#Make changes in Test2 + Master
