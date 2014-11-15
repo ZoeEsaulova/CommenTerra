@@ -8,9 +8,10 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-//add connection to CommenTerraDB database
+/*add connection to ComTerDB database
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/CommenTerraDB');
+mongoose.connect('mongodb://localhost/ComTerDB');
+*/
 
 var app = express();
 
