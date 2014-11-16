@@ -22,10 +22,12 @@ var UserSchema = new mongoose.Schema({
   country: String,
   occupation: String,
   type: String,
-  upvotes: {type: Number, default: 0},
-  downvotes: {type: Number, default: 0},
+  upvotes: { type: Number, default: 0},
+  downvotes: { type: Number, default: 0},
   help: { Boolean, default: true },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
-mongoose.model('User', UserSchema);
+//mongoose.model('User', UserSchema);
+module.exports = mongoose.model(User, UserSchema);
+

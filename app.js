@@ -10,7 +10,14 @@ var users = require('./routes/users');
 
 /*add connection to ComTerDB database
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ComTerDB');
+var connStr = "mongodb://localhost/ComTerDB";
+mongoose.connect(connStr, function(err) {
+    if (err) throw err;
+    console.log("Successfully connected to MongoDB");
+});
+
+require('./models/Comments');
+require('./models/Users');
 */
 
 var app = express();
