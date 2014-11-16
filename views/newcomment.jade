@@ -1,0 +1,8 @@
+extends layout
+
+block content
+	h1= title
+	form#formAddUser(name="addcomment",method="post",action="/addcomment")
+		input#inputTitle(type="text", placeholder="title", name="title")
+		button#btnSubmit(type="submit") submit
+		

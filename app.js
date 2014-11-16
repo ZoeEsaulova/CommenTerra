@@ -6,9 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
-/*add connection to ComTerDB database
+var monk = require('monk');
+var db = monk('localhost:27017/ComTerDB');
+
+//add connection to ComTerDB database
 var mongoose = require('mongoose');
 var connStr = "mongodb://localhost/ComTerDB";
 mongoose.connect(connStr, function(err) {
@@ -19,9 +22,9 @@ mongoose.connect(connStr, function(err) {
 var mongooseTypes = require("mongoose-types");
 mongooseTypes.loadTypes(mongoose);
 
-require('./models/Comments');
-require('./models/Users');
-*/
+require('./models/comment-model');
+require('./models/User-model');
+
 
 var app = express();
 
@@ -37,8 +40,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
