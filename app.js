@@ -15,6 +15,9 @@ mongoose.connect(connStr, function(err) {
     if (err) throw err;
     console.log("Successfully connected to MongoDB");
 });
+//load email and url types
+var mongooseTypes = require("mongoose-types");
+mongooseTypes.loadTypes(mongoose);
 
 require('./models/Comments');
 require('./models/Users');

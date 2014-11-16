@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var Email = mongoose.SchemaTypes.Email;
+var Url = mongoose.SchemaTypes.Url;
 
 var UserSchema = new mongoose.Schema({
   username: {
@@ -24,10 +26,10 @@ var UserSchema = new mongoose.Schema({
   type: String,
   upvotes: { type: Number, default: 0},
   downvotes: { type: Number, default: 0},
-  help: { Boolean, default: true },
+  help: { type: Boolean, default: 0 },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 //mongoose.model('User', UserSchema);
-module.exports = mongoose.model(User, UserSchema);
+module.exports = mongoose.model("User", UserSchema);
 

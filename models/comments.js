@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Url = mongoose.SchemaTypes.Url;
 
 var CommentSchema = new mongoose.Schema({
   title: String,
@@ -11,4 +12,4 @@ var CommentSchema = new mongoose.Schema({
 });
 
 //mongoose.model('Comment', CommentSchema);
-module.exports = mongoose.model(Comment, CommentSchema);
+module.exports = mongoose.model('Comment', CommentSchema);
