@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Email = mongoose.SchemaTypes.Email;
+//var Email = mongoose.SchemaTypes.Email;
 
 //Define the Database schema for "users" collection
 var UserSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ var UserSchema = new mongoose.Schema({
 	  trim: true	  
   },
   email: {
-	  type: Email, 
+	  type: text, 
 	  unique: true,
 	  required: true,
 	  trim: true
