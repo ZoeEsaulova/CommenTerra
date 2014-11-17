@@ -23,7 +23,7 @@ var mongooseTypes = require("mongoose-types");
 mongooseTypes.loadTypes(mongoose);
 
 require('./models/comment-model');
-require('./models/User-model');
+require('./models/user-model');
 
 
 var app = express();
