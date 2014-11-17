@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var Url = mongoose.SchemaTypes.Url;
+//var Url = mongoose.SchemaTypes.Url;
 
 //Define the Database schema for "comments" collection
 var CommentSchema = new mongoose.Schema({
   title: { type: String, required: true }
-  url: Url,
+  url: text,
   text: String,
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   rating: {type: Number, default: 0},
