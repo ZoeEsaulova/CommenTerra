@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 //Define the Database schema for "comments" collection
 var CommentSchema = new mongoose.Schema({
   title: { type: String, required: true }
-  url: text,
+  url: String,
   text: String,
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   rating: {type: Number, default: 0},
