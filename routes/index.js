@@ -49,7 +49,7 @@ router.post('/addcomment', function(req, res) {
 	var newComment = new Comment({ title: newTitle });
 	
 	/*Save new comment in databse. New comments will be saved in "comments" collection of the "ComTerDB"
-	You can check whether the user was saved using following commands in MongoDB shell:
+	You can check whether the comment was saved using following commands in MongoDB shell:
 	use ComTerDB
 	db.comments.find().pretty() */
 	newComment.save(function (err) {
