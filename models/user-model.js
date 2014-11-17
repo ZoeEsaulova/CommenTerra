@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Email = mongoose.SchemaTypes.Email;
-var Url = mongoose.SchemaTypes.Url;
 
+//Define the Database schema for "users" collection
 var UserSchema = new mongoose.Schema({
   username: {
 	  type: String, 
@@ -27,6 +27,7 @@ var UserSchema = new mongoose.Schema({
   upvotes: { type: Number, default: 0},
   downvotes: { type: Number, default: 0},
   help: { type: Boolean, default: 0 },
+  //Comments created by the user
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
