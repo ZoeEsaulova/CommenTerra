@@ -37,20 +37,15 @@ router.post('/adduser', function(req, res) {
 
 /* POST to Add Comment Service */
 router.post('/addcomment', function(req, res) {
-//var monk = require('monk');
-//var db = monk('localhost:27017/ComTerDB');
-	// Set our internal DB variable
-    //var db = req.db;
-	//var collection = db.get('comments');
-    // Get our form values. These rely on the "name" attributes
-    var newTitle = req.body.title;
+	
+        // Get our form values. These rely on the "name" attributes
+        var newTitle = req.body.title;
 	var Comment = require('mongoose').model('Comment');
 	var newComment = new Comment({ title: newTitle });
 	newComment.save(function (err) {
 		if (err) return console.error(err);
 		console.log("Comment Saved!!!");
 	});
-	//collection.insert(newComment);
 	
 	console.log(newTitle);
 	
