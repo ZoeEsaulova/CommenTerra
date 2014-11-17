@@ -16,7 +16,7 @@ var UserSchema = new mongoose.Schema({
 	  trim: true	  
   },
   email: {
-	  type: text, 
+	  type: String, 
 	  unique: true,
 	  required: true,
 	  trim: true
