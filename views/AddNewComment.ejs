@@ -1,0 +1,86 @@
+<head>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>CommenTerra - New Comment</title>
+    <link rel="stylesheet" href="css/CommenTerra.css" />
+    <script src="js/vendor/modernizr.js"></script>
+	<style> 
+		header {background-color:#00EE00; position:fixed; top:0px; left:-15px; right:-15px;  padding:0px;}
+		body {background-color:"white"; padding:50px;}
+		footer {clear:left; margin-top:1em; background:#00EE00; padding:10px;}
+	</style>
+	<header>
+		<nav class="top-bar" margin:25px>
+			<ul class="title-area">
+				<li class="name">
+					<h1>
+						<a href="Home.html">
+							<font face="Calibri" size="5" color="#707070">&nbsp&nbsp CommenTerra</font>
+						</a>
+					</h1>
+				</li>
+				
+				<li class="toggle-topbar menu-icon">
+					<a href="#">
+						<span>menu</span>
+					</a>
+				</li>
+			</ul>
+	
+			<section class="top-bar-section">
+				<ul class="right">
+					<li class="text">
+						<a href="FAQ.html">
+						<font face="Calibri" size="6" color="#707070">? &nbsp&nbsp&nbsp</font>
+					</li>
+				</ul>
+				
+				<ul class="right">
+					<li class="has-button">
+						<a class="small button round" href="#">Login</a>
+					</li>
+				</ul>
+	 
+				<ul class="right">
+					<li class="search">
+						<form>
+							<input type="text" name="q" id="suchbegriff" placeholder="search for keywords..." />
+						</form>
+					</li>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<li class="has-button">
+						<a href="ExtendedSearchResult.html" class="small radius button">Search</a>
+					</li>					
+				</ul>
+			</section>
+		</nav>	
+	</header>
+  </head>
+
+  <body>
+  		<h2>Add new comment</h2>
+  		<br>
+  		<form action="/comments/add" method="post">
+  			<div class="form-group">
+			<label>Title</label>
+			<input type="text" class="form-control" name="title">
+		</div>
+		
+			<p> URL: <input name="url" type="text" size="300" maxlength="200" style="width:300px;"/>
+		
+		<br>
+		
+			<p>Comment</p>
+			<textarea name="text" cols="50" rows="5"/></textarea><br>
+			<button type="submit" class="small radius button"> Add </button>
+		</form> 
+
+		<footer>
+			<a href="AboutUs.html">
+				<font face="Calibri" size="2" color="707070">&nbsp&nbsp&nbsp about us</font>
+			</a>
+		</footer>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommenTerra | Welcome</title>
+    <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+  </head>
+
+  <body>
+    
+    <div class="fixed">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area"> 
+        <li class="name"> 
+          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+        </li> 
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+      </ul>
+      <section class="top-bar-section"> 
+        <!-- Right Nav Section --> 
+        <ul class="right">
+          <li class="has-form">
+            <form data-abide>
+                <div class="row collapse">
+                  <div class="small-9 columns ">
+                      <div class "search-field">
+                        <label> <input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
+                        <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
+                      </div>
+                  </div>
+                  <div class="small-3 columns end">
+                    <button href="advanced_search.html" class="success radius expand" type"submit">Search</button>
+                  </div>
+                </div>
+            </form>
+          </li>
+          <li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
+          <div id="LogInModal" class="reveal-modal" data-reveal>
+            <h2>Log In</h2>
+            <p class="lead">Please log in with your e-mail and your password</p>
+            <p><form data-abide>
+              <div class="email-field">
+                <label>e-Mail 
+                  <small>required</small>
+                  <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
+                </label>
+                <small class="error">Please type in a valid e-mail-adress!</small>
+              </div>
+              <div class="password-field">
+                <label>Password 
+                  <small>required</small>
+                  <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
+                </label>
+                <small class="error">Please type in your password!</small>
+              </div>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
+            </form></p>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+          <li class="has-dropdown"> 
+            <a href="#">Site Navigation</a> 
+            <ul class="dropdown"> 
+              <li><a href="new_comment.html">New Comment</a></li> 
+              <li><a href="advanced_search.html">Advanced Search</a></li>
+              <li><a href="faq.html">Help / FAQ</a></li> 
+            </ul> 
+          </li> 
+        </ul> 
+      </section>
+    </nav>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.joyride.js"></script>
+    <script>
+      $(document).foundation();
+      //$(document).foundation('joyride', 'start');
+    </script>
+  </body>
+</html>

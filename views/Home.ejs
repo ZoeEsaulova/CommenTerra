@@ -1,0 +1,656 @@
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommenTerra | Welcome</title>
+    <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+  </head>
+
+  <body>
+  	
+    <div class="fixed">
+    <nav class="top-bar" data-topbar role="navigation">
+  		<ul class="title-area"> 
+        <li class="name"> 
+          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+        </li> 
+  			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+  			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+  		</ul>
+      <section class="top-bar-section"> 
+  			<!-- Right Nav Section --> 
+        <ul id="numero1" class="right">
+          <li class="has-form">
+            <form action="/api/v1" method="post" data-abide>
+                <div class="row collapse">
+                  <div class="small-9 columns ">
+                      <div class "search-field">
+                        <label> <input type="text" name="q" id="keyword" placeholder="search for keyword" required pattern="alpha_numeric"> </label>
+                        <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
+                      </div>
+                  </div>
+                  <div class="small-3 columns end">
+                    <button class="success radius expand" type="submit">Search</button>
+                  </div>
+                </div>
+            </form>
+          </li>
+  				<li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
+          <div id="LogInModal" class="reveal-modal" data-reveal>
+            <h2>Log In</h2>
+            <p class="lead">Please log in with your e-mail and your password</p>
+            <p><form data-abide>
+              <div class="email-field">
+                <label>e-Mail 
+                  <small>required</small>
+                  <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
+                </label>
+                <small class="error">Please type in a valid e-mail-adress!</small>
+              </div>
+              <div class="password-field">
+                <label>Password 
+                  <small>required</small>
+                  <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
+                </label>
+                <small class="error">Please type in your password!</small>
+              </div>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
+            </form></p>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+  				<li class="has-dropdown"> 
+  					<a href="#">Site Navigation</a> 
+  					<ul class="dropdown"> 
+  						<li><a href="new_comment.html">New Comment</a></li> 
+  						<li><a href="advanced_search.html">Advanced Search</a></li>
+              <li><a href="faq.html">Help / FAQ</a></li> 
+  					</ul> 
+  				</li> 
+  			</ul> 
+  		</section>
+  	</nav>
+    </div>
+
+    <div class="fixed">
+      <nav class="top-bar-border"></nav>
+    </div>
+
+    <strong class="show-for-large-up">
+    <div class="panel custom">  
+      <ul class="large-block-grid-3"> 
+        <li>
+            <img id="firstStop" src="img/vektorlogo.svg" width="205" height="205">
+        </li> 
+        <li>
+          <form data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button id="numero2" href="profile_??????.html" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+          </form>
+        </li>
+        <li>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Comment on almost any geodata-type</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Absolutely free</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Easy to use</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Comprehensive search-feature</font></p></div></div>
+        </li> 
+      </ul>
+    </div>
+    </strong>
+    
+    <strong class="show-for-medium-only">
+      <div class="panel custom">
+        <ul class="small-block-grid-2">
+        <li>
+            <img src="img/vektorlogo.svg" width="205" height="205">
+        </li> 
+        <li>
+          <form data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button href="profile.html_???????" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+          </form>
+        </li>
+        </ul>
+      </div>
+    </strong>
+
+    <strong class="show-for-small-only">
+      <div class="panel custom">
+          <form data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button href="profile.html_???????" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+          </form>
+        </li>
+      </div>
+    </strong>
+
+    <div class="panel custom2">
+
+      <ul class="small-block-grid-2">
+        <li>
+          <a id="numero3" href="new_comment.html" class="success button radius expand">New Comment</a>
+        </li>
+        <li>
+          <a id="numero4" href="advanced_search.html" class="success button radius expand">Advanced Search</a>
+        </li>
+      </ul> 
+
+      <strong class="hide-for-large-up">
+        <div class="panel custom">
+
+          <dl class="tabs" data-tab>
+            <dd><a href="#panel1">View Comments</a></dd>
+            <dd class="content active"><a href="#panel2">View Map</a></dd>
+          </dl>
+
+          <div class="tabs-content">
+
+            <div class="content" id="panel1">
+              <!-- Kommentare -->
+              <dl class="accordion" data-accordion>
+                <dd class="accordion-navigation">
+                  <a href="#panel1b">Berlin POI</a>
+                  <div id="panel1b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                    </li>
+                    </ul>
+                      Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+                <dd class="accordion-navigation">
+                  <a href="#panel2b">NRW DGK5</a>
+                  <div id="panel2b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp29-11-2014
+                    </li>
+                    </ul>
+                      Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+                <dd class="accordion-navigation">
+                  <a href="#panel3b">Germany Waterways</a>
+                  <div id="panel3b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp07-05-2014
+                    </li>
+                    </ul>
+                      Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+                <dd class="accordion-navigation">
+                  <a href="#panel4b">Europe Choroplethic</a>
+                  <div id="panel4b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.eu.de/geobasis/wms_eu_choropleth?"><font color="#2ba6cb">http://www.wms.eu.de/geobasis/wms_eu_choropleth?</font></a>
+                      <p>
+                      <p>
+                      10-09-2014
+                      <p>
+                    </li>
+                    </ul>
+                      Comment 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <font color="#222222">Anonym</font>&nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+                <dd class="accordion-navigation">
+                  <a href="#panel5b">Germany DOP40</a>
+                  <div id="panel5b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.deu.de/geobasis/wms_deu_dop40?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_dop40?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp27-11-2014
+                    </li>
+                    </ul>
+                      Comment 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_Terr4ner.html"><font color="#2ba6cb">Terr4ner</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp8&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+              </dl>
+            </div>
+
+            <div class="content active" id="panel2">
+              <!-- Karte -->
+              <div class="map" id="map" style="width: 100%; height: 750px"></div>
+ 
+            </div>
+
+          </div>
+
+        </div>
+      </strong>      
+
+      <strong class="show-for-large-up">
+      <ul class="small-block-grid-2" data-equalizer>
+        <li>
+          <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+            <!-- Kommentare -->
+            <dl class="accordion" data-accordion>
+              <dd class="accordion-navigation">
+                <a id="lastStop" href="#panel1b">Berlin POI</a>
+                <div id="panel1b" class="content">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                    <p>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp04-12-2014
+                  </li>
+                  </ul>
+                  Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                  </li>
+                  </ul>
+                </div>
+              </dd>
+              <dd class="accordion-navigation">
+                <a href="#panel2b">NRW DGK5</a>
+                <div id="panel2b" class="content">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
+                    <p>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp29-11-2014
+                  </li>
+                  </ul>
+                  Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
+                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                  </li>
+                  </ul>
+                </div>
+              </dd>
+              <dd class="accordion-navigation">
+                <a href="#panel3b">Germany Waterways</a>
+                <div id="panel3b" class="content">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
+                    <p>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp07-05-2014
+                  </li>
+                  </ul>
+                  Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
+                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                  </li>
+                  </ul>
+                </div>
+              </dd>
+              <dd class="accordion-navigation">
+                <a href="#panel4b">Europe Choroplethic</a>
+                <div id="panel4b" class="content">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="http://www.wms.eu.de/geobasis/wms_eu_choropleth?"><font color="#2ba6cb">http://www.wms.eu.de/geobasis/wms_eu_choropleth?</font></a>
+                    <p>
+                    <p>
+                    10-09-2014
+                    <p>
+                  </li>
+                  </ul>
+                  Comment 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <font color="#222222">Anonym</font>&nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                  </li>
+                  </ul>
+                </div>
+              </dd>
+              <dd class="accordion-navigation">
+                <a href="#panel5b">Germany DOP40</a>
+                <div id="panel5b" class="content">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="http://www.wms.deu.de/geobasis/wms_deu_dop40?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_dop40?</font></a>
+                    <p>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp27-11-2014
+                  </li>
+                  </ul>
+                  Comment 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="profile_Terr4ner.html"><font color="#2ba6cb">Terr4ner</font></a>
+                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp8&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                  </li>
+                  </ul>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </li>
+        <li>
+          <div class="panel custom" data-equalizer-watch>
+            <!-- Karte -->
+            <div id="numero5">
+            <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+    </strong>
+
+    </div>
+              <script>
+              
+              if (matchMedia('only screen and (max-width: 64em)').matches) {
+                //Karte für kleine Bildschirme
+                var map = L.map('map');
+
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  maxZoom: 20,
+                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                  id: 'examples.map-i875mjb7'
+                }).addTo(map);
+
+                function onLocationFound(e) {
+                  var radius = e.accuracy / 2;
+
+                  L.marker(e.latlng).addTo(map)
+                  .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                  L.circle(e.latlng, radius, {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map);
+                }
+
+                function onLocationError(e) {
+                  map.setView([51.96935, 7.59588], 13);
+                  alert(e.message);
+                }
+
+                map.on('locationfound', onLocationFound);
+                map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
+
+                map.locate({setView: true, maxZoom: 13});
+                
+                L.marker([51.96935, 7.59588]).addTo(map)
+                  .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                L.polygon([
+                  [51.97424, 7.59757],
+                  [51.97415, 7.59839],
+                  [51.97321, 7.59819],
+                  [51.97326, 7.59736]], {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
+
+                var popup = L.popup();
+
+                function onMapClick(e) {
+                  popup
+                  .setLatLng(e.latlng)
+                  .setContent("You clicked the map at " + e.latlng.toString())
+                  .openOn(map);
+                }
+
+                map.on('click', onMapClick);
+              }
+
+              if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+                //Karte für mittlere Bildschirme
+                var map1 = L.map('map1');
+                //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
+
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  maxZoom: 20,
+                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                  id: 'examples.map-i875mjb7'
+                }).addTo(map1);
+
+                function onLocationFound1(e) {
+                  var radius1 = e.accuracy / 2;
+
+                  L.marker(e.latlng).addTo(map1)
+                  .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
+
+                  L.circle(e.latlng, radius1, {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map1);
+                }
+
+                function onLocationError1(e) {
+                  alert(e.message);
+                }
+
+                map1.on('locationfound', onLocationFound1);
+                map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
+
+                map1.locate({setView: true, maxZoom: 16});
+                
+                L.marker([51.96935, 7.59588]).addTo(map1)
+                  .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                L.polygon([
+                  [51.97424, 7.59757],
+                  [51.97415, 7.59839],
+                  [51.97321, 7.59819],
+                  [51.97326, 7.59736]], {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map1).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
+
+
+                function onMapClick1(e) {
+                  popup
+                  .setLatLng(e.latlng)
+                  .setContent("You clicked the map at " + e.latlng.toString())
+                  .openOn(map1);
+                }
+
+                map1.on('click', onMapClick1);
+
+              }
+
+              </script>
+
+    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+
+    <div id="footer">
+      // <a href="about.html"><font color="#424242">About CommenTerra</font></a> // 
+      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> // 
+      <a href="contact.html"><font color="#424242">Contact Us</font></a> //
+    </div>
+
+    <ol class="joyride-list" data-joyride>
+      <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
+        <h5>Hi there!</h5>
+        <p>Hello and welcome to the CommenTerra Project...</p>
+      </li>
+      <li data-id="numero1" data-text="Next" data-prev-text="Prev" data-options="tip_location: bottom">
+        <p>... if you want to know more about the project and how to work with it, please see the FAQ / Help sites via our multi-functional top-bar. You will also find helpful Links at the bottom of the page.</p>
+      </li>
+      <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>If you instead want to start right away, we won't blame you! Sign up now and enjoy all the member-privelidges and our awesome community.</p>
+      </li>
+      <li data-id="numero3" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>With this button you can add a new comment on almost any geodataset you desire.</p>
+      </li>
+      <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>And with this button you can enjoy the comfort of our awesome search-engine. Just get comfortable, while we do the research for you and get you the comments and datasets you are looking for.</p>
+      </li>
+      <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>This is the map with the markers and potential layers of the comments...</p>
+      </li>
+      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this finally is, where the comments are! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+      </li>
+    </ol>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.joyride.js"></script>
+    <script>
+      $(document).foundation();
+      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+        $(document).foundation('joyride', 'start');
+      }
+      
+    </script>
+  </body>
+</html>
