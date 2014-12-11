@@ -4,16 +4,17 @@ module.exports = function(app, passport) {
 
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
+		
 		if (req.isAuthenticated()) {
-			res.render('Home.ejs', { username: req.user.local.username, action: "/logout", actionName: "Logout"  });
+			res.render('Home.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout"  });
 		} else {
-			res.render('Home.ejs', { username: 'Anonymous', action: "/login", actionName: "Login" });
-		}
+			res.render('Home.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login" });
+		}  
 		
 	});
 
 	// PROFILE SECTION =========================
-	app.get('/profile', function(req, res) {
+	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user
 		});

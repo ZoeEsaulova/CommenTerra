@@ -2,7 +2,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="css/leaflet.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-
   </head>
 
   <body>
@@ -20,7 +18,7 @@
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
-        <li class="name" id="test"> 
+        <li class="name"> 
           <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
   			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
@@ -44,12 +42,11 @@
                 </div>
             </form>
           </li>
-  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
-          <% if (!boolean1) { %>
+  				<li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
             <p class="lead">Please log in with your e-mail and your password</p>
-            <p><form data-abide action="/login" method="post">
+            <p><form data-abide>
               <div class="email-field">
                 <label>e-Mail 
                   <small>required</small>
@@ -64,24 +61,16 @@
                 </label>
                 <small class="error">Please type in your password!</small>
               </div>
-              <button href="/" class="radius" type="submit">Log In</button>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
-          <% } %>
-
-
   				<li class="has-dropdown"> 
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="new_comment.html">New Comment</a></li> 
   						<li><a href="advanced_search.html">Advanced Search</a></li>
               <li><a href="faq.html">Help / FAQ</a></li> 
-
-              <% if (boolean1) { %>
-              <li><a href="profile.html">Profile</a></li> 
-              <% } %>
-
   					</ul> 
   				</li> 
   			</ul> 
@@ -93,7 +82,6 @@
       <nav class="top-bar-border"></nav>
     </div>
 
-    <% if (!boolean1) { %> 
     <strong class="show-for-large-up">
     <div class="panel custom">  
       <ul class="large-block-grid-3"> 
@@ -130,8 +118,7 @@
       </ul>
     </div>
     </strong>
-    <% } %>
-
+    
     <strong class="show-for-medium-only">
       <div class="panel custom">
         <ul class="small-block-grid-2">
