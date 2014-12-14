@@ -1,6 +1,7 @@
-// config/database.js
+// define the database
+
 module.exports = {
 
-	'url' : 'mongodb://localhost/newDB' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+	'url' : 'mongodb://localhost/newDB' 
 
 };

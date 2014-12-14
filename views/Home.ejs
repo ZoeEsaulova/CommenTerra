@@ -16,7 +16,11 @@
   </head>
 
   <body>
-  	
+    <!-- TO BE UPDATED. Login or Signup failed --> 
+  	<% if (message.length > 0) { %>
+      <div class="alert alert-danger">ERROR <%= message %></div>
+    <% } %>
+
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
@@ -74,7 +78,7 @@
   				<li class="has-dropdown"> 
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
-  						<li><a href="new_comment.html">New Comment</a></li> 
+  						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="advanced_search.html">Advanced Search</a></li>
               <li><a href="faq.html">Help / FAQ</a></li> 
 
@@ -184,7 +188,7 @@
 
       <ul class="small-block-grid-2">
         <li>
-          <a id="numero3" href="new_comment.html" class="success button radius expand">New Comment</a>
+          <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
         </li>
         <li>
           <a id="numero4" href="advanced_search.html" class="success button radius expand">Advanced Search</a>

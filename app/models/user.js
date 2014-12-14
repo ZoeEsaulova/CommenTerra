@@ -1,6 +1,8 @@
+/* Database schema for users*/
+
 // load the things we need
-var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
+var mongoose = require('mongoose'),
+    bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -25,25 +27,26 @@ var userSchema = mongoose.Schema({
 		},
 		country: String,
 		occupation: String,
-		status: String,
+		// TO BE UPDATED:
+		status: {type: String, enum: ['User', 'Expert', '???']},
 		upvotes: { type: Number, default: 0},
 		downvotes: { type: Number, default: 0},
 		help: { type: Boolean, default: 0 },
 		//Comments created by the user
-		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
     },
     
 });
 
 // generating a hash
 userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 };
 
 // checking if password is valid
 userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.local.password)
 };
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)

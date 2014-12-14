@@ -1,3 +1,5 @@
+/* Database schema for datasets*/
+
 var mongoose = require('mongoose');
 
 

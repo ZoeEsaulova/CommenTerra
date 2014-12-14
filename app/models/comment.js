@@ -1,3 +1,5 @@
+/* Database schema for comments*/
+
 // load the things we need
 var mongoose = require('mongoose');
 
