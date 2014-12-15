@@ -12,7 +12,5 @@ If you would like to download the code and try it for yourself:
 4. Launch: `node server.js`
 5. Visit in your browser at: `http://localhost:3000`
 
-## Sources:
 
-- [Easy node authentication](http://scotch.io/series/easy-node-authentication)
 
