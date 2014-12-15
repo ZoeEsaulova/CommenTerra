@@ -30,6 +30,52 @@ module.exports = function(app, passport) {
 		res.redirect('/')
 	});
 
+	//map_viewer
+	app.get('/mapviewer', function(req,res) {
+		if (req.isAuthenticated()) {
+			res.render('map_viewer.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+				message: req.flash('loginMessage')  })
+		} else {
+			res.render('map_viewer.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+				message: req.flash('loginMessage') })
+		} 
+	})
+
+	//FAG
+	app.get('/faq', function(req,res) {
+		if (req.isAuthenticated()) {
+			res.render('faq.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+				message: req.flash('loginMessage')  })
+		} else {
+			res.render('faq.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+				message: req.flash('loginMessage') })
+		} 
+	})
+
+	// ADVANCED SEARCH
+	app.get('/advancedsearch', function(req,res) {
+		if (req.isAuthenticated()) {
+			res.render('advanced_search.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+				message: req.flash('loginMessage')  })
+		} else {
+			res.render('advanced_search.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+				message: req.flash('loginMessage') })
+		} 
+	})
+
+	//ABOUT and CONTACT
+	app.get('/about', function(req,res) {
+		if (req.isAuthenticated()) {
+			res.render('about.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+				message: req.flash('loginMessage')  })
+		} else {
+			res.render('about.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+				message: req.flash('loginMessage') })
+		} 
+	})
+
+
+
 // =============================================================================
 // AUTHENTICATE ==================================================
 // =============================================================================

@@ -12,20 +12,22 @@
     <link rel="stylesheet" href="css/leaflet.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-
   </head>
 
   <body>
     <!-- TO BE UPDATED. Login or Signup failed --> 
   	<% if (message.length > 0) { %>
-      <div class="alert alert-danger">ERROR <%= message %></div>
+      <div data-alert class="alert-box">
+        <%= message %>
+      <a href="#" class="close">&times;</a>
+      </div>
     <% } %>
 
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
         <li class="name"> 
-          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
   			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
   			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
@@ -68,7 +70,7 @@
                 </label>
                 <small class="error">Please type in your password!</small>
               </div>
-              <button href="/" class="radius" type="submit">Log In</button>
+              <button id="LogInModal2" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
@@ -79,11 +81,11 @@
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
-  						<li><a href="advanced_search.html">Advanced Search</a></li>
-              <li><a href="faq.html">Help / FAQ</a></li> 
+  						<li><a href="/advancedsearch">Advanced Search</a></li>
+              <li><a href="/faq">Help / FAQ</a></li> 
 
               <% if (boolean1) { %>
-              <li><a href="profile.html">Profile</a></li> 
+              <li><a href="/profile">Profile</a></li> 
               <% } %>
 
   					</ul> 
@@ -192,7 +194,7 @@
           <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
         </li>
         <li>
-          <a id="numero4" href="advanced_search.html" class="success button radius expand">Advanced Search</a>
+          <a id="numero4" href="/advancedsearch" class="success button radius expand">Advanced Search</a>
         </li>
       </ul> 
 
@@ -629,10 +631,11 @@
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
+    <!--footer-->
+    <div class="panel custom4" style="width: 100%; height: 2px"></div>
     <div id="footer">
-      // <a href="about.html"><font color="#424242">About CommenTerra</font></a> // 
-      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> // 
-      <a href="contact.html"><font color="#424242">Contact Us</font></a> //
+    ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
+      <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
     </div>
 
     <ol class="joyride-list" data-joyride>
