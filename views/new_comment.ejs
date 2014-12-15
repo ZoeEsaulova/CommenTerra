@@ -1,0 +1,255 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommenTerra | New Comment</title>
+    <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+
+  <body>
+    
+    <div class="fixed">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area"> 
+        <li class="name"> 
+          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+        </li> 
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+      </ul>
+      <section class="top-bar-section"> 
+        <!-- Right Nav Section --> 
+        <ul id="numero1" class="right">
+          <li class="has-form">
+            <form action="/api/v1" method="post" data-abide>
+                <div class="row collapse">
+                  <div class="small-9 columns ">
+                      <div class "search-field">
+                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
+                        <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
+                      </div>
+                  </div>
+                  <div class="small-3 columns end">
+                    <button class="success radius expand" type="submit">Search</button>
+                  </div>
+                </div>
+            </form>
+          </li>
+          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+          <% if (!boolean1) { %>
+          <div id="LogInModal" class="reveal-modal" data-reveal>
+            <h2>Log In</h2>
+            <p class="lead">Please log in with your e-mail and your password</p>
+            <p><form data-abide>
+              <div class="email-field">
+                <label>E-Mail 
+                  <small>required</small>
+                  <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
+                </label>
+                <small class="error">Please type in a valid e-mail-adress!</small>
+              </div>
+              <div class="password-field">
+                <label>Password 
+                  <small>required</small>
+                  <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
+                </label>
+                <small class="error">Please type in your password!</small>
+              </div>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
+            </form></p>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+          <% } %>
+
+          <li class="has-dropdown"> 
+            <a href="#">Site Navigation</a> 
+            <ul class="dropdown"> 
+              <li><a href="/comments/add">New Comment</a></li> 
+              <li><a href="/advancedsearch">Advanced Search</a></li>
+              <li><a href="/faq">Help / FAQ</a></li> 
+
+              <% if (boolean1) { %>
+              <li><a href="/profile">Profile</a></li> 
+              <% } %>
+            </ul> 
+          </li> 
+        </ul> 
+      </section>
+    </nav>
+    </div>
+
+    <div class="fixed-under">
+      <nav class="top-bar-border"></nav>
+    </div>
+
+    <!--oberer grauer Balken-->
+    <div class="panel custom">
+      <font color="white" size="4">URL:</font>
+      <input type="text" name="url" id="firstStop" placeholder="URL..." />
+      <strong class="show-for-large-up">
+        <button class="tiny radius" id="#" type="submit" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
+          <font color="#424242">Validate URL</font>
+        </button>
+      </strong>
+      <strong class="hide-for-large-up">
+        <button class="tiny radius" id="#" type="submit" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+          <font color="#424242">Validate URL</font>
+        </button>
+      </strong>
+    </div>
+
+    <!--unterer grauer Bereich-->
+    <div class="panel custom2">
+      <strong class="show-for-large-up">
+        <ul class="small-block-grid-2" data-equalizer>
+          <li>
+            <div class="panel custom" data-equalizer-watch>
+              <!-- Kommentar -->
+              <div class="panel custom2">
+                <div id="panel5b" class="content">
+                  <font color="#424242" size="4">Title:</font>
+                  <input type="text" name="title" id="title" placeholder="Title..." />
+                  <p></p>
+                  <font color="#424242" size="4">URL:<p></p>
+                    <p id="urlResult">
+                      Your URL will be shown here after you validate it!
+                    </p>
+                  </font>
+                  </a>
+                  <p></p>
+                  <ul class="small-block-grid-2">
+                    <li>
+                      <font color="#424242" size="4">Rating (optional):</font><br>
+                      <!--- five star rating!!! -->
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    </li>
+                    <li>
+                      <font color="#424242" size="4">Date:</font><br>
+                      <script type="text/javascript" color="424242">
+                        var now = new Date();
+                        document.write(now.toString());
+                      </script>
+                    </li>
+                  </ul>
+                  <p></p>
+                  <font color="#424242" size="4">Comment:</font>
+                  <dl class="accordion" data-accordion>
+                    <dd class="accordion-navigation">
+                      <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                    </dd>
+                  </dl>
+                  <a href=""><font color="#2ba6cb">anonyme</font></a>
+                  <p></p>
+                  <button class="tiny radius expand" type="submit">
+                    <font color="#424242">Save</font>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="panel custom" data-equalizer-watch>
+              <!-- Karte -->
+              <div id="numero5">
+              <div class="map" id="map1" style="width: 100%; height: 600px; border-radius: 3px"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </strong>
+
+      <strong class="hide-for-large-up">
+        <div class="panel custom">
+
+          <dl class="tabs" data-tab>
+            <dd><a href="#panel1">View Comments</a></dd>
+            <dd class="content active"><a href="#panel2">View Map</a></dd>
+          </dl>
+
+          <div class="tabs-content">
+
+            <div class="content" id="panel1">
+              <!-- Kommentare -->
+              <div class="panel custom2">
+                <div id="panel5b" class="content">
+                  <font color="#424242" size="4">Title:</font>
+                  <input type="text" name="title" id="title" placeholder="Title..." />
+                  <p></p>
+                  <font color="#424242" size="4">URL:</font><br>
+                  <p id="urlResult1">
+                      Your URL will be shown here after you validate it!
+                  </p>
+                  <p></p>
+                    <font color="#424242" size="4">Rating:</font><br>
+                    <!--- five star rating!!! -->
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <p></p>
+                    <font color="#424242" size="4">Date:</font><br>
+                    <script type="text/javascript">
+                      var now = new Date();
+                      document.write(now.toString());
+                    </script>
+                  <p></p>
+                  <font color="#424242" size="4">Comment:</font>
+                  <dl class="accordion" data-accordion>
+                    <dd class="accordion-navigation">
+                      <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                    </dd>
+                  </dl>
+                  <a href=""><font color="#2ba6cb">anonyme</font></a>
+                  <button class="tiny radius expand" type="submit">
+                    <font color="#424242">Save</font>
+                  </button>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="content active" id="panel2">
+              <!-- Karte -->
+              <div class="map" id="map" style="width: 100%; height: 750px"></div>
+            </div>
+          </div>
+        </div>
+      </strong>      
+    </div>
+
+
+    <!--footer-->
+    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+    <div id="footer">
+    ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
+      <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
+    </div>
+
+    <ol class="joyride-list" data-joyride>
+      <li data-id="firstStop" data-text="Close" data-options="tip_location: top; prev_button: false">
+        <p>At first you have to validate your URL. When this process was successfull you can create your Comment. On the right site you will see the Geo-Dataset from your URL.</p>
+      </li>
+    </ol>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.joyride.js"></script>
+
+    <script>
+      $(document).foundation();
+      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+        $(document).foundation('joyride', 'start');
+      }
+      
+    </script>
+  </body>
+</html>

@@ -19,7 +19,13 @@ router.get('/', function(req,res) {
 
 // ADD COMMENT ===========================
 router.get('/add', function(req, res) {
-	res.render("AddNewComment.ejs")
+		if (req.isAuthenticated()) {
+			res.render('new_comment.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+				message: req.flash('loginMessage')  })
+		} else {
+			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+				message: req.flash('loginMessage') })
+		}
 });
 
 // process the add comment form
