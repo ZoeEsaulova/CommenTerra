@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-route/angular-route.min.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <script src="js/angular.js"></script>
+
   </head>
 
   <body>
@@ -49,6 +54,8 @@
                 </div>
             </form>
           </li>
+
+          <!-- Login -->
   				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -210,7 +217,9 @@
             <div class="content" id="panel1">
               <!-- Kommentare -->
               <dl class="accordion" data-accordion>
-                <dd class="accordion-navigation">
+
+
+                <dd data-ng-repeat="comment in comments" class="accordion-navigation">
                   <a href="#panel1b">Berlin POI</a>
                   <div id="panel1b" class="content">
                     <ul class="no-bullet">
@@ -237,6 +246,8 @@
                     </ul>
                   </div>
                 </dd>
+
+
                 <dd class="accordion-navigation">
                   <a href="#panel2b">NRW DGK5</a>
                   <div id="panel2b" class="content">
@@ -356,29 +367,29 @@
       <strong class="show-for-large-up">
       <ul class="small-block-grid-2" data-equalizer>
         <li>
-          <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+          <div class="panel custom" style="overflow: auto" data-equalizer-watch data-ng-app="Comments" data-ng-controller="commentsController">
             <!-- Kommentare -->
             <dl class="accordion" data-accordion>
-              <dd class="accordion-navigation">
-                <a id="lastStop" href="#panel1b">Berlin POI</a>
-                <div id="panel1b" class="content">
+              <dd data-ng-repeat="comment in comments" class="accordion-navigation">
+                <a id="lastStop" href="#panel{{ $index }}">{{ comment.title }}</a>
+                <div id="panel{{ $index }}" class="content">
                   <ul class="no-bullet">
                   <li>
-                    <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                    <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">{{ comment.url }}</font></a>
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp04-12-2014
+                    &nbsp&nbsp&nbsp&nbsp{{ comment.date }}
                   </li>
                   </ul>
-                  Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  {{ comment.text }}
                   <p>
                   <ul class="no-bullet">
                   <li>
-                    <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                    <a href="profile_Klaus89.html"><font color="#2ba6cb">Author: {{ comment.author }}</font></a>
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
@@ -386,108 +397,7 @@
                   </ul>
                 </div>
               </dd>
-              <dd class="accordion-navigation">
-                <a href="#panel2b">NRW DGK5</a>
-                <div id="panel2b" class="content">
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
-                    <p>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp29-11-2014
-                  </li>
-                  </ul>
-                  Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  <p>
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
-                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                  </li>
-                  </ul>
-                </div>
-              </dd>
-              <dd class="accordion-navigation">
-                <a href="#panel3b">Germany Waterways</a>
-                <div id="panel3b" class="content">
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
-                    <p>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp07-05-2014
-                  </li>
-                  </ul>
-                  Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  <p>
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
-                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                  </li>
-                  </ul>
-                </div>
-              </dd>
-              <dd class="accordion-navigation">
-                <a href="#panel4b">Europe Choroplethic</a>
-                <div id="panel4b" class="content">
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="http://www.wms.eu.de/geobasis/wms_eu_choropleth?"><font color="#2ba6cb">http://www.wms.eu.de/geobasis/wms_eu_choropleth?</font></a>
-                    <p>
-                    <p>
-                    10-09-2014
-                    <p>
-                  </li>
-                  </ul>
-                  Comment 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  <p>
-                  <ul class="no-bullet">
-                  <li>
-                    <font color="#222222">Anonym</font>&nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                  </li>
-                  </ul>
-                </div>
-              </dd>
-              <dd class="accordion-navigation">
-                <a href="#panel5b">Germany DOP40</a>
-                <div id="panel5b" class="content">
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="http://www.wms.deu.de/geobasis/wms_deu_dop40?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_dop40?</font></a>
-                    <p>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp27-11-2014
-                  </li>
-                  </ul>
-                  Comment 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  <p>
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="profile_Terr4ner.html"><font color="#2ba6cb">Terr4ner</font></a>
-                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp8&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                  </li>
-                  </ul>
-                </div>
-              </dd>
+
             </dl>
           </div>
         </li>
@@ -635,6 +545,7 @@
     <div id="footer">
     ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
       <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
+      <!--div ng-include src="'test.html'"></div-->
     </div>
 
     <ol class="joyride-list" data-joyride>
@@ -672,5 +583,7 @@
       }
       
     </script>
+
+
   </body>
 </html>

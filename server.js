@@ -26,6 +26,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
+/*
+app.engine('html', require('hogan-express'));
+app.set('view engine', 'html');
+*/
+
 //set static content
 app.use(express.static(__dirname + '/public'));
 app.use('/comments', express.static(__dirname + '/public'));

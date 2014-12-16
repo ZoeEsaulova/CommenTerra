@@ -3,6 +3,7 @@
 var express = require('express'),
 	router = express.Router(),		
 	Comment = require('../models/comment'),
+	Dataset = require('../models/dataset'),
  	_ = require('underscore'),
  	querystring = require('querystring');
 
@@ -33,11 +34,14 @@ router.post('/add', function(req, res) {
 	// Get form values. These rely on the "name" attributes
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
-		newText = req.body.text;
+		newText = req.body.text,
+		newDataset = new Dataset({ url: newUrl });
 
 	if (req.isAuthenticated()) {
+		console.log(req.user.local.username);
 		//create new comment
-		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, author: req.user._id })
+		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, userx: req.user._id, 
+			dataset: newDataset })
 		//save the comment in the database
 		newComment.save(function (err) {
 			if (err) return console.error(err)
@@ -45,7 +49,7 @@ router.post('/add', function(req, res) {
 		});
 		res.redirect('/');
 	} else {
-		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText })
+		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: newDataset, author: 'anonymous' })
 		newComment.save(function (err) {
 		if (err) return console.error(err)
 		console.log("Comment Saved!!!")

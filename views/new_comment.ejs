@@ -87,16 +87,17 @@
     </div>
 
     <!--oberer grauer Balken-->
+    <form action="/comments/add" method="post">
     <div class="panel custom">
       <font color="white" size="4">URL:</font>
       <input type="text" name="url" id="firstStop" placeholder="URL..." />
       <strong class="show-for-large-up">
-        <button class="tiny radius" id="#" type="submit" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
+        <button class="tiny radius" id="#" type="#" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
           <font color="#424242">Validate URL</font>
         </button>
       </strong>
       <strong class="hide-for-large-up">
-        <button class="tiny radius" id="#" type="submit" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+        <button class="tiny radius" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
           <font color="#424242">Validate URL</font>
         </button>
       </strong>
@@ -143,10 +144,10 @@
                   <font color="#424242" size="4">Comment:</font>
                   <dl class="accordion" data-accordion>
                     <dd class="accordion-navigation">
-                      <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                      <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
                     </dd>
                   </dl>
-                  <a href=""><font color="#2ba6cb">anonyme</font></a>
+                  <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                   <p></p>
                   <button class="tiny radius expand" type="submit">
                     <font color="#424242">Save</font>
@@ -155,6 +156,7 @@
               </div>
             </div>
           </li>
+        </form>
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!-- Karte -->
