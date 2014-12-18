@@ -1,4 +1,5 @@
 Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR wieder oben auf der Seite ist.
+--> wird bearbeitet von Jens
 
 Auf jede Seite nen JR? -> new_comment & advanced_search
 
@@ -29,9 +30,12 @@ datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen 
 format finden
 
 map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
+--> wird bearbeitet von Jens
 
 FÜR ALLE SEITEN: header wegen NAMEN "CommenTerra | blabla" überprüfen.
+--> wird bearbeitet von Jens
 
 homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
 -> hierbei, wenn mapviewer gewählt wird, im extra tab im browser öffnen, sodass der user vergleiche von mehreren
 datensätzen machen kann
+--> wird bearbeitet von Jens
