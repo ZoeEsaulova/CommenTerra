@@ -41,3 +41,5 @@ homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angeze
 -> hierbei, wenn mapviewer gewählt wird, im extra tab im browser öffnen, sodass der user vergleiche von mehreren
 datensätzen machen kann
 --> wird bearbeitet von Jens
+
+joyride nur auf ab der Größe large oder auch für medium und small?
