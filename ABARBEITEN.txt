@@ -18,9 +18,10 @@ klick auf "boundingbox")
 beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
 
 FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen 
--->abgearbeitet, Max, 18.12.2014
+--> abgearbeitet, Max, 18.12.2014
 
 about us: für kleine bildschirme das ganze untereinander packen
+--> abgearbeitet, Max, 18.12.2014
 
 auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
 
