@@ -29,6 +29,7 @@ auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
 
 datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen nicht überein -> einheitliches 
 format finden
+--> Das Datumsformat auf der new_comment Seite ist meiner Meinung nach gut geeignet, weil es weltweit eindeutig ist. So können auch User aus anderen Zeitzonen Kommentare erstellen, ohne dass die Zeit deren Eingabe verfälschen kann.
 
 map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
 --> wird bearbeitet von Jens
