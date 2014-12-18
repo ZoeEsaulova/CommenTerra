@@ -3,19 +3,19 @@ Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR 
 Auf jede Seite nen JR? -> new_comment & advanced_search
 
 new_comment: dunkler bereich für URL nach halb und dafür die "geparsten" daten auf der rechten seite in 
-einem feld anzeigen?
+einem feld anzeigen? --> Feld ist da, jedoch noch ohne Funktion, Max, 18.12.2014
 
 new_comment: evtl das JR erweitern, weil ein step evtl zu wenig ist
 
 new_comment: wie sieht das hier mit ner boundingbox aus? -> neuer button, um in der karte rechts ne 
-bounding box zu ziehen
+bounding box zu ziehen --> abgearbeitet, Max, 18.12.2014
 
 advanced_search: problem beide karten anzeigen zu können (einmal auf der karte selber und einmal bei 
 klick auf "boundingbox")
 
 beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
 
-FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen
+FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen abgearbeitet, Max, 18.12.2014
 
 about us: für kleine bildschirme das ganze untereinander packen
 
