@@ -43,3 +43,5 @@ datensätzen machen kann
 --> wird bearbeitet von Jens
 
 joyride nur auf ab der Größe large oder auch für medium und small?
+
+new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
