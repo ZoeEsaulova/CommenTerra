@@ -1,3 +1,21 @@
+new_comment:
+- JR bei dem suchfeld ist überflüssig
+- dafür würde ich ein JR bei dem response-feld machen, sodass das ende wieder oben auf der seite ist
+
+allgemein:
+- was soll passieren wenn es zur "hide-for-large" kommt mit den JR? trotzdem anzeigne oder ändern?
+- wie lässt sich JR ausstellen?
+
+Footer:
+- sieht komisch aus, vorher war besser
+
+about:
+sieht aus wie advanced_search!
+
+profilesite:
+- GANZ WICHTIG DAS DIE FERTIG IST
+- auch mit JR!
+
 Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR wieder oben auf der Seite ist.
 --> wird bearbeitet von Jens
 
