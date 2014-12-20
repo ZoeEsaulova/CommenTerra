@@ -3,6 +3,7 @@
 var express = require('express'),
 	router = express.Router(),		
 	Comment = require('../models/comment'),
+	User = require('../models/user'),
 	Dataset = require('../models/dataset'),
  	_ = require('underscore'),
  	querystring = require('querystring');
@@ -38,18 +39,22 @@ router.post('/add', function(req, res) {
 		newDataset = new Dataset({ url: newUrl });
 
 	if (req.isAuthenticated()) {
-		console.log(req.user.local.username);
 		//create new comment
-		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, userx: req.user._id, 
-			dataset: newDataset })
+		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, user: req.user._id,
+		 authorName: req.user.local.username, dataset: newDataset })
 		//save the comment in the database
 		newComment.save(function (err) {
 			if (err) return console.error(err)
 			console.log("Comment Saved!!!")
 		});
-		res.redirect('/');
+		User.findOne({ _id: req.user._id }).exec(function(err, user) {
+			console.log("USER: " + user.username)
+			user.comments.push(newComment)
+			user.save()
+		})
+		res.redirect('/')
 	} else {
-		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: newDataset, author: 'anonymous' })
+		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: newDataset })
 		newComment.save(function (err) {
 		if (err) return console.error(err)
 		console.log("Comment Saved!!!")

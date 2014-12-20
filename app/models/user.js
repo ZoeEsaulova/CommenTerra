@@ -21,7 +21,9 @@ var userSchema = mongoose.Schema({
 			required: true,
 			trim: true
 		},
-		name: {
+
+    },
+    		name: {
 			first: String,
 			last: String
 		},
@@ -34,7 +36,6 @@ var userSchema = mongoose.Schema({
 		help: { type: Boolean, default: 0 },
 		//Comments created by the user
 		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
-    },
     
 });
 
