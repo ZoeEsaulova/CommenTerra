@@ -16,7 +16,7 @@
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area"> 
         <li class="name"> 
-          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
@@ -25,22 +25,21 @@
         <!-- Right Nav Section --> 
         <ul id="numero1" class="right">
           <li class="has-form">
-            <form action="/api/v1" method="post" data-abide>
+            <form data-abide>
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
-                        <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
+                        <label> <input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
+                        <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button class="success radius expand" type="submit">Search</button>
+                    <button href="advanced_search.html" class="success radius expand" type"submit">Search</button>
                   </div>
                 </div>
             </form>
           </li>
-          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
-          <% if (!boolean1) { %>
+          <li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
             <p class="lead">Please log in with your e-mail and your password</p>
@@ -59,22 +58,16 @@
                 </label>
                 <small class="error">Please type in your password!</small>
               </div>
-              <button class="radius" type="submit">Log In</button>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
-          <% } %>
-
           <li class="has-dropdown"> 
             <a href="#">Site Navigation</a> 
             <ul class="dropdown"> 
-              <li><a href="/comments/add">New Comment</a></li> 
-              <li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="/faq">Help / FAQ</a></li> 
-
-              <% if (boolean1) { %>
-              <li><a href="/myprofile">Profile</a></li> 
-              <% } %>
+              <li><a href="new_comment.html">New Comment</a></li> 
+              <li><a href="advanced_search.html">Advanced Search</a></li>
+              <li><a href="faq.html">Help / FAQ</a></li> 
             </ul> 
           </li> 
         </ul> 
@@ -86,21 +79,28 @@
       <nav class="top-bar-border"></nav>
     </div>
 
-    <!--oberer grauer Balken-->
-    <form action="/comments/add" method="post">
+    <!--dark grey area-->
     <div class="panel custom">
-      <font color="white" size="4">URL:</font>
-      <input type="text" name="url" id="firstStop" placeholder="URL..." />
-      <strong class="show-for-large-up">
-        <button class="tiny radius" id="#" type="#" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
-          <font color="#424242">Validate URL</font>
-        </button>
-      </strong>
-      <strong class="hide-for-large-up">
-        <button class="tiny radius" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
-          <font color="#424242">Validate URL</font>
-        </button>
-      </strong>
+      <ul class="small-block-grid-2" data-equalizer>
+        <li>
+          <font color="white" size="4">URL:</font>
+          <input type="text" name="url" id="firstStop" placeholder="URL..." />
+          <p></p>
+          <strong class="show-for-large-up">
+            <button class="tiny radius right" id="#" type="submit" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
+              <font color="#424242">Validate URL</font>
+            </button>
+          </strong>
+          <strong class="hide-for-large-up">
+            <button class="tiny radius right" id="#" type="submit" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firstStop').value">
+              <font color="#424242">Validate URL</font>
+            </button>
+          </strong>
+        </li>
+        <li>
+          <font color="white" size="4">Response:</font>
+          <textarea disabled="disabled" rows="4"></textarea>
+        </li>
     </div>
 
     <!--unterer grauer Bereich-->
@@ -132,31 +132,39 @@
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
                     </li>
-                    <!--li>
+                    <li>
                       <font color="#424242" size="4">Date:</font><br>
                       <script type="text/javascript" color="424242">
                         var now = new Date();
                         document.write(now.toString());
                       </script>
-                    </li-->
+                    </li>
                   </ul>
                   <p></p>
                   <font color="#424242" size="4">Comment:</font>
                   <dl class="accordion" data-accordion>
                     <dd class="accordion-navigation">
-                      <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
+                      <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
                     </dd>
                   </dl>
-                  <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
+                  <a href=""><font color="#2ba6cb">anonyme</font></a>
                   <p></p>
-                  <button class="tiny radius expand" type="submit">
-                    <font color="#424242">Save</font>
-                  </button>
+                  <ul class="small-block-grid-2">
+                    <li>
+                      <button class="tiny radius expand" type="submit">
+                        <font color="#424242">Bounding Box</font>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="tiny radius expand" type="submit">
+                        <font color="#424242">Save</font>
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </li>
-        </form>
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!-- Karte -->
@@ -188,7 +196,7 @@
                   <font color="#424242" size="4">URL:</font><br>
                   <p id="urlResult1">
                       Your URL will be shown here after you validate it!
-                  </p>
+                    </p>
                   <p></p>
                     <font color="#424242" size="4">Rating:</font><br>
                     <!--- five star rating!!! -->
@@ -229,11 +237,11 @@
     </div>
 
 
-    <!--footer-->
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
+
     <div id="footer">
-    ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
-      <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
+      || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
+      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
     <ol class="joyride-list" data-joyride>
