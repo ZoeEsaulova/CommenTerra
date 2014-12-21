@@ -21,6 +21,24 @@ var commentSchema = mongoose.Schema({
 
 })
 
+commentSchema.virtual('dateString').get(function () {
+  var d = this.date;
+  var m_names = new Array("January", "February", "March", 
+"April", "May", "June", "July", "August", "September", 
+"October", "November", "December");
+  var curr_date = d.getDate();
+  var curr_month = d.getMonth();
+  var curr_year = d.getFullYear();
+  var h = d.getHours();
+  var m = d.getMinutes();
+  if (m.toString().length==1) {
+    var result = curr_date + "." + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + "0" + m;
+  } else {
+    var result = curr_date + "." + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + m;
+  }
+  
+  return result;
+})
 
 /*
 commentSchema.virtual('url').get(function () {

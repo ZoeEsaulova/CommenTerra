@@ -56,7 +56,8 @@ router.get('/search', function(req,res) {
 				username: req.user.local.username, 
 				action: "/logout", 
 				actionName: "Logout", 
-				message: req.flash('loginMessage')  })
+				message: req.flash('loginMessage'),
+				query: querystring.stringify(req.query) })
 		} else {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -64,7 +65,8 @@ router.get('/search', function(req,res) {
 				username: 'Anonymous', 
 				action: "#", 
 				actionName: "Login", 
-				message: req.flash('loginMessage') })
+				message: req.flash('loginMessage'),
+			    query: querystring.stringify(req.query) })
 		}
 	})
 	})

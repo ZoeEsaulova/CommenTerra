@@ -231,7 +231,14 @@
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp{{ comment.date }}
+                      &nbsp&nbsp&nbsp&nbsp
+                      <script type="text/javascript" color="424242">
+                        var d = {{ comment.date }};
+                        var curr_date = d.getDate();
+                        var curr_month = d.getMonth();
+                        var curr_year = d.getFullYear();
+                        document.write(curr_date + "-" + m_names[curr_month]  + "-" + curr_year);                     
+                      </script>
                     </li>
                     </ul>
                       {{ comment.text }}
@@ -278,7 +285,7 @@
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp{{ comment.date }}
+                    &nbsp&nbsp&nbsp&nbsp{{ comment.dateString }}
                   </li>
                   </ul>
                   {{ comment.text }}

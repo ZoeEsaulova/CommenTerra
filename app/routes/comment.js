@@ -52,7 +52,8 @@ router.post('/add', function(req, res) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
 		newText = req.body.text;
-	    newDataset = "";
+	    newDataset = "",
+
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
@@ -60,7 +61,7 @@ router.post('/add', function(req, res) {
         		newDataset.save()
 		//create new comment
 		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, user: req.user._id,
-		 authorName: req.user.local.username, dataset: newDataset })
+		 authorName: req.user.local.username, dataset: newDataset})
 		//save the comment in the database
 		newComment.save(function (err) {
 			if (err) return console.error(err)
