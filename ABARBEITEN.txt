@@ -36,6 +36,7 @@ bounding box zu ziehen
 klick auf "boundingbox")
 
 12. beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
+--> Die Kommentare werden jetzt sortiert. Die neu erstellten Kommenatre erscheinen ganz oben in der Liste. Zoe 21.12.2014
 
 13. FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen 
 --> abgearbeitet, Max, 18.12.2014
@@ -48,6 +49,8 @@ klick auf "boundingbox")
 16. datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen nicht überein -> einheitliches 
 format finden
 --> Das Datumsformat auf der new_comment Seite ist meiner Meinung nach gut geeignet, weil es weltweit eindeutig ist. So können auch User aus anderen Zeitzonen Kommentare erstellen, ohne dass die Zeit deren Eingabe verfälschen kann.
+--> Ich finde das Datum bei Erstellung eines Kommentars anzuzeigen ist überflüssig - es wird ja automatisch den aktuellen
+Zeitpunkt gespeichert. In der Kommentarliste wird jetzt das folgende Datumsformat benutzt: 21. December 2014  19:15. Zoe 21.12.2014
 
 17. map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
 --> wird bearbeitet von Jens
@@ -64,6 +67,6 @@ datensätzen machen kann
 
 21. new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
 
-22. new_comment: Im Titel wird automatisch eine Komma gesetzt 
+22. new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 
 
