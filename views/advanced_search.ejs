@@ -69,11 +69,11 @@
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
-              <li><a href="/advancedsearch">Advanced Search</a></li>
+              <li><a href="/api/v1/search">Advanced Search</a></li>
               <li><a href="/faq">Help / FAQ</a></li> 
 
               <% if (boolean1) { %>
-              <li><a href="/profile">Profile</a></li> 
+              <li><a href="/myprofile">Profile</a></li> 
               <% } %>
   					</ul> 
   				</li> 
@@ -93,17 +93,17 @@
         <ul class="large-block-grid-2">
           <h3><font color="white">Advanced Search</font color="white"></h3><br>
           <li>
-            <form>
-              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
-              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
-              <input type="text" name="search_user" id="search_user" placeholder="users..." />
+            <form action="/api/v1" method="post">
+              <input type="text" name="q" id="search_keywords" placeholder="keywords..." />
+              <input type="text" name="url" id="search_url" placeholder="url..." />            
+              <input type="text" name="authorName" id="search_user" placeholder="users..." />
               <p>
                 <a href="#"><i class="fi-star size-32 font-green"></i></a>
                 <a href="#"><i class="fi-star size-32 font-green"></i></a>
                 <a href="#"><i class="fi-star size-32 font-green"></i></a>
                 <a href="#"><i class="fi-star size-32 font-green"></i></a>
                 <a href="#"><i class="fi-star size-32 font-grey"></i></a>
-            </form>
+           
           </li>
 
           <li>
@@ -129,7 +129,7 @@
                 <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="" />
                 <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button> <!-- dynamischer permalink -->
               </li>
-
+               </form>
               <li>
                 <button href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</buttons>
                   <div id="boundingBoxModal" class="reveal-modal" data-reveal>
@@ -171,26 +171,27 @@
             <div class="content" id="panel1">
               <!-- Kommentare -->
               <dl class="accordion" data-accordion>
+              <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
-                  <a href="#panel1b">Berlin POI</a>
-                  <div id="panel1b" class="content">
+                  <a id="lastStop" href="#panel<%= i %>"><%= comments[i].title %></a>
+                  <div id="panel<%= i %>" class="content">
                     <ul class="no-bullet">
                     <li>
-                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb"><%= comments[i].url %></font></a>
                       <p>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].date %>
                     </li>
                     </ul>
-                      Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
+                    <%= comments[i].text %>
+                    <p>
                     <ul class="no-bullet">
                     <li>
-                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                      <a href="profile_Klaus89.html"><font color="#2ba6cb"><%= comments[i].authorName %></font></a>
                       <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                       <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                       &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
@@ -198,108 +199,11 @@
                     </ul>
                   </div>
                 </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel2b">NRW DGK5</a>
-                  <div id="panel2b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp29-11-2014
-                    </li>
-                    </ul>
-                      Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel3b">Germany Waterways</a>
-                  <div id="panel3b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp07-05-2014
-                    </li>
-                    </ul>
-                      Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel4b">Europe Choroplethic</a>
-                  <div id="panel4b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.eu.de/geobasis/wms_eu_choropleth?"><font color="#2ba6cb">http://www.wms.eu.de/geobasis/wms_eu_choropleth?</font></a>
-                      <p>
-                      <p>
-                      10-09-2014
-                      <p>
-                    </li>
-                    </ul>
-                      Comment 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <font color="#222222">Anonym</font>&nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel5b">Germany DOP40</a>
-                  <div id="panel5b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_dop40?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_dop40?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp27-11-2014
-                    </li>
-                    </ul>
-                      Comment 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_Terr4ner.html"><font color="#2ba6cb">Terr4ner</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp8&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
+                <% } %>
+
+
+
+ 
               </dl>
             </div>
 
@@ -315,29 +219,29 @@
       <strong class="show-for-large-up">
         <ul class="small-block-grid-2" data-equalizer>
           <li>
-            <div class="panel custom" style="overflow: auto" data-equalizer-watch>
-              <!-- Kommentare -->
+            <div class="panel custom" style="overflow: auto" data-equalizer-watch>             
               <dl class="accordion" data-accordion>
+              <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
-                  <a id="lastStop" href="#panel1b">Berlin POI</a>
-                  <div id="panel1b" class="content">
+                  <a id="lastStop" href="#panel<%= i %>"><%= comments[i].title %></a>
+                  <div id="panel<%= i %>" class="content">
                     <ul class="no-bullet">
                     <li>
-                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb"><%= comments[i].url %></font></a>
                       <p>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].date %>
                     </li>
                     </ul>
-                    Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <%= comments[i].text %>
                     <p>
                     <ul class="no-bullet">
                     <li>
-                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                      <a href="profile_Klaus89.html"><font color="#2ba6cb"><%= comments[i].authorName %></font></a>
                       <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                       <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                       &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
@@ -345,111 +249,13 @@
                     </ul>
                   </div>
                 </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel2b">NRW DGK5</a>
-                  <div id="panel2b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp29-11-2014
-                    </li>
-                    </ul>
-                    Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel3b">Germany Waterways</a>
-                  <div id="panel3b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp07-05-2014
-                    </li>
-                    </ul>
-                    Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel4b">Europe Choroplethic</a>
-                  <div id="panel4b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.eu.de/geobasis/wms_eu_choropleth?"><font color="#2ba6cb">http://www.wms.eu.de/geobasis/wms_eu_choropleth?</font></a>
-                      <p>
-                      <p>
-                      10-09-2014
-                      <p>
-                    </li>
-                    </ul>
-                    Comment 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <font color="#222222">Anonym</font>&nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-                <dd class="accordion-navigation">
-                  <a href="#panel5b">Germany DOP40</a>
-                  <div id="panel5b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_dop40?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_dop40?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp27-11-2014
-                    </li>
-                    </ul>
-                    Comment 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_Terr4ner.html"><font color="#2ba6cb">Terr4ner</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp8&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
+                <% } %>
               </dl>
             </div>
+
           </li>
+           
+
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!-- Karte -->

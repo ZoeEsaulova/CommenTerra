@@ -2,6 +2,7 @@
 
 module.exports = function(app, passport) {
 
+var User = require('../models/user');
 // normal routes ===============================================================
 
 	// show the home page. The contant of the home page depends on whether the user is authenticatedd
@@ -17,12 +18,23 @@ module.exports = function(app, passport) {
 		
 	});
 
-	// show the profile page
-	app.get('/profile', isLoggedIn, function(req, res) {
+	// show the own profile page
+	app.get('/myprofile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user
 		});
 	});
+
+	// show the profile page of another user
+	app.get('/profile/:userId', function(req, res) {
+		User.findOne({ 'local.username' : req.params.userId }).exec(function(err, foundedUser) {
+			res.render('profile.ejs', {
+				user : foundedUser
+			})
+		})
+	});
+
+	
 
 	// logout
 	app.get('/logout', function(req, res) {

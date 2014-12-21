@@ -87,11 +87,11 @@
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
-  						<li><a href="/advancedsearch">Advanced Search</a></li>
+  						<li><a href="/api/v1/search">Advanced Search</a></li>
               <li><a href="/faq">Help / FAQ</a></li> 
 
               <% if (boolean1) { %>
-              <li><a href="/profile">Profile</a></li> 
+              <li><a href="/myprofile">Profile</a></li> 
               <% } %>
 
   					</ul> 
@@ -126,7 +126,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button id="numero2" href="/profile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+              <button id="numero2" href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
           </form>
         </li>
         <li>
@@ -164,7 +164,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button href="profile.html_???????" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
           </form>
         </li>
         </ul>
@@ -186,7 +186,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button href="profile.html_???????" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
           </form>
         </li>
       </div>
@@ -200,7 +200,7 @@
           <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
         </li>
         <li>
-          <a id="numero4" href="/advancedsearch" class="success button radius expand">Advanced Search</a>
+          <a id="numero4" href="/api/v1/search" class="success button radius expand">Advanced Search</a>
         </li>
       </ul> 
 
@@ -271,7 +271,7 @@
                 <div id="panel{{ $index }}" class="content">
                   <ul class="no-bullet">
                   <li>
-                    <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">{{ comment.url }}</font></a>
+                    <a href="/api/v1/search?url={{ comment.url }}"><font color="#2ba6cb">{{ comment.url }}</font></a>
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -285,7 +285,7 @@
                   <p>
                   <ul class="no-bullet">
                   <li>
-                    <a href="profile_Klaus89.html"><font color="#2ba6cb">Author: {{ comment.authorName }} </font></a>
+                    <a href="/profile/{{ comment.authorName }}"><font color="#2ba6cb">Author: {{ comment.authorName }} </font></a>
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>

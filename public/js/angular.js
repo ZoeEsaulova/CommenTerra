@@ -16,9 +16,26 @@ app.controller("commentsController", function($scope, $http){
 	console.log("I am in controller ")
 	$http.get("/comments").success(function(response){
 		$scope.comments = response;
-		console.log("I am in get " + response.length)
 	}).error(function(err){
 		$scope.error = err;
 	});
-
 })
+
+app.controller("threadController", function($scope, $http, $routeParams){
+	console.log("Im in threadController")
+	$scope.comments = {};
+	var id = $routeParams.datasetId;
+
+	$http.get("/api/v1/search").success(function(response){
+		$scope.comments = response;
+	});
+
+/*
+	$scope.saveFahrt = function(){
+		$http.put("http://localhost:3000/fahrten/" + $scope.fahrt._id, $scope.fahrt)
+		.success(function(response){
+			$location.url("/fahrten")
+		});
+	};
+	*/
+});

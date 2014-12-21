@@ -34,6 +34,8 @@ app.set('view engine', 'html');
 //set static content
 app.use(express.static(__dirname + '/public'));
 app.use('/comments', express.static(__dirname + '/public'));
+app.use('/api/v1/search', express.static(__dirname + '/public'));
+app.use('/api/v1/search?', express.static(__dirname + '/public'));
 
 
 // required for passport (used for auth)

@@ -14,9 +14,9 @@ router.use(express.static(__dirname + '/public'));
 		
 // GET ALL COMMENTS
 router.get('/', function(req,res) {
-	Comment.find().exec(function(err, comments) {
-	res.jsonp(comments)
-	});
+		Comment.find().sort(' -date').exec(function(err, comments) {
+		res.jsonp(comments)
+	});	
 });
 
 // ADD COMMENT ===========================
@@ -33,33 +33,97 @@ router.get('/add', function(req, res) {
 // process the add comment form
 router.post('/add', function(req, res) {
 	// Get form values. These rely on the "name" attributes
-	var newTitle = req.body.title,
-	    newUrl = req.body.url,
-		newText = req.body.text,
-		newDataset = new Dataset({ url: newUrl });
+
+
+
+    /*   
+        if (!query==="undefined") {
+        	query.exec(function(err, dataset) {
+        	console.log("Dataset found " + dataset._id)
+			newDataset = dataset
+		})
+        } else {
+        	console.log("No dataset found")
+        	newDataset = new Dataset({ url: newUrl })
+        	newDataset.save()
+        }*/
 
 	if (req.isAuthenticated()) {
+	var newTitle = req.body.title,
+	    newUrl = req.body.url,
+		newText = req.body.text;
+	    newDataset = "";
+
+        Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
+			if (!dataset) {
+				newDataset = new Dataset({ url: newUrl })
+        		newDataset.save()
 		//create new comment
 		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, user: req.user._id,
 		 authorName: req.user.local.username, dataset: newDataset })
 		//save the comment in the database
 		newComment.save(function (err) {
 			if (err) return console.error(err)
-			console.log("Comment Saved!!!")
 		});
 		User.findOne({ _id: req.user._id }).exec(function(err, user) {
-			console.log("USER: " + user.username)
 			user.comments.push(newComment)
 			user.save()
 		})
+		newDataset.comments.push(newComment)
+		newDataset.save()
+
+
 		res.redirect('/')
-	} else {
-		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: newDataset })
+			} else {
+				//newDataset = dataset
+				//newDataset.save()
+		//create new comment
+		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, user: req.user._id,
+		 authorName: req.user.local.username, dataset: dataset })
+		//save the comment in the database
 		newComment.save(function (err) {
-		if (err) return console.error(err)
-		console.log("Comment Saved!!!")
+			if (err) return console.error(err)
+		});
+		User.findOne({ _id: req.user._id }).exec(function(err, user) {
+			user.comments.push(newComment)
+			user.save()
 		})
+				dataset.comments.push(newComment)
+				dataset.save()
+
 		res.redirect('/')
+			}
+	    });	
+
+	} else {
+	var newTitle = req.body.title,
+	    newUrl = req.body.url,
+		newText = req.body.text;
+	    newDataset = "";
+
+        Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
+			if (!dataset) {
+				newDataset = new Dataset({ url: newUrl })
+        		newDataset.save()
+        		var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: newDataset })
+				newComment.save(function (err) {
+					if (err) return console.error(err)		
+				})
+				newDataset.comments.push(newComment)
+				newDataset.save()
+				res.redirect('/')
+			} else {
+				//newDataset = dataset
+				//newDataset.save()
+				var newComment = new Comment({ title: newTitle, url: newUrl, text: newText, dataset: dataset })
+				newComment.save(function (err) {
+					if (err) return console.error(err)
+				})
+				dataset.comments.push(newComment)
+				dataset.save()
+				res.redirect('/')
+			}
+	    });	
 	}
 });
 
