@@ -1,65 +1,69 @@
-new_comment:
+1. new_comment:
 - JR bei dem suchfeld ist überflüssig
 - dafür würde ich ein JR bei dem response-feld machen, sodass das ende wieder oben auf der seite ist
 
-allgemein:
+2. allgemein:
 - was soll passieren wenn es zur "hide-for-large" kommt mit den JR? trotzdem anzeigne oder ändern?
 - wie lässt sich JR ausstellen?
 
-Footer:
+3. Footer:
 - sieht komisch aus, vorher war besser
 
-about:
+4. about:
 sieht aus wie advanced_search!
 
-profilesite:
+5. profilesite:
 - GANZ WICHTIG DAS DIE FERTIG IST
 - auch mit JR!
 
-Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR wieder oben auf der Seite ist.
+6. Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR wieder oben auf der Seite ist.
 --> wird bearbeitet von Jens
 
-Auf jede Seite nen JR? -> advanced_search
+7. Auf jede Seite nen JR? -> advanced_search
 
-new_comment: dunkler bereich für URL nach halb und dafür die "geparsten" daten auf der rechten seite in 
+8. new_comment: dunkler bereich für URL nach halb und dafür die "geparsten" daten auf der rechten seite in 
 einem feld anzeigen? 
 --> Feld ist da, jedoch noch ohne Funktion, Max, 18.12.2014
 
-new_comment: evtl das JR erweitern, weil ein step evtl zu wenig ist
+9. new_comment: evtl das JR erweitern, weil ein step evtl zu wenig ist
 --> abgearbeitet, Max, 18.12.2014
 
-new_comment: wie sieht das hier mit ner boundingbox aus? -> neuer button, um in der karte rechts ne 
+10. new_comment: wie sieht das hier mit ner boundingbox aus? -> neuer button, um in der karte rechts ne 
 bounding box zu ziehen 
 --> abgearbeitet, Max, 18.12.2014
 
-advanced_search: problem beide karten anzeigen zu können (einmal auf der karte selber und einmal bei 
+11. advanced_search: problem beide karten anzeigen zu können (einmal auf der karte selber und einmal bei 
 klick auf "boundingbox")
 
-beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
+12. beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
 
-FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen 
+13. FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen 
 --> abgearbeitet, Max, 18.12.2014
 
-about us: für kleine bildschirme das ganze untereinander packen
+14. about us: für kleine bildschirme das ganze untereinander packen
 --> abgearbeitet, Max, 18.12.2014
 
-auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
+15. auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
 
-datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen nicht überein -> einheitliches 
+16. datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen nicht überein -> einheitliches 
 format finden
 --> Das Datumsformat auf der new_comment Seite ist meiner Meinung nach gut geeignet, weil es weltweit eindeutig ist. So können auch User aus anderen Zeitzonen Kommentare erstellen, ohne dass die Zeit deren Eingabe verfälschen kann.
 
-map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
+17. map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
 --> wird bearbeitet von Jens
 
-FÜR ALLE SEITEN: header wegen NAMEN "CommenTerra | blabla" überprüfen.
+18. FÜR ALLE SEITEN: header wegen NAMEN "CommenTerra | blabla" überprüfen.
 --> wird bearbeitet von Jens
 
-homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
+19. homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
 -> hierbei, wenn mapviewer gewählt wird, im extra tab im browser öffnen, sodass der user vergleiche von mehreren
 datensätzen machen kann
 --> wird bearbeitet von Jens
 
-joyride nur auf ab der Größe large oder auch für medium und small?
+20. joyride nur auf ab der Größe large oder auch für medium und small?
 
-new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
+21. new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
+
+22. new_comment: Im Titel wird automatisch eine Komma gesetzt 
+
+
