@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
 
   <body>
@@ -87,10 +88,20 @@
     </div>
 
     <!--oberer grauer Balken-->
-    <form action="/comments/add" method="post">
+    <form action=<%= addAction %> method="post">
     <div class="panel custom">
       <font color="white" size="4">URL:</font>
-      <input type="text" name="url" id="firstStop" placeholder="URL..." />
+      <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" readonly="readonly"/>
+      <% if (readonly) { %>
+          <script>
+          jQuery("#firstStop").prop('readonly', true);
+          </script>
+      <% } else { %> 
+          <script>
+          jQuery("#firstStop").prop('readonly', false);
+          </script>
+      <%} %>
+
       <strong class="show-for-large-up">
         <button class="tiny radius" id="#" type="#" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
           <font color="#424242">Validate URL</font>

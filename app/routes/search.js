@@ -10,10 +10,11 @@ router.use(express.static(__dirname + '/public'));
 
 
 router.get('/search', function(req,res) {
+
 	
 	if (!req.query.q) {
 		
-		var query = Comment.find()
+		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
 			for (var key in req.query) {			
 				if (key!="count" && req.query[key]) {
 					query.where(key).equals(req.query[key])
@@ -27,13 +28,16 @@ router.get('/search', function(req,res) {
 		if ( split2[0]==='"' ) {
 			var q2 = req.query.q.slice(1,split2.length-2),
 			    regex2 = new RegExp(q2, 'i');
-			    query = Comment.find( { $or:[{ title: regex2 }, {text: regex2}] })
+			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}]}]  }).
+			    populate('user').populate('dataset').populate('comments')
 		} else {
 		// one of the words search
 		//var result = [];
+		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
+		// MULTIPLE KEYWORDS SEARCH NOT IMPLEMENTED YET
 			for (j = 0; j < split.length; j++) { 
 			var regexX = new RegExp(split[j], 'i');
-			var query = Comment.find( {$or:[ { title: regexX }, { text: regexX }]} )			
+			query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
 			}
 			for (var key in req.query) {	
 				if (key!="count" && key!="q" && req.query[key]) {

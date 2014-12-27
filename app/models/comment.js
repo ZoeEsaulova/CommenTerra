@@ -11,10 +11,11 @@ var commentSchema = mongoose.Schema({
   url: String,
   text: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  authorName: { type: String, default: "Anonymous" },
+  authorName: String,
   rating: {type: Number, default: 0},
   date: { type: Date, default: Date.now },
   comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   markerCoords: [{ type: Number }],
   boundingBox: [{ type: Number}],
   temporalComponent: [ {type: String }]
@@ -83,21 +84,55 @@ commentSchema.virtual('author').get(function () {
      }
    )
 */
-/*
 
-commentSchema.methods.findAuthor = function () {
-      mongoose.model('Comment').findOne({ title : this.title })
+commentSchema.virtual('username').get(function () {
+  
+  mongoose.model('Comment').findOne({ title : this.title }).populate('user').exec(function(err,comment) {
+    if (comment.user!=undefined) {
+      console.log(comment.user.local.username)
+      return comment.user.local.username
+    } else {
+      return "Anonymous"
+    }
+  })
+  })
+/*
+  var comment = ""
+  return query.exec(function(err, com) {
+      if (com.user) {
+    console.log("Ja")
+      return query.populate('user').exec(function(err, comment) {
+      return comment.user.local.username
+    
+  })
+  } else {
+    return "Anonymous"
+  }
+  })
+*/
+
+
+
+/*
+commentSchema.virtual('username2').get(function () {
+  return this.findAuthor(function(err, comment) {
+                        if (comment.user) {
+                          return comment.user.local.username;
+                        }  else {
+                          return "Anonymous"
+                        }    
+                      } )
+  })
+
+
+commentSchema.methods.findAuthor = function (cb) {
+
+      mongoose.model('Comment').findOne({ title : this.title })    
       .populate('user')
-      .exec(function(err, comment) {
-        if (comment.user) {
-          console.log("Method:" + comment.user.local.username);
-          return comment.user.local.username;
-        }  else {
-          return "Anonymous"
-        }    
-      });
+      .exec(cb);
   }
 
+/*
 commentSchema.methods.findSimilarTypes = function (cb) {
   return this.model('Comment').find({ title: this.title }, cb);
 }
@@ -122,5 +157,6 @@ commentSchema.statics = {
   }
   */
 commentSchema.set('toJSON', { virtuals: true });
+commentSchema.set('toObject', { virtuals: true });
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Comment', commentSchema);

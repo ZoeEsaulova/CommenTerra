@@ -3,18 +3,23 @@
 module.exports = function(app, passport) {
 
 var User = require('../models/user');
+var Comment = require('../models/comment');
 // normal routes ===============================================================
 
 	// show the home page. The contant of the home page depends on whether the user is authenticatedd
 	app.get('/', function(req, res) {
-		
-		if (req.isAuthenticated()) {
+		Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments').sort(' -date').exec(function(err,comments) {
+
+			if (req.isAuthenticated()) {
 			res.render('Home.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage')  })
+				message: req.flash('loginMessage'), comments: comments })
 		} else {
 			res.render('Home.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-				message: req.flash('loginMessage') })
-		}  
+				message: req.flash('loginMessage'), comments: comments })
+		} 
+		})
+		
+ 
 		
 	});
 
