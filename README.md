@@ -6,6 +6,8 @@ Description of the project
 
 If you would like to download the code and try it for yourself:
 
+Preconditions: node.js, npm and mongoDB are instulled on your PC, mongoDB is started.
+
 1. Clone the repo: `git clone https://github.com/ZoeEsaulova/CommenTerra.git`
 2. Install packages: `npm install`
 3. Change out the database configuration in config/database.js
