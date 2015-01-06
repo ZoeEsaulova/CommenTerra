@@ -59,13 +59,12 @@ router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
 
 // process the add comment form
 router.post('/addtothread/:commentId', function(req, res) {
-	console.log("UIIIIIIIIIIIIIIIIIIII")
 	// Get form values. These rely on the "name" attributes
 
 	if (req.isAuthenticated()) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
-		newText = req.body.text;
+	    newText = req.body.text,
 	    newDataset = "",
 	    newThread = "";
 
