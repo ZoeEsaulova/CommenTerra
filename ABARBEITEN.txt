@@ -42,7 +42,7 @@ klick auf "boundingbox")
 --> abgearbeitet, Max, 18.12.2014
 
 14. about us: für kleine bildschirme das ganze untereinander packen
---> abgearbeitet, Max, 18.12.2014
+--> ist noch ein Bug drin (zu sehen, bei medium)
 
 15. auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
 
