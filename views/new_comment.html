@@ -135,8 +135,10 @@
                     <li>
                       <font color="#424242" size="4">Date:</font><br>
                       <script type="text/javascript" color="424242">
-                        var now = new Date();
-                        document.write(now.toString());
+                        
+                        var date = new Date();
+
+                        document.write((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
                       </script>
                     </li>
                   </ul>
