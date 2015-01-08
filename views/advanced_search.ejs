@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="css/leaflet.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>    
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
+    <link rel="stylesheet" href="/resources/demos/style.css">
   </head>
 
   <body>  	
@@ -109,25 +115,28 @@
           <li>
             <!-- soll mit datepicker realisiert werden 
               http://foundation-datepicker.peterbeno.com/example.html-->
-            <div class="row date collapse" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-              <input class="small-3 columns" size="16" type="text" value="12-02-2012" readonly> 
-              <span class="prefix small-2 columns end">
+            <!-- div class="row date collapse" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy" -->
+            <div class="row date collapse">
+              <input class="small-3 columns" size="16" type="text" placeholder="Set start date" id="datepicker1"> 
+              <!--span class="prefix small-2 columns end">
                 <i class="fa fa-calendar"></i>
-              </span>
+              </span-->
             </div>
             <br>
 
-            <div class="row date collapse" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-              <input class="small-3 columns" size="16" type="text" value="12-02-2012" readonly> 
-              <span class="prefix small-2 columns end">
+            <!--div class="row date collapse" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy"-->
+            <div class="row date collapse">
+              <input class="small-3 columns" size="16" type="text" placeholder="Set end date" id="datepicker2"> 
+              <!--span class="prefix small-2 columns end">
                 <i class="fa fa-calendar"></i>
-              </span>
+              </span-->
             </div>
 
             <ul class="large-block-grid-2">
               <li>
-                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="" />
-                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button> <!-- dynamischer permalink -->
+                <!--input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="" /-->
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button> 
+                <!-- dynamischer permalink -->
               </li>
                </form>
               <li>
@@ -413,12 +422,38 @@
       <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
     </div>
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
+
 
     <script>
       $(document).foundation();
     </script>
+
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker1" ).datepicker();
+      });
+    </script>
+
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker2" ).datepicker();
+      });
+    </script>    
+
+    <!--script type="text/javascript">
+  jQuery(document).ready(
+      function() {
+          jQuery('#datepicker').datepicker(
+              {
+                  onClose: function(dateText, inst) {
+                          alert("My date is: " + dateText);
+                      }
+              }
+          );
+      }
+  );
+</script-->
+
   </body>
 
 </html>
