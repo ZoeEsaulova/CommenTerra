@@ -14,11 +14,18 @@ router.get('/search', function(req,res) {
 	
 	if (!req.query.q) {
 		
-		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
+		//var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
+		var query = Comment.find({ comment: undefined }).populate('user').populate('comments').populate('dataset')
 			for (var key in req.query) {			
-				if (key!="count" && req.query[key]) {
+				/* if (key!="count" && req.query[key]) {
 					query.where(key).equals(req.query[key])
-				}				
+				}	*/
+				if (key=="url") {
+					query.populate({ 
+						path: 'dataset',
+						match: { url: req.query['url'] }
+					})
+				}			
 			}
 	} else {
 	var split = req.query.q.split(' '),

@@ -9,7 +9,7 @@ var datasetSchema = mongoose.Schema({
 			required: true,
 			trim: true
 		},
-  rating: {type: Number, default: 0},
+  rating: { type: Number, default: 0 },
   //Comments, refering this dataset
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 });
