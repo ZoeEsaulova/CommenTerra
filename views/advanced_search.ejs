@@ -10,49 +10,55 @@
     <link rel="stylesheet" href="css/leaflet.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.datepicker.js"></script>  
+    <script src="js/foundation-datepicker.js"></script> 
   </head>
 
   <body>
-  <!-- TOP-BAR (fixed)
+    <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
-       to get you everywhere -->  
+       to get you everywhere -->  	
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
-      <ul class="title-area"> 
+  		<ul class="title-area"> 
         <li class="name"> 
-          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
-      </ul>
+  			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+  			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+  		</ul>
       <section class="top-bar-section"> 
-        <!-- Right Nav Section --> 
-        <ul class="right">
+  			<!-- Right Nav Section --> 
+        <ul id="numero1" class="right">
           <li class="has-form">
-            <form data-abide>
+            <form action="/api/v1" method="post" data-abide>
                 <div class="row collapse">
                   <div class="small-9 columns ">
-                      <div class "search-field">
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
-                        <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
-                      </div>
+                    <div class "search-field">
+                      <label> <input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
+                      <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
+                    </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button href="advanced_search.html" class="success radius expand" type"submit">Search</button>
+                    <button class="success radius expand" type="submit">Search</button> <!-- referenz? -->
                   </div>
                 </div>
             </form>
           </li>
+
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
-          <li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
+  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+          <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
             <p class="lead">Please log in with your e-mail and your password</p>
-            <p><form data-abide>
+            <p><form data-abide action="/login" method="post">
               <div class="email-field">
-                <label>E-Mail 
+                <label>e-Mail 
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
@@ -65,21 +71,26 @@
                 </label>
                 <small class="error">Please type in your password!</small>
               </div>
-              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
+              <button id="LogInModal2" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
-          <li class="has-dropdown"> 
-            <a id="lastStop" href="#">Site Navigation</a> 
-            <ul class="dropdown"> 
-              <li><a href="new_comment.html">New Comment</a></li> 
-              <li><a href="advanced_search.html">Advanced Search</a></li>
-              <li><a href="faq.html">Help / FAQ</a></li> 
-            </ul> 
-          </li> 
-        </ul> 
-      </section>
-    </nav>
+          <% } %>
+  				<li class="has-dropdown"> 
+  					<a href="#">Site Navigation</a> 
+  					<ul class="dropdown"> 
+              <li><a href="/comments/add">New Comment</a></li> 
+              <li><a href="/api/v1/search">Advanced Search</a></li>
+              <li><a href="/faq">Help / FAQ</a></li> 
+
+              <% if (boolean1) { %>
+              <li><a href="/myprofile">Profile</a></li> 
+              <% } %>
+  					</ul> 
+  				</li> 
+  			</ul> 
+  		</section>
+  	</nav>
     </div>
 
 
@@ -256,6 +267,7 @@
                 <div id="permalinkModal" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:3000/api/v1/search?<%= query %></p>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
               </li>
@@ -416,12 +428,12 @@
                 <div id="permalinkModal" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:3000/api/v1/search?<%= query %></p>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
                 <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
       </strong>
     </div>
-
 
     <!-- lower bright gray area -->
     <div class="panel custom2">
@@ -442,31 +454,38 @@
 
           <div class="tabs-content">
 
-            <div class="content active" id="panel1">
+            <div class="content" id="panel1">
               <!-- comments 
                    ordered in an data-accordion -->
               <dl class="accordion" data-accordion>
-                
+
+              <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
-                  <a href="#panel1b">Berlin POI</a>
-                  <div id="panel1b" class="content">
+                  <a id="lastStop" href="#panel<%= i %>"><%= comments[i].title %></a>
+                  <div id="panel<%= i %>" class="content">
                     <ul class="no-bullet">
                     <li>
-                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                       <p>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                     </li>
                     </ul>
-                      Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
+                    <%= comments[i].text %>
+                    <p>
                     <ul class="no-bullet">
                     <li>
-                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                    <% if (comments[i].user) {%>
+                  <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                    <a href="/profile/<%= comments[i].user.local.username %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    </font></a>
+                  <%} else {%> 
+                    <font color="#2ba6cb">Anonymous</font>
+                  <%} %>
                       <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                       <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                       &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
@@ -474,176 +493,99 @@
                     </ul>
                   </div>
                 </dd>
+                <% } %>
 
-                <dd class="accordion-navigation">
-                  <a href="#panel2b">NRW DGK5</a>
-                  <div id="panel2b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp29-11-2014
-                    </li>
-                    </ul>
-                      Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-
-                <dd class="accordion-navigation">
-                  <a href="#panel3b">Germany Waterways</a>
-                  <div id="panel3b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp07-05-2014
-                    </li>
-                    </ul>
-                      Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
               </dl>
             </div>
 
-            <div class="content" id="panel2">
+
+            <div class="content active" id="panel2">
               <!-- map -->
-              <div class="map" id="map" style="width: 100%; height: 750px"></div> 
+              <div class="map" id="map" style="width: 100%; height: 750px"></div>
             </div>
 
           </div>
         </div>
       </strong> 
 
+
       <!-- LARGE-UP
            use this to show the page when there is a larger display -->
       <strong class="show-for-large-up">
         <ul class="small-block-grid-2" data-equalizer>
           <li>
-            <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+            <div class="panel custom" style="overflow: auto" data-equalizer-watch>      
               <!-- comments 
-                   orderd in a data-accordion -->
+                   orderd in a data-accordion -->       
               <dl class="accordion" data-accordion>
-
+              <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
-                  <a id="numero5" href="#panel1b">Berlin POI</a>
-                  <div id="panel1b" class="content">
+                  <a id="lastStop" href="#panel<%= i %>"><%= comments[i].title %></a>
+                  <div id="panel<%= i %>" class="content">
                     <ul class="no-bullet">
                     <li>
-                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                       <p>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                     </li>
                     </ul>
-                    Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <%= comments[i].text %>
                     <p>
                     <ul class="no-bullet">
                     <li>
-                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                    <% if (comments[i].user) {%>
+                  <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
+                    <a href="/profile/<%= comments[i].user.local.username %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    </font></a>
+                  <%} else {%> 
+                    <font color="#2ba6cb">Anonymous</font>
+                  <%} %>
                       <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                       <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="/comments/addtothread/<%= comments[i].dataset.url %>/<%= comments[i]._id %>"><i class="fi-comment size-21 font-success"></i></a>
                     </li>
                     </ul>
+                    <% if (comments[i].comments.length>0) {%>
+                  
+                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                          <div class="content">
+                            <p id="lastStop"><%= comments[i].comments[j].title %></p>
+                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                            <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                            <p><%= comments[i].comments[j].text %></p>
+                            <p><%= comments[i].comments[j].dateString %></p>
+                              <% if (comments[i].comments[j].user) {%>
+                            <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                              <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
+                                <%= comments[i].comments[j].authorName %>
+                              </font></a>
+                            <%} else {%> 
+                              <font color="#2ba6cb">Anonymous</font>
+                            <%} %>
+                          </div>
+
+                        <%} 
+                      %>
+                  <%} %>
                   </div>
                 </dd>
-
-                <dd class="accordion-navigation">
-                  <a href="#panel2b">NRW DGK5</a>
-                  <div id="panel2b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp29-11-2014
-                    </li>
-                    </ul>
-                    Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-
-                <dd class="accordion-navigation">
-                  <a href="#panel3b">Germany Waterways</a>
-                  <div id="panel3b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp07-05-2014
-                    </li>
-                    </ul>
-                    Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <p>
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
-                    </li>
-                    </ul>
-                  </div>
-                </dd>
-
+                <% } %>
               </dl>
             </div>
-          </li>
+          </li>           
 
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!-- map -->
-              <div>
+              <div id="numero5">
               <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
               </div>
             </div>
@@ -652,7 +594,7 @@
       </strong>
     </div>
 
-    <!-- script for the map on the right of the site -->
+     <!-- script for the map on the right of the site -->
     <script>              
       if (matchMedia('only screen and (max-width: 64em)').matches) {
       //map for small displays
@@ -752,8 +694,7 @@
       }
     </script>
 
-
-    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+ <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
     <!-- FOOTER
          on every page to get more informations -->
