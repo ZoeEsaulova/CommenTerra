@@ -271,6 +271,101 @@
               <div class="map" id="map" style="width: 100%; height: 750px"></div>
             </div>
           </div>
+          <script>              
+                if (matchMedia('only screen and (max-width: 64em)').matches) {
+                //Map for small screens
+                var map = L.map('map');
+
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  maxZoom: 20,
+                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                  id: 'examples.map-i875mjb7'
+                }).addTo(map);
+
+                function onLocationFound(e) {
+                  var radius = e.accuracy / 2;
+
+                  L.marker(e.latlng).addTo(map)
+                  .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                  L.circle(e.latlng, radius, {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map);
+                }
+
+                function onLocationError(e) {
+                  map.setView([51.96935, 7.59588], 13);
+                  alert(e.message);
+                }
+
+                map.on('locationfound', onLocationFound);
+                map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
+
+                map.locate({setView: true, maxZoom: 13});
+
+                var popup = L.popup();
+
+                function onMapClick(e) {
+                  popup
+                  .setLatLng(e.latlng)
+                  .setContent("You clicked the map at " + e.latlng.toString())
+                  .openOn(map);
+                }
+
+                map.on('click', onMapClick);
+              }
+
+              if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+                //Map for medium screens
+                var map1 = L.map('map1');
+                //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
+
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  maxZoom: 20,
+                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                  id: 'examples.map-i875mjb7'
+                }).addTo(map1);
+
+                function onLocationFound1(e) {
+                  var radius1 = e.accuracy / 2;
+
+                  L.marker(e.latlng).addTo(map1)
+                  .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
+
+                  L.circle(e.latlng, radius1, {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map1);
+                }
+
+                function onLocationError1(e) {
+                  alert(e.message);
+                }
+
+                map1.on('locationfound', onLocationFound1);
+                map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
+
+                map1.locate({setView: true, maxZoom: 16});
+
+                function onMapClick1(e) {
+                  popup
+                  .setLatLng(e.latlng)
+                  .setContent("You clicked the map at " + e.latlng.toString())
+                  .openOn(map1);
+                }
+
+                map1.on('click', onMapClick1);
+
+              }
+
+           </script>
         </div>
       </strong>      
     </div>
