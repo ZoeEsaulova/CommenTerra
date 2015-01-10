@@ -54,7 +54,7 @@ var _ = require('underscore');
 				pageowner: foundedUser,
 				boolean3: foundedUser.local.username==req.user.local.username,
 				boolean1: true, 
-				action: "localhost:3000/logout", 
+				action: "/logout", 
 				actionName: "Logout", 
 				message: req.flash('loginMessage'), 
 				comments: comments,
