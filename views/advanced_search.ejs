@@ -14,15 +14,13 @@
     <script src="js/vendor/jquery-1.11.2.js"></script>
     <script src="js/vendor/jquery-ui.js"></script>
     <script src="js/foundation.min.js"></script>
-    <script src="js/foundation.datepicker.js"></script>  
-    <script src="js/foundation-datepicker.js"></script> 
-    <!--script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
     <link rel="stylesheet" href="/resources/demos/style.css">
   </head>
-
-  <body>  	
+  <body>
+    <!-- TOP-BAR (fixed)
+       everytime you can see this strong navigation tool
+       to get you everywhere -->  	
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
@@ -50,6 +48,10 @@
                 </div>
             </form>
           </li>
+
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
   				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -159,21 +161,188 @@
                     <a class="close-reveal-modal">&#215;</a>
                     </div>
               
-                    <button href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</buttons>
-                    <div id="permalinkModal" class="reveal-modal" data-reveal>
-                      <h2>Permalink</h2>
-                      <p class="lead">You can copy this link for later searches:</p>
-                      <p>http://localhost:3000/api/v1/search?<%= query %></p>
-                      <a class="close-reveal-modal">&#215;</a>
-                    </div>
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:3000/api/v1/search?<%= query %></p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
               </li>
             </ul>
           </li>
         </ul>
       </strong>
+
     </div>
 
     <!-- unterer hell grauer Bereich -->
+
+
+      <!-- SMALL-UP
+           use this to show the page on smaller displays
+           for example on mobilephones -->
+      <strong class="hide-for-large-up">
+          <!-- input for the advanced search to get the search start
+             ordered in a grid to have a better overview of the options -->
+          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+            <form>
+              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
+              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
+              <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+              <p>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-grey"></i></a>
+              </p>
+            </form>
+
+                <!-- data binding for the input date -->
+                <form data-abide>
+                  <input type="date" id="id" placeholder="Beginning Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                  <input type="date" id="id" placeholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                </form>
+
+                <!-- boundingbox search
+                     the user get a pop-up window with a map
+                     and is used to make a boundingbox.
+                     the coordinations are extracted and
+                     filled in the input field -->
+                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="GPS" />
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</button>
+                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                  <h2>Boundingbox</h2>
+                  <div class="content active" id="panel2">
+                    <!-- map -->
+                    <div class="map" id="map2" style="width: 100%; height: 600px"></div> 
+
+                    <!-- script for the map in the pop-up window -->
+                      <script>              
+                        if (matchMedia('only screen and (max-width: 64em)').matches) {
+                        //map for small displays
+                        var map = L.map('map2');
+
+                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                          id: 'examples.map-i875mjb7'
+                          }).addTo(map);
+
+                        function onLocationFound(e) {
+                        var radius = e.accuracy / 2;
+
+                        L.marker(e.latlng).addTo(map)
+                          .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                        L.circle(e.latlng, radius, {
+                          color: '#2ba6cb',
+                          fillColor: '#2ba6cb',
+                          fillOpacity: 0.5
+                          }).addTo(map);
+                        }
+
+                        function onLocationError(e) {
+                          map.setView([51.96935, 7.59588], 13);
+                          alert(e.message);
+                        }
+
+                        map.on('locationfound', onLocationFound);
+                        map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
+
+                        map.locate({setView: true, maxZoom: 13});
+                                    
+                        L.marker([51.96935, 7.59588]).addTo(map)
+                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                        var popup = L.popup();
+
+                        function onMapClick(e) {
+                          popup
+                          .setLatLng(e.latlng)
+                          .setContent("You clicked the map at " + e.latlng.toString())
+                          .openOn(map);
+                        }
+
+                        map.on('click', onMapClick);
+                                }
+
+                        if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+                        //map for middle scale displays
+                        var map2 = L.map('map2');
+
+                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                          id: 'examples.map-i875mjb7'
+                          }).addTo(map2);
+
+                        function onLocationFound1(e) {
+                        var radius1 = e.accuracy / 2;
+
+                        L.marker(e.latlng).addTo(map2)
+                          .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
+
+                        L.circle(e.latlng, radius1, {
+                          color: '#2ba6cb',
+                          fillColor: '#2ba6cb',
+                          fillOpacity: 0.5
+                          }).addTo(map2);
+                        }
+
+                        function onLocationError1(e) {
+                          alert(e.message);
+                        }
+
+                        map2.on('locationfound', onLocationFound1);
+                        map2.on('locationerror', map2.setView([51.96935, 7.59588], 13), onLocationError1);
+
+                        map2.locate({setView: true, maxZoom: 16});
+                                    
+                        L.marker([51.96935, 7.59588]).addTo(map2)
+                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                        function onMapClick1(e) {
+                          popup
+                          .setLatLng(e.latlng)
+                          .setContent("You clicked the map at " + e.latlng.toString())
+                          .openOn(map1);
+                        }
+
+                        map2.on('click', onMapClick1);
+                        }
+                      </script>
+
+                  </div>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->              
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:3000/api/v1/search?<%= query %></p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+      </strong>
+    </div>
+
+    <!-- lower bright gray area -->
+
     <div class="panel custom2">
 
       <strong class="hide-for-large-up">
@@ -187,8 +356,12 @@
           <div class="tabs-content">
 
             <div class="content" id="panel1">
-              <!-- Kommentare -->
+
+              <!-- comments 
+                   ordered in an data-accordion -->
               <dl class="accordion" data-accordion>
+
+
               <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
                   <a id="lastStop" href="#panel<%= i %>"><%= comments[i].title %></a>
@@ -210,7 +383,6 @@
                     <ul class="no-bullet">
                     <li>
                     <% if (comments[i].user) {%>
-                  <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                     <a href="/profile/<%= comments[i].user.local.username %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
@@ -224,26 +396,27 @@
                   </div>
                 </dd>
                 <% } %>
-
-
-
- 
               </dl>
             </div>
 
+
             <div class="content active" id="panel2">
-              <!-- Karte -->
+              <!-- map -->
               <div class="map" id="map" style="width: 100%; height: 750px"></div>
- 
+
             </div>
           </div>
         </div>
       </strong> 
 
+      <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
       <strong class="show-for-large-up">
         <ul class="small-block-grid-2" data-equalizer>
           <li>
-            <div class="panel custom" style="overflow: auto" data-equalizer-watch>             
+            <div class="panel custom" style="overflow: auto" data-equalizer-watch>      
+              <!-- comments 
+                   orderd in a data-accordion -->       
               <dl class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
                 <dd class="accordion-navigation">
@@ -290,7 +463,6 @@
                             <p><%= comments[i].comments[j].text %></p>
                             <p><%= comments[i].comments[j].dateString %></p>
                               <% if (comments[i].comments[j].user) {%>
-                            <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                               <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
@@ -307,13 +479,11 @@
                 <% } %>
               </dl>
             </div>
-
-          </li>
-           
+          </li>           
 
           <li>
             <div class="panel custom" data-equalizer-watch>
-              <!-- Karte -->
+              <!-- map -->
               <div id="numero5">
               <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
               </div>
@@ -322,6 +492,9 @@
         </ul>
       </strong>
     </div>
+
+
+     <!-- script for the map on the right of the site -->
 
     <script>              
       if (matchMedia('only screen and (max-width: 64em)').matches) {
@@ -422,7 +595,8 @@
       }
     </script>
 
-    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+ <div class="panel custom4" style="width: 100%; height: 2px"></div>
+
 
     <!--footer-->
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
