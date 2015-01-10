@@ -54,7 +54,7 @@ var _ = require('underscore');
 				pageowner: foundedUser,
 				boolean3: foundedUser.local.username==req.user.local.username,
 				boolean1: true, 
-				action: "/logout", 
+				action: "localhost:3000/logout", 
 				actionName: "Logout", 
 				message: req.flash('loginMessage'), 
 				comments: comments,
@@ -62,7 +62,7 @@ var _ = require('underscore');
 		} else {
 				res.render('profile.ejs', { 
 				boolean1: false, 
-				user: foundedUser, 
+				pageowner: foundedUser, 
 				action: "/login", 
 				actionName: "Login", 
 				message: req.flash('loginMessage'), 
