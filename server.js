@@ -38,6 +38,7 @@ app.use('/comments/add', express.static(__dirname + '/public'));
 app.use('/comments/addtothread/:commentUrl/:commentId', express.static(__dirname + '/public'));
 app.use('/api/v1/search', express.static(__dirname + '/public'));
 app.use('/api/v1/search?', express.static(__dirname + '/public'));
+app.use('/profile', express.static(__dirname + '/public'));
 
 
 // required for passport (used for auth)

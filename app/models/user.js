@@ -23,17 +23,16 @@ var userSchema = mongoose.Schema({
 		},
 
     },
-    		name: {
-			first: String,
-			last: String
-		},
-		country: String,
-		occupation: String,
+    	firstname: { type: String, default: "" },
+    	lastname: { type: String, default: "" },
+		country: { type: String, default: "" },
 		// TO BE UPDATED:
 		status: {type: String, enum: ['User', 'Expert', '???']},
 		upvotes: { type: Number, default: 0},
 		downvotes: { type: Number, default: 0},
 		help: { type: Boolean, default: 0 },
+		profession: { type: String, default: "" },
+		about: String,
 		//Comments created by the user
 		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
     

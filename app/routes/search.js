@@ -17,15 +17,15 @@ router.get('/search', function(req,res) {
 		//var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
 		var query = Comment.find({ comment: undefined }).populate('user').populate('comments').populate('dataset')
 			for (var key in req.query) {			
-				/* if (key!="count" && req.query[key]) {
+				 if (key!="count" && req.query[key]) {
 					query.where(key).equals(req.query[key])
-				}	*/
-				if (key=="url") {
-					query.populate({ 
-						path: 'dataset',
-						match: { url: req.query['url'] }
-					})
-				}			
+				}	
+				/*if (key=="url") {
+					
+					query = Comment.find({ comment: undefined }).populate('user').populate('comments')
+						.populate( 'dataset', null, { 'url': req.query['url'] } )
+					
+				}	*/		
 			}
 	} else {
 	var split = req.query.q.split(' '),
@@ -61,15 +61,22 @@ router.get('/search', function(req,res) {
 	
 	query.sort(' -date').exec(function(err, comments) {
 		if (req.isAuthenticated()) {
+
 			res.render('advanced_search.ejs', { 
+
 				comments: comments, 
 				boolean1: true, 
 				username: req.user.local.username, 
+				userId: req.user._id,
 				action: "/logout", 
 				actionName: "Logout", 
 				message: req.flash('loginMessage'),
 				query: querystring.stringify(req.query) })
 		} else {
+			console.log("Comments: " + comments.length)
+			   /*comments = comments.filter(function(comment){
+     				return comment.dataset.length;
+   				}) */
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
 				boolean1: false, 
