@@ -8,37 +8,42 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <script src="js/vendor/modernizr.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
 
   <body>
-    
+    <!--fixed top-bar-->
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area"> 
         <li class="name"> 
           <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+        <!-- remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
       </ul>
       <section class="top-bar-section"> 
-        <!-- Right Nav Section --> 
+        <!-- right nav section --> 
         <ul id="numero1" class="right">
           <li class="has-form">
             <form action="/api/v1" method="post" data-abide>
                 <div class="row collapse">
+                  <!--seperate this area in 9 areas-->
                   <div class="small-9 columns ">
                       <div class "search-field">
+                        <!--search for keyword field with an autocomplete function-->
                         <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
+                  <!--override the count that adds up to 12 columns-->
                   <div class="small-3 columns end">
                     <button class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
           </li>
+          <!--Log-In modal-->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -50,6 +55,7 @@
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
+                <!--exception: invalid e-mail-->
                 <small class="error">Please type in a valid e-mail-adress!</small>
               </div>
               <div class="password-field">
@@ -57,6 +63,7 @@
                   <small>required</small>
                   <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
                 </label>
+                <!--exception: no password-->
                 <small class="error">Please type in your password!</small>
               </div>
               <button id="LogInModal2" class="radius" type="submit">Log In</button>
@@ -64,13 +71,14 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
+          <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
           <li class="has-dropdown"> 
             <a href="#">Site Navigation</a> 
             <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
               <li><a href="/faq">Help / FAQ</a></li> 
-
+              <!--for the logged user is a further link to the personal "Profile" site-->
               <% if (boolean1) { %>
               <li><a href="/myprofile">Profile</a></li> 
               <% } %>
@@ -84,9 +92,10 @@
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
-
-    <!--Content in the dark-grey-area-->
+    
+    <!--dark grey area-->
     <div class="panel custom">
+      <!--segmenting this area in three areas-->
       <ul class="small-block-grid-3 medium-block-grid-3 large-block-grid-3">
         <li>
           <!--Logo-->
@@ -102,7 +111,7 @@
         </li>
     </div>
 
-    <!--Content in the light grey area-->
+    <!--light grey area-->
     <div class="panel custom2"><br>
       <!--Contact form for small displays-->
       <strong class="show-for-small-only">
@@ -134,28 +143,8 @@
         <p></p>
         <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data">
           <input type="hidden" name="antwortseite_template" value="mail_response.html">  
-
-
-
-
-
-
-
-
-
-
-<!--Muss eventuell eine globale URL sein und keine lokale!!!!-->
-
-
-
-
-
-
-
-
-
-
           <input type="hidden" name="empfaenger" value="m.twel02@gmail.com,bjunge90@gmail.com,ehrecke.jan@gmail.com,j.golz01@gmail.com,zoe.esaulova@gmail.com"/>
+          <!--segmenting this area in two areas-->
           <ul class="small-block-grid-2" data-equalizer>
             <li>
 
