@@ -192,9 +192,20 @@
 						</button>
 					</li>
 					<li>
-						<button id="numero4" class="tiny radius expand" type=""submit>
-							<font color="#424242">Save</font>
+						<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+						  <font color="#424242">Save</font>
 						</button>
+						<!--pop up to confirm the submission-->
+						<div id="confirmModal" class="reveal-modal" data-reveal>
+						  <p class="lead">Are you sure to publish your comment?</p>
+						  <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+						    <font color="#424242">Save</font>
+						  </button>
+						  <button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
+						    <font color="#424242">Go Back</font>
+						  </button>
+						  <a class="close-reveal-modal">&#215;</a>
+						</div>
 					</li>
 				  </ul>
                 </div>
@@ -258,10 +269,21 @@
                   </dl>
 				  <!--return the name of the logged user or the anonyme unlogged user-->
                   <a href=""><font color="#2ba6cb">anonyme</font></a>
-                  <button class="tiny radius expand" type="submit">
-                    <font color="#424242">Save</font>
-                  </button>
-                  <p></p>
+                  <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+			<font color="#424242">Save</font>
+		</button>
+		<!--pop up to confirm the submission-->
+		<div id="confirmModal" class="reveal-modal" data-reveal>
+			<p class="lead">Are you sure to publish your comment?</p>
+			<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+				<font color="#424242">Save</font>
+			</button>
+			<button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
+				<font color="#424242">Go Back</font>
+			</button>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+                <p></p>
                 </div>
               </div>
             </div>
