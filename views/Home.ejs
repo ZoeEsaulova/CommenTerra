@@ -42,6 +42,9 @@
       </div>
     <% } %>
 
+    <!-- TOP-BAR (fixed)
+       everytime you can see this strong navigation tool
+       to get you everywhere -->
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
@@ -71,8 +74,10 @@
             </form>
           </li>
 
-          <!-- Login -->
-  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
+  				<li><a id="numero7" href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
@@ -100,7 +105,7 @@
 
 
   				<li class="has-dropdown"> 
-  					<a href="#">Site Navigation</a> 
+  					<a id="lastStop" href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
@@ -117,11 +122,15 @@
   	</nav>
     </div>
 
+
     <div class="fixed">
       <nav class="top-bar-border"></nav>
     </div>
 
-    <% if (!boolean1) { %> 
+
+    <% if (!boolean1) { %>
+    <!-- LARGE-UP
+         use this to show the page when there is a larger display --> 
     <strong class="show-for-large-up">
     <div class="panel custom">  
       <ul class="large-block-grid-3"> 
@@ -159,7 +168,8 @@
     </div>
     </strong>
     
-
+    <!-- MEDIUM-UP
+         use this to show the page on medium displays -->
     <strong class="show-for-medium-only">
       <div class="panel custom">
         <ul class="small-block-grid-2">
@@ -187,6 +197,9 @@
       </div>
     </strong>
 
+    <!-- SMALL-UP
+         use this to show the page on smaller displays
+         for example on mobilephones -->
     <strong class="show-for-small-only">
       <div class="panel custom">
           <form data-abide>
@@ -209,6 +222,7 @@
     </strong>
     <% } %>
     
+    <!-- lower bright gray area -->
     <div class="panel custom2">
 
       <ul class="small-block-grid-2">
@@ -220,19 +234,26 @@
         </li>
       </ul> 
 
+      <!-- SMALL-UP
+           use this to show the page on smaller displays
+           for example on mobilephones -->
       <strong class="hide-for-large-up">
         <div class="panel custom">
 
+          <!-- data-tabs for the two views in the lower area -->
           <dl class="tabs" data-tab>
+            <!-- first tab -->
             <dd><a href="#panel1">View Comments</a></dd>
+            <!-- second tab -->
             <dd class="content active"><a href="#panel2">View Map</a></dd>
           </dl>
 
           <div class="tabs-content">
 
             <div class="content" id="panel1">
-              <!-- Kommentare -->
-              <dl class="accordion" data-accordion>
+              <!-- comments 
+                   ordered in an data-accordion -->
+              <dl id="numero6" class="accordion" data-accordion>
 
                 <% for(var i=0; i<comments.length; i++) {%>
 
@@ -271,7 +292,7 @@
                   
                       <% for (var j=0; j<comments[i].comments.length; j++) {%>
                           <div class="content">
-                            <p id="lastStop"><%= comments[i].comments[j].title %></p>
+                            <p><%= comments[i].comments[j].title %></p>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -299,7 +320,7 @@
             </div>
 
             <div class="content active" id="panel2">
-              <!-- Karte -->
+              <!-- map -->
               <div class="map" id="map" style="width: 100%; height: 750px"></div>
  
             </div>
@@ -309,16 +330,19 @@
         </div>
       </strong>      
 
-<strong class="show-for-large-up" >
+      <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
+      <strong class="show-for-large-up" >
       <ul class="small-block-grid-2" data-equalizer>
         <li>
           <div class="panel custom" style="overflow: auto" data-equalizer-watch >
-            <!-- Kommentare -->
+            <!-- comments 
+                 orderd in a data-accordion -->
             <dl class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="lastStop" href="#panel<%= i %>c"><%= comments[i].title %></a>
+                <a id="numero6" href="#panel<%= i %>c"><%= comments[i].title %></a>
 
                 <div id="panel<%= i %>c" class="content">
                   <ul class="no-bullet">
@@ -338,7 +362,7 @@
                   <ul class="no-bullet">
                   <li>
                     <% if (comments[i].user) {%>
-                  <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
+                  <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
                     <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
@@ -389,7 +413,7 @@
         </li>
         <li>
           <div class="panel custom" data-equalizer-watch>
-            <!-- Karte -->
+            <!-- map -->
             <div id="numero5">
             <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
             </div>
@@ -399,12 +423,13 @@
       </ul>
 </strong>
 
-
     </div>
+
+        <!-- script for the map on the right of the site -->
               <script>
               
               if (matchMedia('only screen and (max-width: 64em)').matches) {
-                //Karte für kleine Bildschirme
+                //map for small displays
                 var map = L.map('map');
 
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -464,7 +489,7 @@
               }
 
               if (matchMedia('only screen and (min-width: 64.063em)').matches) {
-                //Karte für mittlere Bildschirme
+                //map for middle scale displays
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
@@ -527,7 +552,8 @@
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
-    <!--footer-->
+    <!-- FOOTER
+         on every page to get more informations -->
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
     <div id="footer">
     ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
@@ -535,6 +561,8 @@
       <!--div ng-include src="'test.html'"></div-->
     </div>
 
+    <!-- JOYRIDE
+         as intrudation in the functionality of this page -->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
         <h5>Hi there!</h5>
@@ -555,8 +583,14 @@
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
         <p>This is the map with the markers and potential layers of the comments...</p>
       </li>
-      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this finally is, where the comments are! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this is, where the comments are! Klick to get more informations about them and klick again to hide them.</p>
+      </li>
+      <li data-id="numero7" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>When registered log in to view all your comments and use other member-privelides.</p>
+      </li>
+      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>Use the site navigation to get everywhere at any time. I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
       </li>
     </ol>
 
