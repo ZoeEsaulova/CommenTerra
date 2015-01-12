@@ -297,7 +297,8 @@
                 if (matchMedia('only screen and (max-width: 64em)').matches) {
                 //Map for small screens
                 var map = L.map('map');
-
+		
+		//load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -306,9 +307,10 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map);
 
+		//shows the location of the device
                 function onLocationFound(e) {
                   var radius = e.accuracy / 2;
-
+		  
                   L.marker(e.latlng).addTo(map)
                   .bindPopup("You are within " + radius + " meters from this point").openPopup();
 
@@ -319,6 +321,7 @@
                   }).addTo(map);
                 }
 
+		//if the location can't retrieve it will be centerd on this point
                 function onLocationError(e) {
                   map.setView([51.96935, 7.59588], 13);
                   alert(e.message);
@@ -346,6 +349,7 @@
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
+		//load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -367,6 +371,7 @@
                   }).addTo(map1);
                 }
 
+		//shows the location of the device
                 function onLocationError1(e) {
                   alert(e.message);
                 }
