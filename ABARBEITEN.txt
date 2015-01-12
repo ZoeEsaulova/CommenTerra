@@ -4,13 +4,14 @@ der pfad für die logo.svg-datei ist falsch, deswegen wird das logo nicht angeze
 1. new_comment:
 - JR bei dem suchfeld ist überflüssig
 - dafür würde ich ein JR bei dem response-feld machen, sodass das ende wieder oben auf der seite ist
+--> abgearbeitet, Max, 12.01.2015
 
 2. allgemein:
-- was soll passieren wenn es zur "hide-for-large" kommt mit den JR? trotzdem anzeigne oder ändern?
 - wie lässt sich JR ausstellen?
 
 3. Footer:
 - sieht komisch aus, vorher war besser
+--> abgearbeitet, Max, 12.01.2015
 
 5. profilesite:
 - auch mit JR!
@@ -50,8 +51,10 @@ datensätzen machen kann
 --> wird bearbeitet von Jens
 
 20. joyride nur auf ab der Größe large oder auch für medium und small?
+--> nur large
 
 21. new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
+--> abgearbeitet, Max, 12.01.2015
 
 22. new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 
