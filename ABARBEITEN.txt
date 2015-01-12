@@ -1,3 +1,6 @@
+der pfad für die logo.svg-datei ist falsch, deswegen wird das logo nicht angezeigt, ich glaube es müsste "public/img/.." sein
+
+
 1. new_comment:
 - JR bei dem suchfeld ist überflüssig
 - dafür würde ich ein JR bei dem response-feld machen, sodass das ende wieder oben auf der seite ist
@@ -9,17 +12,11 @@
 3. Footer:
 - sieht komisch aus, vorher war besser
 
-4. about:
-sieht aus wie advanced_search!
-
 5. profilesite:
-- GANZ WICHTIG DAS DIE FERTIG IST
 - auch mit JR!
 
 6. Home Joyride (JR): evtl LogIn & Site Nav auch hinzufügen damit man nach dem JR wieder oben auf der Seite ist.
 --> wird bearbeitet von Jens
-
-7. Auf jede Seite nen JR? -> advanced_search
 
 8. new_comment: dunkler bereich für URL nach halb und dafür die "geparsten" daten auf der rechten seite in 
 einem feld anzeigen? 
@@ -32,19 +29,11 @@ einem feld anzeigen?
 bounding box zu ziehen 
 --> abgearbeitet, Max, 18.12.2014
 
-11. advanced_search: problem beide karten anzeigen zu können (einmal auf der karte selber und einmal bei 
-klick auf "boundingbox")
-
 12. beispiel kommentare anlegen: test für die suche nach neusten kommentaren auf der homeseite?
 --> Die Kommentare werden jetzt sortiert. Die neu erstellten Kommenatre erscheinen ganz oben in der Liste. Zoe 21.12.2014
 
-13. FAQ: evtl im dunklen bereich 3-spaltig laufen? -> punkte ab 2.X dann in die dritte spalte ziehen 
---> abgearbeitet, Max, 18.12.2014
-
 14. about us: für kleine bildschirme das ganze untereinander packen
 --> ist noch ein Bug drin (zu sehen, bei medium)
-
-15. auf allen seiten mit logo: evtl den linken abstand des logo zum rand erhöhen
 
 16. datumsformat bei kommentarerstellung und anzeige auf homesite und suche stimmen nicht überein -> einheitliches 
 format finden
@@ -53,9 +42,6 @@ format finden
 Zeitpunkt gespeichert. In der Kommentarliste wird jetzt das folgende Datumsformat benutzt: 21. December 2014  19:15. Zoe 21.12.2014
 
 17. map_viewer: evtl dunklen bereich mit logo und dem namen MAP VIEWER hinzufügen?
---> wird bearbeitet von Jens
-
-18. FÜR ALLE SEITEN: header wegen NAMEN "CommenTerra | blabla" überprüfen.
 --> wird bearbeitet von Jens
 
 19. homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
