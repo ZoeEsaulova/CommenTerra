@@ -1,6 +1,5 @@
 /* configure passport */
 
-// load all the things we need
 var LocalStrategy    = require('passport-local').Strategy;
 // load up the user model
 var User       = require('../app/models/user');
@@ -29,10 +28,9 @@ module.exports = function(passport) {
     // LOCAL LOGIN =============================================================
     // =========================================================================
     passport.use('local-login', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        passReqToCallback : true // allows us to pass in the req from our route (check if a user is logged in or not)
     },
     function(req, email, password, done) {
         if (email)
@@ -64,10 +62,9 @@ module.exports = function(passport) {
     // LOCAL SIGNUP ============================================================
     // =========================================================================
     passport.use('local-signup', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        passReqToCallback : true // allows us to pass in the req from our route (check if a user is logged in or not)
     },
     function(req, email, password, done) {
         if (email)
@@ -77,7 +74,6 @@ module.exports = function(passport) {
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                // TO BE UPDATED: ADD "The username is already taken"
                 User.findOne({ 'local.email' :  email }, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
@@ -90,7 +86,6 @@ module.exports = function(passport) {
 
                         // create the user
                         var newUser            = new User();
-
                         newUser.local.username = req.body.username;
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
@@ -104,9 +99,8 @@ module.exports = function(passport) {
                     }
 
                 });
-            // if the user is logged in but has no local account...
             } else {
-                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
+                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account)
                 return done(null, req.user);
             }
 

@@ -19,16 +19,7 @@
     <script src="js/vendor/jquery-1.11.2.js"></script>
     <script src="js/vendor/jquery-ui.js"></script>  
 
-<!--script type="text/javascript">
-  jQuery.ajaxSetup({
-  cache: false
-});
-  jQuery(document).ready(
-      function() {
-  jQuery("#accordion-for-large-up").load("accordion.html");
-});
 
-</script-->
 
 
   </head>
@@ -103,7 +94,6 @@
           </div>
           <% } %>
 
-
   				<li class="has-dropdown"> 
   					<a id="lastStop" href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
@@ -131,8 +121,8 @@
     <% if (!boolean1) { %>
     <!-- LARGE-UP
          use this to show the page when there is a larger display --> 
-    <strong class="show-for-large-up">
-    <div class="panel custom">  
+    <strong id="sign-up-for-large-up" class="show-for-large-up">
+      <div class="panel custom">  
       <ul class="large-block-grid-3"> 
         <li>
             <img id="firstStop" src="img/vektorlogo.svg" width="205" height="205">

@@ -50,9 +50,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./app/routes/home.js')(app, passport); // load our routes and pass in our app and fully configured passport
 var comment = require('./app/routes/comment'),
+	profile = require('./app/routes/profile'),
     search = require('./app/routes/search');
 app.use('/comments', comment); // define route for /comments page
 app.use('/api/v1', search); //define route for search
+app.use('/profile', profile); //define route for profile page
 
 // launch ======================================================================
 app.listen(port);

@@ -5,32 +5,24 @@ var express = require('express'),
  	Comment = require('../models/comment'),
  	_ = require('underscore'),
  	querystring = require('querystring');
-//set statoc content
-router.use(express.static(__dirname + '/public'));
 
-
+// search functionality
 router.get('/search', function(req,res) {
 
-	
-	if (!req.query.q) {
-		
-		//var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
+	// keyword search
+	if (!req.query.q) {		
 		var query = Comment.find({ comment: undefined }).populate('user').populate('comments').populate('dataset')
-			for (var key in req.query) {			
-				 if (key!="count" && req.query[key]) {
-					query.where(key).equals(req.query[key])
-				}	
-				/*if (key=="url") {
-					
-					query = Comment.find({ comment: undefined }).populate('user').populate('comments')
-						.populate( 'dataset', null, { 'url': req.query['url'] } )
-					
-				}	*/		
-			}
+		for (var key in req.query) {			
+			if (key!="count" && req.query[key]) {
+				query.where(key).equals(req.query[key])
+			}		
+		}
+	// search for keywords, url, user
 	} else {
 	var split = req.query.q.split(' '),
 	    split2 = req.query.q.split(''),
 		regex = new RegExp(req.query.q, 'i');
+
 		//exact phrase search (e.g. "Germany map")
 		if ( split2[0]==='"' ) {
 			var q2 = req.query.q.slice(1,split2.length-2),
@@ -38,13 +30,12 @@ router.get('/search', function(req,res) {
 			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}]}]  }).
 			    populate('user').populate('dataset').populate('comments')
 		} else {
+
 		// one of the words search
-		//var result = [];
 		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
-		// MULTIPLE KEYWORDS SEARCH NOT IMPLEMENTED YET
 			for (j = 0; j < split.length; j++) { 
-			var regexX = new RegExp(split[j], 'i');
-			query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
+				var regexX = new RegExp(split[j], 'i');
+				query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
 			}
 			for (var key in req.query) {	
 				if (key!="count" && key!="q" && req.query[key]) {
@@ -53,17 +44,15 @@ router.get('/search', function(req,res) {
 			}
 		}
 	}
-	
 
 	if (req.query.count) {
 		query.limit(Number(req.query.count))
 	}	 
 	
+	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
 		if (req.isAuthenticated()) {
-
 			res.render('advanced_search.ejs', { 
-
 				comments: comments, 
 				boolean1: true, 
 				username: req.user.local.username, 
@@ -73,10 +62,6 @@ router.get('/search', function(req,res) {
 				message: req.flash('loginMessage'),
 				query: querystring.stringify(req.query) })
 		} else {
-			console.log("Comments: " + comments.length)
-			   /*comments = comments.filter(function(comment){
-     				return comment.dataset.length;
-   				}) */
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
 				boolean1: false, 
@@ -87,7 +72,8 @@ router.get('/search', function(req,res) {
 			    query: querystring.stringify(req.query) })
 		}
 	})
-	})
+})
+
 //get all search parameters and add them to search permalink
 router.post('/', function(req,res) {
 	res.redirect('/api/v1/search?'+ querystring.stringify(req.body))
