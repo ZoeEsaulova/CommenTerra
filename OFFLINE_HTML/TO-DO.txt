@@ -6,13 +6,13 @@ für alle seiten mit comments:
 - wenn 2 tabs, dann immer erst "comments"
 
 new_comment:
-- "validate" als expand
+- "validate" als expand (erledigt)
  - datensatz soll in die "map" geladen & angezeigt     werden
 - eigentliche comment als nachgebautes accordion
 - aussagekräftiger name für boundingbox button
  - modal für radius und löschen des alten kreises
 - datumsgenerierung immer als MM/DD/YYYY
-- button blau
+- button blau (erledigt)
 - starrating
 
 advanced_search:
@@ -38,8 +38,8 @@ profile:
 
 about:
 - text ans logo dran mit blockgrid-3
-- text als blocksatz
-- lizenzen und rechte ganz rechts
-- topbar von ner anderen seite kopieren
-- unterscheidung für small/medium/large
- - erst logo weg, aber immer lizenzen+abouttext    anzeigen
+- text als blocksatz (erledigt)
+- lizenzen und rechte ganz rechts (erledigt)
+- topbar von ner anderen seite kopieren (erledigt)
+- unterscheidung für small/medium/large (erledigt)
+ - erst logo weg, aber immer lizenzen+abouttext    anzeigen (erledigt)
