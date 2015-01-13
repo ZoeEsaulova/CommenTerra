@@ -1,0 +1,703 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommenTerra | Welcome</title>
+    <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+  </head>
+
+  <body>
+  <!-- TOP-BAR (fixed)
+       everytime you can see this strong navigation tool
+       to get you everywhere --> 	
+    <div class="fixed">
+    <nav class="top-bar" data-topbar role="navigation">
+  		<ul class="title-area"> 
+        <li class="name"> 
+          <h1><a href="home.html"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+        </li> 
+  			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+  			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+  		</ul>
+      <section class="top-bar-section"> 
+  			<!-- Right Nav Section --> 
+        <ul class="right">
+          <li class="has-form">
+            <form data-abide>
+                <div class="row collapse">
+                  <div class="small-9 columns ">
+                      <div class "search-field">
+                        <label> <input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
+                        <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
+                      </div>
+                  </div>
+                  <div class="small-3 columns end">
+                    <button href="advanced_search.html" class="success radius expand" type"submit">Search</button>
+                  </div>
+                </div>
+            </form>
+          </li>
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
+  				<li><a href="#" data-reveal-id="LogInModal">Log In</a></li>
+          <div id="LogInModal" class="reveal-modal" data-reveal>
+            <h2>Log In</h2>
+            <p class="lead">Please log in with your e-mail and your password</p>
+            <p><form data-abide>
+              <div class="email-field">
+                <label>E-Mail 
+                  <small>required</small>
+                  <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
+                </label>
+                <small class="error">Please type in a valid e-mail-adress!</small>
+              </div>
+              <div class="password-field">
+                <label>Password 
+                  <small>required</small>
+                  <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
+                </label>
+                <small class="error">Please type in your password!</small>
+              </div>
+              <button href="profile_??????.html" class="radius" type="submit">Log In</button>
+            </form></p>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+  				<li class="has-dropdown"> 
+  					<a id="lastStop" href="#">Site Navigation</a> 
+  					<ul class="dropdown"> 
+  						<li><a href="new_comment.html">New Comment</a></li> 
+  						<li><a href="advanced_search.html">Advanced Search</a></li>
+              <li><a href="faq.html">Help / FAQ</a></li> 
+  					</ul> 
+  				</li> 
+  			</ul> 
+  		</section>
+  	</nav>
+    </div>
+
+
+    <div class="fixed-under">
+      <nav class="top-bar-border"></nav>
+    </div>
+
+
+    <!-- upper dark gray area -->
+    <div class="panel custom">
+
+      <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
+      <strong class="show-for-large-up">
+        <!-- input for the advanced search to get the search start
+             ordered in a grid to have a better overview of the options -->
+        <ul class="large-block-grid-2">
+          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+          <li>
+            <form>
+              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
+              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
+              <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+              <p>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-grey"></i></a>
+              </p>
+            </form>
+          </li>
+
+          <li>            
+            <ul class="large-block-grid-2">              
+              <li>
+                <!-- data binding for the starting date -->
+                <form data-abide>
+                  <input type="date" id="numero2" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                </form>
+
+                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="GPS" />
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+              </li>
+
+              <li>
+                <!-- data binding for the ending date -->
+                <form data-abide>
+                  <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                </form>
+
+                <!-- boundingbox search
+                     the user get a pop-up window with a map
+                     and is used to make a boundingbox.
+                     the coordinations are extracted and
+                     filled in the input field -->
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</button>
+                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                  <h2>Boundingbox</h2>
+                  <div class="content active" id="panel2">
+                    
+                  </div>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+              
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </strong>
+
+      <!-- SMALL-UP
+           use this to show the page on smaller displays
+           for example on mobilephones -->
+      <strong class="hide-for-large-up">
+          <!-- input for the advanced search to get the search start
+             ordered in a grid to have a better overview of the options -->
+          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+            <form>
+              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
+              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
+              <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+              <p>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-green"></i></a>
+                <a href="#"><i class="fi-star size-32 font-grey"></i></a>
+              </p>
+            </form>
+
+                <!-- data binding for the input date -->
+                <form data-abide>
+                  <input type="date" id="id" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                  <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                </form>
+
+                <!-- boundingbox search
+                     the user get a pop-up window with a map
+                     and is used to make a boundingbox.
+                     the coordinations are extracted and
+                     filled in the input field -->
+                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="GPS decimal-degrees" />
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</button>
+                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                  <h2>Boundingbox</h2>
+                  <div class="content active" id="panel2">
+                    <!-- map -->
+                    <div class="map" id="map2" style="width: 100%; height: 600px"></div> 
+
+                    <!-- script for the map in the pop-up window -->
+                      <script>              
+                        if (matchMedia('only screen and (max-width: 64em)').matches) {
+                        //map for small displays
+                        var map = L.map('map2');
+
+                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                          id: 'examples.map-i875mjb7'
+                          }).addTo(map);
+
+                        function onLocationFound(e) {
+                        var radius = e.accuracy / 2;
+
+                        L.marker(e.latlng).addTo(map)
+                          .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                        L.circle(e.latlng, radius, {
+                          color: '#2ba6cb',
+                          fillColor: '#2ba6cb',
+                          fillOpacity: 0.5
+                          }).addTo(map);
+                        }
+
+                        function onLocationError(e) {
+                          map.setView([51.96935, 7.59588], 13);
+                          alert(e.message);
+                        }
+
+                        map.on('locationfound', onLocationFound);
+                        map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
+
+                        map.locate({setView: true, maxZoom: 13});
+                                    
+                        L.marker([51.96935, 7.59588]).addTo(map)
+                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                        var popup = L.popup();
+
+                        function onMapClick(e) {
+                          popup
+                          .setLatLng(e.latlng)
+                          .setContent("You clicked the map at " + e.latlng.toString())
+                          .openOn(map);
+                        }
+
+                        map.on('click', onMapClick);
+                                }
+
+                        if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+                        //map for middle scale displays
+                        var map2 = L.map('map2');
+
+                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                          id: 'examples.map-i875mjb7'
+                          }).addTo(map2);
+
+                        function onLocationFound1(e) {
+                        var radius1 = e.accuracy / 2;
+
+                        L.marker(e.latlng).addTo(map2)
+                          .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
+
+                        L.circle(e.latlng, radius1, {
+                          color: '#2ba6cb',
+                          fillColor: '#2ba6cb',
+                          fillOpacity: 0.5
+                          }).addTo(map2);
+                        }
+
+                        function onLocationError1(e) {
+                          alert(e.message);
+                        }
+
+                        map2.on('locationfound', onLocationFound1);
+                        map2.on('locationerror', map2.setView([51.96935, 7.59588], 13), onLocationError1);
+
+                        map2.locate({setView: true, maxZoom: 16});
+                                    
+                        L.marker([51.96935, 7.59588]).addTo(map2)
+                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+                        function onMapClick1(e) {
+                          popup
+                          .setLatLng(e.latlng)
+                          .setContent("You clicked the map at " + e.latlng.toString())
+                          .openOn(map1);
+                        }
+
+                        map2.on('click', onMapClick1);
+                        }
+                      </script>
+
+                  </div>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->              
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+      </strong>
+    </div>
+
+
+    <!-- lower bright gray area -->
+    <div class="panel custom2">
+
+      <!-- SMALL-UP
+           use this to show the page on smaller displays
+           for example on mobilephones -->
+      <strong class="hide-for-large-up">
+        <div class="panel custom">
+
+          <!-- data-tabs for the two views in the lower area -->
+          <dl class="tabs" data-tab>
+            <!-- first tab -->
+            <dd class="content active"><a href="#panel1">View Comments</a></dd>
+            <!-- second tab -->
+            <dd><a href="#panel2">View Map</a></dd>
+          </dl>
+
+          <div class="tabs-content">
+
+            <div class="content active" id="panel1">
+              <!-- comments 
+                   ordered in an data-accordion -->
+              <dl class="accordion" data-accordion>
+
+                <dd class="accordion-navigation">
+                  <a href="#panel1b">Berlin POI</a>
+                  <div id="panel1b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                    </li>
+                    </ul>
+                      Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                  <a href="#panel2b">NRW DGK5</a>
+                  <div id="panel2b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp29-11-2014
+                    </li>
+                    </ul>
+                      Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                  <a href="#panel3b">Germany Waterways</a>
+                  <div id="panel3b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp07-05-2014
+                    </li>
+                    </ul>
+                      Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+              </dl>
+            </div>
+
+            <div class="content" id="panel2">
+              <!-- map -->
+              <div class="map" id="map" style="width: 100%; height: 750px"></div> 
+            </div>
+
+          </div>
+        </div>
+      </strong> 
+
+      <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
+      <strong class="show-for-large-up">
+        <ul class="small-block-grid-2" data-equalizer>
+          <li>
+            <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+              <!-- comments 
+                   orderd in a data-accordion -->
+              <dl class="accordion" data-accordion>
+
+                <dd class="accordion-navigation">
+                  <a id="numero5" href="#panel1b">Berlin POI</a>
+                  <div id="panel1b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.ber.de/geobasis/wms_ber_poi?"><font color="#2ba6cb">http://www.wms.ber.de/geobasis/wms_ber_poi?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp04-12-2014
+                    </li>
+                    </ul>
+                    Comment 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_Klaus89.html"><font color="#2ba6cb">Klaus89</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                  <a href="#panel2b">NRW DGK5</a>
+                  <div id="panel2b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.nrw.de/geobasis/wms_nw_dgk5?"><font color="#2ba6cb">http://www.wms.nrw.de/geobasis/wms_nw_dgk5?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp29-11-2014
+                    </li>
+                    </ul>
+                    Comment 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_J4nu$!.html"><font color="#2ba6cb">J4nu$!</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp6&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp2&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                  <a href="#panel3b">Germany Waterways</a>
+                  <div id="panel3b" class="content">
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="http://www.wms.deu.de/geobasis/wms_deu_gewaesser?"><font color="#2ba6cb">http://www.wms.deu.de/geobasis/wms_deu_gewaesser?</font></a>
+                      <p>
+                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp07-05-2014
+                    </li>
+                    </ul>
+                    Comment 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <p>
+                    <ul class="no-bullet">
+                    <li>
+                      <a href="profile_GeoCrack.html"><font color="#2ba6cb">GeoCrack</font></a>
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp1&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp<a href="#"><i class="fi-comment size-21 font-success"></i></a>
+                    </li>
+                    </ul>
+                  </div>
+                </dd>
+
+              </dl>
+            </div>
+          </li>
+
+          <li>
+            <div class="panel custom" data-equalizer-watch>
+              <!-- map -->
+              <div>
+              <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </strong>
+    </div>
+
+    <!-- script for the map on the right of the site -->
+    <script>              
+      if (matchMedia('only screen and (max-width: 64em)').matches) {
+      //map for small displays
+      var map = L.map('map');
+
+      L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        id: 'examples.map-i875mjb7'
+        }).addTo(map);
+
+      function onLocationFound(e) {
+      var radius = e.accuracy / 2;
+
+      L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+      L.circle(e.latlng, radius, {
+        color: '#2ba6cb',
+        fillColor: '#2ba6cb',
+        fillOpacity: 0.5
+        }).addTo(map);
+      }
+
+      function onLocationError(e) {
+        map.setView([51.96935, 7.59588], 13);
+        alert(e.message);
+      }
+
+      map.on('locationfound', onLocationFound);
+      map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
+
+      map.locate({setView: true, maxZoom: 13});
+                
+      L.marker([51.96935, 7.59588]).addTo(map)
+        .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+      var popup = L.popup();
+
+      function onMapClick(e) {
+        popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+      }
+
+      map.on('click', onMapClick);
+              }
+
+      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+      //map for middle scale displays
+      var map1 = L.map('map1');
+
+      L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        id: 'examples.map-i875mjb7'
+        }).addTo(map1);
+
+      function onLocationFound1(e) {
+      var radius1 = e.accuracy / 2;
+
+      L.marker(e.latlng).addTo(map1)
+        .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
+
+      L.circle(e.latlng, radius1, {
+        color: '#2ba6cb',
+        fillColor: '#2ba6cb',
+        fillOpacity: 0.5
+        }).addTo(map1);
+      }
+
+      function onLocationError1(e) {
+        alert(e.message);
+      }
+
+      map1.on('locationfound', onLocationFound1);
+      map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
+
+      map1.locate({setView: true, maxZoom: 16});
+                
+      L.marker([51.96935, 7.59588]).addTo(map1)
+        .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
+
+      function onMapClick1(e) {
+        popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map1);
+      }
+
+      map1.on('click', onMapClick1);
+      }
+    </script>
+
+
+    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+
+    <!-- FOOTER
+         on every page to get more informations -->
+    <div id="footer">
+      || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
+      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
+    </div>
+
+    <!-- JOYRIDE
+         as intrudation in the functionality of this page -->
+    <ol class="joyride-list" data-joyride>
+      <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
+        <p>The advanced search is very usefull to search for spezific geodatasets.</p>
+      </li>
+      <li data-id="numero1" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>Search for users, urls and for any keyword come to your mind...</p>
+      </li>
+      <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>... of course you can pick a dateframe related to the geodataset.</p>
+      </li>
+      <li data-id="numero3" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>Optional you can clarify a boundingbox just to see whether there any comment exists.</p>
+      </li>
+      <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>Copy the link of your search to reuse it same days later.</p>
+      </li>
+      <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>The resulting comments of your search are shown hier. Ordered by relevanz. For more informations klick.
+          To hide klick them again.</p>
+      </li>       
+      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>Again you can take use of the site navigation. Happy Searching!</p>
+      </li>
+    </ol>
+
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.joyride.js"></script>
+    <script>
+      $(document).foundation();
+      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+        $(document).foundation('joyride', 'start');
+      }      
+    </script>
+
+  </body>
+
+</html>

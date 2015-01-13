@@ -1,0 +1,45 @@
+für alle seiten mit comments:
+- 1,2,4 nehmen
+
+- site navi ein link auf profile einfügen   (sichtbar, wenn eingelogt)
+- site navi link auf: neue lokalisation
+- wenn 2 tabs, dann immer erst "comments"
+
+new_comment:
+- "validate" als expand
+ - datensatz soll in die "map" geladen & angezeigt     werden
+- eigentliche comment als nachgebautes accordion
+- aussagekräftiger name für boundingbox button
+ - modal für radius und löschen des alten kreises
+- datumsgenerierung immer als MM/DD/YYYY
+- button blau
+- starrating
+
+advanced_search:
+- starrating
+- datepicker?
+- GPS -> GPS (7.32587, 51.78386)
+- aussagekräftiger name für boundingbox button
+ - modal für radius und löschen des alten kreises
+- search & save this search untereinander und   expand
+
+faq:
+- 2.X einen runterschieben
+- anker ändern
+- über 2.X Tutorials drüberschreiben
+- tutorials ergänzen: navigation und erweiterte   suche aber ohne registrierung
+- videos bei handygröße anpassen
+
+profile:
+- confirm button bei den settings
+ - ohne passwort & username änderung
+- email anzeigen lassen, aber mit option zum   ausblenden
+- log in nicht möglich, da man IMMER eingelogt sein   muss um auf profilseiten zu kommen
+
+about:
+- text ans logo dran mit blockgrid-3
+- text als blocksatz
+- lizenzen und rechte ganz rechts
+- topbar von ner anderen seite kopieren
+- unterscheidung für small/medium/large
+ - erst logo weg, aber immer lizenzen+abouttext    anzeigen
