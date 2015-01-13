@@ -192,9 +192,20 @@
 						</button>
 					</li>
 					<li>
-						<button id="numero4" class="tiny radius expand" type=""submit>
-							<font color="#424242">Save</font>
+						<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+						  <font color="#424242">Save</font>
 						</button>
+						<!--pop up to confirm the submission-->
+						<div id="confirmModal" class="reveal-modal" data-reveal>
+						  <p class="lead">Are you sure to publish your comment?</p>
+						  <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+						    <font color="#424242">Save</font>
+						  </button>
+						  <button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
+						    <font color="#424242">Go Back</font>
+						  </button>
+						  <a class="close-reveal-modal">&#215;</a>
+						</div>
 					</li>
 				  </ul>
                 </div>
@@ -258,10 +269,21 @@
                   </dl>
 				  <!--return the name of the logged user or the anonyme unlogged user-->
                   <a href=""><font color="#2ba6cb">anonyme</font></a>
-                  <button class="tiny radius expand" type="submit">
-                    <font color="#424242">Save</font>
-                  </button>
-                  <p></p>
+                  <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+			<font color="#424242">Save</font>
+		</button>
+		<!--pop up to confirm the submission-->
+		<div id="confirmModal" class="reveal-modal" data-reveal>
+			<p class="lead">Are you sure to publish your comment?</p>
+			<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+				<font color="#424242">Save</font>
+			</button>
+			<button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
+				<font color="#424242">Go Back</font>
+			</button>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+                <p></p>
                 </div>
               </div>
             </div>
@@ -275,7 +297,8 @@
                 if (matchMedia('only screen and (max-width: 64em)').matches) {
                 //Map for small screens
                 var map = L.map('map');
-
+		
+		//load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -284,9 +307,10 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map);
 
+		//shows the location of the device
                 function onLocationFound(e) {
                   var radius = e.accuracy / 2;
-
+		  
                   L.marker(e.latlng).addTo(map)
                   .bindPopup("You are within " + radius + " meters from this point").openPopup();
 
@@ -297,6 +321,7 @@
                   }).addTo(map);
                 }
 
+		//if the location can't retrieve it will be centerd on this point
                 function onLocationError(e) {
                   map.setView([51.96935, 7.59588], 13);
                   alert(e.message);
@@ -324,6 +349,7 @@
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
+		//load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -345,6 +371,7 @@
                   }).addTo(map1);
                 }
 
+		//shows the location of the device
                 function onLocationError1(e) {
                   alert(e.message);
                 }
@@ -375,8 +402,8 @@
          on every page to get more informations -->
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
     <div id="footer">
-    ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&</a>
-      <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
+      || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
+      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
 	<!--joyride: Tour to get a first impression of this site-->
