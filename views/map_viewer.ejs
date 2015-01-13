@@ -41,6 +41,10 @@
                 </div>
             </form>
           </li>
+
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
   				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -83,14 +87,16 @@
   	</nav>
     </div>
 
+
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
 
+
+    <!-- lower bright gray area -->
     <div class="panel custom2">
-      <!--unterer grauer Bereich-->
       <div class="panel custom">
-        <!-- Karte -->
+        <!-- map -->
         <div class="map" id="map" style="width: 100%; height: 1000px; border-radius: 3px"></div>
 
       </div>
@@ -153,12 +159,14 @@
                 }
 
                 map.on('click', onMapClick);
-
     </script>
+
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
-    <!--footer-->
+
+    <!-- FOOTER
+         on every page to get more informations -->
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
     <div id="footer">
     ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</a>
