@@ -1,19 +1,19 @@
-für alle seiten mit comments:
+fÃ¼r alle seiten mit comments:
 - 1,2,4 nehmen
 
-- site navi ein link auf profile einfügen   (sichtbar, wenn eingelogt)
+- site navi ein link auf profile einfÃ¼gen   (sichtbar, wenn eingelogt) --> ist schon da  
 - site navi link auf: neue lokalisation
 - wenn 2 tabs, dann immer erst "comments"
 - JR immer nur wenn desktop oder auch auf mobilen   seiten anzeigen lassen?
-- Versionen der genutzen frameworks �berpr�fen und notfalls alle auf die 
+- Versionen der genutzen frameworks überprüfen und notfalls alle auf die 
   gleiche versions nr bringen
 
 new_comment:
 - "validate" als expand (erledigt)
  - datensatz soll in die "map" geladen & angezeigt     werden
 - eigentliche comment als nachgebautes accordion
-- aussagekräftiger name für boundingbox button
- - modal für radius und löschen des alten kreises
+- aussagekrÃ¤ftiger name fÃ¼r boundingbox button
+ - modal fÃ¼r radius und lÃ¶schen des alten kreises
 - datumsgenerierung immer als MM/DD/YYYY
 - button blau (erledigt)
 - starrating
@@ -22,25 +22,25 @@ advanced_search:
 - starrating
 - datepicker?
 - GPS -> Coordinates (7.32587, 51.78386)
-- aussagekräftiger name für boundingbox button -> Set Areal
- - modal für radius und löschen des alten kreises
+- aussagekrÃ¤ftiger name fÃ¼r boundingbox button -> Set Areal
+ - modal fÃ¼r radius und lÃ¶schen des alten kreises
 - search & save this search untereinander und   expand
 
 faq:
 <<<<<<< HEAD
-- anker �ndern
-- videos bei handygr��e anpassen
+- anker ändern
+- videos bei handygröße anpassen
 =======
 - 2.X einen runterschieben
-- anker ändern
-- über 2.X Tutorials drüberschreiben
-- tutorials ergänzen: navigation und erweiterte   suche aber ohne registrierung
-- videos bei handygröße anpassen
+- anker Ã¤ndern
+- Ã¼ber 2.X Tutorials drÃ¼berschreiben
+- tutorials ergÃ¤nzen: navigation und erweiterte   suche aber ohne registrierung
+- videos bei handygrÃ¶ÃŸe anpassen
 >>>>>>> 03da6aa6fefb6366765d9b365749c7350bc8859e
 
 profile:
 - confirm button bei den settings
- - ohne passwort & username änderung
+ - ohne passwort & username Ã¤nderung
 - email anzeigen lassen, aber mit option zum   ausblenden
 <<<<<<< HEAD
 
@@ -48,16 +48,16 @@ about:
 - text ans logo dran mit blockgrid-3
 - text als blocksatz
 - lizenzen und rechte ganz rechts
-- unterscheidung f�r small/medium/large
+- unterscheidung für small/medium/large
  - erst logo weg, aber immer lizenzen+abouttext    anzeigen
 =======
-- log in nicht möglich, da man IMMER eingelogt sein   muss um auf profilseiten zu kommen
+- log in nicht mÃ¶glich, da man IMMER eingelogt sein   muss um auf profilseiten zu kommen
 
 about:
 - text ans logo dran mit blockgrid-3
 - text als blocksatz (erledigt)
 - lizenzen und rechte ganz rechts (erledigt)
 - topbar von ner anderen seite kopieren (erledigt)
-- unterscheidung für small/medium/large (erledigt)
+- unterscheidung fÃ¼r small/medium/large (erledigt)
  - erst logo weg, aber immer lizenzen+abouttext    anzeigen (erledigt)
 >>>>>>> 03da6aa6fefb6366765d9b365749c7350bc8859e
