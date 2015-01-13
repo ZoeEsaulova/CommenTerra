@@ -4,6 +4,9 @@ für alle seiten mit comments:
 - site navi ein link auf profile einfügen   (sichtbar, wenn eingelogt)
 - site navi link auf: neue lokalisation
 - wenn 2 tabs, dann immer erst "comments"
+- JR immer nur wenn desktop oder auch auf mobilen   seiten anzeigen lassen?
+- Versionen der genutzen frameworks überprüfen und notfalls alle auf die 
+  gleiche versions nr bringen
 
 new_comment:
 - "validate" als expand
@@ -24,22 +27,17 @@ advanced_search:
 - search & save this search untereinander und   expand
 
 faq:
-- 2.X einen runterschieben
 - anker ändern
-- über 2.X Tutorials drüberschreiben
-- tutorials ergänzen: navigation und erweiterte   suche aber ohne registrierung
 - videos bei handygröße anpassen
 
 profile:
 - confirm button bei den settings
  - ohne passwort & username änderung
 - email anzeigen lassen, aber mit option zum   ausblenden
-- log in nicht möglich, da man IMMER eingelogt sein   muss um auf profilseiten zu kommen
 
 about:
 - text ans logo dran mit blockgrid-3
 - text als blocksatz
 - lizenzen und rechte ganz rechts
-- topbar von ner anderen seite kopieren
 - unterscheidung für small/medium/large
  - erst logo weg, aber immer lizenzen+abouttext    anzeigen
