@@ -58,4 +58,6 @@ datensätzen machen kann
 
 22. new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 
+23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
+
 
