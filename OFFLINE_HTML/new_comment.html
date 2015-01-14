@@ -105,7 +105,7 @@
 				</li>
 				<li>
           			<font color="white" size="4">Response:</font>
-          			<textarea disabled="disabled" rows="4"></textarea>
+          			<textarea id="numero5" disabled="disabled" rows="4"></textarea>
         		</li>
 			</ul>
 		</div>
@@ -117,14 +117,16 @@
 				<ul class="small-block-grid-2" data-equalizer>
 					<li>
 						<!--dark grey area-->
-						<div class="panel custom" data-equalizer-watch>
+						<div class="panel custom" style="overflow:auto" data-equalizer-watch>
 							<!--Comment-->
-							<div class="panel custom2">
-								<div id="panel5b" class="content">
-									<font color="#424242" size="4">Title:</font>
-									<input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
-									<p></p>
-									<font color="#424242" size="4">URL:<p></p>
+							<dl class="accordion" data-accordion>
+					        	<dd class="accordion-navigation">
+					            	<a href="#panel1b">
+										<input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
+					            	</a>
+					              	<div class="panel custom2">
+					                	<div id="panel1b" class="content">
+					                  		<font color="#424242" size="4">URL:<p></p>
 										<p id="urlResult">
 											Your URL will be shown here after you validate it!
 										</p>
@@ -145,8 +147,18 @@
 											<font color="#424242" size="4">Date:</font><br>
 											<!--return the current date-->
 											<script type="text/javascript" color="424242">
-												var date = new Date();
-												document.write((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+												var today = new Date();
+												var dd = today.getDate();
+												var mm = today.getMonth()+1
+												var yyyy = today.getFullYear();
+												if(dd<10){
+													dd = '0' + dd;
+												}
+												if(mm<10){
+													mm = '0' + mm
+												}
+												var today = mm + '/' + dd + '/' + yyyy;
+												document.write(today);
 											</script>
 										</li>
 									</ul>
@@ -163,14 +175,26 @@
 									<!--segmenting this area in two areas-->
 									<ul class="small-block-grid-2">
 										<li>
-											<button id="numero3" class="success tiny radius expand" type="submit">Bounding Box</button>
+											<button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
+											<div id="circleModal" class="reveal-modal" data-reveal>
+												<p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
+												<button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
+												<a class="close-reveal-modal">&#215;</a>
+											</div>
 										</li>
 										<li>
-											<button id="numero4" class="success tiny radius expand" type="submit">Save</button>
+											<button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
+											<div id="confirmModal" class="reveal-modal" data-reveal>
+												<p class="lead">Are you sure to submit the commen?</p>
+												<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
+												<a class="close-reveal-modal">&#215;</a>
+											</div>
 										</li>
 									</ul>
-								</div>
-							</div>
+					                	</div>
+					            	</div>
+					            </dd>
+					        </dl>
 						</div>
 					</li>
 					<li>
@@ -188,8 +212,8 @@
 					<div class="panel custom">
 						<!--two taps for Create a Comment and the Map-->
 						<dl class="tabs" data-tab>
-							<dd><a href="#panel1">Create a Comment</a></dd>
-							<dd class="content active"><a href="#panel2">View Map</a></dd>
+							<dd class="content active"><a href="#panel1">Create a Comment</a></dd>
+							<dd><a href="#panel2">View Map</a></dd>
 						</dl>
 						<div class="tabs-content">
 							<div class="content" id="panel1">
@@ -228,12 +252,6 @@
 										<!--return the logged user or the anonyme unlogged user-->
 										<a href=""><font color="#2ba6cb">anonyme</font></a>
 										<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Save</button>
-										<div id="confirmModal" class="reveal-modal" data-reveal>
-											<p class="lead">Are you sure to publish your comment?</p>
-											<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Save</button>
-											<button class="success tiny radius expand" type="delete" data-reveal-id="confirmModal">Go Back</button>
-											<a class="close-reveal-modal">&#215;</a>
-										</div>
 										<p></p>
 									</div>
 								</div>
@@ -356,7 +374,7 @@
 					<p>Your title of your comment</p>
 				</li>
 				<li data-id="numero3" data-text="Next" data-prev-text="Prev" data-options="tip_location: top">
-					<p>Here you can define a Bounding Box in the map of the right site</p>
+					<p>Here you can define an Areal in the map of the right site</p>
 				</li>
 				<li data-id="numero4" data-text="Next" data-prev-text="Prev" data-options="tip_location: top">
 					<p>Save your comment and go automatically to the CommenTerra - Home</p>
