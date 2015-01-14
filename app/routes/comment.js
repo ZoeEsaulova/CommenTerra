@@ -16,14 +16,17 @@ router.get('/', function(req,res) {
 });
 
 // show the new_comment page
-router.get('/add', function(req, res) {
-
+router.get('/add/:url?', function(req, res) {
+		var url = ""
+		if (req.params.url) { 
+			readonly = true; 
+			url = req.params.url}
 		if (req.isAuthenticated()) {
 			res.render('new_comment.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage'), urlValue: "", readonly: false, addAction: "/comments/add" })
+				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-				message: req.flash('loginMessage'), urlValue: "", readonly: false, addAction: "/comments/add" })
+				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
 		}
 });
 
@@ -54,7 +57,7 @@ router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
 });
 
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
-router.post('/add/:url?', function(req, res) {
+router.post('/add', function(req, res) {
 	// Get form values. These rely on the "name" attributes
 
 	if (req.isAuthenticated()) {

@@ -94,23 +94,13 @@
     </div>
 
     <!--dark grey area-->
-    <form action=<%= addAction %> method="post">
+    <form action=<%= addAction %> method="post" name="new_comment_form">
     <div class="panel custom">
 		<!--segmenting this area in two areas-->
 		<ul class="small-block-grid-2" data-equalizer>
 			<li>
 			  <font color="white" size="4">URL:</font>
-			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" readonly="readonly"/>
-			  <% if (readonly) { %>
-				  <script>
-				  jQuery("#firstStop").prop('readonly', true);
-				  </script>
-			  <% } else { %> 
-				  <script>
-				  jQuery("#firstStop").prop('readonly', false);
-				  </script>
-			  <%} %>
-
+			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
 			  <!--will be shown on on small and medium screens-->
 			  <strong class="show-for-large-up">
 				<button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
@@ -197,8 +187,8 @@
 						</button>
 						<!--pop up to confirm the submission-->
 						<div id="confirmModal" class="reveal-modal" data-reveal>
-						  <p class="lead">Are you sure to publish your comment?</p>
-						  <button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">
+						  <p class="lead">Are you sure to publish your comment? show-for-large-up</p>
+						  <button id="testButton" class="success tiny radius expand" data-reveal-id="confirmModal">
 						    Save
 						  </button>
 						  <button class="success tiny radius expand" type="delete" data-reveal-id="confirmModal">
@@ -206,6 +196,7 @@
 						  </button>
 						  <a class="close-reveal-modal">&#215;</a>
 						</div>
+
 					</li>
 				  </ul>
                 </div>
@@ -270,19 +261,19 @@
 				  <!--return the name of the logged user or the anonyme unlogged user-->
                   <a href=""><font color="#2ba6cb">anonyme</font></a>
                   <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
-			<font color="#424242">Save</font>
-		</button>
-		<!--pop up to confirm the submission-->
-		<div id="confirmModal" class="reveal-modal" data-reveal>
-			<p class="lead">Are you sure to publish your comment?</p>
-			<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
-				<font color="#424242">Save</font>
-			</button>
-			<button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
-				<font color="#424242">Go Back</font>
-			</button>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
+            			<font color="#424242">Save</font>
+            		</button>
+            		<!--pop up to confirm the submission-->
+            		<!--div id="confirmModal" class="reveal-modal" data-reveal>
+            			<p class="lead">Are you sure to publish your comment? hide-for-large-up</p>
+            			<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
+            				<font color="#424242">Save</font>
+            			</button>
+            			<button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
+            				<font color="#424242">Go Back</font>
+            			</button>
+            			<a class="close-reveal-modal">&#215;</a>
+            		</div-->
                 <p></p>
                 </div>
               </div>
@@ -436,6 +427,13 @@
       }
       
     </script>
+    <script type="text/javascript">
+
+jQuery("#testButton").click(function(){
+  document.new_comment_form.submit();
+});
+
+</script>
 
     
   </body>
