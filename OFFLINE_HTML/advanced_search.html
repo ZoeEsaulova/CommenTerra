@@ -10,6 +10,54 @@
     <link rel="stylesheet" href="css/leaflet.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <link rel="stylesheet" href="css/labs.css" />
+    <link rel="stylesheet" href="css/jquery.raty.css" />
+
+          <style>.functions .demo {
+            margin-bottom: 10px;
+          }
+
+          .functions .item {
+          background-color: #FEFEFE;
+          border-radius: 4px;
+          display: inline-block;
+          margin-bottom: 5px;
+          padding: 5px 10px;
+          }
+
+          .functions .item a {
+          border: 1px solid #CCC;
+          margin-left: 10px;
+          padding: 5px;
+          text-decoration: none;
+          }
+
+          .functions .item input {
+          display: inline-block;
+          margin-left: 2px;
+          padding: 5px 6px;
+          width: 120px;
+          }
+
+          .functions .item label {
+          display: inline-block;
+          font-size: 1.1em;
+          font-weight: bold;
+          }
+
+          .hint {
+          text-align: center;
+          width: 160px
+          }
+
+          div.hint {
+          font-size: 1.4em;
+          height: 46px;
+          margin-top: 15px;
+          padding: 7px
+          }
+          </style>
+
   </head>
 
   <body>
@@ -104,11 +152,7 @@
               <input type="text" name="search_url" id="search_url" placeholder="url..." />            
               <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
               <p>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-grey"></i></a>
+                <div id="rating"></div> 
               </p>
             </form>
           </li>
@@ -672,6 +716,15 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/jquery.raty.js"></script>
+    <script src="js/labs.js"></script>
+    <script>
+     $(document).ready(function()
+     {
+     $("#rating").raty();
+     });
+    </script>
     <script>
       $(document).foundation();
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
