@@ -212,22 +212,21 @@
                   <ul class="small-block-grid-3">
                     <li>
                       <form data-abide>
-                        <!-- not possible to change! -->
-                        <div class="name-field">
-                          <label>Username
-                            <input type="text" id="username" placeholder="Current Username (placeholder)" name="username">
-                          </label>
-                        </div>
                         <div class="email-field">
                           <label>e-Mail
+                            <input type="email" id="email" placeholder="Current e-mail (placeholder)" name="email" pattern="email">
+                          </label>
+                          <small class="error">Please type in a valid e-mail-adress!</small>
+                        </div>
+                        <div class="email-field">
+                          <label>e-Mail visible for others?
                             <input type="email" id="email" placeholder="Current e-mail (placeholder" name="email" pattern="email">
                           </label>
                           <small class="error">Please type in a valid e-mail-adress!</small>
                         </div>
-                        <!-- not possible to change! -->
-                        <div class="password-field">
-                          <label>Password
-                            <input type="password" id="password" placeholder="Create a new password" name="password">
+                        <div class="country-field">
+                          <label>Country
+                            <input type="password" id="password" placeholder="Current country (placeholder)" name="password">
                           </label>
                         </div>
                       </form>
@@ -269,8 +268,8 @@
                        and information about the user -->
                   <div id="saveSettingsModal" class="reveal-modal" data-reveal>
                     <p class="lead">Are you sure to save the settings?</p>
-                    <button href="profile_?????.html" class="radius" type="submit">&nbsp&nbspOkay&nbsp&nbsp</button>
-                    <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">Cancel</button>
+                    <button href="profile_?????.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">&nbsp&nbspOkay&nbsp&nbsp</button>
+                    <button href="#" class="radius" type="submit">Cancel</button>
                     <a class="close-reveal-modal">&#215;</a>
                   </div>
                   <a class="close-reveal-modal">&#215;</a>
@@ -303,6 +302,7 @@
             <div><p><font color="white">Username: </font><font color="white" size="5">J4NU5!</font></p></div>
             <div><p><font color="white">First Name: </font><font color="white" size="5">Jan</font></p></div>
             <div><p><font color="white">Last Name: </font><font color="white" size="5">Ehrecke</font></p></div>
+            <div><p><font color="white">Country: </font><font color="white" size="5">Germany</font></p></div>
             <div><p><font color="white">Profession: </font><font color="white" size="5">Student</font>
               <br><br><font color="white">User Rating: </font>
               <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
@@ -310,6 +310,8 @@
             </div>
           </li>
           <li>
+            <!-- it´s possible to not show the e-mail for others -->
+            <div><p class="text-justify"><font color="white">e-Mail:</font><br><br><font color="white" size ="4">jan@hardcoder.com</font></p></div>
             <div><p id="numero2" class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</font></p></div>
           </li>
         </ul>
@@ -327,6 +329,7 @@
             <div><p><font color="white">Username: </font><font color="white" size="5">J4NU5!</font></p></div>
             <div><p><font color="white">First Name: </font><font color="white" size="5">Jan</font></p></div>
             <div><p><font color="white">Last Name: </font><font color="white" size="5">Ehrecke</font></p></div>
+            <div><p><font color="white">Country: </font><font color="white" size="5">Germany</font></p></div>
             <div><p><font color="white">Profession: </font><font color="white" size="5">Student</font>
               <br><br><font color="white">User Rating: </font>
               <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
@@ -334,6 +337,8 @@
             </div>
           </li>
           <li>
+            <!-- it´s possible to not show the e-mail for others -->
+            <div><p class="text-justify"><font color="white">e-Mail:</font><br><br><font color="white" size ="4">jan@hardcoder.com</font></p></div>
             <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</font></p></div>
           </li>
         </ul>
@@ -349,17 +354,20 @@
         <div><p><font color="white">Username: </font><font color="white" size="5">J4NU5!</font></p></div>
         <div><p><font color="white">First Name: </font><font color="white" size="5">Jan</font></p></div>
         <div><p><font color="white">Last Name: </font><font color="white" size="5">Ehrecke</font></p></div>
+        <div><p><font color="white">Country: </font><font color="white" size="5">Germany</font></p></div>
         <div><p><font color="white">Profession: </font><font color="white" size="5">Student</font>
           <br><br><font color="white">User Rating: </font>
           <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
           <font color="#c60f13" size="5">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
         </div>
+        <!-- it´s possible to not show the e-mail for others -->
+        <div><p class="text-justify"><font color="white">e-Mail:</font><br><br><font color="white" size ="4">jan@hardcoder.com</font></p></div>
         <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</font></p></div>
       </div>
     </strong>
 
+    <!-- lower bright gray area -->
     <div class="panel custom2">
-      <!-- lower bright gray area -->
       <ul class="small-block-grid-2">
         <li>
           <a href="new_comment.html" class="success button radius expand">New Comment</a>

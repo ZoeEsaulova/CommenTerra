@@ -13,8 +13,6 @@
     <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-    <link rel="stylesheet" href="css/labs.css" />
-    <link rel="stylesheet" href="css/jquery.raty.css" />
 
           <!-- style for rate function and stars -->
           <style>.functions .demo {
@@ -238,45 +236,41 @@
               <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
               <input type="text" name="search_url" id="search_url" placeholder="url..." />            
               <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
-              <p>
-                <div id="rating"></div> 
-              </p>
             </form>
+            <div id="rating"></div> 
           </li>
 
-          <li>            
-            <ul class="large-block-grid-2">              
-              <li>
+          <li>          
                 <!-- data binding for the starting date -->
                 <form data-abide>
                   <input type="date" id="numero2" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
                   <small class="error">The date must be in the format: MM/DD/YYYY</small>
                 </form>
 
-                <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS" />
-              </li>
-
-              <li>
                 <!-- data binding for the ending date -->
                 <form data-abide>
                   <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
                   <small class="error">The date must be in the format: MM/DD/YYYY</small>
                 </form>
+
+                <!-- coordinates for searching on a specific point -->
+                <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
+    
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
                      on the map the boundingbox circle appears. -->
                 <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
-                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-                  <h2>Set Areal</h2>
-                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
-                  <input type="text" id="radius" name=" radius" placeholder="10">
-                  <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
-                  <a class="close-reveal-modal">&#215;</a>
-                </div>
-              </li>
-            </ul>
-              <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button><p></p>
+                  <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                    <h2>Set Areal</h2>
+                    <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
+                    <input type="text" id="radius" name=" radius" placeholder="10">
+                    <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
+                    <a class="close-reveal-modal">&#215;</a>
+                  </div>
+
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+            
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
@@ -301,14 +295,9 @@
               <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
               <input type="text" name="search_url" id="search_url" placeholder="url..." />            
               <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
-              <p>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-green"></i></a>
-                <a href="#"><i class="fi-star size-32 font-grey"></i></a>
-              </p>
             </form>
+            <div id="rating1"></div>
+            <p></p>
 
                 <!-- data binding for the input date -->
                 <form data-abide>
@@ -317,6 +306,9 @@
                   <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
                   <small class="error">The date must be in the format: MM/DD/YYYY</small>
                 </form>
+
+                <!-- coordinates for searching on a specific point -->
+                <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
 
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
@@ -809,6 +801,12 @@
      $(document).ready(function()
      {
      $("#rating").raty();
+     });
+    </script>
+    <script>
+     $(document).ready(function()
+     {
+     $("#rating1").raty();
      });
     </script>
     <script>
