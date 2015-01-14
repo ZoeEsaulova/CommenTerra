@@ -1,29 +1,32 @@
+allgemein:
+- PARSING!
+- Startrating: Funktionalität
+- Commentar bewerten (daumen hoch/runter)
+- Logout confirmation modal: Funktionalität
+- Commentar commentieren: Funktionalität
+- Datepicker auf new_comment Seite: Funktionalität
+- Suche nach Bewertung, Datum
+- GPS, Bounding Box
+- wie lässt sich JR ausstellen?
+
 für alle seiten:  
 - site navi link auf: neue lokalisation
  -> führt dazu, dass die karte neu geladen werden muss (hat jan gelöst)
 - JR immer nur für den desktop nicht für mobilen seiten anzeigen (nicht gefordert!)
 
-
 new_comment:
-- datensatz soll in die "map" geladen & angezeigt werden
+- datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
+zu kommentieren)
 - modal fÃ¼r radius und lÃ¶schen des alten kreises
 - datepicker für den gewählten bezugsdatumsrahmen
 - datepicker! und datum raus, weil im hintergrund in der
   datenbank hinterlegt
-21. new_comment: Nach dem der Save-Button geklickt wurde eine Abfrage, ob man sich sicher ist, diesen Kommentar zu erstellen
---> abgearbeitet, Max, 12.01.2015
-22. new_comment: Im Titel wird automatisch eine Komma gesetzt ?
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ? 
 
 advanced_search:
-- datepicker?
+- datepicker --> gelöst, die Funktionalität mache ich wenn wir den datepicker auf new_comment Seite haben.
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
 - anordnung der rechten button
-
-profile:
-- email anzeigen lassen, aber mit option zum ausblenden
-
-2. allgemein:
-- wie lässt sich JR ausstellen?
 
 19. homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
 
@@ -34,6 +37,7 @@ kann auch später erledigt werden, nachrangig!
 _______________________________________________________________
 
 - Tooltipps
+- Editieren und Löschen von Kommentaren
 
 faq:
 - anker ändern
@@ -44,3 +48,10 @@ about:
 - lizenzen und rechte ganz rechts
 - unterscheidung für small/medium/large
  - erst logo weg, aber immer lizenzen+abouttext anzeigen
+ 
+ profile:
+- email anzeigen lassen, aber mit option zum ausblenden --> nicht gefordert
+
+advanced_search:
+- checkboxen: "all these words", "any of these words" : der unterschied besteht hier nur darin ob man 
+AND oder OR Verknüpfung bei der Suche verwendet
