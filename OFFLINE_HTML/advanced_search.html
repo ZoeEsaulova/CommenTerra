@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CommenTerra | Welcome</title>
+    <title>CommenTerra | Advanced Search</title>
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
@@ -123,7 +123,6 @@
                 </form>
 
                 <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS" />
-                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
               </li>
 
               <li>
@@ -132,30 +131,21 @@
                   <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
                   <small class="error">The date must be in the format: MM/DD/YYYY</small>
                 </form>
-
-
-
-
-
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
-                     able to define a radius.
-                     the coordinations are extracted and
-                     filled in the input field -->
-                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</button>
+                     able to define a radius. Afterwards by clicking
+                     on the map the boundingbox circle appears. -->
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
                 <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-                  <h2>Boundingbox</h2>
-                  <div class="content active" id="panel2">
-                    <input type="data" id="radius" name=" radius" placeholder="10 km">
-                    <button href="#" class="tiny radius expand"style="padding-bottom: 0.45rem">Take</button>
-                  </div>
+                  <h2>Set Areal</h2>
+                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometre.</p>
+                  <input type="text" id="radius" name=" radius" placeholder="10">
+                  <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
-
-
-
-
-              
+              </li>
+            </ul>
+              <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
@@ -165,8 +155,6 @@
                   <p class="lead">You can copy this link for later searches:</p>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
-              </li>
-            </ul>
           </li>
         </ul>
       </strong>
@@ -198,121 +186,16 @@
                   <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
                   <small class="error">The date must be in the format: MM/DD/YYYY</small>
                 </form>
-
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
-                     able to define a radius.
-                     the coordinations are extracted and
-                     filled in the input field -->
-                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="GPS decimal-degrees" />
-                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Boundingbox</button>
+                     able to define a radius. Afterwards by clicking
+                     on the map the boundingbox circle appears. -->
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
                 <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-                  <h2>Boundingbox</h2>
-                  <div class="content active" id="panel2">
-                    <!-- map -->
-                    <div class="map" id="map2" style="width: 100%; height: 600px"></div> 
-
-                    <!-- script for the map in the pop-up window -->
-                      <script>              
-                        if (matchMedia('only screen and (max-width: 64em)').matches) {
-                        //map for small displays
-                        var map = L.map('map2');
-
-                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-                        maxZoom: 20,
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                          id: 'examples.map-i875mjb7'
-                          }).addTo(map);
-
-                        function onLocationFound(e) {
-                        var radius = e.accuracy / 2;
-
-                        L.marker(e.latlng).addTo(map)
-                          .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-                        L.circle(e.latlng, radius, {
-                          color: '#2ba6cb',
-                          fillColor: '#2ba6cb',
-                          fillOpacity: 0.5
-                          }).addTo(map);
-                        }
-
-                        function onLocationError(e) {
-                          map.setView([51.96935, 7.59588], 13);
-                          alert(e.message);
-                        }
-
-                        map.on('locationfound', onLocationFound);
-                        map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
-
-                        map.locate({setView: true, maxZoom: 13});
-                                    
-                        L.marker([51.96935, 7.59588]).addTo(map)
-                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
-
-                        var popup = L.popup();
-
-                        function onMapClick(e) {
-                          popup
-                          .setLatLng(e.latlng)
-                          .setContent("You clicked the map at " + e.latlng.toString())
-                          .openOn(map);
-                        }
-
-                        map.on('click', onMapClick);
-                                }
-
-                        if (matchMedia('only screen and (min-width: 64.063em)').matches) {
-                        //map for middle scale displays
-                        var map2 = L.map('map2');
-
-                        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-                        maxZoom: 20,
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                          id: 'examples.map-i875mjb7'
-                          }).addTo(map2);
-
-                        function onLocationFound1(e) {
-                        var radius1 = e.accuracy / 2;
-
-                        L.marker(e.latlng).addTo(map2)
-                          .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
-
-                        L.circle(e.latlng, radius1, {
-                          color: '#2ba6cb',
-                          fillColor: '#2ba6cb',
-                          fillOpacity: 0.5
-                          }).addTo(map2);
-                        }
-
-                        function onLocationError1(e) {
-                          alert(e.message);
-                        }
-
-                        map2.on('locationfound', onLocationFound1);
-                        map2.on('locationerror', map2.setView([51.96935, 7.59588], 13), onLocationError1);
-
-                        map2.locate({setView: true, maxZoom: 16});
-                                    
-                        L.marker([51.96935, 7.59588]).addTo(map2)
-                          .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
-
-                        function onMapClick1(e) {
-                          popup
-                          .setLatLng(e.latlng)
-                          .setContent("You clicked the map at " + e.latlng.toString())
-                          .openOn(map1);
-                        }
-
-                        map2.on('click', onMapClick1);
-                        }
-                      </script>
-
-                  </div>
+                  <h2>Set Areal</h2>
+                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometre.</p>
+                  <input type="text" id="radius" name=" radius" placeholder="10">
+                  <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
 
