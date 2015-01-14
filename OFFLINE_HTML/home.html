@@ -9,14 +9,60 @@
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
-    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">-->
     <script src="js/vendor/jquery-1.11.2.js"></script>
-    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
     <script src="css/vendor/jquery-ui.js"></script>
-    <!--<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>-->
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <link rel="stylesheet" href="css/labs.css" />
+    <link rel="stylesheet" href="css/jquery.raty.css" />
 
+    <!-- style for rate function and stars -->
+          <style>.functions .demo {
+            margin-bottom: 10px;
+          }
+
+          .functions .item {
+          background-color: #FEFEFE;
+          border-radius: 4px;
+          display: inline-block;
+          margin-bottom: 5px;
+          padding: 5px 10px;
+          }
+
+          .functions .item a {
+          border: 1px solid #CCC;
+          margin-left: 10px;
+          padding: 5px;
+          text-decoration: none;
+          }
+
+          .functions .item input {
+          display: inline-block;
+          margin-left: 2px;
+          padding: 5px 6px;
+          width: 120px;
+          }
+
+          .functions .item label {
+          display: inline-block;
+          font-size: 1.1em;
+          font-weight: bold;
+          }
+
+          .hint {
+          text-align: center;
+          width: 160px
+          }
+
+          div.hint {
+          font-size: 1.4em;
+          height: 46px;
+          margin-top: 15px;
+          padding: 7px
+          }
+          </style>
+
+    <!-- autocomplete style -->
     <style>
       .ui-autocomplete {
       max-height: 100px;
@@ -32,6 +78,7 @@
       }
     </style>
 
+    <!-- script for autocomplete function -->
     <script>
       $(function() {
       var availableTags = [
@@ -760,7 +807,6 @@
       </li>
     </ol>
 
-    <!--<script src="js/vendor/jquery.js"></script>-->
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
