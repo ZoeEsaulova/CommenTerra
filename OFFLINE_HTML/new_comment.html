@@ -12,6 +12,8 @@
     <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <script src="js/foundation.datepicker.js"></script>
+	<script src="js/foundation-datepicker.js"></script>
     <link rel="stylesheet" href="css/labs.css" />
     <link rel="stylesheet" href="css/jquery.raty.css" />
 
@@ -257,6 +259,7 @@
 							<dl class="accordion" data-accordion>
 					        	<dd class="accordion-navigation">
 					            	<a href="#panel1b">
+					            		<font color="#424242" size="4">Title:</font>
 										<input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
 					            	</a>
 					              	<div class="panel custom2">
@@ -275,22 +278,17 @@
 											<div id="rating"></div>
 										</li>
 										<li>
-											<font color="#424242" size="4">Date:</font><br>
-											<!--return the current date-->
-											<script type="text/javascript" color="424242">
-												var today = new Date();
-												var dd = today.getDate();
-												var mm = today.getMonth()+1
-												var yyyy = today.getFullYear();
-												if(dd<10){
-													dd = '0' + dd;
-												}
-												if(mm<10){
-													mm = '0' + mm
-												}
-												var today = mm + '/' + dd + '/' + yyyy;
-												document.write(today);
-											</script>
+											<font color="#424242" size="4">Datepicker (optional):</font><br>
+											<!-- data binding for the starting date -->
+											<div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+												<input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+												<small class="error">The date must be in the format: MM/DD/YYYY</small>
+											</div>
+											<!-- data binding for the ending date -->
+											<form data-abide>
+												<input type="text" id="datepicker2" placeholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+												<small class="error">The date must be in the format: MM/DD/YYYY</small>
+											</form>
 										</li>
 									</ul>
 									<p></p>
@@ -316,14 +314,12 @@
 										<li>
 											<button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
 											<div id="confirmModal" class="reveal-modal" data-reveal>
-												<p class="lead">Are you sure to submit the commen?</p>
+												<p class="lead">Are you sure to submit the comment?</p>
 												<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
 												<a class="close-reveal-modal">&#215;</a>
 											</div>
 										</li>
 									</ul>
-					                	</div>
-					            	</div>
 					            </dd>
 					        </dl>
 						</div>
@@ -344,51 +340,79 @@
 						<!--two taps for Create a Comment and the Map-->
 						<dl class="tabs" data-tab>
 							<dd class="content active"><a href="#panel1">Create a Comment</a></dd>
-							<dd><a href="#panel2">View Map</a></dd>
+							<dd class="content inactive"><a href="#panel2">View Map</a></dd>
 						</dl>
 						<div class="tabs-content">
-							<div class="content" id="panel1">
+							<div class="content active" id="panel1">
 								<!--Comment-->
-								<div class="panel custom2">
-									<div id="panel5b" class="content">
-										<font color="#424242" size="4">Title:</font>
-										<input type="text" name="title" id="title" placeholder="Title..." />
-										<p></p>
-										<font color="#424242" size="4">URL:</font><br>
-										<p id="urlResult1">
+								<dl class="accordion" data-accordion>
+					        	<dd class="accordion-navigation">
+					            	<a href="#panel1b">
+					            		<font color="#424242" size="4">Title:</font>
+										<input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
+					            	</a>
+					              	<div class="panel custom2">
+					                	<div id="panel1b" class="content">
+					                  		<font color="#424242" size="4">URL:<p></p>
+										<p id="urlResult">
 											Your URL will be shown here after you validate it!
 										</p>
-										<p></p>
-										<font color="#424242" size="4">Rating:</font><br>
-										<!---five star rating-->
-										<div id="rating"></div>
-										<p></p>
-										<!--return the current date-->
-										<font color="#424242" size="4">Date:</font><br>
-										<script type="text/javascript">
-											var date = new Date();
-											document.write((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
-										</script>
-										<p></p>
-										<font color="#424242" size="4">Comment:</font>
-										<dl class="accordion" data-accordion>
-											<dd class="accordion-navigation">
-												<textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
-											</dd>
-										</dl>
-										<!--return the logged user or the anonyme unlogged user-->
-										<a href=""><font color="#2ba6cb">anonyme</font></a>
-										<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Save</button>
-										<p></p>
+									</font>
+									<p></p>
+									<!--segmenting this area in two areas-->
+									<font color="#424242" size="4">Rating (optional):</font><br>
+									<!--five star rating-->
+									<div id="rating"></div>
+									<font color="#424242" size="4">Datepicker (optional):</font><br>
+									<!-- data binding for the starting date -->
+									<div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+										<input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+										<small class="error">The date must be in the format: MM/DD/YYYY</small>
 									</div>
-								</div>
+									<!-- data binding for the ending date -->
+									<form data-abide>
+										<input type="text" id="datepicker2" placeholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+										<small class="error">The date must be in the format: MM/DD/YYYY</small>
+									</form>
+									<p></p>
+									<font color="#424242" size="4">Comment:</font>
+									<dl class="accordion" data-accordion>
+										<dd class="accordion-navigation">
+											<textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+										</dd>
+									</dl>
+									<!--return the logged user or the anonyme unlogged user-->
+									<a href=""><font color="#2ba6cb">anonyme</font></a>
+									<p></p>
+									<!--segmenting this area in two areas-->
+									<button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
+									<div id="circleModal" class="reveal-modal" data-reveal>
+										<p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
+										<button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
+										<a class="close-reveal-modal">&#215;</a>
+									</div>
+									<button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
+									<div id="confirmModal" class="reveal-modal" data-reveal>
+										<p class="lead">Are you sure to submit the comment?</p>
+										<button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
+										<a class="close-reveal-modal">&#215;</a>
+									</div>
+					            </dd>
+					        </dl>
 							</div>
-						<div class="content active" id="panel2">
+						<div class="content" id="panel2">
 							<!--Map-->
 							<div class="map" id="map" style="width: 100%; height: 683px"></div>
 						</div>
 					</div>
+					
 					<script>
+					/*
+						$('#panel2').on('toggled', function(even tab){
+							console.log(tab);
+							map.invalidateSize(true);
+						})*/
+
 						if (matchMedia('only screen and (max-width: 64em)').matches) {
 							//Map for small screens
 							var map = L.map('map');
@@ -527,5 +551,18 @@
 	        $(document).foundation('joyride', 'start');
 	      }      
 	    </script>
+	     <script>
+			$(document).foundation();
+		</script>
+		<script>
+			jQuery(function() {
+				jQuery( "#datepicker1" ).datepicker();
+			});
+		</script>
+		<script>
+			jQuery(function() {
+				jQuery( "#datepicker2" ).datepicker();
+			});
+		</script> 
 	</body>
 </html>
