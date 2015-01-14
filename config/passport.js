@@ -1,4 +1,4 @@
-/* configure passport */
+/* configure passport (passport is a framework used for authentication)*/
 
 var LocalStrategy    = require('passport-local').Strategy;
 // load up the user model
