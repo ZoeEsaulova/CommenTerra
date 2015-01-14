@@ -1,108 +1,151 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CommenTerra | Welcome</title>
-		<link rel="stylesheet" href="css/commenterra.css" />
-		<link rel="stylesheet" href="css/commenterra-icons.css" />
-		<link rel="stylesheet" href="css/leaflet.css" />
-		<link rel="stylesheet" href="css/vendor/jquery-ui.css" />
-		<script src="js/vendor/jquery-1.11.2.js"></script>
-		<script src="css/vendor/jquery-ui.js"></script>
-		<script src="js/vendor/modernizr.js"></script>
-		<script src="js/vendor/leaflet.js"></script>
-		<link rel="stylesheet" href="css/labs.css" />
-		<link rel="stylesheet" href="css/jquery.raty.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommenTerra | Advanced Search</title>
+    <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="css/vendor/jquery-ui.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+    <link rel="stylesheet" href="css/labs.css" />
+    <link rel="stylesheet" href="css/jquery.raty.css" />
 
-		<!-- autocomplete style -->
-	    <style>
-	      .ui-autocomplete {
-	      max-height: 100px;
-	      overflow-y: auto;
-	      /* prevent horizontal scrollbar */
-	      overflow-x: hidden;
-	      }
-	      /* IE 6 doesn't support max-height
-	      * we use height instead, but this forces the menu to always be this tall
-	      */
-	      * html .ui-autocomplete {
-	      height: 100px;
-	      }
-	    </style>
+          <!-- style for rate function and stars -->
+          <style>.functions .demo {
+            margin-bottom: 10px;
+          }
 
-	    <!-- script for autocomplete function -->
-	    <script>
-	      $(function() {
-	      var availableTags = [
-	      "ActionScript",
-	      "AppleScript",
-	      "Asp",
-	      "BASIC",
-	      "C",
-	      "C++",
-	      "Clojure",
-	      "COBOL",
-	      "ColdFusion",
-	      "Erlang",
-	      "Fortran",
-	      "Groovy",
-	      "Haskell",
-	      "Java",
-	      "JavaScript",
-	      "Lisp",
-	      "Perl",
-	      "PHP",
-	      "Python",
-	      "Ruby",
-	      "Scala",
-	      "Scheme"
-	      ];
-	       function split( val ) {
-	      return val.split( /,\s*/ );
-	      }
-	      function extractLast( term ) {
-	      return split( term ).pop();
-	      }
-	      $( "#tags" )
-	      // don't navigate away from the field on tab when selecting an item
-	      .bind( "keydown", function( event ) {
-	      if ( event.keyCode === $.ui.keyCode.TAB &&
-	      $( this ).autocomplete( "instance" ).menu.active ) {
-	      event.preventDefault();
-	      }
-	      })
-	      .autocomplete({
-	      minLength: 3,
-	      source: function( request, response ) {
-	      // delegate back to autocomplete, but extract the last term
-	      response( $.ui.autocomplete.filter(
-	      availableTags, extractLast( request.term ) ) );
-	      },
-	      focus: function() {
-	      // prevent value inserted on focus
-	      return false;
-	      },
-	      select: function( event, ui ) {
-	      var terms = split( this.value );
-	      // remove the current input
-	      terms.pop();
-	      // add the selected item
-	      terms.push( ui.item.value );
-	      // add placeholder to get the comma-and-space at the end
-	      terms.push( "" );
-	      this.value = terms.join( ", " );
-	      return false;
-	      }
-	      });
-	      });
-	    </script>
+          .functions .item {
+          background-color: #FEFEFE;
+          border-radius: 4px;
+          display: inline-block;
+          margin-bottom: 5px;
+          padding: 5px 10px;
+          }
+
+          .functions .item a {
+          border: 1px solid #CCC;
+          margin-left: 10px;
+          padding: 5px;
+          text-decoration: none;
+          }
+
+          .functions .item input {
+          display: inline-block;
+          margin-left: 2px;
+          padding: 5px 6px;
+          width: 120px;
+          }
+
+          .functions .item label {
+          display: inline-block;
+          font-size: 1.1em;
+          font-weight: bold;
+          }
+
+          .hint {
+          text-align: center;
+          width: 160px
+          }
+
+          div.hint {
+          font-size: 1.4em;
+          height: 46px;
+          margin-top: 15px;
+          padding: 7px
+          }
+          </style>
+
+    <!-- autocomplete style -->
+    <style>
+      .ui-autocomplete {
+      max-height: 100px;
+      overflow-y: auto;
+      /* prevent horizontal scrollbar */
+      overflow-x: hidden;
+      }
+      /* IE 6 doesn't support max-height
+      * we use height instead, but this forces the menu to always be this tall
+      */
+      * html .ui-autocomplete {
+      height: 100px;
+      }
+    </style>
+
+    <!-- script for autocomplete function -->
+    <script>
+      $(function() {
+      var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      ];
+       function split( val ) {
+      return val.split( /,\s*/ );
+      }
+      function extractLast( term ) {
+      return split( term ).pop();
+      }
+      $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+      $( this ).autocomplete( "instance" ).menu.active ) {
+      event.preventDefault();
+      }
+      })
+      .autocomplete({
+      minLength: 3,
+      source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+      availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+      // prevent value inserted on focus
+      return false;
+      },
+      select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+      }
+      });
+      });
+    </script>
 
 	</head>
-
 	<body>
-		<!--fixes top bar-->
 		<div class="fixed">
 			<nav class="top-bar" data-topbar role="navigation">
 				<ul class="title-area">
@@ -121,7 +164,7 @@
 									<div class="small-9 columns ">
 										<div class "search-field">
 											<label>
-												<input type="text" id="keyword" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric">
+												<input type="text" id="tags" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric">
 											</label>
 											<small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
 										</div>
@@ -150,7 +193,7 @@
 									<div class="password-field">
 										<label>Password
 											<small>required</small>
-											<input type="password" id="password" placeholder="P4s$w0rd!" name="password" required>
+											<input type="password" id="tags" placeholder="P4s$w0rd!" name="password" required>
 										</label>
 										<small class="error">Please type in your password!</small>
 									</div>
@@ -229,11 +272,7 @@
 										<li>
 											<font color="#424242" size="4">Rating (optional):</font><br>
 											<!--five star rating-->
-											<a href="#"><i class="fi-star size-28 font-green"></i></a>
-											<a href="#"><i class="fi-star size-28 font-green"></i></a>
-											<a href="#"><i class="fi-star size-28 font-green"></i></a>
-											<a href="#"><i class="fi-star size-28 font-green"></i></a>
-											<a href="#"><i class="fi-star size-28 font-grey"></i></a>
+											<div id="rating"></div>
 										</li>
 										<li>
 											<font color="#424242" size="4">Date:</font><br>
@@ -269,9 +308,7 @@
 										<li>
 											<button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
 											<div id="circleModal" class="reveal-modal" data-reveal>
-												<h2>Set Areal</h2>
-                  								<p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometre.</p>
-                  								<input type="text" id="radius" name=" radius" placeholder="10">
+												<p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
 												<button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
 												<a class="close-reveal-modal">&#215;</a>
 											</div>
@@ -299,8 +336,8 @@
 							</div>
 						</div>
 					</li>
-				</ul>
-			</strong>
+					</ul>
+				</strong>
 				<!--will be showen for small and medium screens-->
 				<strong class="hide-for-large-up">
 					<div class="panel custom">
@@ -477,15 +514,22 @@
 					<p>Here you can see the Response from your URL</p>
 				</li>
 			</ol>
-		</div>
-		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
-		<script src="js/foundation/foundation.joyride.js"></script>
-		<script>
-			$(document).foundation();
-			if (matchMedia('only screen and (min-width: 64.063em)').matches) {
-			$(document).foundation('joyride', 'start');
-			}
-		</script>
+	    <script src="js/foundation/foundation.joyride.js"></script>
+	    <script src="js/jquery.raty.js"></script>
+	    <script src="js/jquery.raty2.js"></script>
+	    <script src="js/labs.js"></script>
+	    <script>
+	     $(document).ready(function()
+	     {
+	     $("#rating").raty();
+	     });
+	    </script>
+	    <script>
+	      $(document).foundation();
+	      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+	        $(document).foundation('joyride', 'start');
+	      }      
+	    </script>
 	</body>
 </html>
