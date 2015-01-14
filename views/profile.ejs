@@ -163,38 +163,36 @@
       <nav class="top-bar-border"></nav>
     </div>
 
+    <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
     <strong class="show-for-large-up">
+      <!-- upper dark gray area -->
       <div class="panel custom">
-        <!--oberer grauer Balken-->
         <ul class="large-block-grid-3">
           <li>
-            <img src="img/empty_avatar.svg" width="205" height="205">
+            <img id="firstStop" src="img/empty_avatar.svg" width="205" height="205">
           </li>
           <li>
-            <div><p><font color="white">Username: </font><font color="white" size="5"><%= pageowner.local.username %></font></p></div>
-            <div><p><font color="white">Email: </font><font color="white" size="5"><%= pageowner.local.email %></font></p></div>            
-          	<% if (pageowner.firstname) {%>
-          		<div><p><font color="white">First Name: </font><font color="white" size="5"><%= pageowner.firstname%></font></p></div>
-          	<%} %>        
-          	<% if (pageowner.lastname) {%>
-          		<div><p><font color="white">Last Name: </font><font color="white" size="5"><%= pageowner.lastname %></font></p></div>
-          	<%} %> 
-          	<% if (pageowner.profession) {%>
-          		<div><p><font color="white">Profession: </font><font color="white" size="5"><%= pageowner.profession %></font></p></div>
-          	<%} %> 
-          	<% if (pageowner.country) {%>
-          		<div><p><font color="white">Country: </font><font color="white" size="5"><%= pageowner.country %></font></p></div>
-          	<%} %>            	          	          	          	    
-              <br><br><font color="white">User Rating: </font>
-              <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-              <font color="#c60f13" size="5">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
-            </div>
+            <!-- information about the user -->
+            <div><p><font color="white">Username: </font><font color="white" size="3"><%= pageowner.local.username %></font></p></div>
+            <div><p><font color="white">Email: </font><font color="white" size="3"><%= pageowner.local.email %></font></p></div>
+            <% if (pageowner.firstname) {%>
+              <div><p><font color="white">First Name: </font><font color="white" size="3"><%= pageowner.firstname%></font></p></div>
+            <%} %>
+            <% if (pageowner.lastname) {%>
+              <div><p><font color="white">Last Name: </font><font color="white" size="3"><%= pageowner.lastname %></font></p></div>
+            <%} %>
+            <% if (pageowner.profession) {%>
+              <div><p><font color="white">Profession: </font><font color="white" size="3"><%= pageowner.profession %></font></p></div>
+            <%} %> 
+              <font color="white">User Rating: </font>
+              <font color="#80FF00" size="3">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
+              <font color="#c60f13" size="3">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
           </li>
           <li>
             <% if (pageowner.about) {%>
-            <div><p class="text-justify"><font color="red">About Me:</font><br><br><font color="red" size ="5"><%= pageowner.about %></font></p></div>
-          	<%} %>          	
-
+            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5"><%= pageowner.about %></font></p></div>
+            <%} %>
           </li>
         </ul>
       </div>
