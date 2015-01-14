@@ -7,7 +7,95 @@
     <title>CommenTerra | FAQ</title>
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+
+    <!-- autocomplete style -->
+    <style>
+      .ui-autocomplete {
+      max-height: 100px;
+      overflow-y: auto;
+      /* prevent horizontal scrollbar */
+      overflow-x: hidden;
+      }
+      /* IE 6 doesn't support max-height
+      * we use height instead, but this forces the menu to always be this tall
+      */
+      * html .ui-autocomplete {
+      height: 100px;
+      }
+    </style>
+
+    <!-- script for autocomplete function -->
+    <script>
+      $(function() {
+      var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      ];
+       function split( val ) {
+      return val.split( /,\s*/ );
+      }
+      function extractLast( term ) {
+      return split( term ).pop();
+      }
+      $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+      $( this ).autocomplete( "instance" ).menu.active ) {
+      event.preventDefault();
+      }
+      })
+      .autocomplete({
+      minLength: 3,
+      source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+      availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+      // prevent value inserted on focus
+      return false;
+      },
+      select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+      }
+      });
+      });
+    </script>
   </head>
 
   <body>
@@ -125,7 +213,7 @@
       <div class="show-for-large-up">
         <ul class="large-block-grid-3"> 
           <li>
-            <img id="firstStop" src="img/vektorlogo.svg" width="300" height="300" style="padding-left:50px">
+            <img id="firstStop" src="img/vektorlogo.svg" width="300" height="250" style="padding-left:20px">
           </li>
 
           <!-- topics with integrated links for a fast navigation on the page -->
@@ -142,9 +230,10 @@
             <a href="#1.8"><font color="white">1.8 How can I manage my search-requests?</font></a><br>
           </li>
           <li>
-              <br>
+            <h3><font color="white">Tutorials</font></h3><br>
             <a href="#2.1"><font color="white">2.1 How to sign in (video)</font></a><br>
             <a href="#2.2"><font color="white">2.2 How to make a comment (video)</font></a><br>
+            <a href="#2.3"><font color="white">2.3 How to search (video)</font></a><br>
           </li>
         </ul>
       </div>
@@ -201,20 +290,32 @@
         <br>
         <br>
         <br>
-      <h2> 2. Tutorials </h2>
-        <br>
-      <p><b><a name="2.1"><font color="#424242">2.1</font></a> Registrieren: </b></p>
-      <video width="400" controls>
-        <source src="" type="video/mp4">
-      </video>
-        <br>
-        <br>
-      <p><b><a name="2.2"><font color="#424242">2.2</font></a> Kommmentar verfassen: </b></p>
-      <video width="400" controls>
-        <source src="" type="video/mp4">
-      </video><br><br>
-    </div>
+        <h2> 2. Tutorials </h2>
+          <br>
+        <!-- how to navigate on the pages -->
+        <p><b><a name="2.1"><font color="#424242">2.1</font></a> Navigation on page: </b></p>
+        <video width="400" controls>
+          <source src="" type="video/mp4">
+        </video>
+          <br>
+          <br>     
+        <!-- create new comment
+             only for registrated users --> 
+        <p><b><a name="2.2"><font color="#424242">2.2</font></a> Make a comment: </b></p>
+        <video width="400" controls>
+          <source src="" type="video/mp4">
+        </video>
+          <br>
+          <br>
+        <!-- how to set up a search -->
+        <p><b><a name="2.3"><font color="#424242">2.2</font></a> How to search: </b></p>
+        <video width="400" controls>
+          <source src="" type="video/mp4">
+        </video>
+          <br>
+          <br>
 
+    <!-- lower bright gray area -->
     <div class="panel custom2">
       <!-- SMALL-UP
            use this to show the page on smaller displays
@@ -267,14 +368,24 @@
           <br>      
         <h2> 2. Tutorials </h2>
           <br>
-        <p><b><a name="2.1"><font color="#424242">2.1</font></a> Registrieren: </b></p>
-        <video width="400" controls>
+        <!-- how to navigate on the pages -->
+        <p><b><a name="2.1"><font color="#424242">2.1</font></a> Navigation on page: </b></p>
+        <video width="250" controls>
           <source src="" type="video/mp4">
         </video>
           <br>
-          <br>      
-        <p><b><a name="2.2"><font color="#424242">2.2</font></a> Kommmentar verfassen: </b></p>
-        <video width="400" controls>
+          <br>     
+        <!-- create new comment
+             only for registrated users --> 
+        <p><b><a name="2.2"><font color="#424242">2.2</font></a> Make a comment: </b></p>
+        <video width="250" controls>
+          <source src="" type="video/mp4">
+        </video>
+          <br>
+          <br>
+        <!-- how to set up a search -->
+        <p><b><a name="2.3"><font color="#424242">2.2</font></a> How to search: </b></p>
+        <video width="250" controls>
           <source src="" type="video/mp4">
         </video>
           <br>
@@ -288,13 +399,11 @@
 
     <!-- FOOTER
          on every page to get more informations -->
-    <div class="panel custom4" style="width: 100%; height: 2px"></div>
     <div id="footer">
       || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
       <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
 
     <script>
