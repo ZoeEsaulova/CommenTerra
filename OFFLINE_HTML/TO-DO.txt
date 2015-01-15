@@ -11,6 +11,7 @@ allgemein:
 - Suche nach Bewertung, Datum
 - GPS, Bounding Box
 - wie lässt sich JR ausstellen?
+- Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
 
 für alle seiten:  
 - site navi link auf: neue lokalisation
