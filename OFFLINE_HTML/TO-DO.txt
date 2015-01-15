@@ -1,3 +1,6 @@
+- Server aktualisieren + Beispieldaten
+- Codereview hochladen?
+
 allgemein:
 - PARSING!
 - Startrating: Funktionalität

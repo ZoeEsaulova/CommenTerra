@@ -8,8 +8,94 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+
+     <!-- autocomplete style -->
+    <style>
+      .ui-autocomplete {
+      max-height: 100px;
+      overflow-y: auto;
+      /* prevent horizontal scrollbar */
+      overflow-x: hidden;
+      }
+      /* IE 6 doesn't support max-height
+      * we use height instead, but this forces the menu to always be this tall
+      */
+      * html .ui-autocomplete {
+      height: 100px;
+      }
+    </style>
+
+    <!-- script for autocomplete function -->
+    <script>
+      $(function() {
+      var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      ];
+       function split( val ) {
+      return val.split( /,\s*/ );
+      }
+      function extractLast( term ) {
+      return split( term ).pop();
+      }
+      $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+      $( this ).autocomplete( "instance" ).menu.active ) {
+      event.preventDefault();
+      }
+      })
+      .autocomplete({
+      minLength: 3,
+      source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+      availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+      // prevent value inserted on focus
+      return false;
+      },
+      select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+      }
+      });
+      });
+    </script>
   </head>
 
   <body>
@@ -166,7 +252,6 @@
       <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
 
     <script>
