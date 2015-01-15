@@ -1,11 +1,12 @@
 - Server aktualisieren + Beispieldaten
 - Codereview hochladen?
+- Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 
 allgemein:
 ____________________________
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!
-- PARSING! PARSING! PARSING!
+- PARSING! PARSING! PARSING!   --> :))) ja, es ist schon wichtig
 ____________________________
 - Startrating: Funktionalität
 - Commentar bewerten (daumen hoch/runter)
