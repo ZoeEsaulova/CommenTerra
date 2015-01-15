@@ -16,7 +16,8 @@ var commentSchema = mongoose.Schema({
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   markerCoords: [{ type: Number }],
   boundingBox: [{ type: Number}],
-  temporalComponent: [ {type: String }]
+  startdate: String,
+  enddate: String
 
 })
 

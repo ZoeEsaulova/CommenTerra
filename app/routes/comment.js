@@ -65,7 +65,7 @@ router.post('/add', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "";
-	    console.log("Startdate: " + req.body.startdate)
+
 
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
@@ -119,6 +119,9 @@ router.post('/add', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text;
 	    newDataset = "";
+
+	var split = req.body.startdate.split('/');
+	    console.log("Startdate: " + split[0])
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
