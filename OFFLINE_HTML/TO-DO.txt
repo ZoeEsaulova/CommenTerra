@@ -2,7 +2,11 @@
 - Codereview hochladen?
 
 allgemein:
-- PARSING!
+____________________________
+- PARSING! PARSING! PARSING!
+- PARSING! PARSING! PARSING!
+- PARSING! PARSING! PARSING!
+____________________________
 - Startrating: Funktionalität
 - Commentar bewerten (daumen hoch/runter)
 - Logout confirmation modal: Funktionalität
@@ -12,6 +16,10 @@ allgemein:
 - GPS, Bounding Box
 - wie lässt sich JR ausstellen?
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
+- star rating funktioniert nicht mit bildern
+- logout funktioniert nicht
+- profile in site navigation muss über FAQ
+- footer muss der link für die weiterleitung gemacht werden mit action
 
 für alle seiten:  
 - site navi link auf: neue lokalisation
@@ -22,10 +30,21 @@ new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
   datenbank hinterlegt
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ? 
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ?
+- der standart error muss weg
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
+- am anfang keine commentare anzeigen
+- bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
+- overflow muss auf autogestellt werden, damit nicht alle kommentare angezeigt werden + scrollbar
+
+home:
+- bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
+
+faq:
+- footer passt nicht
+- flax video für dynamische veränderung
 
 23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
