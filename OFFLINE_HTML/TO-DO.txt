@@ -2,7 +2,11 @@
 - Codereview hochladen?
 
 allgemein:
-- PARSING!
+____________________________
+- PARSING! PARSING! PARSING!
+- PARSING! PARSING! PARSING!
+- PARSING! PARSING! PARSING!
+____________________________
 - Startrating: Funktionalität
 - Commentar bewerten (daumen hoch/runter)
 - Logout confirmation modal: Funktionalität
@@ -12,26 +16,33 @@ allgemein:
 - GPS, Bounding Box
 - wie lässt sich JR ausstellen?
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
+- star rating funktioniert nicht mit bildern
+- logout funktioniert nicht
 
 für alle seiten:  
 - site navi link auf: neue lokalisation
  -> führt dazu, dass die karte neu geladen werden muss (hat jan gelöst)
-- JR immer nur für den desktop nicht für mobilen seiten anzeigen (nicht gefordert!)
 - Zeitliche Ausdehnung anzeigen
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-- modal fÃ¼r radius und lÃ¶schen des alten kreises
-- datepicker für den gewählten bezugsdatumsrahmen
-- datepicker! und datum raus, weil im hintergrund in der
   datenbank hinterlegt
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ? 
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ?
+- der standart error muss weg
 
 advanced_search:
-- datepicker --> gelöst, die Funktionalität mache ich wenn wir den datepicker auf new_comment Seite haben.
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
-- anordnung der rechten button
+- am anfang keine commentare anzeigen
+- bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
+- overflow muss auf autogestellt werden, damit nicht alle kommentare angezeigt werden + scrollbar
+
+home:
+- bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
+
+faq:
+- footer passt nicht
+- flax video für dynamische veränderung
 
 23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
@@ -41,6 +52,7 @@ _______________________________________________________________
 
 - Tooltipps
 - Editieren und Löschen von Kommentaren
+- JR immer nur für den desktop nicht für mobilen seiten anzeigen (nicht gefordert!)
 
 faq:
 - anker ändern

@@ -220,11 +220,11 @@
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="/faq">Help / FAQ</a></li> 
+              <!-- only for logged in users -->
               <% if (boolean1) { %>
-              <li><a href="/profile/<%= userId %>">Profile</a></li> 
+              <li><a href="/myprofile">Profile</a></li> 
               <% } %>
-
+              <li><a href="/faq">Help / FAQ</a></li> 
   					</ul> 
   				</li> 
   			</ul> 
@@ -688,20 +688,14 @@
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
+
     <!-- FOOTER
          on every page to get more informations -->
     <!-- steht oben doch schon? -> <div class="panel custom4" style="width: 100%; height: 2px"></div> -->
     <div id="footer">
-      || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
-      <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
+      || <a href="/about"><font color="#424242">About CommenTerra / Contact</font></a> || 
+      <a href="/faq"><font color="#424242">FAQ / Help</font></a> ||
     </div>
-    
-    <!-- old footer
-    <div id="footer">
-    ´ <a href="/about"><font color="#424242">About CommenTerra / Contact</font>nbsp&nbsp&nbsp&nbsp0&</a>
-      <a href="/faq"><font color="#424242">FAQ / Help</font></a> 
-    </div>
-    -->
 
     <!-- JOYRIDE
          as intrudation in the functionality of this page -->
