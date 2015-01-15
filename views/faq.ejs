@@ -96,9 +96,11 @@
       });
       });
     </script>
+
   </head>
 
   <body>
+
   	<!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -119,12 +121,13 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
+                        <label> <input type="text" id="tags" placeholder="search for keyword" name="q" required pattern="alpha_numeric"> 
+                        </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button class="success radius expand" type="submit">Search</button>
+                    <button href="advanced_search.html" class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
@@ -140,7 +143,7 @@
             <p class="lead">Please log in with your e-mail and your password</p>
             <p><form data-abide action="/login" method="post">
               <div class="email-field">
-                <label>e-Mail 
+                <label>E-Mail 
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
