@@ -211,16 +211,11 @@
   					<ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="/faq">Help / FAQ</a></li> 
-
-
-
-
+              <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
-
-
+              <li><a href="/faq">Help / FAQ</a></li> 
   					</ul> 
   				</li> 
   			</ul> 

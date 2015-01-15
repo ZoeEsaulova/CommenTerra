@@ -18,8 +18,6 @@ ____________________________
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
 - star rating funktioniert nicht mit bildern
 - logout funktioniert nicht
-- profile in site navigation muss über FAQ
-- footer muss der link für die weiterleitung gemacht werden mit action
 
 für alle seiten:  
 - site navi link auf: neue lokalisation
