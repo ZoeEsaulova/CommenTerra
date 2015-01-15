@@ -15,16 +15,16 @@ router.get('/search', function(req,res) {
 		for (var key in req.query) {			
 			if (key!="count" && key!="startdate" && key!="enddate" && req.query[key]) {
 				query.where(key).equals(req.query[key])
-			}		
-		}
+			}	
 			if (req.query.startdate && req.query.enddate) {
-
 				var start = new Date(req.query.startdate)
 				console.log("start: " + start)
 				var end = new Date(req.query.enddate)
 				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
-				//query.where({ "startdate": {"$gte": start}})
-			}		
+						
+			}	
+		}
+		
 	// search for keywords, url, user
 	} else {
 	var split = req.query.q.split(' '),
@@ -37,25 +37,47 @@ router.get('/search', function(req,res) {
 			    regex2 = new RegExp(q2, 'i');
 			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}]}]  }).
 			    populate('user').populate('dataset').populate('comments')
+
+			 if (req.query.startdate && req.query.enddate) {
+				var start = new Date(req.query.startdate)
+				console.log("start: " + start)
+				var end = new Date(req.query.enddate)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+						
+			}
+
 		} else {
 
 		// one of the words search
 		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
+			if (req.query.startdate && req.query.enddate) {
+				var start = new Date(req.query.startdate)
+				console.log("start: " + start)
+				var end = new Date(req.query.enddate)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+						
+			}
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
 				query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
 			}
 			for (var key in req.query) {	
-				if (key!="count" && key!="q" && req.query[key]) {
+				if (key!="startdate" && key!="enddate" && key!="count" && key!="q" && req.query[key]) {
 					query.where(key).equals(req.query[key])
-				}				
+				}	
+		
 			}
+
 		}
 	}
+
+
 
 	if (req.query.count) {
 		query.limit(Number(req.query.count))
 	}	 
+			
+	
 	
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
