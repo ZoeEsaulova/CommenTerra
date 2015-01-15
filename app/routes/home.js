@@ -12,7 +12,7 @@ var _ = require('underscore');
 		Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments').sort(' -date')
 		.exec(function(err,comments) {
 			if (req.isAuthenticated()) {
-				res.render('home.ejs', { 
+				res.render('Home.ejs', { 
 					boolean1: true, 
 					username: req.user.local.username,
 					userId: req.user._id,
@@ -22,7 +22,7 @@ var _ = require('underscore');
 					comments: comments 
 				})
 		} else {
-			res.render('home.ejs', { 
+			res.render('Home.ejs', { 
 				boolean1: false, 
 				username: 'Anonymous', 
 				action: "#", 
