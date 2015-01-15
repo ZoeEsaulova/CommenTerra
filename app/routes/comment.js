@@ -65,7 +65,8 @@ router.post('/add', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "";
-
+		startdate = new Date(req.body.startdate),
+	    enddate = new Date(req.body.enddate);
 
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
@@ -79,7 +80,9 @@ router.post('/add', function(req, res) {
 					user: req.user._id,
 		 			dataset: newDataset, 
 		 			authorName: req.user.local.username, 
-		 			url: newUrl })
+		 			url: newUrl,
+		 			startdate: startdate,
+        			enddate: enddate })
 				//save the comment in the database
 				newComment.save(function (err) {
 					if (err) return console.error(err)
@@ -117,17 +120,25 @@ router.post('/add', function(req, res) {
 	} else {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
-		newText = req.body.text;
-	    newDataset = "";
+		newText = req.body.text,
+	    newDataset = "",
+		startdate = new Date(req.body.startdate),
+	    enddate = new Date(req.body.enddate);
 
-	var split = req.body.startdate.split('/');
-	    console.log("Startdate: " + split[0])
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
-        		var newComment = new Comment({ title: newTitle, text: newText, dataset: newDataset, url: newUrl})
+        		var newComment = new Comment({ 
+        			title: newTitle, 
+        			text: newText, 
+        			dataset: newDataset, 
+        			url: newUrl,
+        			startdate: startdate,
+        			enddate: enddate
+        		})
+
 				newComment.save(function (err) {
 					if (err) return console.error(err)		
 				})

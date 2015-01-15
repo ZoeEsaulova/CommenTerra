@@ -215,11 +215,11 @@
 
 
 
-<!-- UPDATE AFTER JENS_ ADD TO ALL PAGES-->
+
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
-<!-- ... -->
+
 
   					</ul> 
   				</li> 
@@ -258,7 +258,11 @@
           <li>            
             <ul class="large-block-grid-2">              
               <li>
-                <input type="date" id="datepicker1, numero2" placeholder="Start Date" name="date">  
+                <!-- data binding for the starting date -->
+                <div id="numero2" data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                  <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
+                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
+                </div>
 
                 <!-- coordinates for searching on a specific point -->
                 <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
@@ -268,8 +272,12 @@
               </li>
 
               <li>
-                <input type="date" id="datepicker2" placeholder="End Date" name="date">
-    
+                <!-- data binding for the starting date -->
+                <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                  <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
+                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
+                </div>
+   
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
@@ -282,8 +290,6 @@
                     <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
                     <a class="close-reveal-modal">&#215;</a>
                   </div>
-
-                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
             
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
