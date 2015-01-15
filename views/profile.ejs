@@ -200,9 +200,12 @@
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-              			<li><a href="/faq">Help / FAQ</a></li> 
+              <li><a href="/faq">Help / FAQ</a></li>
+              <% if (boolean1) { %>
+              <li><a href="/profile/<%= userId %>">Profile</a></li> 
+              <% } %>
 
-<!-- TO DO: Funktionalität - edit Profile, Rollenzugriff auf Profilseite -->
+      <!-- TO DO: Funktionalität - edit Profile, Rollenzugriff auf Profilseite -->
 
       <!-- soll eigentlich nur ein neues orten auf der karte ermöglichen
               <li><a href="profile.html">Relocation</a></li> -->
