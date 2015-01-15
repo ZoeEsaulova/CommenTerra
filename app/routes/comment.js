@@ -122,9 +122,9 @@ router.post('/add', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "",
-		startdate = new Date(req.body.startdate),
-	    enddate = new Date(req.body.enddate);
-
+		newStartdate = new Date(req.body.startdate),
+	    newEnddate = new Date(req.body.enddate);
+	    
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
@@ -135,8 +135,8 @@ router.post('/add', function(req, res) {
         			text: newText, 
         			dataset: newDataset, 
         			url: newUrl,
-        			startdate: startdate,
-        			enddate: enddate
+        			startdate: newStartdate,
+        			enddate: newEnddate
         		})
 
 				newComment.save(function (err) {
@@ -146,7 +146,8 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-				var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl })
+				var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
+				startdate: newStartdate, enddate: newEnddate })
 				newComment.save(function (err) {
 					if (err) return console.error(err)
 				})

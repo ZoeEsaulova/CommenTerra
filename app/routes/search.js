@@ -13,10 +13,18 @@ router.get('/search', function(req,res) {
 	if (!req.query.q) {		
 		var query = Comment.find({ comment: undefined }).populate('user').populate('comments').populate('dataset')
 		for (var key in req.query) {			
-			if (key!="count" && req.query[key]) {
+			if (key!="count" && key!="startdate" && key!="enddate" && req.query[key]) {
 				query.where(key).equals(req.query[key])
 			}		
 		}
+			if (req.query.startdate && req.query.enddate) {
+
+				var start = new Date(req.query.startdate)
+				console.log("start: " + start)
+				var end = new Date(req.query.enddate)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+				//query.where({ "startdate": {"$gte": start}})
+			}		
 	// search for keywords, url, user
 	} else {
 	var split = req.query.q.split(' '),
