@@ -9,19 +9,140 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    <script src="../node_modules/angular/angular.min.js"></script>
-    <script src="../node_modules/angular-route/angular-route.min.js"></script>
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/jquery-1.11.2.js"></script>
-    <script src="js/vendor/jquery-ui.js"></script>  
 
+    <!-- style for rate function and stars -->
+          <style>.functions .demo {
+            margin-bottom: 10px;
+          }
 
+          .functions .item {
+          background-color: #FEFEFE;
+          border-radius: 4px;
+          display: inline-block;
+          margin-bottom: 5px;
+          padding: 5px 10px;
+          }
 
+          .functions .item a {
+          border: 1px solid #CCC;
+          margin-left: 10px;
+          padding: 5px;
+          text-decoration: none;
+          }
 
+          .functions .item input {
+          display: inline-block;
+          margin-left: 2px;
+          padding: 5px 6px;
+          width: 120px;
+          }
+
+          .functions .item label {
+          display: inline-block;
+          font-size: 1.1em;
+          font-weight: bold;
+          }
+
+          .hint {
+          text-align: center;
+          width: 160px
+          }
+
+          div.hint {
+          font-size: 1.4em;
+          height: 46px;
+          margin-top: 15px;
+          padding: 7px
+          }
+          </style>
+
+    <!-- autocomplete style -->
+    <style>
+      .ui-autocomplete {
+      max-height: 100px;
+      overflow-y: auto;
+      /* prevent horizontal scrollbar */
+      overflow-x: hidden;
+      }
+      /* IE 6 doesn't support max-height
+      * we use height instead, but this forces the menu to always be this tall
+      */
+      * html .ui-autocomplete {
+      height: 100px;
+      }
+    </style>
+
+    <!-- script for autocomplete function -->
+    <script>
+      $(function() {
+      var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      ];
+       function split( val ) {
+      return val.split( /,\s*/ );
+      }
+      function extractLast( term ) {
+      return split( term ).pop();
+      }
+      $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+      $( this ).autocomplete( "instance" ).menu.active ) {
+      event.preventDefault();
+      }
+      })
+      .autocomplete({
+      minLength: 3,
+      source: function( request, response ) {
+      // delegate back to autocomplete, but extract the last term
+      response( $.ui.autocomplete.filter(
+      availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+      // prevent value inserted on focus
+      return false;
+      },
+      select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+      }
+      });
+      });
+    </script>
   </head>
 
   <body data-ng-app="Comments" data-ng-controller="commentsController">
@@ -336,7 +457,17 @@
                 <div id="panel<%= i %>c" class="content">
                   <ul class="no-bullet">
                   <li>
-                    <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <!-- MapViewerModal
+                         by clicking the link of the geodataset
+                         the user is asked whether he/she´d like to
+                         open it in the map_viewer -->
+                    <a href="/api/v1/search?url=<%= comments[i].dataset.url %>" data-reveal-id="mapModal"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <div id="mapModal" class="reveal-modal" data-reveal>
+                      <p class="lead">Do you want to use the map viewer?</p>
+                      <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
+                      <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
+                      <a class="close-reveal-modal">&#215;</a>
+                    </div>
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -542,11 +673,10 @@
 
     <!-- FOOTER
          on every page to get more informations -->
-    <div class="panel custom4" style="width: 100%; height: 2px"></div>
+    <!-- steht oben doch schon? -> <div class="panel custom4" style="width: 100%; height: 2px"></div> -->
     <div id="footer">
       || <a href="about.html"><font color="#424242">About CommenTerra / Contact</font></a> || 
       <a href="faq.html"><font color="#424242">FAQ / Help</font></a> ||
-      <!--div ng-include src="'test.html'"></div-->
     </div>
     
     <!-- old footer
@@ -589,7 +719,6 @@
       </li>
     </ol>
 
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
