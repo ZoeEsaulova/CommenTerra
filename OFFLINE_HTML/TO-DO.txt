@@ -26,6 +26,7 @@ zu kommentieren)
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
+- erstmal nichts anzeigen
 
 23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
