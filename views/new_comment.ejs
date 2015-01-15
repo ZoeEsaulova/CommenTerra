@@ -284,7 +284,7 @@
                     <a href="#panel1b">
                       <font color="#424242" size="4">Title:</font>
                       <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
-                      <small class="error">You have to indicate a title!</small>
+                      <!-- <small class="error">You have to indicate a title!</small> -->
                     </a>
                     <div class="panel custom2">
                       <div id="panel1b" class="content">
@@ -306,12 +306,10 @@
                             <!-- data binding for the starting date -->
                             <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
                               <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
-                              <small class="error">The date must be in the format: MM/DD/YYYY</small>
                             </div>
                             <!-- data binding for the ending date -->
                             <div data-abide>
                               <input type="text" id="datepicker2" placeholder="End Date" name="enddate" pattern="month_day_year">
-                              <small class="error">The date must be in the format: MM/DD/YYYY</small>
                             </div>
                           </li>
                         </ul>
@@ -320,7 +318,7 @@
                         <dl class="accordion" data-accordion>
                           <dd class="accordion-navigation">
                             <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
-                            <small class="error">You have to indicate a comment!</small>
+                            <!-- <small class="error">You have to indicate a comment!</small> -->
                           </dd>
                         </dl>
                         <!--return the logged user or the anonyme unlogged user-->
@@ -371,6 +369,7 @@
           </li>
         </ul>
       </strong>
+
 	  <!--will be shown for small and medium screens-->
       <strong class="hide-for-large-up">
         <div class="panel custom">
@@ -387,7 +386,7 @@
                   <a href="#panel1b">
                     <font color="#424242" size="4">Title:</font>
                     <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
-                    <small class="error">You have to indicate a title!</small>
+                    <!-- <small class="error">You have to indicate a title!</small> -->
                   </a>
                   <div class="panel custom2">
                     <div id="panel1b" class="content">
@@ -574,8 +573,6 @@
 	    <p>Here you can see the Response from your URL</p>
 	  </li>
     </ol>
-
-
 
     <script>
       $(document).ready(function(){
