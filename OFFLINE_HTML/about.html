@@ -118,12 +118,15 @@
           <li class="has-form">
             <form data-abide>
                 <div class="row collapse">
+                  <!--seperate this area in 9 areas-->
                   <div class="small-9 columns ">
                       <div class "search-field">
+                        <!--search for keyword field with an autocomplete function-->
                         <label> <input type="text" id="tags" placeholder="search for keyword" name"keyword" required pattern="alpha_numeric"> </label>
                         <small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small>
                       </div>
                   </div>
+                  <!--override the count that adds up to 12 columns-->
                   <div class="small-3 columns end">
                     <button href="advanced_search.html" class="success radius expand" type"submit">Search</button>
                   </div>
@@ -143,6 +146,7 @@
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
+                <!--exception: invalid e-mail-->
                 <small class="error">Please type in a valid e-mail-adress!</small>
               </div>
               <div class="password-field">
@@ -150,12 +154,14 @@
                   <small>required</small>
                   <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
                 </label>
+                <!--exception: no password-->
                 <small class="error">Please type in your password!</small>
               </div>
               <button href="profile_??????.html" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
+          <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
           <li class="has-dropdown"> 
             <a href="#">Site Navigation</a> 
             <ul class="dropdown"> 
@@ -177,6 +183,7 @@
 
     <!-- upper dark gray area -->
     <div class="panel custom">
+      <!--segmenting this area in three areas-->
       <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
         <li>
           <!-- LARGE-UP
