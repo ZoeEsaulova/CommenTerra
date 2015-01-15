@@ -455,6 +455,7 @@
                 <a id="numero6" href="#panel<%= i %>c"><%= comments[i].title %></a>
 
                 <div id="panel<%= i %>c" class="content">
+                  <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
                     <!-- MapViewerModal
@@ -494,7 +495,21 @@
                     &nbsp&nbsp&nbsp&nbsp
                     <a href="/comments/add/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>
                   </li>
-                  </ul> 
+                  </ul>
+                  </div>
+
+                  <ul class="no-bullet">
+                  <li>
+                    <!-- for making a comment at a comment -->
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <textarea placeholder="comment on this comment ..."></textarea>
+                        <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
+                      </div>
+                    </div>
+                  </li>
+                  </ul>
+
                   <% if (comments[i].comments.length>0) {%>
                   
                       <% for (var j=0; j<comments[i].comments.length; j++) {%>
