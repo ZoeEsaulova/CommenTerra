@@ -305,14 +305,14 @@
                             <font color="#424242" size="4">Datepicker (optional):</font><br>
                             <!-- data binding for the starting date -->
                             <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
-                              <input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+                              <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
                               <small class="error">The date must be in the format: MM/DD/YYYY</small>
                             </div>
                             <!-- data binding for the ending date -->
-                            <form data-abide>
-                              <input type="text" id="datepicker2" placeholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                            <div data-abide>
+                              <input type="text" id="datepicker2" placeholder="End Date" name="enddate" pattern="month_day_year">
                               <small class="error">The date must be in the format: MM/DD/YYYY</small>
-                            </form>
+                            </div>
                           </li>
                         </ul>
                         <p></p>
@@ -338,12 +338,20 @@
                             </div>
                           </li>
                           <li>
-                            <button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
-                            <div id="confirmModal" class="reveal-modal" data-reveal>
-                              <p class="lead">Are you sure to submit the comment?</p>
-                              <button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
-                              <a class="close-reveal-modal">&#215;</a>
-                            </div>
+                -           <button class="success tiny radius expand" data-reveal-id="confirmModal">
+                -             Save
+                -           </button>
+                -           <!--pop up to confirm the submission-->
+                -           <div id="confirmModal" class="reveal-modal" data-reveal>
+                -             <p class="lead">Are you sure to publish your comment? show-for-large-up</p>
+                -             <button id="testButton" class="success tiny radius expand" data-reveal-id="confirmModal">
+                -               Save
+                -             </button>
+                -             <button class="success tiny radius expand" type="delete" data-reveal-id="confirmModal">
+                -               Go Back
+                -             </button>
+                -             <a class="close-reveal-modal">&#215;</a>
+                -           </div>
                           </li>
                         </ul>
                       </div>
@@ -394,12 +402,12 @@
                       <font color="#424242" size="4">Datepicker (optional):</font><br>
                       <!-- data binding for the starting date -->
                       <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
-                        <input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+                        <input type="text" id="datepicker1" placeholder="Start Date" name="date">
                         <small class="error">The date must be in the format: MM/DD/YYYY</small>
                       </div>
                       <!-- data binding for the ending date -->
                       <form data-abide>
-                        <input type="text" id="datepicker2" aceholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                        <input type="text" id="datepicker2" aceholder="End Date" name="date" pattern="month_day_year">
                         <small class="error">The date must be in the format: MM/DD/YYYY</small>
                       </form>
                       <p></p>

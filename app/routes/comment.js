@@ -63,8 +63,9 @@ router.post('/add', function(req, res) {
 	if (req.isAuthenticated()) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
-		newText = req.body.text;
-	    newDataset = "",
+		newText = req.body.text,
+	    newDataset = "";
+	    console.log("Startdate: " + req.body.startdate)
 
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
