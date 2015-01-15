@@ -31,8 +31,6 @@ advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
 - anordnung der rechten button
 
-19. homesite: modal mit abfrage, ob datensatz auf der seite oder im mapviewer angezeigt werden soll
-
 23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
 _______________________________________________________________
