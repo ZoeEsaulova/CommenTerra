@@ -1,14 +1,152 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CommenTerra | New Comment</title>
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/vendor/leaflet.js"></script>
+    <script src="js/foundation.datepicker.js"></script>
+    <script src="js/foundation-datepicker.js"></script>
+    <link rel="stylesheet" href="css/labs.css" />
+    <link rel="stylesheet" href="css/jquery.raty.css" />
+
+    <!-- style for rate function and stars -->
+    <style>
+      .functions .demo {
+        margin-bottom: 10px;
+      }
+
+      .functions .item {
+        background-color: #FEFEFE;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+      }
+
+      .functions .item a {
+        border: 1px solid #CCC;
+        margin-left: 10px;
+        padding: 5px;
+        text-decoration: none;
+      }
+
+      .functions .item input {
+        display: inline-block;
+        margin-left: 2px;
+        padding: 5px 6px;
+        width: 120px;
+      }
+
+      .functions .item label {
+        display: inline-block;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      .hint {
+        text-align: center;
+        width: 160px
+      }
+
+      div.hint {
+        font-size: 1.4em;
+        height: 46px;
+        margin-top: 15px;
+        padding: 7px
+      }
+    </style>
+
+    <!-- autocomplete style -->
+    <style>
+      .ui-autocomplete {
+        max-height: 100px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+      }
+      /* IE 6 doesn't support max-height
+      * we use height instead, but this forces the menu to always be this tall
+      */
+      * html .ui-autocomplete {
+        height: 100px;
+      }
+    </style>
+
+    <!-- script for autocomplete function -->
+    <script>
+      $(function() {
+        var availableTags = [
+          "ActionScript",
+          "AppleScript",
+          "Asp",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        function split( val ) {
+          return val.split( /,\s*/ );
+        }
+        function extractLast( term ) {
+          return split( term ).pop();
+        }
+        $( "#tags" )
+        // don't navigate away from the field on tab when selecting an item
+        .bind( "keydown", function( event ) {
+          if ( event.keyCode === $.ui.keyCode.TAB &&
+          $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+          }
+        })
+        .autocomplete({
+        minLength: 3,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) 
+          ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+          }
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -32,7 +170,7 @@
                   <div class="small-9 columns ">
                       <div class "search-field">
 						<!--search for keyword field with an autocomplete function-->
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
+                        <label> <input type="text" id="tags" placeholder="search for keyword" name="q"> </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
@@ -132,78 +270,80 @@
             <div class="panel custom" data-equalizer-watch>
               <div class="panel custom2">
 				<!--Comment area-->
-                <div id="panel5b" class="content">
-                  <font color="#424242" size="4">Title:</font>
-                  <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
-                  <p></p>
-                  <font color="#424242" size="4">URL:<p></p>
-                    <p id="urlResult">
-                      Your URL will be shown here after you validate it!
-                    </p>
-                  </font>
-                  </a>
-                  <p></p>
-				  <!--segmenting this area in two areas-->
-                  <ul class="small-block-grid-2">
-                    <li>
-					  <!--five star rating-->
-                      <font color="#424242" size="4">Rating (optional):</font><br>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    </li>
-                    <li>
-						<font color="#424242" size="4">Date:</font><br>
-						<!--return the current date-->
-						<script type="text/javascript" color="424242">
-							<!--pick up the current date and return it in the form MM/DD/YYYY-->
-							var date = new Date();
-							document.write((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
-						</script>
-					</li>
-                  </ul>
-                  <p></p>
-                  <font color="#424242" size="4">Comment:</font>
-                  <dl class="accordion" data-accordion>
-                    <dd class="accordion-navigation">
-                      <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
-                    </dd>
-                  </dl>
-				  <!--return the name of the logged user or the anonyme unlogged user-->
-                  <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
-                  <p></p>
-				  <!--segmenting this area in two areas-->
-				  <ul class="small-block-grid-2">
-					<li>
-						<button id="numero3" class="success tiny radius expand" type=""submit>
-							Bounding Box
-						</button>
-					</li>
-					<li>
-						<button class="success tiny radius expand" data-reveal-id="confirmModal">
-						  Save
-						</button>
-						<!--pop up to confirm the submission-->
-						<div id="confirmModal" class="reveal-modal" data-reveal>
-						  <p class="lead">Are you sure to publish your comment? show-for-large-up</p>
-						  <button id="testButton" class="success tiny radius expand" data-reveal-id="confirmModal">
-						    Save
-						  </button>
-						  <button class="success tiny radius expand" type="delete" data-reveal-id="confirmModal">
-						    Go Back
-						  </button>
-						  <a class="close-reveal-modal">&#215;</a>
-						</div>
-
-					</li>
-				  </ul>
-                </div>
+                <dl class="accordion" data-accordion>
+                  <dd class="accordion-navigation">
+                    <a href="#panel1b">
+                      <font color="#424242" size="4">Title:</font>
+                      <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
+                      <small class="error">You have to indicate a title!</small>
+                    </a>
+                    <div class="panel custom2">
+                      <div id="panel1b" class="content">
+                        <font color="#424242" size="4">URL:<p></p>
+                          <p id="urlResult">
+                            Your URL will be shown here after you validate it!
+                          </p>
+                        </font>
+                        <p></p>
+                        <!--segmenting this area in two areas-->
+                        <ul class="small-block-grid-2">
+                          <li>
+                            <font color="#424242" size="4">Rating (optional):</font><br>
+                            <!--five star rating-->
+                            <div id="rating"></div>
+                          </li>
+                          <li>
+                            <font color="#424242" size="4">Datepicker (optional):</font><br>
+                            <!-- data binding for the starting date -->
+                            <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                              <input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+                              <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                            </div>
+                            <!-- data binding for the ending date -->
+                            <form data-abide>
+                              <input type="text" id="datepicker2" placeholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                              <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                            </form>
+                          </li>
+                        </ul>
+                        <p></p>
+                        <font color="#424242" size="4">Comment:</font>
+                        <dl class="accordion" data-accordion>
+                          <dd class="accordion-navigation">
+                            <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                            <small class="error">You have to indicate a comment!</small>
+                          </dd>
+                        </dl>
+                        <!--return the logged user or the anonyme unlogged user-->
+                        <a href=""><font color="#2ba6cb">anonyme</font></a>
+                        <p></p>
+                        <!--segmenting this area in two areas-->
+                        <ul class="small-block-grid-2">
+                          <li>
+                            <button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
+                            <div id="circleModal" class="reveal-modal" data-reveal>
+                              <p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
+                              <input type="text" placeholder="radius in kilometers" />
+                              <button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
+                              <a class="close-reveal-modal">&#215;</a>
+                            </div>
+                          </li>
+                          <li>
+                            <button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
+                            <div id="confirmModal" class="reveal-modal" data-reveal>
+                              <p class="lead">Are you sure to submit the comment?</p>
+                              <button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
+                              <a class="close-reveal-modal">&#215;</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </li>
-        </form>
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!--Map-->
@@ -217,66 +357,70 @@
 	  <!--will be shown for small and medium screens-->
       <strong class="hide-for-large-up">
         <div class="panel custom">
-		  <!--tabs for the comment and for the map-->
+          <!--two taps for Create a Comment and the Map-->
           <dl class="tabs" data-tab>
-            <dd><a href="#panel1">View Comments</a></dd>
-            <dd class="content active"><a href="#panel2">View Map</a></dd>
+            <dd class="content active"><a href="#panel1">Create a Comment</a></dd>
+            <dd class="content inactive"><a href="#panel2">View Map</a></dd>
           </dl>
-
           <div class="tabs-content">
-
-            <div class="content" id="panel1">
+            <div class="content active" id="panel1">
               <!--Comment-->
-              <div class="panel custom2">
-                <div id="panel5b" class="content">
-                  <font color="#424242" size="4">Title:</font>
-                  <input type="text" name="title" id="title" placeholder="Title..." />
-                  <p></p>
-                  <font color="#424242" size="4">URL:</font><br>
-                  <p id="urlResult1">
-                      Your URL will be shown here after you validate it!
-                  </p>
-                  <p></p>
-                    <font color="#424242" size="4">Rating:</font><br>
-                    <!--five star rating-->
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <p></p>
-                    <font color="#424242" size="4">Date:</font><br>
-                    <script type="text/javascript">
-						        // pick up the current date and return it in the form MM/DD/YYYY
-						var date = new Date();
-						document.write((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
-					</script>
-                  <p></p>
-                  <font color="#424242" size="4">Comment:</font>
-                  <dl class="accordion" data-accordion>
-                    <dd class="accordion-navigation">
-                      <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
-                    </dd>
-                  </dl>
-				  <!--return the name of the logged user or the anonyme unlogged user-->
-                  <a href=""><font color="#2ba6cb">anonyme</font></a>
-                  <button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
-            			<font color="#424242">Save</font>
-            		</button>
-            		<!--pop up to confirm the submission-->
-            		<!--div id="confirmModal" class="reveal-modal" data-reveal>
-            			<p class="lead">Are you sure to publish your comment? hide-for-large-up</p>
-            			<button class="tiny radius expand" type="submit" data-reveal-id="confirmModal">
-            				<font color="#424242">Save</font>
-            			</button>
-            			<button class="tiny radius expand" type="delete" data-reveal-id="confirmModal">
-            				<font color="#424242">Go Back</font>
-            			</button>
-            			<a class="close-reveal-modal">&#215;</a>
-            		</div-->
-                <p></p>
-                </div>
-              </div>
+              <dl class="accordion" data-accordion>
+                <dd class="accordion-navigation">
+                  <a href="#panel1b">
+                    <font color="#424242" size="4">Title:</font>
+                    <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
+                    <small class="error">You have to indicate a title!</small>
+                  </a>
+                  <div class="panel custom2">
+                    <div id="panel1b" class="content">
+                      <font color="#424242" size="4">URL:<p></p>
+                        <p id="urlResult">Your URL will be shown here after you validate it!</p>
+                      </font>
+                      <p></p>
+                      <!--segmenting this area in two areas-->
+                      <font color="#424242" size="4">Rating (optional):</font><br>
+                      <!--five star rating-->
+                      <div id="rating"></div>
+                      <font color="#424242" size="4">Datepicker (optional):</font><br>
+                      <!-- data binding for the starting date -->
+                      <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                        <input type="text" id="datepicker1" placeholder="Beginning Date (MM/DD/YYYY)" name="date">
+                        <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                      </div>
+                      <!-- data binding for the ending date -->
+                      <form data-abide>
+                        <input type="text" id="datepicker2" aceholder="Ending Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                        <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                      </form>
+                      <p></p>
+                      <font color="#424242" size="4">Comment:</font>
+                      <dl class="accordion" data-accordion>
+                        <dd class="accordion-navigation">
+                          <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                          <small class="error">You have to indicate a comment!</small>
+                        </dd>
+                      </dl>
+                      <!--return the logged user or the anonyme unlogged user-->
+                      <a href=""><font color="#2ba6cb">anonyme</font></a>
+                      <p></p>
+                      <!--segmenting this area in two areas-->
+                      <button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
+                      <div id="circleModal" class="reveal-modal" data-reveal>
+                        <p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
+                        <button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
+                        <a class="close-reveal-modal">&#215;</a>
+                      </div>
+                      <button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
+                      <div id="confirmModal" class="reveal-modal" data-reveal>
+                        <p class="lead">Are you sure to submit the comment?</p>
+                        <button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit</button>
+                        <a class="close-reveal-modal">&#215;</a>
+                      </div>
+                    </div>
+                  </div>
+                </dl>
+              </dl>
             </div>
 
             <div class="content active" id="panel2">
@@ -419,7 +563,15 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
+    <script src="js/jquery.raty.js"></script>
+    <script src="js/jquery.raty2.js"></script>
+    <script src="js/labs.js"></script>
 
+    <script>
+      $(document).ready(function(){
+        $("#rating").raty();
+      });
+    </script>
     <script>
       $(document).foundation();
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
@@ -427,14 +579,23 @@
       }
       
     </script>
+    <script>
+      $(document).foundation();
+    </script>
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker1" ).datepicker();
+      });
+    </script>
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker2" ).datepicker();
+      });
+    </script>
     <script type="text/javascript">
-
-jQuery("#testButton").click(function(){
-  document.new_comment_form.submit();
-});
-
-</script>
-
-    
+      jQuery("#testButton").click(function(){
+        document.new_comment_form.submit();
+      });
+    </script>  
   </body>
 </html>
