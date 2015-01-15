@@ -17,6 +17,7 @@ für alle seiten:
 - site navi link auf: neue lokalisation
  -> führt dazu, dass die karte neu geladen werden muss (hat jan gelöst)
 - JR immer nur für den desktop nicht für mobilen seiten anzeigen (nicht gefordert!)
+- Zeitliche Ausdehnung anzeigen
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
