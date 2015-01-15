@@ -54,7 +54,7 @@ var _ = require('underscore');
 	//show FAQ page
 	app.get('/faq', function(req,res) {
 		if (req.isAuthenticated()) {
-			res.render('faq.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+			res.render('faq.ejs', { userId: req.user._id, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage')  })
 		} else {
 			res.render('faq.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
@@ -65,7 +65,7 @@ var _ = require('underscore');
 	//show about page
 	app.get('/about', function(req,res) {
 		if (req.isAuthenticated()) {
-			res.render('about.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+			res.render('about.ejs', { userId: req.user_id, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage')  })
 		} else {
 			res.render('about.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 

@@ -22,7 +22,7 @@ router.get('/add/:url?', function(req, res) {
 			readonly = true; 
 			url = req.params.url}
 		if (req.isAuthenticated()) {
-			res.render('new_comment.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+			res.render('new_comment.ejs', { userId: req.user._id, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 

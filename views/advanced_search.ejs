@@ -213,7 +213,7 @@
               <li><a href="/api/v1/search">Advanced Search</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
-              <li><a href="/profile/<% userId %>">Profile</a></li> 
+              <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
               <li><a href="/faq">Help / FAQ</a></li> 
   					</ul> 
@@ -473,13 +473,13 @@
                          by clicking the link of the geodataset
                          the user is asked whether he/she´d like to
                          open it in the map_viewer -->
-                    <a href="/api/v1/search?url=<%= comments[i].dataset.url %>" data-reveal-id="mapModal"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                    <div id="mapModal" class="reveal-modal" data-reveal>
+                    <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <!--div id="mapModal" class="reveal-modal" data-reveal>
                       <p class="lead">Do you want to use the map viewer?</p>
                       <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
                       <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
                       <a class="close-reveal-modal">&#215;</a>
-                    </div>
+                    </div-->
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>

@@ -15,6 +15,7 @@ var express = require('express'),
 			if (req.isAuthenticated()) {				
 				res.render('profile.ejs', { 
 				user: req.user,
+				userId: req.user._id,
 				pageowner: foundedUser,
 				boolean3: foundedUser.local.username==req.user.local.username,
 				boolean1: true, 
