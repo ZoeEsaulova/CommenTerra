@@ -258,40 +258,23 @@
           <li>            
             <ul class="large-block-grid-2">              
               <li>
-                <!-- data binding for the starting date -->
-                <div id="numero2" data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
-                  <input type="text" id="datepicker1" placeholder="Beginning Date" name="date">
-                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
-                </div>
-                
+                <input type="date" id="datepicker1, numero2" placeholder="Start Date" name="date">  
 
-                <input type="text" name="search_boundingbox" id="search_boundingbox" placeholder="GPS" />
+                <!-- coordinates for searching on a specific point -->
+                <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
 
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit">Search</button>
                 </form>
               </li>
 
               <li>
-                <!-- data binding for the starting date -->
-                <form data-abide>
-                  <input type="date" style="width: 50%" id="numero2" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
-                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
-                </form>
-
-                <!-- data binding for the ending date -->
-                <form data-abide>
-                  <input type="date" style="width: 50%" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
-                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
-                </form>
-
-                <!-- coordinates for searching on a specific point -->
-                <input type="text" style="width: 50%" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
+                <input type="date" id="datepicker2" placeholder="End Date" name="date">
     
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
                      on the map the boundingbox circle appears. -->
-                <button id="numero3" style="width: 50%" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
                   <div id="boundingBoxModal" class="reveal-modal" data-reveal>
                     <h2>Set Areal</h2>
                     <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
