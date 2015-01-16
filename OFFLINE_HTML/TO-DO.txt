@@ -33,7 +33,7 @@ zu kommentieren)
 - new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 - der standart error muss weg
 - datepicker umbenennen
-- Falls hier keine Auswahl getroffen wird, wird der Zeitpunkt des Kommentars als zeitlicher Parameter hinterlegt.
+- Falls hier keine Auswahl getroffen wird, wird der Zeitpunkt des Kommentars als zeitlicher Parameter hinterlegt - TESTEN
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
