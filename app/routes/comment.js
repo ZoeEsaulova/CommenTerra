@@ -57,7 +57,7 @@ router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
 });
 
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
-router.post('/add', function(req, res) {
+router.post('/add/:url?', function(req, res) {
 	// Get form values. These rely on the "name" attributes
 
 	if (req.isAuthenticated()) {
