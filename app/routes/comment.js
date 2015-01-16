@@ -75,8 +75,13 @@ router.post('/add/:url?', function(req, res) {
 	    } else {
 	    	var startdate1 = new Date()
 	    	var enddate1 = new Date()
+	    	//startdate1.setHours(0,0,0,0)
+	    	//enddate1.setHours(0,0,0,0)
+	    	startdate1 = new Date(startdate1.getUTCFullYear(), parseInt(startdate1.getUTCMonth()), startdate1.getUTCDate()+1)
+	    	enddate1 = new Date(enddate1.getUTCFullYear(), parseInt(enddate1.getUTCMonth()), enddate1.getUTCDate()+1)
+	    	
 	    }
-
+console.log("startdate: " + startdate1 + " enddate: " + enddate1)
 	if (req.isAuthenticated()) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
@@ -142,7 +147,6 @@ router.post('/add/:url?', function(req, res) {
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
-				console.log("Keinen Dataset" + splitdate1[0] + " " + splitdate1[1] + " " + splitdate1[2])
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
         		var newComment = new Comment({ 

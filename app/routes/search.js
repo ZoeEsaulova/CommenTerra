@@ -15,15 +15,17 @@ router.get('/search', function(req,res) {
 		for (var key in req.query) {			
 			if (key!="count" && key!="startdate" && key!="enddate" && req.query[key]) {
 				query.where(key).equals(req.query[key])
-			}	
+			}		
+		}
 			if (req.query.startdate && req.query.enddate) {
-				var start = new Date(req.query.startdate)
-				console.log("start: " + start)
-				var end = new Date(req.query.enddate)
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				console.log("Start: " + start + " End: " + end)
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
-			}	
-		}
+			}
 		
 	// search for keywords, url, user
 	} else {
@@ -39,9 +41,10 @@ router.get('/search', function(req,res) {
 			    populate('user').populate('dataset').populate('comments')
 
 			 if (req.query.startdate && req.query.enddate) {
-				var start = new Date(req.query.startdate)
-				console.log("start: " + start)
-				var end = new Date(req.query.enddate)
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
 			}
@@ -51,9 +54,11 @@ router.get('/search', function(req,res) {
 		// one of the words search
 		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
 			if (req.query.startdate && req.query.enddate) {
-				var start = new Date(req.query.startdate)
-				console.log("start: " + start)
-				var end = new Date(req.query.enddate)
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
 			}
