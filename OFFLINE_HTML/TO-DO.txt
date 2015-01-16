@@ -2,7 +2,7 @@
 - Codereview hochladen?
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 - Login von new_comment funktioniert nicht 
-- Change Requests: Contact
+- Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
 
 allgemein:
 ____________________________
@@ -15,7 +15,7 @@ ____________________________
 - Logout confirmation modal: Funktionalität
 - Commentar commentieren: Funktionalität
 - Suche nach Bewertung
-- GPS, Bounding Box
+- GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
 - wie lässt sich JR ausstellen?
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
 - star rating funktioniert nicht mit bildern
@@ -33,6 +33,7 @@ zu kommentieren)
 - new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 - der standart error muss weg
 - datepicker umbenennen
+- Falls hier keine Auswahl getroffen wird, wird der Zeitpunkt des Kommentars als zeitlicher Parameter hinterlegt.
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
