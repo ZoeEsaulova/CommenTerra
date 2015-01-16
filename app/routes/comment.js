@@ -65,8 +65,19 @@ router.post('/add/:url?', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "";
-		newStartdate = new Date(req.body.startdate),
-	    newEnddate = new Date(req.body.enddate);
+	    if (req.body.startdate && req.body.enddate) {
+	    	var newStartdate = new Date(req.body.startdate)
+	    	var newEnddate = new Date(req.body.enddate)
+	    } else if ( req.body.startdate) {
+	    	var newStartdate = new Date(req.body.startdate)
+	    	var endStartdate = new Date(req.body.startdate)
+	    } else if ( req.body.enddate) {
+	    	var newStartdate = new Date(req.body.enddate)
+	    	var endStartdate = new Date(req.body.enddate)
+	    } else {
+	    	var newStartdate = new Date()
+	    	var endStartdate = new Date()
+	    }
 
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
@@ -122,8 +133,19 @@ router.post('/add/:url?', function(req, res) {
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "",
-		newStartdate = new Date(req.body.startdate),
-	    newEnddate = new Date(req.body.enddate);
+	    if (req.body.startdate && req.body.enddate) {
+	    	var newStartdate = new Date(req.body.startdate)
+	    	var newEnddate = new Date(req.body.enddate)
+	    } else if ( req.body.startdate) {
+	    	var newStartdate = new Date(req.body.startdate)
+	    	var endStartdate = new Date(req.body.startdate)
+	    } else if ( req.body.enddate) {
+	    	var newStartdate = new Date(req.body.enddate)
+	    	var endStartdate = new Date(req.body.enddate)
+	    } else {
+	    	var newStartdate = new Date()
+	    	var endStartdate = new Date()
+	    }
 	    
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
