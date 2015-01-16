@@ -9,6 +9,7 @@ var _ = require('underscore');
 
 	// show the home page
 	app.get('/', function(req, res) {
+		
 		Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments').sort(' -date')
 		.exec(function(err,comments) {
 			if (req.isAuthenticated()) {

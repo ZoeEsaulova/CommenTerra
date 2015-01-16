@@ -20,7 +20,7 @@ router.get('/search', function(req,res) {
 				var start = new Date(req.query.startdate)
 				console.log("start: " + start)
 				var end = new Date(req.query.enddate)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
 			}	
 		}
@@ -42,7 +42,7 @@ router.get('/search', function(req,res) {
 				var start = new Date(req.query.startdate)
 				console.log("start: " + start)
 				var end = new Date(req.query.enddate)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
 			}
 
@@ -54,7 +54,7 @@ router.get('/search', function(req,res) {
 				var start = new Date(req.query.startdate)
 				console.log("start: " + start)
 				var end = new Date(req.query.enddate)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lt": end } }, { $and: [ { "startdate": { "$lt": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
 			}
 			for (j = 0; j < split.length; j++) { 

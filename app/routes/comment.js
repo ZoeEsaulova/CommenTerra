@@ -59,25 +59,30 @@ router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
 router.post('/add/:url?', function(req, res) {
 	// Get form values. These rely on the "name" attributes
+	    if (req.body.startdate && req.body.enddate) {
+			var splitdate1 = req.body.startdate.split('/')
+			var splitdate2 = req.body.enddate.split('/')
+			var startdate1 = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+			var enddate1 = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+	    } else if ( req.body.startdate) {
+	    	var splitdate1 = req.body.startdate.split('/')
+			var startdate1 = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+			var enddate1 = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+	    } else if ( req.body.enddate) {
+			var splitdate2 = req.body.enddate.split('/')
+			var startdate1 = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+			var enddate1 = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+	    } else {
+	    	var startdate1 = new Date()
+	    	var enddate1 = new Date()
+	    }
 
 	if (req.isAuthenticated()) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
 		newText = req.body.text,
 	    newDataset = "";
-	    if (req.body.startdate && req.body.enddate) {
-	    	var newStartdate = new Date(req.body.startdate)
-	    	var newEnddate = new Date(req.body.enddate)
-	    } else if ( req.body.startdate) {
-	    	var newStartdate = new Date(req.body.startdate)
-	    	var endStartdate = new Date(req.body.startdate)
-	    } else if ( req.body.enddate) {
-	    	var newStartdate = new Date(req.body.enddate)
-	    	var endStartdate = new Date(req.body.enddate)
-	    } else {
-	    	var newStartdate = new Date()
-	    	var endStartdate = new Date()
-	    }
+
 
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
@@ -92,8 +97,8 @@ router.post('/add/:url?', function(req, res) {
 		 			dataset: newDataset, 
 		 			authorName: req.user.local.username, 
 		 			url: newUrl,
-		 			startdate: newStartdate,
-        			enddate: newEnddate })
+		 			startdate: startdate1,
+        			enddate: enddate1 })
 				//save the comment in the database
 				newComment.save(function (err) {
 					if (err) return console.error(err)
@@ -113,7 +118,7 @@ router.post('/add/:url?', function(req, res) {
 					user: req.user._id,
 				 	dataset: dataset, 
 				 	authorName: req.user.local.username, 
-				 	url: newUrl, startdate: newStartdate, enddate: newEnddate})
+				 	url: newUrl, startdate: startdate1, enddate: enddate1})
 				//save the comment in the database
 				newComment.save(function (err) {
 					if (err) return console.error(err)
@@ -132,24 +137,12 @@ router.post('/add/:url?', function(req, res) {
 	var newTitle = req.body.title,
 	    newUrl = req.body.url,
 		newText = req.body.text,
-	    newDataset = "",
-	    if (req.body.startdate && req.body.enddate) {
-	    	var newStartdate = new Date(req.body.startdate)
-	    	var newEnddate = new Date(req.body.enddate)
-	    } else if ( req.body.startdate) {
-	    	var newStartdate = new Date(req.body.startdate)
-	    	var endStartdate = new Date(req.body.startdate)
-	    } else if ( req.body.enddate) {
-	    	var newStartdate = new Date(req.body.enddate)
-	    	var endStartdate = new Date(req.body.enddate)
-	    } else {
-	    	var newStartdate = new Date()
-	    	var endStartdate = new Date()
-	    }
-	    
+	    newDataset = "";
+  
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
+				console.log("Keinen Dataset" + splitdate1[0] + " " + splitdate1[1] + " " + splitdate1[2])
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
         		var newComment = new Comment({ 
@@ -157,8 +150,8 @@ router.post('/add/:url?', function(req, res) {
         			text: newText, 
         			dataset: newDataset, 
         			url: newUrl,
-        			startdate: newStartdate,
-        			enddate: newEnddate
+        			startdate: startdate1,
+        			enddate: enddate1
         		})
 
 				newComment.save(function (err) {
@@ -169,7 +162,7 @@ router.post('/add/:url?', function(req, res) {
 				res.redirect('/')
 			} else {
 				var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
-				startdate: newStartdate, enddate: newEnddate })
+				startdate: startdate1, enddate: enddate1 })
 				newComment.save(function (err) {
 					if (err) return console.error(err)
 				})
