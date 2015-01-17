@@ -3,6 +3,7 @@
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 - Login von new_comment funktioniert nicht 
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
+- Code kürzen
 
 allgemein:
 ____________________________
@@ -25,6 +26,9 @@ für alle seiten:
  -> führt dazu, dass die karte neu geladen werden muss (hat jan gelöst)
 - Zeitliche Ausdehnung anzeigen
 - bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
+
+profile:
+- login ermöglichen
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
