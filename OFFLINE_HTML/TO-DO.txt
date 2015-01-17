@@ -3,6 +3,7 @@
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 - Login von new_comment funktioniert nicht 
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
+- Code kürzen
 
 allgemein:
 ____________________________
