@@ -32,9 +32,9 @@ commentSchema.virtual('dateString').get(function () {
   var h = d.getHours();
   var m = d.getMinutes();
   if (m.toString().length==1) {
-    var result = curr_date + "." + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + "0" + m;
+    var result = curr_date + " " + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + "0" + m;
   } else {
-    var result = curr_date + "." + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + m;
+    var result = curr_date + " " + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + m;
   }
   return result;
 })

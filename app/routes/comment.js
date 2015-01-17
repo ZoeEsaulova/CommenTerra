@@ -22,7 +22,7 @@ router.get('/add/:url?', function(req, res) {
 			readonly = true; 
 			url = req.params.url}
 		if (req.isAuthenticated()) {
-			res.render('new_comment.ejs', { userId: req.user._id, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
+			res.render('new_comment.ejs', { userId: req.user.local.username, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
@@ -57,7 +57,7 @@ router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
 });
 
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
-router.post('/add/:url?', function(req, res) {
+router.post('/add', function(req, res) {
 	// Get form values. These rely on the "name" attributes
 	    if (req.body.startdate && req.body.enddate) {
 			var splitdate1 = req.body.startdate.split('/')
@@ -81,14 +81,12 @@ router.post('/add/:url?', function(req, res) {
 	    	enddate1 = new Date(enddate1.getUTCFullYear(), parseInt(enddate1.getUTCMonth()), enddate1.getUTCDate()+1)
 	    	
 	    }
-console.log("startdate: " + startdate1 + " enddate: " + enddate1)
+	    var newTitle = req.body.title,
+	    	newUrl = req.body.url,
+			newText = req.body.text,
+	    	newDataset = "";
+
 	if (req.isAuthenticated()) {
-	var newTitle = req.body.title,
-	    newUrl = req.body.url,
-		newText = req.body.text,
-	    newDataset = "";
-
-
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
@@ -139,11 +137,6 @@ console.log("startdate: " + startdate1 + " enddate: " + enddate1)
 	    });	
 	// if not authenticated:
 	} else {
-	var newTitle = req.body.title,
-	    newUrl = req.body.url,
-		newText = req.body.text,
-	    newDataset = "";
-  
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
@@ -181,16 +174,15 @@ console.log("startdate: " + startdate1 + " enddate: " + enddate1)
 // add comment to existing thread
 router.post('/addtothread/:commentId', function(req, res) {
 
-	if (req.isAuthenticated()) {
-	//get form values
-	var newTitle = req.body.title,
-	    newUrl = req.body.url,
+	if (req.isAuthenticated()) {	
+	var newUrl = "",
 	    newText = req.body.text,
 	    newDataset = "",
 	    newThread = "";
 
 	    Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
 	    	newThread = thread
+	    	newUrl = thread.url
 	    })
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
@@ -199,7 +191,6 @@ router.post('/addtothread/:commentId', function(req, res) {
         		newDataset.save()
 			//create new comment
 			var newComment = new Comment({ 
-				title: newTitle, 
 				text: newText, 
 				user: req.user._id,
 				dataset: newDataset, 
@@ -216,15 +207,9 @@ router.post('/addtothread/:commentId', function(req, res) {
 			})
 			newDataset.comments.push(newComment)
 			newDataset.save()
-			Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
-		    	thread.comments.push(newComment)
-		    	thread.save()
-		    })
-			res.redirect('/')
 			} else {
 				//create new comment
-				var newComment = new Comment({ 
-					title: newTitle, 
+				var newComment = new Comment({  
 					text: newText, 
 					user: req.user._id,
 				 	dataset: dataset, 
@@ -241,30 +226,34 @@ router.post('/addtothread/:commentId', function(req, res) {
 				})
 				dataset.comments.push(newComment)
 				dataset.save()
-				Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
-			    	thread.comments.push(newComment)
-			    	thread.save()
-			    })
-				res.redirect('/')
 			}
+			Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
+					console.log("Find 2")
+	    			thread.comments.push(newComment)
+	    			thread.save()
+	    	})
+				res.redirect('/')
+
 	    });	
 
 	} else {
-	var newTitle = req.body.title,
-	    newUrl = req.body.url,
+	
+	var newUrl = "",
 		newText = req.body.text;
 	    newDataset = "",
 	    newThread = "";
 
 	    Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
+	    	console.log("Find 1")
 	    	newThread = thread
+	    	newUrl = thread.url
 	    })	    
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
-        		var newComment = new Comment({ title: newTitle, text: newText, dataset: newDataset, comment: newThread
+        		var newComment = new Comment({ text: newText, dataset: newDataset, comment: newThread
         		, url: newUrl })
 				newComment.save(function (err) {
 					if (err) return console.error(err)		
@@ -273,19 +262,20 @@ router.post('/addtothread/:commentId', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-				var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, comment: newThread
+				var newComment = new Comment({ text: newText, dataset: dataset, comment: newThread
 				,  url: newUrl})
 				newComment.save(function (err) {
 					if (err) return console.error(err)
 				})
 				dataset.comments.push(newComment)
 				dataset.save()
-				Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
+			}
+			Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
+					console.log("Find 2")
 	    			thread.comments.push(newComment)
 	    			thread.save()
-	    		})
+	    	})
 				res.redirect('/')
-			}
 	    });	
 	}
 });

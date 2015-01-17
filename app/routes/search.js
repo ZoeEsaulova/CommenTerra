@@ -91,7 +91,7 @@ router.get('/search', function(req,res) {
 				comments: comments, 
 				boolean1: true, 
 				username: req.user.local.username, 
-				userId: req.user._id,
+				userId: req.user.local.username,
 				action: "/logout", 
 				actionName: "Logout", 
 				message: req.flash('loginMessage'),

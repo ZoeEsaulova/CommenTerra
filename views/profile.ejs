@@ -177,20 +177,29 @@
             </form>
           </li>
 
-
-          <!-- LogOutModal
-               to get logged-out
-               only posible when you have been registed and has logged in
-               confirmation redirect the user to the home.html -->
-  		<li><a href=<%= action %> data-reveal-id="LogOutModal"><%= actionName %></a></li>
-
+          <!-- Login -->
+          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
-          <div id="LogOutModal" class="reveal-modal" data-reveal>
-            <h2>Logging Out</h2>
-            <p class="lead">You will be redirected to the main page.</p>
-            <br>
-            <button href="home.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">&nbsp&nbspOkay&nbsp&nbsp</button>
-            <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">Cancel</button>
+          <div id="LogInModal" class="reveal-modal" data-reveal>
+            <h2>Log In</h2>
+            <p class="lead">Please log in with your e-mail and your password</p>
+            <p><form data-abide action="/login" method="post">
+              <div class="email-field">
+                <label>e-Mail 
+                  <small>required</small>
+                  <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
+                </label>
+                <small class="error">Please type in a valid e-mail-adress!</small>
+              </div>
+              <div class="password-field">
+                <label>Password 
+                  <small>required</small>
+                  <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
+                </label>
+                <small class="error">Please type in your password!</small>
+              </div>
+              <button id="LogInModal2" class="radius" type="submit">Log In</button>
+            </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
@@ -200,10 +209,6 @@
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-              <!--for the logged user is a further link to the personal "Profile" site-->
-              <% if (boolean1) { %>
-              <li><a href="/profile/<%= userId %>">Profile</a></li> 
-              <% } %>
               <li><a href="/faq">Help / FAQ</a></li>
 
       <!-- TO DO: Funktionalität - edit Profile, Rollenzugriff auf Profilseite -->
@@ -314,6 +319,9 @@
             <% if (pageowner.profession) {%>
               <div><p><font color="white">Profession: </font><font color="white" size="3"><%= pageowner.profession %></font></p></div>
             <%} %> 
+            <% if (pageowner.country) {%>
+              <div><p><font color="white">Country: </font><font color="white" size="3"><%= pageowner.country %></font></p></div>
+            <%} %>            
               <font color="white">User Rating: </font>
               <font color="#80FF00" size="3">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
               <font color="#c60f13" size="3">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>

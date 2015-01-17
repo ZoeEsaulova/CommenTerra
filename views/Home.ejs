@@ -473,7 +473,7 @@
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
+                   
                   </li>
                   </ul>
                   <%= comments[i].text %>
@@ -482,7 +482,7 @@
                   <li>
                     <% if (comments[i].user) {%>
                   <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
                     <font color="#2ba6cb">Anonymous</font>
@@ -492,6 +492,7 @@
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
                     <a href="/comments/add/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>
+                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
                   </ul>
                   </div>
@@ -500,10 +501,10 @@
                   <li>
 
                     <!-- for making a comment at a comment -->
-                    <form action="" method="post">
+                    <form action="comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
                       <div class="large-12 columns">
-                        <textarea placeholder="comment on this comment ..."></textarea>
+                        <textarea name="text" placeholder="comment on this comment ..."></textarea>
                         <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
                     </div>
@@ -514,25 +515,24 @@
                   <% if (comments[i].comments.length>0) {%>
                   
                       <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                      <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
-                            <p id="lastStop"><%= comments[i].comments[j].title %></p>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-grey"></i></a>
                             <p><%= comments[i].comments[j].text %></p>
-                            <p><%= comments[i].comments[j].dateString %></p>
                               <% if (comments[i].comments[j].user) {%>
                             <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                               <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
                             <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>
+                              <font color="#2ba6cb">Anonymous</font>                            
                             <%} %>
+                              <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                              <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                              &nbsp&nbsp&nbsp&nbsp
+                              <font size="3"><%= comments[i].dateString %></font>                           
                           </div>
-
+                        </div>
+                        <br>
                         <%} 
                       %>
                   <%} %>

@@ -8,14 +8,14 @@ var express = require('express'),
 
 
 	// show the profile page 
-	router.get('/:userId', function(req, res) {
-		User.findOne({ '_id' : req.params.userId }).exec(function(err, foundedUser) {
+	router.get('/:username', function(req, res) {
+		User.findOne({ 'local.username' : req.params.username }).exec(function(err, foundedUser) {
 			var query = Comment.find({ comment: undefined, user: foundedUser }).populate('user').populate('dataset').populate('comments')
 			query.exec(function(err,comments) {
 			if (req.isAuthenticated()) {				
 				res.render('profile.ejs', { 
 				user: req.user,
-				userId: req.user._id,
+				userId: req.user.local.username,
 				pageowner: foundedUser,
 				boolean3: foundedUser.local.username==req.user.local.username,
 				boolean1: true, 
@@ -71,6 +71,7 @@ var express = require('express'),
 			query.exec(function(err,comments) {	
 				res.render('profile.ejs', { 
 				user: req.user,
+				userId: req.user.local.username,
 				pageowner: foundedUser,
 				boolean3: foundedUser._id.toHexString()==req.user._id.toHexString(),
 				boolean1: true, 
