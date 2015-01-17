@@ -27,6 +27,9 @@ für alle seiten:
 - Zeitliche Ausdehnung anzeigen
 - bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
 
+profile:
+- login ermöglichen
+
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
