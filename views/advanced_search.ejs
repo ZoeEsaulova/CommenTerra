@@ -413,7 +413,7 @@
                     </ul>
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=comments[i].comments.length-1; j>0; j--) {%>
+                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                           <div class="content">
                             <p><%= comments[i].comments[j].title %></p>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -525,7 +525,7 @@
 
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=comments[i].comments.length-1; j>0; j--) {%>
+                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
                             <p><%= comments[i].comments[j].text %></p>

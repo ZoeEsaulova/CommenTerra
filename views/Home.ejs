@@ -515,7 +515,7 @@
 
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=comments[i].comments.length-1; j>0; j--) {%>
+                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
                             <p><%= comments[i].comments[j].text %></p>
