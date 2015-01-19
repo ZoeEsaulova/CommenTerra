@@ -501,13 +501,14 @@
                   <li>
 
                     <!-- for making a comment at a comment -->
-                    <form action="comments/addtothread/<%= comments[i]._id %>" method="post">
+                    <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
                       <div class="large-12 columns">
                         <textarea name="text" placeholder="comment on this comment ..."></textarea>
                         <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
                     </div>
+                  </form>
                   </li>
                   </ul>
 
@@ -529,7 +530,7 @@
                               <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                               <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                               &nbsp&nbsp&nbsp&nbsp
-                              <font size="3"><%= comments[i].dateString %></font>                           
+                              <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                           </div>
                         </div>
                         <br>

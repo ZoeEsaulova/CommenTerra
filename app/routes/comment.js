@@ -299,7 +299,6 @@ router.post('/addtothread/:commentId', function(req, res) {
 				dataset.save()
 			}
 			Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
-					console.log("Find 2")
 	    			thread.comments.push(newComment)
 	    			thread.save()
 	    	})
