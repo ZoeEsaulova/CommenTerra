@@ -7,13 +7,82 @@ var express = require('express'),
 	Dataset = require('../models/dataset'),
  	_ = require('underscore'),
  	querystring = require('querystring');
-		
-// get all comments
+ 	request = require('request'),
+ 	xml2js = require('xml2js'),
+	resp = {},
+	resptext = "No properties found. Check the format of your url";
+
+/* WMS PARSER 
+*  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
+*/
 router.get('/', function(req,res) {
-		Comment.find({ comment: undefined}).sort(' -date').exec(function(err, comments) {
-		res.jsonp(comments)
-	});	
-});
+ 	var url = ""
+
+ 	// check the url format, append an GetCapability request if necessary
+	if (req.query.url.indexOf("?")==(-1)) {
+		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS"
+	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
+		url = req.query.url
+	} else {
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS"
+	}
+
+	// send an GetCapabilities request 
+  	request(
+    	{ method: 'GET'
+    	, uri: url
+    	//, gzip: true
+    	}
+  	, function (error, response, body) {
+  		if (body) {
+
+  		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
+		  var parser = new xml2js.Parser({explicitArray : false});
+		  parser.parseString(body, function(err,result) {
+			  console.log("RESULTS:_________________________")
+			  //traverse(result)
+			  //findAttr(result)
+			  //showAttr(resp)
+			  //console.log("getownPropertyNames: " + Object.getOwnPropertyNames ( result ))
+			  console.log(result.WMT_MS_Capabilities.Service)
+			  resp = result.WMT_MS_Capabilities.Service  	
+			  
+			  if (!(result.WMT_MS_Capabilities==undefined))  {
+			  	resptext = JSON.stringify(resp)
+			  } 
+  		  })
+  		} 
+	  	resp = {}
+	    res.render('new_comment.ejs', { 
+	    	boolean1: false, 
+	    	username: 'Anonymous', 
+	    	action: "#", 
+	    	actionName: "Login", 
+			message: req.flash('loginMessage'), 
+			urlValue: "", 
+			addAction: "/comments/add", 
+			// send response to clinet
+			XMLresponse: resptext ,
+			urlResult: req.query.url })
+	})
+})
+		/*.on('data', function(data) {
+		    // decompressed data as it is received
+		    //console.log('decoded chunk: ' + data)
+		  })
+		  .on('response', function(response) {
+		    // unmodified http.IncomingMessage object
+		    response.on('data', function(data) {
+		      // compressed data as it is received
+		      //console.log('received ' + data.length + ' bytes of compressed data')
+		      //res.send(data)
+		      res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
+						message: req.flash('loginMessage'), urlValue: "", addAction: "/comments/add", XMLresponse:  JSON.stringify(resp),
+						urlResult: req.query.url})
+			});
+		  }) */
+
+		//});
 
 // show the new_comment page
 router.get('/add/:url?', function(req, res) {
@@ -23,10 +92,12 @@ router.get('/add/:url?', function(req, res) {
 			url = req.params.url}
 		if (req.isAuthenticated()) {
 			res.render('new_comment.ejs', { userId: req.user.local.username, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
+				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
+				urlResult: "Your URL will be shown here after you validate it!" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add" })
+				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
+				urlResult: "Your URL will be shown here after you validate it!" })
 		}
 });
 
@@ -302,6 +373,52 @@ router.put('/:commentId', function(req,res) {
 router.delete('/:commentId', function(req,res) {
 	/* NOT IMPLEMENTED YET */
 })
-		
+
+function findAttr(o ) {
+	
+    for (i in o) {
+        if (typeof(o[i])=="object") {          
+            findAttr(o[i] );
+        }
+        if ((i=="Title") && (typeof(o[i])=="string")) {
+        	//console.log(i, o[i])          
+            	if (resp.title==undefined) {
+            		resp["Title"] = o[i]
+            	//console.log("FOUND!:   " + i, o[i])         	
+            }
+        }
+        if ((i=="Abstract") && (typeof(o[i])=="string")) {
+        	//console.log(i, o[i])          
+            	if (resp.abstract==undefined) {
+            		resp["Abstract"] = o[i]
+            	//console.log("FOUND!:   " + i, o[i])         	
+            }
+        }
+        if (i=="ContactInformation") {         
+            	if (resp.keywords==undefined) {
+            		resp["ContactInformation"] = o[i]
+            	//console.log("FOUND!:   " + i, o[i])         	
+            }
+        }                 
+    }
+}
+
+function showAttr(o ) {
+    for (i in o) {
+            console.log(i, o[i])
+    }
+}
+
+function traverse(o ) {
+    for (i in o) {
+        if (typeof(o[i])=="object") {
+            console.log(i, o[i])
+            traverse(o[i] );
+        }
+    }
+} 
+
+
+
 
 module.exports = router

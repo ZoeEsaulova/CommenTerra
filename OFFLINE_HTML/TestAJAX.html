@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+	<script>
+function loadXML() {
+ jQuery.ajax({
+            url: "http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",
+            type: 'GET',
+            success: function(res) {
+                console.log(res);
+                jQuery( "#response" ).html(res);
+            }
+        });
+}
+
+</script>
+</head>
+<body>
+	<h1> Teste AJAX </h1>
+	<button onclick="loadXML()">Load XML</button>
+	<div id="response"></div>
+</body>
+</html>

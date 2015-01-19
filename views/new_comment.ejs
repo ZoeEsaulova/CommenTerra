@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CommenTerra | New Comment</title>
@@ -25,7 +26,30 @@
     <script src="js/labs.js"></script>  
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
     <link rel="stylesheet" href="/resources/demos/style.css">  
-
+    <!--script>
+jQuery(document).ready(function(){
+jQuery("#testUrl").click(function(){
+//var testurl = jQuery("#firstStop").val();
+var testurl = "test";
+jQuery.get( "/comments/" + testurl, function( data ) {
+  jQuery( "#response" ).html( data );
+  alert( "Load was performed." + data);
+});
+/*
+   jQuery.ajax({
+            url: "http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",
+            type: 'GET',
+            success: function(res) {
+                console.log(res);
+                jQuery( "#response" ).html(res);
+            };
+            error: function(jqXHR, textStatus, err){
+               alert('text status '+textStatus+', err '+err)
+           }
+        });*/
+});
+});
+</script-->
     <!-- style for rate function and stars -->
     <style>
       .functions .demo {
@@ -241,19 +265,46 @@
     </div>
 
     <!--dark grey area-->
-    <form action=<%= addAction %> method="post" name="new_comment_form">
+
     <div class="panel custom">
 		<!--segmenting this area in two areas-->
+    
 		<ul class="small-block-grid-2" data-equalizer>
 			<li>
 			  <font color="white" size="4">URL:</font>
+        <form action="/comments" method="get">
 			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
 			  <!--will be shown on on small and medium screens-->
 			  <strong class="show-for-large-up">
-				<button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult').innerHTML = document.getElementById('firstStop').value">
+				<button class="tiny radius expand" id="validateurl" type="submit">
 				  <font color="#424242">Validate URL</font>
 				</button>
+      </form>
 			  </strong>
+
+<!--script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+    document.getElementById("response").innerHTML=xmlhttp.responseText;   
+}
+xmlhttp.open("GET","http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",true);
+xmlhttp.send();
+}
+</script-->
+
+
+
 			  <!--will be shown on large screens-->
 			  <strong class="hide-for-large-up">
 				<button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
@@ -264,7 +315,7 @@
 			<li>
 				<!--shows the response of the URL-->
 				<font color="white" size="4">Response:</font>
-				<textarea id="numero5" disabled="disabled" rows="4"></textarea>
+				<textarea id="response" disabled="disabled" rows="4"><%= XMLresponse %></textarea>
 			</li>
 		</ul>
     </div>
@@ -273,7 +324,9 @@
     <div class="panel custom2">
 	<!--will be shown on large screens-->
       <strong class="show-for-large-up">
+            
 	  <!--segmenting this area in two areas-->
+    <form action=<%= addAction %> method="post" name="new_comment_form">
         <ul class="small-block-grid-2" data-equalizer>
           <li>
             <div class="panel custom" data-equalizer-watch>
@@ -289,9 +342,7 @@
                     <div class="panel custom2">
                       <div id="panel1b" class="content">
                         <font color="#424242" size="4">URL:<p></p>
-                          <p id="urlResult">
-                            Your URL will be shown here after you validate it!
-                          </p>
+                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" />                 
                         </font>
                         <p></p>
                         <!--segmenting this area in two areas-->
