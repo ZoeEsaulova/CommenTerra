@@ -5,6 +5,7 @@
 - Public API: "itemUnderReview" statt "url" ? Public Api von Gruppe 2 einlesen
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
 - Code kürzen
+- Map viwer testen
 
 allgemein:
 ____________________________
@@ -18,8 +19,6 @@ ____________________________
 - GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
 - wie lässt sich JR ausstellen?
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
-
-für alle seiten:  
 - site navi link auf: neue lokalisation
 - Zeitliche Ausdehnung anzeigen
 
