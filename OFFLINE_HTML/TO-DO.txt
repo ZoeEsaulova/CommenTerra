@@ -2,8 +2,10 @@
 - Codereview hochladen?
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 - Login von new_comment funktioniert nicht 
+- Public API: "itemUnderReview" statt "url" ? Public Api von Gruppe 2 einlesen
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
 - Code kürzen
+- Map viwer testen
 
 allgemein:
 ____________________________
@@ -11,33 +13,21 @@ ____________________________
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!   
 ____________________________
-- Startrating: Funktionalität
+- Startrating
 - Commentar bewerten (daumen hoch/runter)
 - Logout confirmation modal: Funktionalität
-- Commentar commentieren: Funktionalität
-- Suche nach Bewertung
 - GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
 - wie lässt sich JR ausstellen?
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
-- star rating funktioniert nicht mit bildern
-
-für alle seiten:  
 - site navi link auf: neue lokalisation
- -> führt dazu, dass die karte neu geladen werden muss (hat jan gelöst)
 - Zeitliche Ausdehnung anzeigen
-- bewertung für einen kommentar (sind textfelder -> datenbank; bilder als klickreferenz)
-
-profile:
-- login ermöglichen
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-  datenbank hinterlegt
 - new_comment: Im Titel wird automatisch eine Komma gesetzt ?
 - der standart error muss weg
 - datepicker umbenennen
-- Falls hier keine Auswahl getroffen wird, wird der Zeitpunkt des Kommentars als zeitlicher Parameter hinterlegt - TESTEN
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
@@ -70,7 +60,7 @@ about:
  - erst logo weg, aber immer lizenzen+abouttext anzeigen
  
  profile:
-- email anzeigen lassen, aber mit option zum ausblenden --> nicht gefordert
+- email anzeigen lassen, aber mit option zum ausblenden 
 
 advanced_search:
 - checkboxen: "all these words", "any of these words" : der unterschied besteht hier nur darin ob man 
