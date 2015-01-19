@@ -413,7 +413,7 @@
                     </ul>
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                      <% for (var j=comments[i].comments.length-1; j>0; j--) {%>
                           <div class="content">
                             <p><%= comments[i].comments[j].title %></p>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -494,7 +494,7 @@
                   <li>
                     <% if (comments[i].user) {%>
                   <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
                     <font color="#2ba6cb">Anonymous</font>
@@ -525,7 +525,7 @@
 
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                      <% for (var j=comments[i].comments.length-1; j>0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
                             <p><%= comments[i].comments[j].text %></p>
