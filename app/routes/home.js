@@ -45,7 +45,7 @@ var _ = require('underscore');
 	app.get('/mapviewer', function(req,res) {
 		if (req.isAuthenticated()) {
 			res.render('map_viewer.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage')  })
+				message: req.flash('loginMessage'), userId: req.user.local.username })
 		} else {
 			res.render('map_viewer.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
 				message: req.flash('loginMessage') })

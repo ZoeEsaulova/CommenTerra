@@ -53,17 +53,32 @@ router.get('/', function(req,res) {
   		  })
   		} 
 	  	resp = {}
+	  if (req.isAuthenticated()) {
 	    res.render('new_comment.ejs', { 
-	    	boolean1: false, 
-	    	username: 'Anonymous', 
-	    	action: "#", 
-	    	actionName: "Login", 
+	    	boolean1: true, 
+	    	username: req.user.local.username,
+	    	userId:  req.user.local.username,
+	    	action: "/logout", 
+	    	actionName: "Logout", 
+		message: req.flash('loginMessage'), 
+		urlValue: "", 
+		addAction: "/comments/add", 
+		// send response to clinet
+		XMLresponse: resptext ,
+		urlResult: req.query.url }) }
+	   else {
+		 res.render('new_comment.ejs', { 
+	    		boolean1: false, 
+	    		username: 'Anonymous', 
+	    		action: "#", 
+	    		actionName: "Login", 
 			message: req.flash('loginMessage'), 
 			urlValue: "", 
 			addAction: "/comments/add", 
 			// send response to clinet
 			XMLresponse: resptext ,
-			urlResult: req.query.url })
+			urlResult: req.query.url })	
+		}
 	})
 })
 		/*.on('data', function(data) {

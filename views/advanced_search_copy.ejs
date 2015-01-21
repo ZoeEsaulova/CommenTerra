@@ -1,12 +1,11 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CommenTerra | Welcome</title>
-    <link rel="stylesheet" href="css/commenterra.css" />
+<link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
@@ -15,7 +14,10 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
 
-    <!-- style for rate function and stars -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+          <!-- style for rate function and stars -->
           <style>.functions .demo {
             margin-bottom: 10px;
           }
@@ -145,15 +147,7 @@
     </script>
   </head>
 
-  <body data-ng-app="Comments" data-ng-controller="commentsController">
-    <!-- Login or Signup failed --> 
-  	<% if (message.length > 0) { %>
-      <div data-alert class="alert-box">
-        <%= message %>
-      <a href="#" class="close">&times;</a>
-      </div>
-    <% } %>
-
+  <body>
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -166,7 +160,6 @@
   			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
   			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
   		</ul>
-
       <section class="top-bar-section"> 
   			<!-- Right Nav Section --> 
         <ul id="numero1" class="right">
@@ -175,8 +168,8 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" name="q" id="keyword" placeholder="search for keyword"> </label>
-                        <!--small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small -->
+                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
+                        <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
                   <div class="small-3 columns end">
@@ -185,12 +178,10 @@
                 </div>
             </form>
           </li>
-
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
-          <!-- Login -->
-          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
@@ -215,16 +206,14 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-          
-
   				<li class="has-dropdown"> 
-  					<a id="lastStop" href="#">Site Navigation</a> 
+  					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
-  						<li><a href="/comments/add">New Comment</a></li> 
-  						<li><a href="/api/v1/search">Advanced Search</a></li>
+              <li><a href="/comments/add">New Comment</a></li> 
+              <li><a href="/api/v1/search">Advanced Search</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
-              <li><a href="/profile/<% userId %>">Profile</a></li> 
+              <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
               <li><a href="/faq">Help / FAQ</a></li> 
   					</ul> 
@@ -235,117 +224,139 @@
     </div>
 
 
-    <div class="fixed">
+    <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
 
 
-    <% if (!boolean1) { %>
-    <!-- LARGE-UP
-         use this to show the page when there is a larger display --> 
-    <strong id="sign-up-for-large-up" class="show-for-large-up">
-      <div class="panel custom">  
-      <ul class="large-block-grid-3"> 
-        <li>
-            <img id="firstStop" src="img/vektorlogo.svg" width="205" height="205">
-        </li> 
-        <li>
-          <form action="/signup" method="post" data-abide>
-            <div class="name-field">
-                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
-              <small class="error">Please type in a username!</small>
-            </div>
-            <div class="email-field">
-                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
-              <small class="error">Please type in a valid e-mail-adress!</small>
-            </div>
-            <div class="password-field">
-                <input type="password" id="password" placeholder="Create a password" name="password" required> 
-              <small class="error">Please type in a password!</small>
-            </div>
-              <button id="numero2" href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
-          </form>
-        </li>
-        <li>
-            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Comment on almost any geodata-type</font></p></div></div>
-            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Absolutely free</font></p></div></div>
-            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Easy to use</font></p></div></div>
-            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Comprehensive search-feature</font></p></div></div>
-        </li> 
-      </ul>
-    </div>
-    </strong>
-    
-    <!-- MEDIUM-UP
-         use this to show the page on medium displays -->
-    <strong class="show-for-medium-only">
-      <div class="panel custom">
-        <ul class="small-block-grid-2">
-        <li>
-            <img src="img/vektorlogo.svg" width="205" height="205">
-        </li> 
-        <li>
-          <form data-abide>
-            <div class="name-field">
-                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
-              <small class="error">Please type in a username!</small>
-            </div>
-            <div class="email-field">
-                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
-              <small class="error">Please type in a valid e-mail-adress!</small>
-            </div>
-            <div class="password-field">
-                <input type="password" id="password" placeholder="Create a password" name="password" required> 
-              <small class="error">Please type in a password!</small>
-            </div>
-              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
-          </form>
-        </li>
-        </ul>
-      </div>
-    </strong>
+    <!-- upper dark gray area -->
+    <div class="panel custom">
 
-    <!-- SMALL-UP
-         use this to show the page on smaller displays
-         for example on mobilephones -->
-    <strong class="show-for-small-only">
-      <div class="panel custom">
-          <form data-abide>
-            <div class="name-field">
-                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
-              <small class="error">Please type in a username!</small>
-            </div>
-            <div class="email-field">
-                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
-              <small class="error">Please type in a valid e-mail-adress!</small>
-            </div>
-            <div class="password-field">
-                <input type="password" id="password" placeholder="Create a password" name="password" required> 
-              <small class="error">Please type in a password!</small>
-            </div>
-              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
-          </form>
-        </li>
-      </div>
-    </strong>
-    <% } %>
-    
+    <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
+      <strong class="show-for-large-up">
+        <!-- input for the advanced search to get the search start
+             ordered in a grid to have a better overview of the options -->
+        <ul class="large-block-grid-2">
+          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+          <li>
+            <form action="/api/v1" method="post">
+              <input type="text" name="q" id="search_keywords" placeholder="keywords" />
+              <input type="text" name="url" id="search_url" placeholder="url" />            
+              <input type="text" name="authorName" id="search_user" placeholder="user" />
+              <p>
+                <div id="rating"></div>
+              </p>
+            
+          </li>
+
+          <li>            
+            <ul class="large-block-grid-2">              
+              <li>
+                <!-- data binding for the starting date -->
+                <div id="numero2" data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                  <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
+                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
+                </div>
+
+                <!-- coordinates for searching on a specific point -->
+                <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
+
+                <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit">Search</button>
+                
+              </li>
+
+              <li>
+                <!-- data binding for the starting date -->
+                <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                  <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
+                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
+                </div>
+   
+                <!-- boundingbox search
+                     the user get a pop-up window where he/she is
+                     able to define a radius. Afterwards by clicking
+                     on the map the boundingbox circle appears. -->
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
+                  <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                    <h2>Set Areal</h2>
+                    <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
+                    <input type="text" id="radius" name=" radius" placeholder="10">
+                    <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
+                    <a class="close-reveal-modal">&#215;</a>
+                  </div>
+                </form>
+            
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:80/apo/v1/search?<%= query %></p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>              
+          </li>
+        </ul>
+        </ul>
+      </strong>
+
+      <!-- SMALL-UP
+           use this to show the page on smaller displays
+           for example on mobilephones -->
+      <strong class="hide-for-large-up">
+          <!-- input for the advanced search to get the search start
+             ordered in a grid to have a better overview of the options -->
+          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+            <form>
+              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
+              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
+              <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+            </form>
+            <div id="rating1"></div>
+            <p></p>
+
+                <!-- data binding for the input date -->
+                <form data-abide>
+                  <input type="date" id="id" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                  <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
+                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
+                </form>
+
+                <!-- coordinates for searching on a specific point -->
+                <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
+
+                <!-- boundingbox search
+                     the user get a pop-up window where he/she is
+                     able to define a radius. Afterwards by clicking
+                     on the map the boundingbox circle appears. -->
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
+                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+                  <h2>Set Areal</h2>
+                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometre.</p>
+                  <input type="text" id="radius" name=" radius" placeholder="10">
+                  <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+
+                <!-- "safe this search"-button open a pop-up window
+                     generate a permalink the user can copy
+                     to get back to his search everytime -->              
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                  <h2>Permalink</h2>
+                  <p class="lead">You can copy this link for later searches:</p>
+                  <p>http://localhost:3000/apo/v1/search?<%= query %></p>
+                  <a class="close-reveal-modal">&#215;</a>
+                </div>
+                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+      </strong>
+    </div>
+
     <!-- lower bright gray area -->
     <div class="panel custom2">
-
-      <ul class="small-block-grid-2">
-        <li>
-          <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
-        </li>
-        <li>
-          <a id="numero4" href="/api/v1/search" class="success button radius expand">Advanced Search</a>
-        </li>
-      </ul> 
-
       <!-- SMALL-UP
            use this to show the page on smaller displays
            for example on mobilephones -->
@@ -355,14 +366,14 @@
           <!-- data-tabs for the two views in the lower area -->
           <dl class="tabs" data-tab>
             <!-- first tab -->
-            <dd><a href="#panel1">View Comments</a></dd>
+            <dd><a class="content active" href="#panel1">View Comments</a></dd>
             <!-- second tab -->
-            <dd class="content active"><a href="#panel2">View Map</a></dd>
+            <dd><a href="#panel2">View Map</a></dd>
           </dl>
 
           <div class="tabs-content">
 
-            <div class="content" id="panel1">
+            <div class="content active" id="panel1">
               <!-- comments 
                    ordered in an data-accordion -->
               <dl id="numero6" class="accordion" data-accordion>
@@ -402,7 +413,7 @@
                     </ul>
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                           <div class="content">
                             <p><%= comments[i].comments[j].title %></p>
                             <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -419,6 +430,7 @@
                               </font></a>
                             <%} else {%> 
                               <font color="#2ba6cb">Anonymous</font>
+                              <%= metamaps %>
                             <%} %>
                           </div>
 
@@ -428,33 +440,47 @@
                   </div>
                 </dd>
                 <% } %>
+<% if (metamaps.length > 0 ) { %> 
+<!-- MY META MAPS -->
+<% for(var i=0; i<metamaps.length; i++) {%>
+  <dd class="accordion-navigation">
+                <a id="lastStop" href="#panel<%= i %>c">My Meta Maps comment</a>
+
+                <div id="panel<%= i %>c" class="content">
+                  <div class="panel custom5" style="border-color: #424242;">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="/mapviewer"><font color="#2ba6cb"><%= metamaps[i].itemUnderReview %></font></a>
+                    <%= metamaps[i].text %>
+                  </li>    
+  </dd>
+<%} %>
+<% } %>                
               </dl>
             </div>
 
-            <div class="content active" id="panel2">
+            <div class="content" id="panel2">
               <!-- map -->
               <div class="map" id="map" style="width: 100%; height: 750px"></div>
  
             </div>
-
           </div>
-
         </div>
-      </strong>      
+      </strong> 
 
       <!-- LARGE-UP
            use this to show the page when there is a larger display -->
-      <strong class="show-for-large-up" >
-      <ul class="small-block-grid-2" data-equalizer>
-        <li>
-          <div class="panel custom" style="overflow: auto" data-equalizer-watch >
-            <!-- comments 
+      <strong class="show-for-large-up">
+        <ul class="small-block-grid-2" data-equalizer>
+          <li>
+            <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+                         <!-- comments 
                  orderd in a data-accordion -->
             <dl class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="numero6" href="#panel<%= i %>c"><%= comments[i].title %></a>
+                <a id="lastStop" href="#panel<%= i %>c"><%= comments[i].title %></a>
 
                 <div id="panel<%= i %>c" class="content">
                   <div class="panel custom5" style="border-color: #424242;">
@@ -464,20 +490,19 @@
                          by clicking the link of the geodataset
                          the user is asked whether he/she´d like to
                          open it in the map_viewer -->
-                    <a href="/api/v1/search?url=<%= comments[i].dataset.url %>" data-reveal-id="mapModal"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                    <div id="mapModal" class="reveal-modal" data-reveal>
+                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <!--div id="mapModal" class="reveal-modal" data-reveal>
                       <p class="lead">Do you want to use the map viewer?</p>
                       <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
                       <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
                       <a class="close-reveal-modal">&#215;</a>
-                    </div>
+                    </div-->
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
                   </ul>
                   <%= comments[i].text %>
@@ -486,7 +511,7 @@
                   <li>
                     <% if (comments[i].user) {%>
                   <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
                     <font color="#2ba6cb">Anonymous</font>
@@ -496,6 +521,7 @@
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
                     <a href="/comments/add/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
                   </ul>
                   </div>
@@ -503,66 +529,63 @@
                   <ul class="no-bullet">
                   <li>
                     <!-- for making a comment at a comment -->
+                    <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
                       <div class="large-12 columns">
-                        <textarea placeholder="comment on this comment ..."></textarea>
+                        <textarea name="text" placeholder="comment on this comment ..."></textarea>
                         <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
                     </div>
+                  </form>
                   </li>
                   </ul>
 
-
                   <% if (comments[i].comments.length>0) {%>
                   
-                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
+                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
+                      <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
-                            <p id="lastStop"><%= comments[i].comments[j].title %></p>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-grey"></i></a>
                             <p><%= comments[i].comments[j].text %></p>
-                            <p><%= comments[i].comments[j].dateString %></p>
                               <% if (comments[i].comments[j].user) {%>
                             <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                               <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
                             <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>
+                              <font color="#2ba6cb">Anonymous</font>                            
                             <%} %>
+                              <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                              <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                              &nbsp&nbsp&nbsp&nbsp
+                              <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                           </div>
-
+                        </div>
+                        <br>
                         <%} 
                       %>
                   <%} %>
 
                 </div>
 
-
               </dd>
               <% } %>
 
             </dl>
           </div>
-        </li>
-        <li>
-          <div class="panel custom" data-equalizer-watch>
-            <!-- map -->
-            <div id="numero5">
-            <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+          </li>
+          <li>
+            <div class="panel custom" data-equalizer-watch>
+              <!-- map -->
+              <div>
+              <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+              </div>
             </div>
-
-          </div>
-        </li>
-      </ul>
-</strong>
-
+          </li>
+        </ul>
+      </strong>
     </div>
 
-        <!-- script for the map on the right of the site -->
+     <!-- script for the map on the right of the site -->
               <script>
               
               if (matchMedia('only screen and (max-width: 64em)').matches) {
@@ -686,14 +709,13 @@
               }
 
               </script>
-              
+
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 
 
     <!-- FOOTER
          on every page to get more informations -->
-    <!-- steht oben doch schon? -> <div class="panel custom4" style="width: 100%; height: 2px"></div> -->
     <div id="footer">
       || <a href="/about"><font color="#424242">About CommenTerra / Contact</font></a> || 
       <a href="/faq"><font color="#424242">FAQ / Help</font></a> ||
@@ -703,45 +725,63 @@
          as intrudation in the functionality of this page -->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
-        <h5>Hi there!</h5>
-        <p>Hello and welcome to the CommenTerra Project...</p>
+        <p>The advanced search is very usefull to search for spezific geodatasets.</p>
       </li>
-      <li data-id="numero1" data-text="Next" data-prev-text="Prev" data-options="tip_location: bottom">
-        <p>... if you want to know more about the project and how to work with it, please see the FAQ / Help sites via our multi-functional top-bar. You will also find helpful Links at the bottom of the page.</p>
+      <li data-id="numero1" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>Search for users, urls and for any keyword come to your mind...</p>
       </li>
       <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>If you instead want to start right away, we won't blame you! Sign up now and enjoy all the member-privelidges and our awesome community.</p>
+        <p>... of course you can pick a dateframe related to the geodataset.</p>
       </li>
       <li data-id="numero3" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>With this button you can add a new comment on almost any geodataset you desire.</p>
+        <p>Optional you can clarify a boundingbox just to see whether there any comment exists.</p>
       </li>
-      <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>And with this button you can enjoy the comfort of our awesome search-engine. Just get comfortable, while we do the research for you and get you the comments and datasets you are looking for.</p>
+      <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>Copy the link of your search to reuse it same days later.</p>
       </li>
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>This is the map with the markers and potential layers of the comments...</p>
-      </li>
-      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this is, where the comments are! Klick to get more informations about them and klick again to hide them.</p>
-      </li>
-      <li data-id="numero7" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>When registered log in to view all your comments and use other member-privelides.</p>
-      </li>
+        <p>The resulting comments of your search are shown hier. Ordered by relevanz. For more informations klick.
+          To hide klick them again.</p>
+      </li>       
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>Use the site navigation to get everywhere at any time. I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+        <p>Again you can take use of the site navigation. Happy Searching!</p>
       </li>
     </ol>
 
+
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
+    <script src="js/jquery.raty.js"></script>
+    <script src="js/labs.js"></script>
+    <script>
+     $(document).ready(function()
+     {
+     $("#rating").raty();
+     });
+    </script>
+    <script>
+     $(document).ready(function()
+     {
+     $("#rating1").raty();
+     });
+    </script>
     <script>
       $(document).foundation();
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }
-      
+      }      
     </script>
-
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker1" ).datepicker();
+      });
+    </script>
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker2" ).datepicker();
+      });
+    </script>    
 
   </body>
+
 </html>

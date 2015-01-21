@@ -253,10 +253,9 @@
           <li>            
             <ul class="large-block-grid-2">              
               <li>
-                <!-- data binding for the starting date -->
-                <div id="numero2" data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                <!-- start date -->
+                <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
                   <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
-                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
                 </div>
 
                 <!-- coordinates for searching on a specific point -->
@@ -267,10 +266,9 @@
               </li>
 
               <li>
-                <!-- data binding for the starting date -->
-                <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
+                <!-- end date -->
+                <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
                   <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
-                  <!-- <small class="error">The date must be in the format: MM/DD/YYYY</small> -->
                 </div>
    
                 <!-- boundingbox search
@@ -316,14 +314,14 @@
             </form>
             <div id="rating1"></div>
             <p></p>
-
-                <!-- data binding for the input date -->
-                <form data-abide>
-                  <input type="date" id="id" placeholder="Start Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
-                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
-                  <input type="date" id="id" placeholder="End Date (MM/DD/YYYY)" name="date" pattern="month_day_year">
-                  <small class="error">The date must be in the format: MM/DD/YYYY</small>
-                </form>
+              <!-- start date -->
+              <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
+                <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
+              </div>
+              <!-- end date -->
+              <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
+                <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
+              </div>
 
                 <!-- coordinates for searching on a specific point -->
                 <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
@@ -335,7 +333,7 @@
                 <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
                 <div id="boundingBoxModal" class="reveal-modal" data-reveal>
                   <h2>Set Areal</h2>
-                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometre.</p>
+                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
                   <input type="text" id="radius" name=" radius" placeholder="10">
                   <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
                   <a class="close-reveal-modal">&#215;</a>
@@ -553,6 +551,23 @@
               </dd>
               <% } %>
 
+<% if (metamaps.length > 0 ) { %> 
+<!-- MY META MAPS -->
+<% for(var i=0; i<metamaps.length; i++) {%>
+  <dd class="accordion-navigation">
+                <a id="lastStop" href="#panelm<%= i %>c">My Meta Maps comment</a>
+
+                <div id="panelm<%= i %>c" class="content">
+                  <div class="panel custom5" style="border-color: #424242;">
+                  <ul class="no-bullet">
+                  <li>
+                    <a href="/mapviewer"><font color="#2ba6cb"><%= metamaps[i].itemUnderReview %></font></a>
+                    <br>
+                    <%= metamaps[i].text %>
+                  </li>    
+  </dd>
+<%} %>
+<% } %>
             </dl>
           </div>
           </li>
