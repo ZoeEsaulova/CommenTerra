@@ -1,3 +1,6 @@
+----------
+test
+----------
 - Server aktualisieren + Beispieldaten
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
 - Login von new_comment funktioniert nicht 
