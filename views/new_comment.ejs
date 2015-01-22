@@ -330,7 +330,6 @@ xmlhttp.send();
         <ul class="small-block-grid-2" data-equalizer>
           <li>
             <div class="panel custom" data-equalizer-watch>
-              <div class="panel custom2">
 				<!--Comment area-->
                 <dl class="accordion" data-accordion>
                   <dd class="accordion-navigation">
@@ -367,13 +366,12 @@ xmlhttp.send();
                         <p></p>
                         <font color="#424242" size="4">Comment:</font>
                         <dl class="accordion" data-accordion>
-                          <dd class="accordion-navigation">
-                            <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
-                            <!-- <small class="error">You have to indicate a comment!</small> -->
-                          </dd>
-                        </dl>
+                        <dd class="accordion-navigation">
+                          <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                        </dd>
+                      </dl>
                         <!--return the logged user or the anonyme unlogged user-->
-                        <a href=""><font color="#2ba6cb">anonyme</font></a>
+                        <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                         <p></p>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
@@ -408,7 +406,6 @@ xmlhttp.send();
                     </div>
                   </dd>
                 </dl>
-              </div>
             </div>
           </li>
           <li>
@@ -466,18 +463,12 @@ xmlhttp.send();
                       <dl class="accordion" data-accordion>
                         <dd class="accordion-navigation">
                           <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
-                          <small class="error">You have to indicate a comment!</small>
                         </dd>
                       </dl>
-                      <!--return the logged user or the anonyme unlogged user-->
-                      <a href=""><font color="#2ba6cb">anonyme</font></a>
+                        <!--return the logged user or the anonyme unlogged user-->
+                        <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                       <p></p>
                       <button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
-                      <div id="circleModal" class="reveal-modal" data-reveal>
-                        <p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
-                        <button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
-                        <a class="close-reveal-modal">&#215;</a>
-                      </div>
                       <p></p>
                       <button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
 
