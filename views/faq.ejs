@@ -101,20 +101,20 @@
 
   <body>
 
-  	<!-- TOP-BAR (fixed)
+    <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
-  		<ul class="title-area"> 
+      <ul class="title-area"> 
         <li class="name"> 
           <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
-  			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
-  			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
-  		</ul>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+      </ul>
       <section class="top-bar-section"> 
-  			<!-- Right Nav Section --> 
+        <!-- Right Nav Section --> 
         <ul id="numero1" class="right">
           <li class="has-form">
             <form action="/api/v1/simplesearch" method="get" data-abide>
@@ -135,7 +135,7 @@
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
-  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
@@ -160,9 +160,9 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-  				<li class="has-dropdown"> 
-  					<a href="#">Site Navigation</a> 
-  					<ul class="dropdown"> 
+          <li class="has-dropdown"> 
+            <a href="#">Site Navigation</a> 
+            <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
               <!-- only for logged in users -->
@@ -170,11 +170,11 @@
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
               <li><a href="/faq">Help / FAQ</a></li> 
-  					</ul> 
-  				</li> 
-  			</ul> 
-  		</section>
-  	</nav>
+            </ul> 
+          </li> 
+        </ul> 
+      </section>
+    </nav>
     </div>
 
 
@@ -204,7 +204,7 @@
             <a href="#1.8"><font color="white">1.8 How can I manage my search-requests?</font></a><br>
           </li>
           <li>
-            <br>
+            <h3><font color="white">Tutorials</font></h3><br>
             <a href="#2.1"><font color="white">2.1 How to sign in (video)</font></a><br>
             <a href="#2.2"><font color="white">2.2 How to make a comment (video)</font></a><br>
           </li>
