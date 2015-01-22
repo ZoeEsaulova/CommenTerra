@@ -39,8 +39,6 @@ advanced_search:
 - Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
 
 faq:
-- footer passt nicht
-- flax video für dynamische veränderung
 
 23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
@@ -54,7 +52,6 @@ _______________________________________________________________
 
 faq:
 - anker ändern
-- videos bei handygröße anpassen
 
 about:
 - text ans logo dran mit blockgrid-3
