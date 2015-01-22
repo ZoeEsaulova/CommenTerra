@@ -3,6 +3,7 @@ test
 ----------
 - Server aktualisieren + Beispieldaten
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
+    --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - Login von new_comment funktioniert nicht 
 - Public API: "itemUnderReview" statt "url" ? Public Api von Gruppe 2 einlesen
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen, API
