@@ -199,22 +199,22 @@ jQuery.get( "/comments/" + testurl, function( data ) {
           <li class="has-form">
             <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
-		  <!--seperate this area in 9 areas-->
+      <!--seperate this area in 9 areas-->
                   <div class="small-9 columns ">
                       <div class "search-field">
-			<!--search for keyword field with an autocomplete function-->
+      <!--search for keyword field with an autocomplete function-->
                         <label> <input type="text" id="tags" placeholder="search for keyword" name="q"> </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
-		  <!--override the count that adds up to 12 columns-->
+      <!--override the count that adds up to 12 columns-->
                   <div class="small-3 columns end">
                     <button class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
           </li>
-	  <!--Log-In modal-->
+    <!--Log-In modal-->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -226,7 +226,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
-		<!--exception: invalid e-mail-->
+    <!--exception: invalid e-mail-->
                 <small class="error">Please type in a valid e-mail-address!</small>
               </div>
               <div class="password-field">
@@ -234,7 +234,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
                   <small>required</small>
                   <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
                 </label>
-		<!--exception: no password-->
+    <!--exception: no password-->
                 <small class="error">Please type in your password!</small>
               </div>
               <button class="radius" type="submit">Log In</button>
@@ -242,7 +242,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-		  <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
+      <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
           <li class="has-dropdown"> 
             <a href="#">Site Navigation</a> 
             <ul class="dropdown"> 
@@ -267,12 +267,13 @@ jQuery.get( "/comments/" + testurl, function( data ) {
     <!--dark grey area-->
 
     <div class="panel custom">
-		<!--segmenting this area in two areas-->
+    <!--segmenting this area in two areas-->
     
-		<ul class="small-block-grid-2" data-equalizer>
-			<li>
-			  <font color="white" size="4">URL:</font>
+    <ul class="small-block-grid-2" data-equalizer>
+      <li>
+        <font color="white" size="4">URL:</font>
         <form action="/comments" method="get">
+<<<<<<< HEAD
 			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
 			  <!--will be shown on on small and medium screens-->
           <div class="row">
@@ -292,8 +293,16 @@ jQuery.get( "/comments/" + testurl, function( data ) {
 				<button class="tiny radius expand" id="validateurl" type="submit">
 				  <font color="#424242">Validate URL</font>
 				</button>
+=======
+        <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
+        <!--will be shown on on small and medium screens-->
+        <strong class="show-for-large-up">
+        <button class="tiny radius expand" id="validateurl" type="submit">
+          <font color="#424242">Validate URL</font>
+        </button>
+>>>>>>> 831d597c4a22e02811f1f1aa27aedc2f710ace38
       </form>
-			  </strong>
+        </strong>
 
 <!--script>
 function loadXMLDoc()
@@ -318,33 +327,32 @@ xmlhttp.send();
 
 
 
-			  <!--will be shown on large screens-->
-			  <strong class="hide-for-large-up">
-				<button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
-				  <font color="#424242">Validate URL</font>
-				</button>
-			  </strong>
-			</li>
-			<li>
-				<!--shows the response of the URL-->
-				<font color="white" size="4">Response:</font>
-				<textarea id="response" disabled="disabled" rows="4"><%= XMLresponse %></textarea>
-			</li>
-		</ul>
+        <!--will be shown on large screens-->
+        <strong class="hide-for-large-up">
+        <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+          <font color="#424242">Validate URL</font>
+        </button>
+        </strong>
+      </li>
+      <li>
+        <!--shows the response of the URL-->
+        <font id="numero5" color="white" size="4">Response:</font>
+        <textarea id="response" disabled="disabled" rows="4"><%= XMLresponse %></textarea>
+      </li>
+    </ul>
     </div>
 
     <!--light grey area-->
     <div class="panel custom2">
-	<!--will be shown on large screens-->
+  <!--will be shown on large screens-->
       <strong class="show-for-large-up">
             
-	  <!--segmenting this area in two areas-->
+    <!--segmenting this area in two areas-->
     <form action=<%= addAction %> method="post" name="new_comment_form">
         <ul class="small-block-grid-2" data-equalizer>
           <li>
             <div class="panel custom" data-equalizer-watch>
-              <div class="panel custom2">
-				<!--Comment area-->
+        <!--Comment area-->
                 <dl class="accordion" data-accordion>
                   <dd class="accordion-navigation">
                     <a href="#panel1b">
@@ -380,13 +388,12 @@ xmlhttp.send();
                         <p></p>
                         <font color="#424242" size="4">Comment:</font>
                         <dl class="accordion" data-accordion>
-                          <dd class="accordion-navigation">
-                            <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
-                            <!-- <small class="error">You have to indicate a comment!</small> -->
-                          </dd>
-                        </dl>
+                        <dd class="accordion-navigation">
+                          <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                        </dd>
+                      </dl>
                         <!--return the logged user or the anonyme unlogged user-->
-                        <a href=""><font color="#2ba6cb">anonyme</font></a>
+                        <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                         <p></p>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
@@ -400,7 +407,7 @@ xmlhttp.send();
                             </div>
                           </li>
                           <li>
-                           <button class="success tiny radius expand" data-reveal-id="confirmModal">
+                           <button id="numero4" class="success tiny radius expand" data-reveal-id="confirmModal">
                              Save
                            </button>
                            <!--pop up to confirm the submission-->
@@ -421,13 +428,12 @@ xmlhttp.send();
                     </div>
                   </dd>
                 </dl>
-              </div>
             </div>
           </li>
           <li>
             <div class="panel custom" data-equalizer-watch>
               <!--Map-->
-              <div id="numero5">
+              <div>
               <div class="map" id="map1" style="width: 100%; height: 730px; border-radius: 3px"></div>
               </div>
             </div>
@@ -435,7 +441,7 @@ xmlhttp.send();
         </ul>
       </strong>
 
-	  <!--will be shown for small and medium screens-->
+    <!--will be shown for small and medium screens-->
       <strong class="hide-for-large-up">
         <div class="panel custom">
           <!--two taps for Create a Comment and the Map-->
@@ -479,20 +485,14 @@ xmlhttp.send();
                       <dl class="accordion" data-accordion>
                         <dd class="accordion-navigation">
                           <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
-                          <small class="error">You have to indicate a comment!</small>
                         </dd>
                       </dl>
-                      <!--return the logged user or the anonyme unlogged user-->
-                      <a href=""><font color="#2ba6cb">anonyme</font></a>
+                        <!--return the logged user or the anonyme unlogged user-->
+                        <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                       <p></p>
                       <button id="numero3" class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Set Areal</button>
-                      <div id="circleModal" class="reveal-modal" data-reveal>
-                        <p class="lead">Type on the map to create the center of the circle. Please inside a radius (in kilometers) for the areal.</p>
-                        <button class="success tiny radius expand" type="submit" data-reveal-id="circleModal">Create center</button>
-                        <a class="close-reveal-modal">&#215;</a>
-                      </div>
                       <p></p>
-                      <button id="numero4" class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
+                      <button class="success tiny radius expand" type="submit" data-reveal-id="confirmModal">Submit Comment</button>
 
                     </div>
                   </div>
@@ -509,8 +509,8 @@ xmlhttp.send();
                 if (matchMedia('only screen and (max-width: 64em)').matches) {
                 //Map for small screens
                 var map = L.map('map');
-		
-		//load and display tile layers on the map
+    
+    //load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -519,10 +519,10 @@ xmlhttp.send();
                   id: 'examples.map-i875mjb7'
                 }).addTo(map);
 
-		//shows the location of the device
+    //shows the location of the device
                 function onLocationFound(e) {
                   var radius = e.accuracy / 2;
-		  
+      
                   L.marker(e.latlng).addTo(map)
                   .bindPopup("You are within " + radius + " meters from this point").openPopup();
 
@@ -533,7 +533,7 @@ xmlhttp.send();
                   }).addTo(map);
                 }
 
-		//if the location can't retrieve it will be centerd on this point
+    //if the location can't retrieve it will be centerd on this point
                 function onLocationError(e) {
                   map.setView([51.96935, 7.59588], 13);
                   alert(e.message);
@@ -561,7 +561,7 @@ xmlhttp.send();
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
-		//load and display tile layers on the map
+    //load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -583,7 +583,7 @@ xmlhttp.send();
                   }).addTo(map1);
                 }
 
-		//shows the location of the device
+    //shows the location of the device
                 function onLocationError1(e) {
                   alert(e.message);
                 }
@@ -620,23 +620,23 @@ xmlhttp.send();
       <a href="/faq"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
-	<!--joyride: Tour to get a first impression of this site-->
+  <!--joyride: Tour to get a first impression of this site-->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="tip_location: top; prev_button: false">
         <p>At first you have to validate your URL. When this process was successfull you can create your Comment. On the right site you will see the Geo-Dataset from your URL.</p>
       </li>
-	  <li data-id="numero2" data-text="Next" data-prev-text="Prev" data-options="tip_location:top; prev_button:false">
-		<p>Here you are able to write a title of your comment</p>
-	  </li>
-	  <li data-id="numero3" data-text="Next" data-prev-text="Prev" data-options="tip_location:top; prev_button:false">
-		<p>Here you can define a Bounding Box in the map of the right site</p>
-	  </li>
-	  <li data-id="numero4" data-text="Next" data-prev-text="Prev" data-options="tip_location:top; prev_button:false">
-		<p>Save yout comment and attain automatically to the "CommenTerra | Home" site</p>
-	  </li>
-	  <li data-id="numero5" data-text="End" data-prev-text="Prev" data-options="tip_location: top">
-	    <p>Here you can see the Response from your URL</p>
-	  </li>
+    <li data-id="numero2" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Here you are able to write a title of your comment</p>
+    </li>
+    <li data-id="numero3" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Here you can define a Bounding Box in the map of the right site</p>
+    </li>
+    <li data-id="numero4" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Save yout comment and see it on the "CommenTerra | Home" site</p>
+    </li>
+    <li data-id="numero5" data-text="End" data-prev-text="Prev" data-options="tip_location: top">
+      <p>Here you can see the Response from your URL</p>
+    </li>
     </ol>
 
     <script>
