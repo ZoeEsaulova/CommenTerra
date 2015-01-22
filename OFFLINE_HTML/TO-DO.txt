@@ -1,6 +1,3 @@
-----------
-test
-----------
 - Server aktualisieren + Beispieldaten
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
@@ -16,31 +13,23 @@ ____________________________
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!   
 ____________________________
-- Startrating
 - Commentar bewerten (daumen hoch/runter)
-- Logout confirmation modal: Funktionalität
+- Logout confirmation modal: Funktionalität <----- mit modal funktioniert log-in/out nicht!!!
 - GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
-- wie lässt sich JR ausstellen?
+- wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und  nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation
-- Zeitliche Ausdehnung anzeigen
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
 - new_comment: Im Titel wird automatisch eine Komma gesetzt ?
-- der standart error muss weg
-- datepicker umbenennen
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || möglich? da wir kreis haben.
 - am anfang keine commentare anzeigen
 - overflow muss auf autogestellt werden, damit nicht alle kommentare angezeigt werden + scrollbar
 - Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
-
-faq:
-
-23. FA030213 Verweise auf Lizenzen der Web-Applikation, den Quellcode, eine Liste der genutzten Bibliotheken und die Adresse der öffentlichen Datenschnittstelle.
 
 _______________________________________________________________
 kann auch später erledigt werden, nachrangig!
@@ -53,12 +42,6 @@ _______________________________________________________________
 faq:
 - anker ändern
 
-about:
-- text ans logo dran mit blockgrid-3
-- lizenzen und rechte ganz rechts
-- unterscheidung für small/medium/large
- - erst logo weg, aber immer lizenzen+abouttext anzeigen
- 
  profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
 
