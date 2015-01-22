@@ -197,7 +197,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
         <!--right nav section--> 
         <ul id="numero1" class="right">
           <li class="has-form">
-            <form action="/api/v1" method="post" data-abide>
+            <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
 		  <!--seperate this area in 9 areas-->
                   <div class="small-9 columns ">
@@ -275,6 +275,19 @@ jQuery.get( "/comments/" + testurl, function( data ) {
         <form action="/comments" method="get">
 			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
 			  <!--will be shown on on small and medium screens-->
+          <div class="row">
+    <div class="large-12 columns">
+      <label><font color="white" size="4">Select the data format:</font>
+        <select type="text" name="select">
+          <option value="wms">WMS</option>
+          <option value="wfs">WFS</option>
+          <option value="kml">KML</option>
+          <option value="gml">GML</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <br>
 			  <strong class="show-for-large-up">
 				<button class="tiny radius expand" id="validateurl" type="submit">
 				  <font color="#424242">Validate URL</font>

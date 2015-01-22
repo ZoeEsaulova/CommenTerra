@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 var userSchema = mongoose.Schema({
 
     local            : {
-    	username : String,
+    	username : { type: String, unique: true },
         email        : { 
 			type: String,
 			unique: true,

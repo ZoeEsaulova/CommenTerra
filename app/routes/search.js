@@ -11,7 +11,7 @@ router.get('/searchapi', function(req, res) {
 		var split = req.query.q.split(' ')
 
 		// one of the words search
-		var query = Comment.find({ comment: undefined }).populate('user')
+		var query = Comment.find({ comment: undefined })
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
 				query = query.where( { $or:[{ title: regexX }, { text: regexX } ]  })					

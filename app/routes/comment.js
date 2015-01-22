@@ -14,17 +14,22 @@ var express = require('express'),
 
 /* WMS PARSER 
 *  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
+*  wfs example: http://map1.naturschutz.rlp.de/service_lanis
 */
 router.get('/', function(req,res) {
+	
+	
+	var format = req.query.select
+	console.log(format)
  	var url = ""
 
  	// check the url format, append an GetCapability request if necessary
 	if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS"
+		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS"
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
 	}
 
 	// send an GetCapabilities request 
@@ -34,6 +39,7 @@ router.get('/', function(req,res) {
     	//, gzip: true
     	}
   	, function (error, response, body) {
+  		console.log(body)
   		if (body) {
 
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
@@ -44,12 +50,18 @@ router.get('/', function(req,res) {
 			  //findAttr(result)
 			  //showAttr(resp)
 			  //console.log("getownPropertyNames: " + Object.getOwnPropertyNames ( result ))
-			  console.log(result.WMT_MS_Capabilities.Service)
+			  
+
+
+			  /*console.log(result.WMT_MS_Capabilities.Service)
 			  resp = result.WMT_MS_Capabilities.Service  	
 			  
 			  if (!(result.WMT_MS_Capabilities==undefined))  {
 			  	resptext = JSON.stringify(resp)
-			  } 
+			  } */
+			  resptext = JSON.stringify(result)
+			  console.log(result)
+
   		  })
   		} 
 	  	resp = {}
