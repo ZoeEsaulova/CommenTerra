@@ -18,38 +18,44 @@
 
     <link rel="stylesheet" href="css/labs.css" />
     <link rel="stylesheet" href="css/jquery.raty.css" />
+    <script src="js/jquery.raty2.js"></script>
+    <script src="js/labs.js"></script>
 
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
-    <script src="js/jquery.raty.js"></script>
-    <script src="js/jquery.raty2.js"></script>
-    <script src="js/labs.js"></script>  
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
-    <link rel="stylesheet" href="/resources/demos/style.css">  
+
+    <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> 
+
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+
     <!--script>
-jQuery(document).ready(function(){
-jQuery("#testUrl").click(function(){
-//var testurl = jQuery("#firstStop").val();
-var testurl = "test";
-jQuery.get( "/comments/" + testurl, function( data ) {
-  jQuery( "#response" ).html( data );
-  alert( "Load was performed." + data);
-});
-/*
-   jQuery.ajax({
-            url: "http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",
-            type: 'GET',
-            success: function(res) {
-                console.log(res);
-                jQuery( "#response" ).html(res);
-            };
-            error: function(jqXHR, textStatus, err){
-               alert('text status '+textStatus+', err '+err)
-           }
-        });*/
-});
-});
-</script-->
+    jQuery(document).ready(function(){
+    jQuery("#testUrl").click(function(){
+    //var testurl = jQuery("#firstStop").val();
+    var testurl = "test";
+    jQuery.get( "/comments/" + testurl, function( data ) {
+      jQuery( "#response" ).html( data );
+      alert( "Load was performed." + data);
+    });
+    /*
+       jQuery.ajax({
+                url: "http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    jQuery( "#response" ).html(res);
+                };
+                error: function(jqXHR, textStatus, err){
+                   alert('text status '+textStatus+', err '+err)
+               }
+            });*/
+    });
+    });
+    </script-->
+
+
     <!-- style for rate function and stars -->
     <style>
       .functions .demo {
@@ -199,22 +205,22 @@ jQuery.get( "/comments/" + testurl, function( data ) {
           <li class="has-form">
             <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
-      <!--seperate this area in 9 areas-->
+                  <!--seperate this area in 9 areas-->
                   <div class="small-9 columns ">
                       <div class "search-field">
-      <!--search for keyword field with an autocomplete function-->
+                         <!--search for keyword field with an autocomplete function-->
                         <label> <input type="text" id="tags" placeholder="search for keyword" name="q"> </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
-      <!--override the count that adds up to 12 columns-->
+                  <!--override the count that adds up to 12 columns-->
                   <div class="small-3 columns end">
                     <button class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
           </li>
-    <!--Log-In modal-->
+          <!--Log-In modal-->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
@@ -226,7 +232,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
-    <!--exception: invalid e-mail-->
+                <!--exception: invalid e-mail-->
                 <small class="error">Please type in a valid e-mail-address!</small>
               </div>
               <div class="password-field">
@@ -234,7 +240,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
                   <small>required</small>
                   <input type="password" id="password" placeholder="P4s$w0rd!" name="password" required> 
                 </label>
-    <!--exception: no password-->
+                <!--exception: no password-->
                 <small class="error">Please type in your password!</small>
               </div>
               <button class="radius" type="submit">Log In</button>
@@ -242,7 +248,7 @@ jQuery.get( "/comments/" + testurl, function( data ) {
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-      <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
+          <!--Site Navigation with links to "New Comment", "Advanced Search" and "Help / FAQ"-->
           <li class="has-dropdown"> 
             <a href="#">Site Navigation</a> 
             <ul class="dropdown"> 
@@ -265,86 +271,94 @@ jQuery.get( "/comments/" + testurl, function( data ) {
     </div>
 
     <!--dark grey area-->
-
     <div class="panel custom">
-    <!--segmenting this area in two areas-->
-    
-    <ul class="small-block-grid-2" data-equalizer>
+
+    <!-- LARGE-UP
+           use this to show the page when there is a larger display -->
+    <strong class="show-for-large-up">
+      <ul class="small-block-grid-2" data-equalizer>
+        <li>
+          <font color="white" size="4">URL:</font>
+          <form action="/comments" method="get">
+
+
+  			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
+              <label><font color="white" size="4">Select the data format:</font>
+                <select style="width: 100%" type="text" name="select">
+                  <option value="wms">WMS</option>
+                  <option value="wfs">WFS</option>
+                  <option value="kml">KML</option>
+                  <option value="gml">GML</option>
+                </select>
+              </label>
+          <button class="tiny radius expand" id="validateurl" type="submit">
+            <font color="#424242">Validate URL</font>
+          </button>
+        </form>
+
+      <!--script>
+      function loadXMLDoc()
+      {
+      var xmlhttp;
+      if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+        }
+      else
+        {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+      xmlhttp.onreadystatechange=function()
+        {
+          document.getElementById("response").innerHTML=xmlhttp.responseText;   
+      }
+      xmlhttp.open("GET","http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",true);
+      xmlhttp.send();
+      }
+      </script-->
+
+      </li>
       <li>
-        <font color="white" size="4">URL:</font>
-        <form action="/comments" method="get">
-<<<<<<< HEAD
-			  <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
-			  <!--will be shown on on small and medium screens-->
-          <div class="row">
-    <div class="large-12 columns">
-      <label><font color="white" size="4">Select the data format:</font>
-        <select type="text" name="select">
+        <!--shows the response of the URL-->
+        <font id="numero5" color="white" size="4">Response:</font>
+        <textarea id="response" disabled="disabled" rows="8"><%= XMLresponse %></textarea>
+      </li>
+    </ul>
+    </strong>
+
+    <!-- SMALL-UP
+         use this to show the page on smaller displays
+         for example on mobilephones -->
+    <strong class="hide-for-large-up">
+      <font color="white" size="4">URL:</font>
+      <form action="/comments" method="get">
+      <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
+        <label><font color="white" size="4">Select the data format:</font>
+        <select style="width: 100%" type="text" name="select">
           <option value="wms">WMS</option>
           <option value="wfs">WFS</option>
           <option value="kml">KML</option>
           <option value="gml">GML</option>
         </select>
-      </label>
-    </div>
-  </div>
-  <br>
-			  <strong class="show-for-large-up">
-				<button class="tiny radius expand" id="validateurl" type="submit">
-				  <font color="#424242">Validate URL</font>
-				</button>
-=======
-        <input type="text" name="url" id="firstStop" placeholder="URL..." value="<%= urlValue %>" />
-        <!--will be shown on on small and medium screens-->
-        <strong class="show-for-large-up">
-        <button class="tiny radius expand" id="validateurl" type="submit">
-          <font color="#424242">Validate URL</font>
-        </button>
->>>>>>> 831d597c4a22e02811f1f1aa27aedc2f710ace38
+        </label>
+      <p></p>
       </form>
-        </strong>
-
-<!--script>
-function loadXMLDoc()
-{
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-    document.getElementById("response").innerHTML=xmlhttp.responseText;   
-}
-xmlhttp.open("GET","http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",true);
-xmlhttp.send();
-}
-</script-->
-
-
-
-        <!--will be shown on large screens-->
-        <strong class="hide-for-large-up">
-        <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
-          <font color="#424242">Validate URL</font>
-        </button>
-        </strong>
-      </li>
-      <li>
-        <!--shows the response of the URL-->
-        <font id="numero5" color="white" size="4">Response:</font>
-        <textarea id="response" disabled="disabled" rows="4"><%= XMLresponse %></textarea>
+      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+      <font color="#424242">Validate URL</font>
+      </button>
+      <!--shows the response of the URL-->
+      <font id="numero5" color="white" size="4">Response:</font>
+      <textarea id="response" disabled="disabled" rows="7"><%= XMLresponse %></textarea>
       </li>
     </ul>
     </div>
+    </strong>
+  </div>
+
 
     <!--light grey area-->
     <div class="panel custom2">
-  <!--will be shown on large screens-->
+    <!--will be shown on large screens-->
       <strong class="show-for-large-up">
             
     <!--segmenting this area in two areas-->
@@ -363,7 +377,7 @@ xmlhttp.send();
                     <div class="panel custom2">
                       <div id="panel1b" class="content">
                         <font color="#424242" size="4">URL:<p></p>
-                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" />                 
+                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" disabled/>                 
                         </font>
                         <p></p>
                         <!--segmenting this area in two areas-->
@@ -377,11 +391,11 @@ xmlhttp.send();
                             <font color="#424242" size="4">Datepicker (optional):</font><br>
                             <!-- data binding for the starting date -->
                             <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
-                              <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
+                              <input type="text" id="datepicker3" placeholder="Start Date" name="startdate">
                             </div>
                             <!-- data binding for the ending date -->
                             <div data-abide>
-                              <input type="text" id="datepicker2" placeholder="End Date" name="enddate" pattern="month_day_year">
+                              <input type="text" id="datepicker4" placeholder="End Date" name="enddate" pattern="month_day_year">
                             </div>
                           </li>
                         </ul>
@@ -446,11 +460,11 @@ xmlhttp.send();
         <div class="panel custom">
           <!--two taps for Create a Comment and the Map-->
           <dl class="tabs" data-tab>
-            <dd class="content active"><a href="#panel1">Create a Comment</a></dd>
-            <dd class="content inactive"><a href="#panel2">View Map</a></dd>
+            <dd class="content"><a href="#panel1">Create a Comment</a></dd>
+            <dd class="content active"><a href="#panel2">View Map</a></dd>
           </dl>
           <div class="tabs-content">
-            <div class="content active" id="panel1">
+            <div class="content" id="panel1">
               <!--Comment-->
               <dl class="accordion" data-accordion>
                 <dd class="accordion-navigation">
@@ -462,23 +476,21 @@ xmlhttp.send();
                   <div class="panel custom2">
                     <div id="panel1b" class="content">
                       <font color="#424242" size="4">URL:<p></p>
-                        <p id="urlResult">Your URL will be shown here after you validate it!</p>
+                        <input id="urlResult" type="text" name="url" value="<%= urlResult %>" disabled/>
                       </font>
                       <p></p>
                       <!--segmenting this area in two areas-->
                       <font color="#424242" size="4">Rating (optional):</font><br>
                       <!--five star rating-->
-                      <div id="rating"></div>
+                      <div id="rating2"></div>
                       <font color="#424242" size="4">Datepicker (optional):</font><br>
                       <!-- data binding for the starting date -->
                       <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
                         <input type="text" id="datepicker1" placeholder="Start Date" name="date">
-                        <small class="error">The date must be in the format: MM/DD/YYYY</small>
                       </div>
                       <!-- data binding for the ending date -->
                       <form data-abide>
                         <input type="text" id="datepicker2" aceholder="End Date" name="date" pattern="month_day_year">
-                        <small class="error">The date must be in the format: MM/DD/YYYY</small>
                       </form>
                       <p></p>
                       <font color="#424242" size="4">Comment:</font>
@@ -510,7 +522,7 @@ xmlhttp.send();
                 //Map for small screens
                 var map = L.map('map');
     
-    //load and display tile layers on the map
+                //load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -519,7 +531,7 @@ xmlhttp.send();
                   id: 'examples.map-i875mjb7'
                 }).addTo(map);
 
-    //shows the location of the device
+                //shows the location of the device
                 function onLocationFound(e) {
                   var radius = e.accuracy / 2;
       
@@ -533,7 +545,7 @@ xmlhttp.send();
                   }).addTo(map);
                 }
 
-    //if the location can't retrieve it will be centerd on this point
+                //if the location can't retrieve it will be centerd on this point
                 function onLocationError(e) {
                   map.setView([51.96935, 7.59588], 13);
                   alert(e.message);
@@ -561,7 +573,7 @@ xmlhttp.send();
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
-    //load and display tile layers on the map
+                //load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
                   maxZoom: 20,
                   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -583,7 +595,7 @@ xmlhttp.send();
                   }).addTo(map1);
                 }
 
-    //shows the location of the device
+                //shows the location of the device
                 function onLocationError1(e) {
                   alert(e.message);
                 }
@@ -603,8 +615,8 @@ xmlhttp.send();
                 map1.on('click', onMapClick1);
 
               }
-
            </script>
+
         </div>
       </strong>      
     </div>
@@ -620,7 +632,7 @@ xmlhttp.send();
       <a href="/faq"><font color="#424242">FAQ / Help</font></a> ||
     </div>
 
-  <!--joyride: Tour to get a first impression of this site-->
+    <!--joyride: Tour to get a first impression of this site-->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="tip_location: top; prev_button: false">
         <p>At first you have to validate your URL. When this process was successfull you can create your Comment. On the right site you will see the Geo-Dataset from your URL.</p>
@@ -641,15 +653,23 @@ xmlhttp.send();
 
     <script>
       $(document).ready(function(){
-        $("#rating").raty();
+        $("#rating").raty({
+          path: 'img',
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#rating2").raty({
+          path: 'img',
+        });
       });
     </script>
     <script>
       $(document).foundation();
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }
-      
+      }      
     </script>
     <script>
       $(document).foundation();
@@ -662,6 +682,16 @@ xmlhttp.send();
     <script>
       jQuery(function() {
         jQuery( "#datepicker2" ).datepicker();
+      });
+    </script>
+        <script>
+      jQuery(function() {
+        jQuery( "#datepicker3" ).datepicker();
+      });
+    </script>
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker4" ).datepicker();
       });
     </script>
     <script type="text/javascript">
