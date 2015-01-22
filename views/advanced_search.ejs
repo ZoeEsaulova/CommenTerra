@@ -153,15 +153,15 @@
        to get you everywhere -->
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
-  		<ul class="title-area"> 
+      <ul class="title-area"> 
         <li class="name"> 
           <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
-  			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
-  			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
-  		</ul>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
+      </ul>
       <section class="top-bar-section"> 
-  			<!-- Right Nav Section --> 
+        <!-- Right Nav Section --> 
         <ul id="numero1" class="right">
           <li class="has-form">
             <form action="/api/v1" method="post" data-abide>
@@ -181,7 +181,7 @@
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
-  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
@@ -206,9 +206,9 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-  				<li class="has-dropdown"> 
-  					<a href="#">Site Navigation</a> 
-  					<ul class="dropdown"> 
+          <li class="has-dropdown"> 
+            <a href="#">Site Navigation</a> 
+            <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
               <!-- only for logged in users -->
@@ -216,11 +216,11 @@
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
               <li><a href="/faq">Help / FAQ</a></li> 
-  					</ul> 
-  				</li> 
-  			</ul> 
-  		</section>
-  	</nav>
+            </ul> 
+          </li> 
+        </ul> 
+      </section>
+    </nav>
     </div>
 
 
@@ -262,7 +262,7 @@
                 <!-- coordinates for searching on a specific point -->
                 <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
 
-                <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit">Search</button>
+                <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
                 
               </li>
 
@@ -277,7 +277,7 @@
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
                      on the map the boundingbox circle appears. -->
-                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
+                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Set Areal</font></button>
                   <div id="boundingBoxModal" class="reveal-modal" data-reveal>
                     <h2>Set Areal</h2>
                     <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
@@ -290,7 +290,7 @@
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
-                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save this Search</font></button>
                 <div id="permalinkModal" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
