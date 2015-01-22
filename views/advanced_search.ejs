@@ -267,7 +267,7 @@
                 <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
 
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
-                
+                <button id="bb">BoundingBox</button>
               </li>
 
               <li>
@@ -715,6 +715,23 @@
 
                 map1.on('click', onMapClick1);
 
+/*
+var polygonDrawer = new L.Draw.Polyline();
+
+// Assumming you have a Leaflet map accessible
+map1.on('draw:created', function (e) {
+    var type = e.layerType,
+        layer = e.layer;
+
+    // Do whatever you want with the layer.
+    // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
+    // E.g. add it to the map
+    layer.addTo(map1);
+});
+
+$('#bb').click(function() {
+    polygonDrawer.enable();
+});*/
               }
 
               </script>

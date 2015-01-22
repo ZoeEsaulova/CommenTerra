@@ -35,7 +35,6 @@ router.get('/simplesearch', function(req, res) {
 		    	//, gzip: true
 		    	}
 		  	, function (error, response, body) {
-		  		console.log(body)
 		  		var metamaps = []
 		  		var json = JSON.parse(body)
 		  		metamaps = json.comments

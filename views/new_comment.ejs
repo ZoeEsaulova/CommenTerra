@@ -291,10 +291,14 @@
                   <option value="gml">GML</option>
                 </select>
               </label>
+              <br>
           <button class="tiny radius expand" id="validateurl" type="submit">
             <font color="#424242">Validate URL</font>
           </button>
         </form>
+        <br>
+        <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
+        <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)">Show Bounding Box</button>
 
       <!--script>
       function loadXMLDoc()
@@ -613,6 +617,19 @@
                 }
 
                 map1.on('click', onMapClick1);
+                // define rectangle geographical bounds
+
+function showBoundingBox(xmin, ymin, xmax, ymax) {
+  console.log("SHOW BOUNDING BOX")
+  //var bounds = [[54.559322, -5.767822], [56.1210604, -3.021240]];
+var bounds = [[xmin, ymin], [xmax, ymax]];
+// create an orange rectangle
+L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
+
+// zoom the map to the rectangle bounds
+map1.fitBounds(bounds);
+}
+
 
               }
            </script>
@@ -699,5 +716,11 @@
         document.new_comment_form.submit();
       });
     </script>  
+    <!--script>
+jQuery("#validateurl3").click(function() {
+  showBoundingBox();
+}
+
+</script-->
   </body>
 </html>

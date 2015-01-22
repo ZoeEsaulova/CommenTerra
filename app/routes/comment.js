@@ -10,19 +10,16 @@ var express = require('express'),
  	request = require('request'),
  	xml2js = require('xml2js'),
 	resp = {},
-	resptext = "No properties found. Check the format of your url";
+	resptext = "No properties found. Check the format of your url",
+	coords = {};
 
 /* WMS PARSER 
 *  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
-*  wfs example: http://map1.naturschutz.rlp.de/service_lanis
+*  wfs example: 
 */
 router.get('/', function(req,res) {
-	
-	
-	var format = req.query.select
-	console.log(format)
  	var url = ""
-
+ 	var format = req.query.select
  	// check the url format, append an GetCapability request if necessary
 	if (req.query.url.indexOf("?")==(-1)) {
 		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
@@ -39,7 +36,7 @@ router.get('/', function(req,res) {
     	//, gzip: true
     	}
   	, function (error, response, body) {
-  		console.log(body)
+  		//console.log(body)
   		if (body) {
 
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
@@ -47,7 +44,9 @@ router.get('/', function(req,res) {
 		  parser.parseString(body, function(err,result) {
 			  console.log("RESULTS:_________________________")
 			  //traverse(result)
-			  //findAttr(result)
+			  findAttr(result)
+			  console.log("resp" + resp.LatLonBoundingBox.$)
+			  coords = resp.LatLonBoundingBox.$
 			  //showAttr(resp)
 			  //console.log("getownPropertyNames: " + Object.getOwnPropertyNames ( result ))
 			  
@@ -60,7 +59,7 @@ router.get('/', function(req,res) {
 			  	resptext = JSON.stringify(resp)
 			  } */
 			  resptext = JSON.stringify(result)
-			  console.log(result)
+
 
   		  })
   		} 
@@ -70,6 +69,7 @@ router.get('/', function(req,res) {
 	    	boolean1: true, 
 	    	username: req.user.local.username,
 	    	userId:  req.user.local.username,
+	    	coords: coords,
 	    	action: "/logout", 
 	    	actionName: "Logout", 
 		message: req.flash('loginMessage'), 
@@ -84,6 +84,7 @@ router.get('/', function(req,res) {
 	    		username: 'Anonymous', 
 	    		action: "#", 
 	    		actionName: "Login", 
+	    		coords: coords,
 			message: req.flash('loginMessage'), 
 			urlValue: "", 
 			addAction: "/comments/add", 
@@ -403,10 +404,17 @@ router.delete('/:commentId', function(req,res) {
 function findAttr(o ) {
 	
     for (i in o) {
-        if (typeof(o[i])=="object") {          
+        if (typeof(o[i])=="object") { 
+                if (i=="LatLonBoundingBox") {         
+            	if (resp.keywords==undefined) {
+            		resp["LatLonBoundingBox"] = o[i]
+            	console.log("FOUND!:   " + i, o[i])   
+            	return      	
+            }
+        }          
             findAttr(o[i] );
         }
-        if ((i=="Title") && (typeof(o[i])=="string")) {
+        /*if ((i=="Title") && (typeof(o[i])=="string")) {
         	//console.log(i, o[i])          
             	if (resp.title==undefined) {
             		resp["Title"] = o[i]
@@ -419,13 +427,8 @@ function findAttr(o ) {
             		resp["Abstract"] = o[i]
             	//console.log("FOUND!:   " + i, o[i])         	
             }
-        }
-        if (i=="ContactInformation") {         
-            	if (resp.keywords==undefined) {
-            		resp["ContactInformation"] = o[i]
-            	//console.log("FOUND!:   " + i, o[i])         	
-            }
-        }                 
+        } */
+                
     }
 }
 
