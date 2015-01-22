@@ -14,6 +14,11 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
 
+    <link rel="stylesheet" href="css/labs.css" />
+    <link rel="stylesheet" href="css/jquery.raty.css" />
+    <script src="js/jquery.raty.js"></script>
+    <script src="js/labs.js"></script>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
     <link rel="stylesheet" href="/resources/demos/style.css">
 
@@ -364,14 +369,14 @@
           <!-- data-tabs for the two views in the lower area -->
           <dl class="tabs" data-tab>
             <!-- first tab -->
-            <dd><a class="content active" href="#panel1">View Comments</a></dd>
+            <dd><a class="content" href="#panel1">View Comments</a></dd>
             <!-- second tab -->
-            <dd><a href="#panel2">View Map</a></dd>
+            <dd><a class="content active" href="#panel2">View Map</a></dd>
           </dl>
 
           <div class="tabs-content">
 
-            <div class="content active" id="panel1">
+            <div class="content" id="panel1">
               <!-- comments 
                    ordered in an data-accordion -->
               <dl id="numero6" class="accordion" data-accordion>
@@ -440,7 +445,7 @@
               </dl>
             </div>
 
-            <div class="content" id="panel2">
+            <div class="content active" id="panel2">
               <!-- map -->
               <div class="map" id="map" style="width: 100%; height: 750px"></div>
  
@@ -749,19 +754,19 @@
 
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
-    <script src="js/jquery.raty.js"></script>
-    <script src="js/labs.js"></script>
     <script>
-     $(document).ready(function()
-     {
-     $("#rating").raty();
-     });
+      $(document).ready(function(){
+        $("#rating").raty({
+          path: 'img',
+        });
+      });
     </script>
     <script>
-     $(document).ready(function()
-     {
-     $("#rating1").raty();
-     });
+      $(document).ready(function(){
+        $("#rating2").raty({
+          path: 'img',
+        });
+      });
     </script>
     <script>
       $(document).foundation();
