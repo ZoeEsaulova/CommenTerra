@@ -615,15 +615,15 @@
                 map1.on('click', onMapClick1);
                 // define rectangle geographical bounds
 
-function showBoundingBox(xmin, ymin, xmax, ymax) {
+                function showBoundingBox(xmin, ymin, xmax, ymax) {
 
-var bounds = [[xmin, ymin], [xmax, ymax]];
-// create an orange rectangle
-L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
+                var bounds = [[xmin, ymin], [xmax, ymax]];
+                // create an orange rectangle
+                L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
 
-// zoom the map to the rectangle bounds
-map1.fitBounds(bounds);
-}
+                // zoom the map to the rectangle bounds
+                map1.fitBounds(bounds);
+                }
 
 
 

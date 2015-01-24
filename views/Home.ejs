@@ -17,7 +17,8 @@
     <!--script src="js/angular.js"></script-->
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/jquery-1.11.2.js"></script>
-    <script src="js/vendor/jquery-ui.js"></script>  
+    <script src="js/vendor/jquery-ui.js"></script> 
+  
 
 <!-- style for rate function and stars -->
           <style>.functions .demo {
@@ -454,9 +455,10 @@
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="numero6" href="#panel<%= i %>c"><%= comments[i].title %></a>
+                <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
 
-                <div id="panel<%= i %>c" class="content">
+                <div id="panel<%= i %>c" class="content" 
+                  >
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
@@ -636,7 +638,12 @@
 
               if (matchMedia('only screen and (min-width: 64.063em)').matches) {
                 //Karte für mittlere Bildschirme
-                var map1 = L.map('map1');
+                var map1 = L.map('map1', {drawControl: true} );
+
+                // draw plugin
+
+                 
+
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -693,7 +700,8 @@
                 map1.on('click', onMapClick1);
 
                 function loadMarker(x, y) {
-                  L.marker([ x, y ]).addTo(map1);
+                  console.log("xy " + x + " " + y)
+                  L.marker([ x, y ]).openPopup();
                 }
 
                 function showMarkers(planes) {

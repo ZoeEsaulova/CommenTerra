@@ -15,8 +15,7 @@ var _ = require('underscore');
 			var markers = ""
 				for (var i=0; i<comments.length; i++) {
 					if (comments[i].markerCoords[0]) {
-						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
-						
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 						
 					}
 				}
 			
