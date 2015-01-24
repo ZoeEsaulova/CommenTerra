@@ -29,7 +29,6 @@ zu kommentieren)
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || Macht es Sinn nach einem bestimmten Punkt zu suchen? 
 - am anfang keine commentare anzeigen
-- overflow muss auf autogestellt werden, damit nicht alle kommentare angezeigt werden + scrollbar
 - Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
 - Bounding Box- Suche
 
