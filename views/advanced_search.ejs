@@ -694,7 +694,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
-                map1.locate({setView: true, maxZoom: 16});
+                map1.locate({setView: false, maxZoom: 16});
                 
                 L.marker([51.96935, 7.59588]).addTo(map1)
                   .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
@@ -719,14 +719,34 @@
                 
                 function showMarkers(planes) {
 
-                    planes = planes.split(",");
+                                      planes = planes.split(",");
+                    var minx = 51.927967;
+                    var miny = 7.576890;
+                    var maxx = 52.002744;
+                    var maxy = 7.669931;
                     console.log(planes[0] + " " + planes[1])
-                                   for (var i = 0; i < planes.length - 1; i=i+3) {
-                                    console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
-                                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
-                                      .bindPopup(planes[i+2])
+                    for (var i = 0; i < planes.length - 1; i=i+3) {
+                      if (Number(planes[i]) < miny) {
+                        miny = Number(planes[i])
+                      } else if (Number(planes[i]) > maxy) {
+                        maxy = Number(planes[i])
+                      }
+                       if (Number(planes[i+1]) < minx) {
+                        minx = Number(planes[i+1])
+                      } else if (Number(planes[i+1]) > maxx) {
+                        maxx = Number(planes[i+1])
+                      }
+                      console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
+                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                      .bindPopup(planes[i+2])
                       .addTo(map1);
                     }
+                    //map1.setView([51.96935, 7.59588], 7); ,    , 
+
+                    map1.fitBounds([
+                      [minx-0.5, miny-0.5],
+                      [maxx+0.5, maxy+0.5]
+                  ]);
                 }
 
                 map1.on('click', onMapClick1);
