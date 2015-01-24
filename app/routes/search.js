@@ -51,7 +51,7 @@ router.get('/simplesearch', function(req, res) {
 		if ( split2[0]==='"' ) {
 			var q2 = req.query.q.slice(1,split2.length-2),
 			    regex2 = new RegExp(q2, 'i');
-			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}]}]  }).
+			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}, {url: regex2}]}]  }).
 			    populate('user').populate('dataset').populate('comments')
 
 			 if (req.query.startdate && req.query.enddate) {
@@ -78,7 +78,7 @@ router.get('/simplesearch', function(req, res) {
 			}
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
-				query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
+				query = query.where( { $or:[{ title: regexX }, {text: regexX}, {url: regexX}]  })					
 			}
 			for (var key in req.query) {	
 				if (key!="startdate" && key!="enddate" && key!="count" && key!="q" && req.query[key]) {
@@ -161,7 +161,7 @@ router.get('/search', function(req,res) {
 		if ( split2[0]==='"' ) {
 			var q2 = req.query.q.slice(1,split2.length-2),
 			    regex2 = new RegExp(q2, 'i');
-			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}]}]  }).
+			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}, {url: regex2}]}]  }).
 			    populate('user').populate('dataset').populate('comments')
 
 			 if (req.query.startdate && req.query.enddate) {
@@ -188,7 +188,7 @@ router.get('/search', function(req,res) {
 			}
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
-				query = query.where( { $or:[{ title: regexX }, {text: regexX}]  })					
+				query = query.where( { $or:[{ title: regexX }, {text: regexX}, {url: regexX}]  })					
 			}
 			for (var key in req.query) {	
 				if (key!="startdate" && key!="enddate" && key!="count" && key!="q" && req.query[key]) {

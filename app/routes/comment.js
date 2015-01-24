@@ -11,7 +11,7 @@ var express = require('express'),
  	xml2js = require('xml2js'),
 	resp = {},
 	resptext = "No properties found. Check the format of your url",
-	coords = {};
+	coords = { minx: "", miny: "", maxx: "", maxy: "" };
 
 /* WMS PARSER 
 *  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
@@ -23,11 +23,11 @@ router.get('/', function(req,res) {
  	var format = req.query.select
  	// check the url format, append an GetCapability request if necessary
 	if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=" + format 
+		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
 	}
 
 	// send an GetCapabilities request 
@@ -44,12 +44,20 @@ router.get('/', function(req,res) {
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
 		  var parser = new xml2js.Parser({explicitArray : false});
 		  parser.parseString(body, function(err,result) {
-		  	console.log(result)
+		  	
 			  //traverse(result)
 			  if (result) {
-			  	findAttr(result)
+			  	findAttr(result, format)
 				if (resp.LatLonBoundingBox) {
-					coords = resp.LatLonBoundingBox.$
+					coords.minx = resp.LatLonBoundingBox.$.minx
+					coords.miny = resp.LatLonBoundingBox.$.miny
+					coords.maxx = resp.LatLonBoundingBox.$.maxx
+					coords.maxy = resp.LatLonBoundingBox.$.maxy
+				} if (resp.LowerCorner) {
+					coords.minx = resp.LowerCorner.split(' ')[0]
+					coords.miny = resp.LowerCorner.split(' ')[1]
+					coords.maxx = resp.UpperCorner.split(' ')[0]
+					coords.maxy = resp.UpperCorner.split(' ')[1]
 				}
 				resptext = JSON.stringify(result)
 			  } 
@@ -391,20 +399,41 @@ router.post('/addtothread/:commentId', function(req, res) {
 });
 
 //Find coordinates for bounding box and marker
-function findAttr(o ) {
-	
-    for (i in o) {
-        if (typeof(o[i])=="object") { 
-                if (i=="LatLonBoundingBox") {         
+function findAttr(o, format) {
+	if (format=="wms") {
+		for (i in o) {
+        	if (typeof(o[i])=="object") { 
+        		if (i=="LatLonBoundingBox") {         
             	if (resp.LatLonBoundingBox==undefined) {
             		resp["LatLonBoundingBox"] = o[i]
             	console.log("FOUND!:   " + i, o[i])   
             	return      	
-            }
-        }          
-            findAttr(o[i] );
-        }               
-    }
+            	}
+        		}
+
+        	findAttr(o[i], format );
+        	}
+        }
+	} else if (format=="wfs") {
+		for (i in o) {
+		if (typeof(o[i])=="object") {
+			findAttr(o[i], format )
+		}
+		if (typeof(o[i])=="string") {
+			if (i=="ows:LowerCorner") {        
+            	if (resp.LowerCorner==undefined) {
+            		resp["LowerCorner"] = o[i]
+            		console.log("FOUND low!:   " + i, o[i])              	      	
+            	}
+        	}
+        	if (i=="ows:UpperCorner") {        
+            	if (resp.UpperCorner==undefined) {
+            		resp["UpperCorner"] = o[i]
+            		console.log("FOUND up!:   " + i, o[i])              	      	
+            	}
+        	}
+		}
+	} }
 }
 
 module.exports = router
