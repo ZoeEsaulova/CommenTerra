@@ -6,8 +6,7 @@ Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - Login von new_comment funktioniert nicht 
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen
-- KARTE: Marker auf allen Seiten, automatisches Auszoomen, Marker beim anclicken eines Kommentars hervorheben, 
-        mehrere MArker mit gleichen Coordinaten
+- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten
 
 allgemein:
 ____________________________
