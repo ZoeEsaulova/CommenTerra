@@ -259,6 +259,7 @@
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
               <li><a href="/faq">Help / FAQ</a></li> 
+              <li><a onclick="startJoyRide()">Start Tour</a></li>
             </ul> 
           </li> 
         </ul> 
@@ -678,10 +679,12 @@ map1.fitBounds(bounds);
       });
     </script>
     <script>
-      $(document).foundation();
-      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
-        $(document).foundation('joyride', 'start');
-      }      
+      function startJoyRide(){
+        $(document).foundation();
+        if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+          $(document).foundation('joyride', 'start');
+        }      
+      }    
     </script>
     <script>
       $(document).foundation();
