@@ -19,7 +19,6 @@ var _ = require('underscore');
 						
 					}
 				}
-			console.log(markers)
 			
 			if (req.isAuthenticated()) {			
 				res.render('Home.ejs', { 

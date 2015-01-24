@@ -12,6 +12,13 @@ var express = require('express'),
 		User.findOne({ 'local.username' : req.params.username }).exec(function(err, foundedUser) {
 			var query = Comment.find({ comment: undefined, user: foundedUser }).populate('user').populate('dataset').populate('comments')
 			query.exec(function(err,comments) {
+				var markers = ""
+				for (var i=0; i<comments.length; i++) {
+					if (comments[i].markerCoords[0]) {
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						
+					}
+				}
 			if (req.isAuthenticated()) {				
 				res.render('profile.ejs', { 
 				user: req.user,
@@ -21,6 +28,7 @@ var express = require('express'),
 				boolean1: true, 
 				action: "/logout", 
 				actionName: "Logout", 
+				markers: markers,
 				message: req.flash('loginMessage'), 
 				comments: comments,
 				})
@@ -30,6 +38,7 @@ var express = require('express'),
 				pageowner: foundedUser, 
 				action: "/login", 
 				actionName: "Login", 
+				markers: markers,
 				message: req.flash('loginMessage'), 
 				comments: comments,
 				 })

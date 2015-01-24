@@ -35,6 +35,8 @@ router.get('/simplesearch', function(req, res) {
 		    	//, gzip: true
 		    	}
 		  	, function (error, response, body) {
+		  		
+
 		  		console.log(body)
 		  		var metamaps = []
 		  		var json = JSON.parse(body)
@@ -94,6 +96,13 @@ router.get('/simplesearch', function(req, res) {
 	
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
+		var markers = ""
+				for (var i=0; i<comments.length; i++) {
+					if (comments[i].markerCoords[0]) {
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						
+					}
+				}
 		if (req.isAuthenticated()) {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -104,6 +113,7 @@ router.get('/simplesearch', function(req, res) {
 				action: "/logout", 
 				actionName: "Logout", 
 				message: req.flash('loginMessage'),
+				markers: markers,
 				query: querystring.stringify(req.query) })
 		} else {
 			res.render('advanced_search.ejs', { 
@@ -113,6 +123,7 @@ router.get('/simplesearch', function(req, res) {
 				username: 'Anonymous', 
 				action: "#", 
 				actionName: "Login", 
+				markers: markers,
 				message: req.flash('loginMessage'),
 			    query: querystring.stringify(req.query) })
 		}
@@ -199,6 +210,14 @@ router.get('/search', function(req,res) {
 	
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
+		var markers = ""
+				for (var i=0; i<comments.length; i++) {
+					if (comments[i].markerCoords[0]) {
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						
+					}
+				}
+
 		if (req.isAuthenticated()) {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -208,6 +227,7 @@ router.get('/search', function(req,res) {
 				userId: req.user.local.username,
 				action: "/logout", 
 				actionName: "Logout", 
+				markers: markers,
 				message: req.flash('loginMessage'),
 				query: querystring.stringify(req.query) })
 		} else {
@@ -218,6 +238,7 @@ router.get('/search', function(req,res) {
 				username: 'Anonymous', 
 				action: "#", 
 				actionName: "Login", 
+				markers: markers,
 				message: req.flash('loginMessage'),
 			    query: querystring.stringify(req.query) })
 		}

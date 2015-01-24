@@ -144,7 +144,11 @@
     </script>
   </head>
 
-  <body>
+  <% if (markers) { %>
+       <body onload="showMarkers('<%= markers %>')">
+    <% } else { %>
+       <body>
+    <% }%>
   	
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
@@ -710,6 +714,17 @@
                   .setLatLng(e.latlng)
                   .setContent("You clicked the map at " + e.latlng.toString())
                   .openOn(map1);
+                }
+                function showMarkers(planes) {
+
+                    planes = planes.split(",");
+                    console.log(planes[0] + " " + planes[1])
+                                   for (var i = 0; i < planes.length - 1; i=i+3) {
+                                    console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
+                                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                                      .bindPopup(planes[i+2])
+                      .addTo(map1);
+                    }
                 }
 
                 map1.on('click', onMapClick1);
