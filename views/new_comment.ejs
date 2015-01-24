@@ -291,13 +291,19 @@
                 </select>
               </label>
               <br>
-          <button class="tiny radius expand" id="validateurl" type="submit">
-            <font color="#424242">Validate URL</font>
-          </button>
+              <ul class="large-block-grid-2">
+                <li>
+                  <button class="tiny radius expand" id="validateurl" type="submit">
+                    <font color="#424242">Validate URL</font>
+                  </button>
+                </li>
+                <li>
+                  <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
+                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
+                </li>
+              </ul>
         </form>
         <br>
-        <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
-        <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
 
       <!--script>
       function loadXMLDoc()
