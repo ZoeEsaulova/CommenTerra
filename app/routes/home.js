@@ -12,7 +12,16 @@ var _ = require('underscore');
 		
 		Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments').sort(' -date')
 		.exec(function(err,comments) {
-			if (req.isAuthenticated()) {
+			var markers = ""
+				for (var i=0; i<comments.length; i++) {
+					if (comments[i].markerCoords[0]) {
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						
+					}
+				}
+			console.log(markers)
+			
+			if (req.isAuthenticated()) {			
 				res.render('Home.ejs', { 
 					boolean1: true, 
 					username: req.user.local.username,
@@ -20,7 +29,8 @@ var _ = require('underscore');
 					action: "/logout", 
 					actionName: "Logout", 
 					message: req.flash('loginMessage'), 
-					comments: comments 
+					comments: comments,
+					markers: markers
 				})
 		} else {
 			res.render('Home.ejs', { 
@@ -29,7 +39,8 @@ var _ = require('underscore');
 				action: "#", 
 				actionName: "Login", 
 				message: req.flash('loginMessage'), 
-				comments: comments 
+				comments: comments,
+				markers: markers
 			})
 		} 
 		})	

@@ -169,7 +169,7 @@
         <!-- Right Nav Section --> 
         <ul id="numero1" class="right">
           <li class="has-form">
-            <form action="/api/v1" method="post" data-abide>
+            <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
@@ -395,7 +395,7 @@
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-green"></i></a>
                       <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
+                      
                     </li>
                     </ul>
                       <%= comments[i].text %>
@@ -411,7 +411,7 @@
                       <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                       <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                       &nbsp&nbsp&nbsp&nbsp
-                    <a href="/comments/addtothread/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>                      
+                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>                     
                     </li>
                     </ul>
                   <% if (comments[i].comments.length>0) {%>
@@ -512,7 +512,7 @@
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
-                    <a href="/comments/add/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>
+     
                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
                   </ul>

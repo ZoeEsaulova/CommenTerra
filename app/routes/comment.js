@@ -19,48 +19,40 @@ var express = require('express'),
 */
 router.get('/', function(req,res) {
  	var url = ""
+ 	resptext = "No properties found. Check the format of your url"
  	var format = req.query.select
  	// check the url format, append an GetCapability request if necessary
 	if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
+		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=" + format 
 	}
 
 	// send an GetCapabilities request 
   	request(
     	{ method: 'GET'
     	, uri: url
-    	//, gzip: true
+    	, gzip: true
     	}
   	, function (error, response, body) {
+  		
   		//console.log(body)
-  		if (body) {
+  		if (!error && body) {
 
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
 		  var parser = new xml2js.Parser({explicitArray : false});
 		  parser.parseString(body, function(err,result) {
-			  console.log("RESULTS:_________________________")
+		  	console.log(result)
 			  //traverse(result)
-			  findAttr(result)
-			  console.log("resp" + resp.LatLonBoundingBox.$)
-			  coords = resp.LatLonBoundingBox.$
-			  //showAttr(resp)
-			  //console.log("getownPropertyNames: " + Object.getOwnPropertyNames ( result ))
-			  
-
-
-			  /*console.log(result.WMT_MS_Capabilities.Service)
-			  resp = result.WMT_MS_Capabilities.Service  	
-			  
-			  if (!(result.WMT_MS_Capabilities==undefined))  {
-			  	resptext = JSON.stringify(resp)
-			  } */
-			  resptext = JSON.stringify(result)
-
-
+			  if (result) {
+			  	findAttr(result)
+				if (resp.LatLonBoundingBox) {
+					coords = resp.LatLonBoundingBox.$
+				}
+				resptext = JSON.stringify(result)
+			  } 
   		  })
   		} 
 	  	resp = {}
@@ -72,12 +64,12 @@ router.get('/', function(req,res) {
 	    	coords: coords,
 	    	action: "/logout", 
 	    	actionName: "Logout", 
-		message: req.flash('loginMessage'), 
-		urlValue: "", 
-		addAction: "/comments/add", 
-		// send response to clinet
-		XMLresponse: resptext ,
-		urlResult: req.query.url }) }
+			message: req.flash('loginMessage'), 
+			urlValue: "", 
+			addAction: "/comments/add", 
+			// send response to clinet
+			XMLresponse: resptext ,
+			urlResult: req.query.url }) }
 	   else {
 		 res.render('new_comment.ejs', { 
 	    		boolean1: false, 
@@ -85,36 +77,20 @@ router.get('/', function(req,res) {
 	    		action: "#", 
 	    		actionName: "Login", 
 	    		coords: coords,
-			message: req.flash('loginMessage'), 
-			urlValue: "", 
-			addAction: "/comments/add", 
-			// send response to clinet
-			XMLresponse: resptext ,
-			urlResult: req.query.url })	
+				message: req.flash('loginMessage'), 
+				urlValue: "", 
+				addAction: "/comments/add", 
+				// send response to clinet
+				XMLresponse: resptext ,
+				urlResult: req.query.url })	
 		}
 	})
 })
-		/*.on('data', function(data) {
-		    // decompressed data as it is received
-		    //console.log('decoded chunk: ' + data)
-		  })
-		  .on('response', function(response) {
-		    // unmodified http.IncomingMessage object
-		    response.on('data', function(data) {
-		      // compressed data as it is received
-		      //console.log('received ' + data.length + ' bytes of compressed data')
-		      //res.send(data)
-		      res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-						message: req.flash('loginMessage'), urlValue: "", addAction: "/comments/add", XMLresponse:  JSON.stringify(resp),
-						urlResult: req.query.url})
-			});
-		  }) */
-
-		//});
 
 // show the new_comment page
 router.get('/add/:url?', function(req, res) {
 		var url = ""
+
 		if (req.params.url) { 
 			readonly = true; 
 			url = req.params.url}
@@ -129,34 +105,9 @@ router.get('/add/:url?', function(req, res) {
 		}
 });
 
-// show the new_comment page to add comment to existing thread
-router.get('/addtothread/:commentUrl/:commentId', function(req, res) {
-		if (req.isAuthenticated()) {
-			res.render('new_comment.ejs', { 
-				boolean1: true, 
-				username: req.user.local.username, 
-				action: "/logout", 
-				actionName: "Logout", 
-				message: req.flash('loginMessage'), 
-				urlValue: req.params.commentUrl, 
-				readonly: true, 
-				addAction: "/comments/addtothread/"+req.params.commentId })
-		} else {
-			res.render('new_comment.ejs', { 
-				boolean1: false, 
-				username: 'Anonymous', 
-				action: "#", 
-				actionName: "Login", 
-				message: req.flash('loginMessage'), 
-				urlValue: req.params.commentUrl, 
-				readonly: true, 
-				addAction: "/comments/addtothread/"+req.params.commentId })
-		}
-		
-});
-
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
 router.post('/add', function(req, res) {
+
 	// Get form values. These rely on the "name" attributes
 	    if (req.body.startdate && req.body.enddate) {
 			var splitdate1 = req.body.startdate.split('/')
@@ -183,16 +134,38 @@ router.post('/add', function(req, res) {
 	    var newTitle = req.body.title,
 	    	newUrl = req.body.url,
 			newText = req.body.text,
-	    	newDataset = "";
+			boundingBox = [],
+			markerCoords = [],
+			newDataset = "";
 
-	if (req.isAuthenticated()) {
+			if (coords.minx) {
+				boundingBox = [ Number(coords.minx), Number(coords.miny),  Number(coords.maxx), Number(coords.maxy) ]
+				markerCoords = [ Number(coords.minx) + (Number(coords.maxx) - Number(coords.minx))/2,
+			 					Number(coords.miny) + (Number(coords.maxy) - Number(coords.miny))/2 ]
+			}			    	
+	    	coords = {}
+		
+		if (req.isAuthenticated()) {
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
 				//create new comment
-				var newComment = new Comment({ 
+				if (markerCoords.length>0) {
+					var newComment = new Comment({ 
+					title: newTitle, 
+					text: newText, 
+					user: req.user._id,
+		 			dataset: newDataset, 
+		 			authorName: req.user.local.username, 
+		 			url: newUrl,
+		 			markerCoords: markerCoords,
+		 			boundingBox: boundingBox,
+		 			startdate: startdate1,
+        			enddate: enddate1 })
+				} else {
+					var newComment = new Comment({ 
 					title: newTitle, 
 					text: newText, 
 					user: req.user._id,
@@ -201,6 +174,9 @@ router.post('/add', function(req, res) {
 		 			url: newUrl,
 		 			startdate: startdate1,
         			enddate: enddate1 })
+
+				}
+				
 				//save the comment in the database
 				newComment.save(function (err) {
 					if (err) return console.error(err)
@@ -214,13 +190,27 @@ router.post('/add', function(req, res) {
 				res.redirect('/')
 			} else {
 				//create new comment
-				var newComment = new Comment({ 
+				if (markerCoords.length>0) {
+					var newComment = new Comment({ 
 					title: newTitle, 
 					text: newText, 
 					user: req.user._id,
 				 	dataset: dataset, 
-				 	authorName: req.user.local.username, 
+				 	authorName: req.user.local.username,
+				 	markerCoords: markerCoords, 
+				 	boundingBox: boundingBox,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
+				} else {
+					var newComment = new Comment({ 
+					title: newTitle, 
+					text: newText, 
+					user: req.user._id,
+				 	dataset: dataset, 
+				 	authorName: req.user.local.username,
+				 	url: newUrl, startdate: startdate1, enddate: enddate1})
+
+				}
+				
 				//save the comment in the database
 				newComment.save(function (err) {
 					if (err) return console.error(err)
@@ -241,7 +231,21 @@ router.post('/add', function(req, res) {
 			if (!dataset) {
 				newDataset = new Dataset({ url: newUrl })
         		newDataset.save()
-        		var newComment = new Comment({ 
+
+        		if (markerCoords.length>0) {
+        			var newComment = new Comment({ 
+        			title: newTitle, 
+        			text: newText, 
+        			dataset: newDataset, 
+        			url: newUrl,
+        			startdate: startdate1,
+        			enddate: enddate1,
+        			markerCoords: markerCoords,
+        			boundingBox: boundingBox
+
+        		})
+        		} else {
+        			var newComment = new Comment({ 
         			title: newTitle, 
         			text: newText, 
         			dataset: newDataset, 
@@ -249,6 +253,8 @@ router.post('/add', function(req, res) {
         			startdate: startdate1,
         			enddate: enddate1
         		})
+        		}
+        		
 
 				newComment.save(function (err) {
 					if (err) return console.error(err)		
@@ -257,8 +263,16 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-				var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
+
+				if (markerCoords.length>0) {
+					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
+				startdate: startdate1, enddate: enddate1, markerCoords: markerCoords, boundingBox: boundingBox })
+				} else {
+					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1 })
+
+				}
+				
 				newComment.save(function (err) {
 					if (err) return console.error(err)
 				})
@@ -342,7 +356,6 @@ router.post('/addtothread/:commentId', function(req, res) {
 	    newThread = "";
 
 	    Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
-	    	console.log("Find 1")
 	    	newThread = thread
 	    	newUrl = thread.url
 	    })	    
@@ -369,7 +382,6 @@ router.post('/addtothread/:commentId', function(req, res) {
 				dataset.save()
 			}
 			Comment.findOne({ _id: req.params.commentId }).exec(function(err, thread) {
-					console.log("Find 2")
 	    			thread.comments.push(newComment)
 	    			thread.save()
 	    	})
@@ -378,76 +390,21 @@ router.post('/addtothread/:commentId', function(req, res) {
 	}
 });
 
-
-// get one comment
-router.get('/:commentId', function(req,res) {
-	Comment.find({ _id : req.params.commentId }).exec(function(err, comment) {
-	res.jsonp(comment)
-	});
-});
-
-// edit a comment
-router.put('/:commentId', function(req,res) {
-	Comment.find({ _id : req.params.commentId }).exec(function(err, comment) {
-		comment = _.extend(comment, req.body)
-		comment.save(function(err) {
-			res.jsonp(comment)
-		})	
-	});
-})
-
-// edelete a comment
-router.delete('/:commentId', function(req,res) {
-	/* NOT IMPLEMENTED YET */
-})
-
+//Find coordinates for bounding box and marker
 function findAttr(o ) {
 	
     for (i in o) {
         if (typeof(o[i])=="object") { 
                 if (i=="LatLonBoundingBox") {         
-            	if (resp.keywords==undefined) {
+            	if (resp.LatLonBoundingBox==undefined) {
             		resp["LatLonBoundingBox"] = o[i]
             	console.log("FOUND!:   " + i, o[i])   
             	return      	
             }
         }          
             findAttr(o[i] );
-        }
-        /*if ((i=="Title") && (typeof(o[i])=="string")) {
-        	//console.log(i, o[i])          
-            	if (resp.title==undefined) {
-            		resp["Title"] = o[i]
-            	//console.log("FOUND!:   " + i, o[i])         	
-            }
-        }
-        if ((i=="Abstract") && (typeof(o[i])=="string")) {
-        	//console.log(i, o[i])          
-            	if (resp.abstract==undefined) {
-            		resp["Abstract"] = o[i]
-            	//console.log("FOUND!:   " + i, o[i])         	
-            }
-        } */
-                
+        }               
     }
 }
-
-function showAttr(o ) {
-    for (i in o) {
-            console.log(i, o[i])
-    }
-}
-
-function traverse(o ) {
-    for (i in o) {
-        if (typeof(o[i])=="object") {
-            console.log(i, o[i])
-            traverse(o[i] );
-        }
-    }
-} 
-
-
-
 
 module.exports = router

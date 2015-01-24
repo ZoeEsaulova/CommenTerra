@@ -374,12 +374,13 @@
                     <a href="#panel1b">
                       <font color="#424242" size="4">Title:</font>
                       <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
+                      
                       <!-- <small class="error">You have to indicate a title!</small> -->
                     </a>
                     <div class="panel custom2">
                       <div id="panel1b" class="content">
                         <font color="#424242" size="4">URL:<p></p>
-                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" disabled/>                 
+                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" readonly/>                 
                         </font>
                         <p></p>
                         <!--segmenting this area in two areas-->
@@ -405,7 +406,7 @@
                         <font color="#424242" size="4">Comment:</font>
                         <dl class="accordion" data-accordion>
                         <dd class="accordion-navigation">
-                          <textarea style="height:185px;resize:none;" name="message" id="message" placeholder="Comment..."></textarea>
+                          <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
                         </dd>
                       </dl>
                         <!--return the logged user or the anonyme unlogged user-->
@@ -618,8 +619,7 @@
                 // define rectangle geographical bounds
 
 function showBoundingBox(xmin, ymin, xmax, ymax) {
-  console.log("SHOW BOUNDING BOX")
-  //var bounds = [[54.559322, -5.767822], [56.1210604, -3.021240]];
+
 var bounds = [[xmin, ymin], [xmax, ymax]];
 // create an orange rectangle
 L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
@@ -627,6 +627,7 @@ L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
 // zoom the map to the rectangle bounds
 map1.fitBounds(bounds);
 }
+
 
 
               }

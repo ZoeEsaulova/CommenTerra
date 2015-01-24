@@ -159,7 +159,14 @@
 
   </head>
 
-  <body data-ng-app="Comments" data-ng-controller="commentsController">
+  
+   <% if (markers) { %>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>')">
+    <% } else { %>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" >
+    <% }%>
+  
+  
     <!-- TO BE UPDATED. Login or Signup failed --> 
   	<% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -476,7 +483,7 @@
                    
                   </li>
                   </ul>
-                  <%= comments[i].text %>
+                  <%= comments[i].text %> 
                   <p>
                   <ul class="no-bullet">
                   <li>
@@ -487,11 +494,16 @@
                   <%} else {%> 
                     <font color="#2ba6cb">Anonymous</font>
                   <%} %>
+<!--
+<% if (comments[i].markerCoords) {%>
 
+  <p onload="loadMarker(<%= comments[i].markerCoords[1] %>, <%= comments[i].markerCoords[0] %>)">test</p>;
+
+<%} %>
+-->
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
-                    <a href="/comments/add/<%= comments[i].dataset.url %>"><i class="fi-comment size-21 font-success"></i></a>
                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
                   </ul>
@@ -679,6 +691,22 @@
                 }
 
                 map1.on('click', onMapClick1);
+
+                function loadMarker(x, y) {
+                  L.marker([ x, y ]).addTo(map1);
+                }
+
+                function showMarkers(planes) {
+
+                    planes = planes.split(",");
+                    console.log(planes[0] + " " + planes[1])
+                                   for (var i = 0; i < planes.length - 1; i=i+3) {
+                                    console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
+                                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                                      .bindPopup(planes[i+2])
+                      .addTo(map1);
+                    }
+                }
 
               }
 
