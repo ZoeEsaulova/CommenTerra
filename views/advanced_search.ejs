@@ -224,6 +224,8 @@
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
+              
+              <li><a onclick="startJoyRide()">Start Tour</a></li>
               <li><a href="/faq">Help / FAQ</a></li> 
             </ul> 
           </li> 
@@ -278,7 +280,7 @@
                 <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
                   <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
                 </div>
-   
+
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
@@ -292,7 +294,7 @@
                     <a class="close-reveal-modal">&#215;</a>
                   </div>
                 </form>
-            
+              
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
@@ -379,7 +381,7 @@
 
           <div class="tabs-content">
 
-            <div class="content" id="panel1">
+            <div class="content" style="overflow: auto" id="panel1">
               <!-- comments 
                    ordered in an data-accordion -->
               <dl id="numero6" class="accordion" data-accordion>
@@ -463,7 +465,7 @@
         <ul class="small-block-grid-2" data-equalizer>
           <li>
             <div class="panel custom" style="overflow: auto" data-equalizer-watch>
-                         <!-- comments 
+            <!-- comments 
                  orderd in a data-accordion -->
             <dl class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
@@ -750,7 +752,7 @@
 
                 map1.on('click', onMapClick1);
 
-/*
+/*  wird der code hier noch gebraucht? - wenn nicht, dann bitte löschen
 var polygonDrawer = new L.Draw.Polyline();
 
 // Assumming you have a Leaflet map accessible
