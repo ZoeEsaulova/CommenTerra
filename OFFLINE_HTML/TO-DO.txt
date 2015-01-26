@@ -20,6 +20,7 @@ ____________________________
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation
+- kleines rotes X um seinen eigenen kommentar wieder zu löschen?
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
@@ -42,6 +43,7 @@ _______________________________________________________________
 
 faq:
 - anker ändern
+- warum genau mussten die flex-videos auskommentiert werden?
 
  profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
@@ -49,3 +51,8 @@ faq:
 advanced_search:
 - checkboxen: "all these words", "any of these words" : der unterschied besteht hier nur darin ob man 
 AND oder OR Verknüpfung bei der Suche verwendet
+
+about:
+- unter dem footer ist ein dicker weißer balken
+- die "||" im footer sind weiß und nicht grau
+- evtl das logo größer?
