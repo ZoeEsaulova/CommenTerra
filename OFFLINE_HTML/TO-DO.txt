@@ -20,7 +20,7 @@ ____________________________
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation
-- kleines rotes X um seinen eigenen kommentar wieder zu löschen?
+- kleines rotes X um seinen eigenen kommentar wieder zu löschen? --> nicht gefordert
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
