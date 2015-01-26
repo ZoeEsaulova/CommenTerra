@@ -20,7 +20,7 @@
     <script src="js/vendor/jquery-ui.js"></script> 
   
 
-<!-- style for rate function and stars -->
+          <!-- style for rate function and stars -->
           <style>.functions .demo {
             margin-bottom: 10px;
           }
@@ -66,21 +66,21 @@
           }
           </style>
 
-    <!-- autocomplete style -->
-    <style>
-      .ui-autocomplete {
-      max-height: 100px;
-      overflow-y: auto;
-      /* prevent horizontal scrollbar */
-      overflow-x: hidden;
-      }
-      /* IE 6 doesn't support max-height
-      * we use height instead, but this forces the menu to always be this tall
-      */
-      * html .ui-autocomplete {
-      height: 100px;
-      }
-    </style>
+          <!-- autocomplete style -->
+          <style>
+            .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            }
+            /* IE 6 doesn't support max-height
+            * we use height instead, but this forces the menu to always be this tall
+            */
+            * html .ui-autocomplete {
+            height: 100px;
+            }
+          </style>
 <!--script type="text/javascript">
   jQuery.ajaxSetup({
   cache: false
@@ -91,7 +91,7 @@
 });
 
 </script-->
- <!-- script for autocomplete function -->
+    <!-- script for autocomplete function -->
     <script>
       $(function() {
       var availableTags = [
@@ -485,20 +485,10 @@
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
-                    <!-- MapViewerModal
+                    <!-- MapViewer
                          by clicking the link of the geodataset
-                         the user is asked whether he/she´d like to
-                         open it in the map_viewer -->
+                         it is open in the map_viewer -->
                     <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-
-                    <!-- MIT DEM MAP MODAL FUNKTIONIERT LOGOUT NICHT -->
-                    <!--div id="mapModal" class="reveal-modal" data-reveal>
-                      <p class="lead">Do you want to use the map viewer?</p>
-                      <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
-                      <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
-                      <a class="close-reveal-modal">&#215;</a>
-                    </div-->
-
                     <p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
@@ -513,7 +503,7 @@
                   <ul class="no-bullet">
                   <li>
                     <% if (comments[i].user) {%>
-                  <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                    <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
@@ -536,7 +526,6 @@
                   <br>
                   <ul class="no-bullet">
                   <li>
-
                     <!-- for making a comment at a comment -->
                     <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
@@ -549,9 +538,7 @@
                   </li>
                   </ul>
 
-
-                  <% if (comments[i].comments.length>0) {%>
-                  
+                  <% if (comments[i].comments.length>0) {%>                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
@@ -576,9 +563,8 @@
                   <%} %>
 
                 </div>
-
-
               </dd>
+
               <% } %>
 
             </dl>
@@ -594,7 +580,7 @@
           </div>
         </li>
       </ul>
-</strong>
+      </strong>
 
     </div>
               <script>
