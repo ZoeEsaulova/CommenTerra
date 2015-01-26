@@ -290,23 +290,21 @@
                   <option value="gml">GML</option>
                 </select>
               </label>
-              <br>           
-                  <button class="tiny radius expand" id="validateurl" type="submit">
-                    <font color="#424242">Validate URL</font>
-                  </button>
-               </form>
-               <br>
-                  <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
-                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>       
-        <br>
-
-      </li>
-      <li>
-        <!--shows the response of the URL-->
-        <font id="numero5" color="white" size="4">Response:</font>
-        <textarea id="response" disabled="disabled" rows="8"><%= XMLresponse %></textarea>
-      </li>
-    </ul>
+              <br>          
+              <button class="tiny radius expand" id="validateurl" type="submit">
+                <font color="#424242">Validate URL</font>
+              </button>
+          </form>
+          <br>
+          <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
+                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
+        </li>
+        <li>
+          <!--shows the response of the URL-->
+          <font id="numero5" color="white" size="4">Response:</font>
+          <textarea id="response" disabled="disabled" rows="11"><%= XMLresponse %></textarea>
+        </li>
+      </ul>
     </strong>
 
     <!-- SMALL-UP
