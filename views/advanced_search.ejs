@@ -373,104 +373,7 @@
 
     <!-- lower bright gray area -->
     <div class="panel custom2">
-      <!-- SMALL-UP
-           use this to show the page on smaller displays
-           for example on mobilephones -->
-      <strong class="hide-for-large-up">
-        <div class="panel custom">
-
-          <!-- data-tabs for the two views in the lower area -->
-          <dl class="tabs" data-tab>
-            <!-- first tab -->
-            <dd><a class="content" href="#panel1">View Comments</a></dd>
-            <!-- second tab -->
-            <dd><a class="content active" href="#panel2">View Map</a></dd>
-          </dl>
-
-          <div class="tabs-content">
-
-            <div class="content" style="overflow: auto" id="panel1">
-              <!-- comments 
-                   ordered in an data-accordion -->
-              <dl id="numero6" class="accordion" data-accordion>
-
-                <% for(var i=0; i<comments.length; i++) {%>
-
-                <dd data-ng-repeat="comment in comments" class="accordion-navigation">
-                  <a href="#panel<%= i %>b"><%= comments[i].title %></a>
-                  <div id="#panel<%= i %>b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      
-                    </li>
-                    </ul>
-                      <%= comments[i].text %>
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                    
-                      <% if (comments[i].user) {%>
-                      <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %></font></a>
-                  <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
-                  <%} %>                      
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>                     
-                    </li>
-                    </ul>
-                  <% if (comments[i].comments.length>0) {%>
-                  
-                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
-                          <div class="content">
-                            <p><%= comments[i].comments[j].title %></p>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                            <p><%= comments[i].comments[j].text %></p>
-                            <p><%= comments[i].comments[j].dateString %></p>
-                              <% if (comments[i].comments[j].user) {%>
-                            <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
-                              <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
-                                <%= comments[i].comments[j].authorName %>
-                              </font></a>
-                            <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>
-                            <%} %>
-                          </div>
-
-                        <%} 
-                      %>
-                  <%} %>                    
-                  </div>
-                </dd>
-                <% } %>
-              </dl>
-            </div>
-
-            <div class="content active" id="panel2">
-              <!-- map -->
-              <div class="map" id="map" style="width: 100%; height: 750px"></div>
- 
-            </div>
-          </div>
-        </div>
-      </strong> 
-
-      <!-- LARGE-UP
-           use this to show the page when there is a larger display -->
-      <strong class="show-for-large-up">
-        <ul class="small-block-grid-2" data-equalizer>
+        <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
           <li>
             <div class="panel custom" style="overflow: auto" data-equalizer-watch>
             <!-- comments 
@@ -503,10 +406,8 @@
                         <a href="#"><i class="fi-star size-28 font-green"></i></a>
                         <a href="#"><i class="fi-star size-28 font-grey"></i></a>
                         
-
                         <!-- timeframe for this geodataset -->
                         <front>Timeframe: </font>
-
 
                       </li>
                     </ul>
@@ -530,9 +431,7 @@
                       </li>
                     </ul>
                   </div>
-
                   <br>
-
                   <ul class="no-bullet">
                     <li>
                       <!-- for making a comment at a comment -->
@@ -611,73 +510,10 @@
             </div>
           </li>
         </ul>
-      </strong>
     </div>
 
               <!-- script for the map on the right of the site -->
               <script>
-              
-              if (matchMedia('only screen and (max-width: 64em)').matches) {
-                //map for small displays
-                var map = L.map('map');
-
-                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-                  maxZoom: 20,
-                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                  id: 'examples.map-i875mjb7'
-                }).addTo(map);
-
-                function onLocationFound(e) {
-                  var radius = e.accuracy / 2;
-
-                  L.marker(e.latlng).addTo(map)
-                  .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-                  L.circle(e.latlng, radius, {
-                    color: '#2ba6cb',
-                    fillColor: '#2ba6cb',
-                    fillOpacity: 0.5
-                  }).addTo(map);
-                }
-
-                function onLocationError(e) {
-                  map.setView([51.96935, 7.59588], 13);
-                  alert(e.message);
-                }
-
-                map.on('locationfound', onLocationFound);
-                map.on('locationerror', map.setView([51.96935, 7.59588], 13), onLocationError);
-
-                map.locate({setView: true, maxZoom: 13});
-                
-                L.marker([51.96935, 7.59588]).addTo(map)
-                  .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
-
-                L.polygon([
-                  [51.97424, 7.59757],
-                  [51.97415, 7.59839],
-                  [51.97321, 7.59819],
-                  [51.97326, 7.59736]], {
-                    color: '#2ba6cb',
-                    fillColor: '#2ba6cb',
-                    fillOpacity: 0.5
-                  }).addTo(map).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
-
-                var popup = L.popup();
-
-                function onMapClick(e) {
-                  popup
-                  .setLatLng(e.latlng)
-                  .setContent("You clicked the map at " + e.latlng.toString())
-                  .openOn(map);
-                }
-
-                map.on('click', onMapClick);
-              }
-
-              if (matchMedia('only screen and (min-width: 64.063em)').matches) {
                 //map for middle scale displays
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
@@ -784,8 +620,6 @@ map1.on('draw:created', function (e) {
 $('#bb').click(function() {
     polygonDrawer.enable();
 });*/
-              }
-
               </script>
 
 

@@ -362,9 +362,6 @@
     
     <!-- lower bright gray area -->
     <div class="panel custom2">
-      <!-- SMALL-UP
-           use this to show the page on smaller displays
-           for example on mobilephones -->
       <ul class="small-block-grid-2">
         <li>
           <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
@@ -374,102 +371,7 @@
         </li>
       </ul> 
 
-      <strong class="hide-for-large-up">
-        <div class="panel custom">
-          <!-- data-tabs for the two views in the lower area -->
-          <dl class="tabs" data-tab>
-            <!-- first tab -->
-            <dd><a href="#panel1">View Comments</a></dd>
-            <!-- second tab -->
-            <dd class="content active"><a href="#panel2">View Map</a></dd>
-          </dl>
-
-          <div class="tabs-content">
-
-            <div class="content" id="panel1">
-              <!-- comments 
-                   ordered in an data-accordion -->
-              <dl class="accordion" data-accordion>
-
-                <% for(var i=0; i<comments.length; i++) {%>
-
-                <dd data-ng-repeat="comment in comments" class="accordion-navigation">
-                  <a href="#panel<%= i %>b"><%= comments[i].title %></a>
-                  <div id="#panel<%= i %>b" class="content">
-                    <ul class="no-bullet">
-                    <li>
-                      <a href="/api/v1/search?url=<%= comments[i].dataset.url %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                      <p>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                      <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                    </li>
-                    </ul>
-                      <%= comments[i].text %>
-                      <p>
-                    <ul class="no-bullet">
-                    <li>
-                    
-                      <% if (comments[i].user) {%>
-                      <a href="/profile/<%= comments[i].user._id %>"><font color="#2ba6cb"><%= comments[i].user.local.username %></font></a>
-                  <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
-                  <%} %>                      
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                      &nbsp&nbsp&nbsp&nbsp
-                    <a href="/comments/addtothread/<%= comments[i].dataset.url %>/<%= comments[i]._id %>"><i class="fi-comment size-21 font-success"></i></a>                      
-                    </li>
-                    </ul>
-                  <% if (comments[i].comments.length>0) {%>
-                  
-                      <% for (var j=0; j<comments[i].comments.length; j++) {%>
-                          <div class="content">
-                            <p id="lastStop"><%= comments[i].comments[j].title %></p>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                            <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                            <p><%= comments[i].comments[j].text %></p>
-                            <p><%= comments[i].comments[j].dateString %></p>
-                              <% if (comments[i].comments[j].user) {%>
-                            <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
-                              <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
-                                <%= comments[i].comments[j].authorName %>
-                              </font></a>
-                            <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>
-                            <%} %>
-                          </div>
-
-                        <%} 
-                      %>
-                  <%} %>                    
-                  </div>
-                </dd>
-                <% } %>
-              </dl>
-            </div>
-
-            <div class="content active" id="panel2">
-              <!-- map -->
-              <div class="map" id="map" style="width: 100%; height: 750px"></div>
- 
-            </div>
-
-          </div>
-
-        </div>
-      </strong>      
-
-      <!-- LARGE-UP
-           use this to show the page when there is a larger display -->
-      <strong class="show-for-large-up" >
-      <ul class="small-block-grid-2" data-equalizer>
+      <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
         <li>
           <div class="panel custom" style="overflow: auto" data-equalizer-watch >
             <!-- comments 
@@ -580,8 +482,6 @@
           </div>
         </li>
       </ul>
-      </strong>
-
     </div>
               <script>
               
