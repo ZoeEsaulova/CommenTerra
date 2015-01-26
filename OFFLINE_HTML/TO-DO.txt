@@ -56,3 +56,13 @@ about:
 - unter dem footer ist ein dicker weißer balken
 - die "||" im footer sind weiß und nicht grau
 - evtl das logo größer?
+
+
+Beispieldaten:
+
+Sensor observation service(SOS) http://sensorweb.demo.52north.org/PegelOnlineSOSv2.1/
+				                http://sensorweb.demo.52north.org/52n-sos-webapp/client
+GML				                http://examples.oreilly.com/9780596008659/
+KML			                	kml-samples.googlecode.com/svn/trunk/kml/time/time-stamp-point.kml 
+			                	www-user.uni-bremen.de/koelling/kml/borabora.kml
+			                	
