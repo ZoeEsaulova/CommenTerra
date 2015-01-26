@@ -293,8 +293,10 @@
                     <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
                     <a class="close-reveal-modal">&#215;</a>
                   </div>
-                </form>
-              
+
+            </form>
+                <p></p>
+
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
@@ -302,9 +304,10 @@
                 <div id="permalinkModal" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
-                  <p>http://localhost:3000/apo/v1/search?<%= query %></p>
+                  <p>http://localhost:80/apo/v1/search?<%= query %></p>
                   <a class="close-reveal-modal">&#215;</a>
-                </div>              
+                </div>
+
           </li>
         </ul>
         </ul>
@@ -317,49 +320,54 @@
           <!-- input for the advanced search to get the search start
              ordered in a grid to have a better overview of the options -->
           <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
-            <form>
-              <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
-              <input type="text" name="search_url" id="search_url" placeholder="url..." />            
-              <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
-            </form>
-            <div id="rating1"></div>
+          <form>
+            <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
+            <input type="text" name="search_url" id="search_url" placeholder="url..." />            
+            <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+          </form>
+          <div id="rating1"></div>
+          <p></p>
+          <!-- start date -->
+          <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
+            <input type="text" id="datepicker3" placeholder="Start Date" name="startdate">
+          </div>
+          <!-- end date -->
+          <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
+            <input type="text" id="datepicker4" placeholder="End Date" name="enddate">
+          </div>
+
+          <!-- coordinates for searching on a specific point -->
+          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
+
+          <!-- boundingbox search
+               the user get a pop-up window where he/she is
+               able to define a radius. Afterwards by clicking
+               on the map the boundingbox circle appears. -->
+          <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
+            <div id="boundingBoxModal" class="reveal-modal" data-reveal>
+              <h2>Set Areal</h2>
+              <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
+              <input type="text" id="radius" name=" radius" placeholder="10">
+              <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
+              <a class="close-reveal-modal">&#215;</a>
+            </div>
+
+            <p></P>
+
+          <!-- "safe this search"-button open a pop-up window
+               generate a permalink the user can copy
+               to get back to his search everytime -->              
+          <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+            <div id="permalinkModal" class="reveal-modal" data-reveal>
+              <h2>Permalink</h2>
+              <p class="lead">You can copy this link for later searches:</p>
+              <p>http://localhost:80/apo/v1/search?<%= query %></p>
+              <a class="close-reveal-modal">&#215;</a>
+            </div>
+
             <p></p>
-              <!-- start date -->
-              <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
-              </div>
-              <!-- end date -->
-              <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
-              </div>
 
-                <!-- coordinates for searching on a specific point -->
-                <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
-
-                <!-- boundingbox search
-                     the user get a pop-up window where he/she is
-                     able to define a radius. Afterwards by clicking
-                     on the map the boundingbox circle appears. -->
-                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
-                <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-                  <h2>Set Areal</h2>
-                  <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
-                  <input type="text" id="radius" name=" radius" placeholder="10">
-                  <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
-                  <a class="close-reveal-modal">&#215;</a>
-                </div>
-
-                <!-- "safe this search"-button open a pop-up window
-                     generate a permalink the user can copy
-                     to get back to his search everytime -->              
-                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
-                <div id="permalinkModal" class="reveal-modal" data-reveal>
-                  <h2>Permalink</h2>
-                  <p class="lead">You can copy this link for later searches:</p>
-                  <p>http://localhost:3000/apo/v1/search?<%= query %></p>
-                  <a class="close-reveal-modal">&#215;</a>
-                </div>
-                <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+          <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
       </strong>
     </div>
 
@@ -475,67 +483,71 @@
 
                 <div id="panel<%= i %>c" class="content">
                   <div class="panel custom5" style="border-color: #424242;">
-                  <ul class="no-bullet">
-                  <li>
-                    <!-- MapViewerModal
-                         by clicking the link of the geodataset
-                         the user is asked whether he/she´d like to
-                         open it in the map_viewer -->
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                    <!--div id="mapModal" class="reveal-modal" data-reveal>
-                      <p class="lead">Do you want to use the map viewer?</p>
-                      <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
-                      <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
-                      <a class="close-reveal-modal">&#215;</a>
-                    </div-->
+                    <ul class="no-bullet">
+                      <li>
+                        <!-- MapViewerModal
+                             by clicking the link of the geodataset
+                             the user is asked whether he/she´d like to
+                             open it in the map_viewer -->
+                        <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                        <!--div id="mapModal" class="reveal-modal" data-reveal>
+                          <p class="lead">Do you want to use the map viewer?</p>
+                          <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
+                          <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
+                          <a class="close-reveal-modal">&#215;</a>
+                        </div-->
+                        <p>
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                        
+
+                        <!-- timeframe for this geodataset -->
+                        <front>Timeframe: </font>
+
+
+                      </li>
+                    </ul>
+
+                    <%= comments[i].text %>
                     <p>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    
+                    <ul class="no-bullet">
+                      <li>
+                        <% if (comments[i].user) {%>
+                      <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                        <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %></font></a>
+                      <%} else {%> 
+                        <font color="#2ba6cb">Anonymous</font>
+                      <%} %>
 
-                    <!-- timeframe for this geodataset -->
-                    <front>Timeframe: </font>
-
-
-                  </li>
-                  </ul>
-                  <%= comments[i].text %>
-                  <p>
-                  <ul class="no-bullet">
-                  <li>
-                    <% if (comments[i].user) {%>
-                  <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
-                    </font></a>
-                  <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
-                  <%} %>
-
-                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp
-     
-                    &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                  </li>
-                  </ul>
+                        <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                        <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                        &nbsp&nbsp&nbsp&nbsp
+         
+                        &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
+                      </li>
+                    </ul>
                   </div>
+
                   <br>
+
                   <ul class="no-bullet">
-                  <li>
-                    <!-- for making a comment at a comment -->
-                    <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
-                    <div class="row">
-                      <div class="large-12 columns">
-                        <textarea name="text" placeholder="comment on this comment ..."></textarea>
-                        <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
+                    <li>
+                      <!-- for making a comment at a comment -->
+                      <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
+                      <div class="row">
+                        <div class="large-12 columns">
+                          <textarea name="text" placeholder="comment on this comment ..."></textarea>
+                          <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
+                        </div>
                       </div>
-                    </div>
-                  </form>
-                  </li>
+                    </form>
+                    </li>
                   </ul>
+
+                  <p></P>
 
                   <% if (comments[i].comments.length>0) {%>
                   
@@ -567,11 +579,12 @@
               </dd>
               <% } %>
 
+
 <% if (metamaps.length > 0 ) { %> 
 <!-- MY META MAPS -->
 <% for(var i=0; i<metamaps.length; i++) {%>
   <dd class="accordion-navigation">
-                <a id="lastStop" href="#panelm<%= i %>c">My Meta Maps comment</a>
+                <a href="#panelm<%= i %>c">My Meta Maps comment</a>
 
                 <div id="panelm<%= i %>c" class="content">
                   <div class="panel custom5" style="border-color: #424242;">
@@ -584,6 +597,8 @@
   </dd>
 <%} %>
 <% } %>
+
+
             </dl>
           </div>
           </li>
@@ -599,7 +614,7 @@
       </strong>
     </div>
 
-     <!-- script for the map on the right of the site -->
+              <!-- script for the map on the right of the site -->
               <script>
               
               if (matchMedia('only screen and (max-width: 64em)').matches) {
@@ -844,7 +859,15 @@ $('#bb').click(function() {
         jQuery( "#datepicker2" ).datepicker();
       });
     </script>    
-
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker3" ).datepicker();
+      });
+    </script>
+    <script>
+      jQuery(function() {
+        jQuery( "#datepicker4" ).datepicker();
+      });
+    </script>
   </body>
-
 </html>
