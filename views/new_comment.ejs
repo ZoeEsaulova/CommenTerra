@@ -296,6 +296,7 @@
               </button>
           </form>
           <br>
+          <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
                   <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
         </li>
@@ -323,10 +324,17 @@
         </select>
         </label>
       <p></p>
-      </form>
       <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
       <font color="#424242">Validate URL</font>
       </button>
+      </form>
+      <p></p>
+      
+      <!-- show the pre defined boundingbox of the geodataset on the map 
+            ! funktioniert auf klein leider nicht ! -->
+      <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
+                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
+
       <!--shows the response of the URL-->
       <font id="numero5" color="white" size="4">Response:</font>
       <textarea id="response" disabled="disabled" rows="7"><%= XMLresponse %></textarea>
