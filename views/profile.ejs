@@ -148,8 +148,7 @@
        <body onload="showMarkers('<%= markers %>')">
     <% } else { %>
        <body>
-    <% }%>
-  	
+    <% }%>  	
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -157,21 +156,20 @@
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
         <li class="name"> 
-          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
   			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
   			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
   		</ul>
       <section class="top-bar-section"> 
   			<!-- Right Nav Section --> 
-        <ul class="right">
+        <ul class="right" id="lastStop">
           <li class="has-form">
            <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" name="q" id="keyword" placeholder="search for keyword"> </label>
-                        <!--small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small -->
+                        <label> <input type="text" name="q" id="tags" placeholder="search term"> </label>
                       </div>
                   </div>
                   <div class="small-3 columns end">
@@ -180,7 +178,6 @@
                 </div>
             </form>
           </li>
-
           <!-- Login -->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
@@ -207,19 +204,11 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-
   				<li class="has-dropdown"> 
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-              
-
-              <!-- TO DO: Funktionalität - edit Profile, Rollenzugriff auf Profilseite -->
-
-              <!-- soll eigentlich nur ein neues orten auf der karte ermöglichen
-                      <li><a href="profile.html">Relocation</a></li> -->
-
         			<% if ((boolean1) && (boolean3)) {%> 
         			<li><a data-reveal-id="SettingsModal">Profile Settings</a></li>
                 <!-- SettingsModal
@@ -270,9 +259,7 @@
                         </div>                      
                     </li>
                   </ul>
-
-                  <button id="numero2" class="tiny radius expand" type="submit"><font color="#424242">Save Changes</font></button>
-
+                  <button class="tiny radius expand" type="submit"><font color="#424242">Save Changes</font></button>
                     <!-- saveSettingsModal
                          confirm the change of settings
                          and information about the user -->
@@ -286,9 +273,9 @@
                   </form>
                 </div>      
 			         <%} %>
-
-               <li><a href="/faq">Help / FAQ</a></li>
-               
+               <li><a id="relocate" onClick="relocate()">Relocate</a></li>
+               <li><a onclick="startJoyRide()">Start Tour</a></li>
+               <li><a href="/faq">Help / FAQ</a></li>               
   					</ul> 
   				</li> 
   			</ul> 
@@ -296,11 +283,9 @@
   	</nav>
     </div>
 
-
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
-
 
     <!-- LARGE-UP
            use this to show the page when there is a larger display -->
@@ -311,6 +296,42 @@
           <li>
             <img id="firstStop" src="img/empty_avatar.svg" width="205" height="205">
           </li>
+          <li>
+            <!-- information about the user -->
+            <div><p><font color="white">Username: </font><font id="numero2" color="white" size="3"><%= pageowner.local.username %></font></p></div>
+            <div><p><font color="white">Email: </font><font color="white" size="3"><%= pageowner.local.email %></font></p></div>
+            <% if (pageowner.firstname) {%>
+              <div><p><font color="white">First Name: </font><font color="white" size="3"><%= pageowner.firstname%></font></p></div>
+            <%} %>
+            <% if (pageowner.lastname) {%>
+              <div><p><font color="white">Last Name: </font><font color="white" size="3"><%= pageowner.lastname %></font></p></div>
+            <%} %>
+            <% if (pageowner.profession) {%>
+              <div><p><font color="white">Profession: </font><font color="white" size="3"><%= pageowner.profession %></font></p></div>
+            <%} %> 
+            <% if (pageowner.country) {%>
+              <div><p><font color="white">Country: </font><font color="white" size="3"><%= pageowner.country %></font></p></div>
+            <%} %>            
+          </li>
+          <li>
+            <% if (pageowner.about) {%>
+            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="3"><%= pageowner.about %></font></p></div>
+            <%} %>
+            <p>
+            <font color="white">User Rating: </font>
+            <font color="#80FF00" size="3">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
+            <font color="#c60f13" size="3">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </strong>
+
+    <!-- MEDIUM-UP
+           use this to show the page when there is a medium display -->
+    <strong class="hide-for-large-up">
+      <div class="panel custom">
+        <ul class="medium-block-grid-2 small-block-grid-1">
           <li>
             <!-- information about the user -->
             <div><p><font color="white">Username: </font><font color="white" size="3"><%= pageowner.local.username %></font></p></div>
@@ -326,59 +347,19 @@
             <%} %> 
             <% if (pageowner.country) {%>
               <div><p><font color="white">Country: </font><font color="white" size="3"><%= pageowner.country %></font></p></div>
-            <%} %>            
-              <font color="white">User Rating: </font>
-              <font color="#80FF00" size="3">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-              <font color="#c60f13" size="3">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
+            <%} %>
           </li>
           <li>
             <% if (pageowner.about) {%>
-            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5"><%= pageowner.about %></font></p></div>
+            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="3"><%= pageowner.about %></font></p></div>
             <%} %>
+            <p>
+            <font color="white">User Rating: </font>
+            <font color="#80FF00" size="3">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
+            <font color="#c60f13" size="3">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i>
+            </p>
           </li>
         </ul>
-      </div>
-    </strong>
-
-
-    <!-- MEDIUM-UP
-           use this to show the page when there is a medium display -->
-    <strong class="show-for-medium-only">
-      <div class="panel custom">
-        <ul class="small-block-grid-2">
-          <li>
-            <!-- information about the user -->
-            <div><p><font color="white">Username: </font><font color="white" size="5">J4NU5!</font></p></div>
-            <div><p><font color="white">First Name: </font><font color="white" size="5">Jan</font></p></div>
-            <div><p><font color="white">Last Name: </font><font color="white" size="5">Ehrecke</font></p></div>
-            <div><p><font color="white">Profession: </font><font color="white" size="5">Student</font>
-              <br><br><font color="white">User Rating: </font>
-              <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-              <font color="#c60f13" size="5">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
-            </div>
-          </li>
-          <li>
-            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</font></p></div>
-          </li>
-        </ul>
-      </div>
-    </strong>
-
-    <!-- SMALL-UP
-           use this to show the page on smaller displays
-           for example on mobilephones -->
-    <strong class="show-for-small-only">
-      <div class="panel custom">
-        <!-- information about the user -->
-        <div><p><font color="white">Username: </font><font color="white" size="5">J4NU5!</font></p></div>
-        <div><p><font color="white">First Name: </font><font color="white" size="5">Jan</font></p></div>
-        <div><p><font color="white">Last Name: </font><font color="white" size="5">Ehrecke</font></p></div>
-        <div><p><font color="white">Profession: </font><font color="white" size="5">Student</font>
-          <br><br><font color="white">User Rating: </font>
-          <font color="#80FF00" size="5">&nbsp&nbsp36&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-          <font color="#c60f13" size="5">&nbsp&nbsp12&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i></p>
-        </div>
-        <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</font></p></div>
       </div>
     </strong>
 
@@ -404,9 +385,7 @@
             <dl id="numero1" class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
-
-                <a id="lastStop" href="#panel<%= i %>c"><%= comments[i].title %></a>
-
+                <a href="#panel<%= i %>c"><%= comments[i].title %></a>
                 <div id="panel<%= i %>c" class="content">
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
@@ -432,26 +411,21 @@
                   <p>
                   <ul class="no-bullet">
                   <li>
-                    <% if (comments[i].user) {%>
-                  
+                    <% if (comments[i].user) {%>                  
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
+                    <font color="#424242"><em>anonymous</em></font>
                   <%} %>
-
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
-                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                  
+                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>                  
                   </li>
                   </ul> 
-                </div>
-                  <br>
+                </div><br>
                   <ul class="no-bullet">
                   <li>
-
                     <!-- for making a comment at a comment -->
                     <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
@@ -464,7 +438,6 @@
                   </li>
                   </ul>
                   <% if (comments[i].comments.length>0) {%>
-                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
@@ -475,7 +448,7 @@
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
                             <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>                            
+                              <font color="#424242"><em>anonymous</em></font>                            
                             <%} %>
                               <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                               <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
@@ -490,7 +463,6 @@
                 </div>
               </dd>
               <% } %>
-
             </dl>
           </div>
         </li>
@@ -498,9 +470,8 @@
           <div class="panel custom" data-equalizer-watch>
             <!-- map -->
             <div id="numero5">
-            <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+              <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
             </div>
-
           </div>
         </li>
       </ul>
@@ -518,13 +489,24 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
+                function relocate() {
+
+                  map1.locate({setView: true, maxZoom: 16});
+
+                  map1.removeLayer(locationMarker);
+                  map1.removeLayer(locationCircle);
+                }
+
+                var locationMarker;
+                var locationCircle;
+
                 function onLocationFound1(e) {
                   var radius1 = e.accuracy / 2;
 
-                  L.marker(e.latlng).addTo(map1)
+                  locationMarker = L.marker(e.latlng).addTo(map1)
                   .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
 
-                  L.circle(e.latlng, radius1, {
+                  locationCircle = L.circle(e.latlng, radius1, {
                     color: '#2ba6cb',
                     fillColor: '#2ba6cb',
                     fillOpacity: 0.5
@@ -538,21 +520,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
-                map1.locate({setView: false, maxZoom: 16});
-                
-                L.marker([51.96935, 7.59588]).addTo(map1)
-                  .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
-
-                L.polygon([
-                  [51.97424, 7.59757],
-                  [51.97415, 7.59839],
-                  [51.97321, 7.59819],
-                  [51.97326, 7.59736]], {
-                    color: '#2ba6cb',
-                    fillColor: '#2ba6cb',
-                    fillOpacity: 0.5
-                  }).addTo(map1).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
-
+                map1.locate({setView: true, maxZoom: 16});
 
                 function onMapClick1(e) {
                   popup
@@ -611,7 +579,7 @@
         <p>This is your profil page!</p>
       </li>
       <li data-id="numero1" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p> Usefull to research your comments...</p>
+        <p> Usefull to research and view your comments...</p>
       </li>
       <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
         <p>... and share some information about yourself with the community.</p>
@@ -623,21 +591,16 @@
 
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
-    <script src="js/jquery.raty.js"></script>
-    <script src="js/labs.js"></script>
-    <script>
-     $(document).ready(function()
-     {
-     $("#rating").raty();
-     });
-    </script>
     <script>
       $(document).foundation();
+    </script>
+    <script>
+      function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }      
+      }
+      }
     </script>
-
   </body>
 
 </html>

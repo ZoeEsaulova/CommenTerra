@@ -98,8 +98,7 @@
     </script>
   </head>
 
-  <body>
-  	
+  <body>  	
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -120,8 +119,7 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
-                        <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
+                        <label> <input type="text" id="tags" placeholder="search term" name="q"> </label>
                       </div>
                   </div>
                   <div class="small-3 columns end">
@@ -130,7 +128,6 @@
                 </div>
             </form>
           </li>
-
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
@@ -164,6 +161,7 @@
   					<ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
+              <li><a>Relocate</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
@@ -176,18 +174,21 @@
   	</nav>
     </div>
 
-
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
 
+    <!-- upper light gray area -->
+    <div class="panel custom">
+      <!-- link of the shown map -->
+      <p><font color="white">LINK</font></p>
+    </div>
 
     <!-- lower bright gray area -->
     <div class="panel custom2">
       <div class="panel custom">
         <!-- map -->
-        <div class="map" id="map" style="width: 100%; height: 1000px; border-radius: 3px"></div>
-
+        <div class="map" id="map" style="width: 100%; height: 750px; border-radius: 3px"></div>
       </div>
     </div>
 
@@ -241,9 +242,7 @@
                 map.on('click', onMapClick);
     </script>
 
-
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
-    
 
     <!-- FOOTER
          on every page to get more informations -->
@@ -253,7 +252,6 @@
     </div>
 
     <script src="js/foundation.min.js"></script>
-
     <script>
       $(document).foundation();
     </script>

@@ -96,11 +96,9 @@
       });
       });
     </script>
-
   </head>
 
   <body>
-
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -121,7 +119,7 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" id="tags" placeholder="search for keyword" name="q" required pattern="alpha_numeric"> 
+                        <label> <input type="text" id="tags" placeholder="search term" name="q" required pattern="alpha_numeric"> 
                         </label>
                       </div>
                   </div>
@@ -131,7 +129,6 @@
                 </div>
             </form>
           </li>
-
           <!-- LogInModal
                to get logged-in in the community network
                only posible when you have been registed -->
@@ -169,7 +166,6 @@
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
               <% } %>
-              <li><a href="/faq">Help / FAQ</a></li> 
             </ul> 
           </li> 
         </ul> 
@@ -177,14 +173,12 @@
     </nav>
     </div>
 
-
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
 
     <!-- upper dark gray area -->
     <div class="panel custom">
-
       <!-- SMALL-UP
            use this to show the page on smaller displays
            for example on mobilephones -->
@@ -202,6 +196,7 @@
             <a href="#1.6"><font color="white">1.6 How can I deactivate the user-help?</font></a><br>
             <a href="#1.7"><font color="white">1.7 Can I save my search-requests?</font></a><br>
             <a href="#1.8"><font color="white">1.8 How can I manage my search-requests?</font></a><br>
+            <a href="#1.9"><font color="white">1.9 What is "Start Tour" & how to use it?</font></a><br>
           </li>
           <li>
             <h3><font color="white">Tutorials</font></h3><br>
@@ -217,9 +212,8 @@
         <ul class="large-block-grid-3"> 
           <li>
             <!-- logo -->
-            <img id="firstStop" src="img/vektorlogo.svg" width="300" height="250" style="padding-left:20px">
+            <img id="firstStop" src="img/vektorlogo.svg" width="335" height="335" style="padding-left:40px">
           </li>
-
           <!-- topics with integrated links for a fast navigation on the page -->
           <li>
             <h3><font color="white">FAQ</font></h3>
@@ -232,6 +226,7 @@
             <a href="#1.6"><font color="white">1.6 How can I deactivate the user-help?</font></a><br>
             <a href="#1.7"><font color="white">1.7 Can I save my search-requests?</font></a><br>
             <a href="#1.8"><font color="white">1.8 How can I manage my search-requests?</font></a><br>
+            <a href="#1.9"><font color="white">1.9 What is "Start Tour" & how to use it?</font></a><br>
           </li>
           <li>
             <h3><font color="white">Tutorials</font></h3><br>
@@ -256,69 +251,58 @@
       <p><b><a name="1.1"><font color="#424242">1.1</font></a> Is it possible to rate a person? </b></p>
       <ul>
         <li>No. Logged user can rate comments (positive or negative) concerning of their usefulness one time.</li>
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.2"><font color="#424242">1.2</font></a> How can I rate a comment? </b></p>
       <ul>
         <li>You have to click on a comment (or on a pin). Now you can see the comment. At the bottom of the comment field you have the possibillity to rate this comment.
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.3"><font color="#424242">1.3</font></a> How will be generate a thread? </b></p>
       <ul>
         <li>A thread will be generate automatically. Several comments with the same attributes will be generate to a list and visualized as a list on the left site on the main page. </li>
-      </ul>
+      </ul><br>
       <p><b><a name="1.4"><font color="#424242">1.4</font></a> How can I change my personal settings? </b></p>
       <ul>
         <li>Logged users have the possibillity to change their personal settings over the gear-wheel (on the right side of the logged main page).</li>
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.5"><font color="#424242">1.5</font></a> Who is CommenTerra? </b></p>
       <ul>
         <li>You can find further informations about CommenTerra when you click on the link at the footer "about us"</li>
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.6"><font color="#424242">1.6</font></a> How can I deactivate the user-help? </b></p>
       <ul>
         <li>You can deactivate the user-help in your user-settings</li>
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.7"><font color="#424242">1.7</font></a> Can I save my search-requests? </b></p>
       <ul>
         <li>Yes. You can safe your search-requests by click on the ""-button</li>
-      </ul>
-        <br>
+      </ul><br>
       <p><b><a name="1.8"><font color="#424242">1.8</font></a> How can I manage my search-requests? </b></p>
       <ul>
         <li>By clicking on the gear-wheel you open the personal settings. Here you have the chance to manage (rename) the requests</li>
-      </ul>
-        <br>
-        <br>
-        <br>
-       <h2> 2. Tutorials </h2>
-        <br>
+      </ul><br>
+      <p><b><a name="1.9"><font color="#424242">1.9</font></a> What is "Start Tour" & how to use it? </b></p>
+      <ul>
+        <li>"Start Tour" is for explaining the page you are right now. It can be activated in the "Site Navigation"</li>
+      </ul><br><br><br>
+
+       <h2> 2. Tutorials </h2><br>
         <!-- how to navigate on the pages -->
         <p><b><a name="2.1"><font color="#424242">2.1</font></a> Navigation on page: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/Esi9RUWWtks"></object-->
-        </div>
-          <br>
-          <br>     
+          <object width="420" height="315" data="https://www.youtube.com/v/Esi9RUWWtks"></object>
+        </div><br><br>     
         <!-- create new comment
              only for registrated users --> 
         <p><b><a name="2.2"><font color="#424242">2.2</font></a> Make a comment: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/7eqAL3iuzy0"></object-->
-        </div>
-          <br>
-          <br>
+          <object width="420" height="315" data="https://www.youtube.com/v/7eqAL3iuzy0"></object>
+        </div><br><br>
         <!-- how to set up a search -->
         <p><b><a name="2.3"><font color="#424242">2.3</font></a> How to search: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/fDodP2QGOZE"></object-->
-        </div>
-          <br>
-          <br>
-        </div>
+          <object width="420" height="315" data="https://www.youtube.com/v/fDodP2QGOZE"></object>
+        </div><br><br>
+      </div>
 
       <!-- SMALL-UP
            use this to show the page on smaller displays
@@ -331,75 +315,62 @@
         <p><b><a name="1.1"><font color="#424242">1.1</font></a> Is it possible to rate a person? </b></p>
         <ul>
           <li>No. Logged user can rate comments (positive or negative) concerning of their usefulness one time.</li>
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.2"><font color="#424242">1.2</font></a> How can I rate a comment? </b></p>
         <ul>
           <li>You have to click on a comment (or on a pin). Now you can see the comment. At the bottom of the comment field you have the possibillity to rate this comment.
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.3"><font color="#424242">1.3</font></a> How will be generate a thread? </b></p>
         <ul>
           <li>A thread will be generate automatically. Several comments with the same attributes will be generate to a list and visualized as a list on the left site on the main page. </li>
-        </ul>
+        </ul><br>
         <p><b><a name="1.4"><font color="#424242">1.4</font></a> How can I change my personal settings? </b></p>
         <ul>
           <li>Logged users have the possibillity to change their personal settings over the gear-wheel (on the right side of the logged main page).</li>
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.5"><font color="#424242">1.5</font></a> Who is CommenTerra? </b></p>
         <ul>
           <li>You can find further informations about CommenTerra when you click on the link at the footer "about us"</li>
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.6"><font color="#424242">1.6</font></a> How can I deactivate the user-help? </b></p>
         <ul>
           <li>You can deactivate the user-help in your user-settings</li>
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.7"><font color="#424242">1.7</font></a> Can I save my search-requests? </b></p>
         <ul>
           <li>Yes. You can safe your search-requests by click on the ""-button</li>
-        </ul>
-          <br>
+        </ul><br>
         <p><b><a name="1.8"><font color="#424242">1.8</font></a> How can I manage my search-requests? </b></p>
         <ul>
           <li>By clicking on the gear-wheel you open the personal settings. Here you have the chance to manage (rename) the requests</li>
-        </ul>
-          <br>
-          <br>
-          <br>      
-        <h2> 2. Tutorials </h2>
-        <br>
+        </ul><br>
+        <p><b><a name="1.9"><font color="#424242">1.9</font></a> What is "Start Tour" & how to use it? </b></p>
+        <ul>
+          <li>"Start Tour" is for explaining the page you are right now. It can be activated in the "Site Navigation"</li>
+        </ul><br><br><br>
+     
+        <h2> 2. Tutorials </h2><br>
         <!-- how to navigate on the pages -->
         <p><b><a name="2.1"><font color="#424242">2.1</font></a> Navigation on page: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/Esi9RUWWtks"></object-->
-        </div>
-          <br>
-          <br>     
+          <object width="420" height="315" data="https://www.youtube.com/v/Esi9RUWWtks"></object>
+        </div><br><br>    
         <!-- create new comment
              only for registrated users --> 
         <p><b><a name="2.2"><font color="#424242">2.2</font></a> Make a comment: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/7eqAL3iuzy0"></object-->
-        </div>
-          <br>
-          <br>
+          <object width="420" height="315" data="https://www.youtube.com/v/7eqAL3iuzy0"></object>
+        </div><br><br>
         <!-- how to set up a search -->
         <p><b><a name="2.3"><font color="#424242">2.3</font></a> How to search: </b></p>
         <div class="flex-video"> 
-          <!--object width="420" height="315" data="https://www.youtube.com/v/fDodP2QGOZE"></object-->
-        </div>
-          <br>
-          <br>
+          <object width="420" height="315" data="https://www.youtube.com/v/fDodP2QGOZE"></object>
+        </div><br><br>
       </div>
     </div>
   </div>
 
-
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
-
 
     <!-- FOOTER
          on every page to get more informations -->
@@ -409,11 +380,9 @@
     </div>
 
     <script src="js/foundation.min.js"></script>
-
     <script>
       $(document).foundation();
     </script>
-
   </body>
 
 </html>

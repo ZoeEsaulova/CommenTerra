@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CommenTerra | About Us</title>
-   <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
@@ -121,8 +121,7 @@
                   <div class="small-9 columns ">
                       <div class "search-field">
                         <!--search for keyword field with an autocomplete function-->
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
-                        <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
+                        <label> <input type="text" id="tags" placeholder="search term" name="q"> </label>
                       </div>
                   </div>
                   <!--override the count that adds up to 12 columns-->
@@ -180,11 +179,9 @@
     </nav>
     </div>
 
-
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
-
     
     <!-- upper dark gray area -->
     <div class="panel custom">
@@ -194,7 +191,7 @@
       <ul class="large-block-grid-3">
         <li>
             <!--Logo-->
-            <img id="firstStop" src="img/vektorlogo.svg" width="205" height="205">
+            <img id="firstStop" src="img/vektorlogo.svg" width="335" height="335" style="padding-left:40px">
         </li>
         <li>
           <font size="6" color="white"><b>About Us</b></font>            
@@ -202,7 +199,7 @@
             <p></p>
         </li>
         <li>
-          <!--Lizenzen-->
+          <!-- licences and github repository -->
           <font size="6" color="white"><b>Licences</b></font>
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
@@ -233,7 +230,7 @@
             <p></p>
         </li>
         <li>
-          <!--Lizenzen-->
+          <!-- licences and github repository -->
           <font size="6" color="white"><b>Licences</b></font>
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
@@ -260,7 +257,7 @@
           <font size="6" color="white"><b>About Us</b></font>            
             <p align="justify" style="line-heigh:1.9em"><font color="white">CommenTerra founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek. We maintain this Web Application since 2014. Furthermore we use open sources to create this Application. Our young company has the ambition to start a community-based interchange with datasets.</font></p>
             <p></p>
-          <!--Lizenzen-->
+          <!-- licences and github repository -->
           <font size="6" color="white"><b>Licences</b></font>
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
@@ -315,16 +312,11 @@
         <font size="6">Contact Us</font>
         <p></p>
         <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="antwortseite_template" value="mail_response.html">  
-
-
-<!--Muss eventuell eine globale URL sein und keine lokale!-->
-
+          <input type="hidden" name="antwortseite_template" value="mail_response.html">
 
           <input type="hidden" name="empfaenger" value="m.twel02@gmail.com,bjunge90@gmail.com,ehrecke.jan@gmail.com,j.golz01@gmail.com,zoe.esaulova@gmail.com"/>
           <ul class="small-block-grid-2" data-equalizer>
             <li>
-
               <label for="name"><font color="#424242">Name:</font></label>
               <input class="inputright" type="text" name="name" id="name"/>
 
@@ -352,19 +344,16 @@
       </strong>
     </div>
 
-
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
-
 
     <!-- FOOTER
          on every page to get more informations -->
     <div id="footer">
-      || <a href="/about"><font color="#424242">About CommenTerra / Contact</font></a> || 
-      <a href="/faq"><font color="#424242">FAQ / Help</font></a> ||
+      <a href="/about"><font color="#424242">|| About CommenTerra / Contact ||</font></a> 
+      <a href="/faq"><font color="#424242">FAQ / Help ||</font></a> 
     </div>
 
     <script src="js/foundation.min.js"></script>
-
     <script>
       $(document).foundation();
     </script>

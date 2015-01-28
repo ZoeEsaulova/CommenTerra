@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,16 +8,11 @@
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
-    <!--script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script-->
-    <!--script src="../node_modules/angular/angular.min.js"></script-->
-    <!--script src="../node_modules/angular-route/angular-route.min.js"></script-->
+    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-    <!--script src="js/angular.js"></script-->
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/jquery-1.11.2.js"></script>
-    <script src="js/vendor/jquery-ui.js"></script> 
-  
+    <script src="js/vendor/jquery-ui.js"></script>
 
           <!-- style for rate function and stars -->
           <style>.functions .demo {
@@ -162,11 +156,50 @@
 
   
    <% if (markers) { %>
-       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>')">
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>'); helpModal();">
     <% } else { %>
-       <body data-ng-app="Comments" data-ng-controller="commentsController" >
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="helpModal()" >
     <% }%>
   
+    <!--Modal help (shown or disabled)-->
+    <script>
+      function setCookie() {
+        if(document.getElementById("hideModal").checked == true){
+          document.cookie = "hilfe=off";
+        } else {
+          document.cookie = "help=on";
+        }
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+      function helpModal() {
+        var c = getCookie("hilfe");
+        if(c=="" || c=="on"){
+          $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+        }
+      }
+    </script>
+
+    <div id="ModalHelp" class="reveal-modal" data-reveal>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</p><br>
+      <p>
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
+        <label for="hideModal">
+          <font color="#424242">&nbsp Don't show me this again</font>
+        </label>
+      </p>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
   
     <!-- TO BE UPDATED. Login or Signup failed --> 
   	<% if (message.length > 0) { %>
@@ -194,12 +227,11 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" name="q" id="keyword" placeholder="search for keyword"> </label>
-                        <!--small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small -->
+                        <label> <input type="text" name="q" id="tags" placeholder="search term"> </label>
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button class="success radius expand" type="submit">Search</button>
+                    <button id="lastStop" class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
@@ -240,6 +272,7 @@
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
+              <li><a>Relocate</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
@@ -417,7 +450,7 @@
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
+                    <font color="#424242"><em>anonymous</em></font>
                   <%} %>
 <!--
 <% if (comments[i].markerCoords) {%>
@@ -459,7 +492,7 @@
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
                             <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>                            
+                              <font color="#424242"><em>anonymous</em></font>                            
                             <%} %>
                               <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                               <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
@@ -690,20 +723,25 @@
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
         <p>This is the map with the markers and potential layers of the comments...</p>
       </li>
+      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this is, where the comments are! Click the titles to get more information on the titles.</p>
+      </li>
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this finally is, where the comments are! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+        <p>For a shorter search use this! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
       </li>
     </ol>
 
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
       $(document).foundation();
+    </script>
+    <script>
+      function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
       }
-      
+      }
     </script>
 
 
