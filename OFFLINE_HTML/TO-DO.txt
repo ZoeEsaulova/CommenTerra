@@ -8,7 +8,7 @@ BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/sea
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - Login von new_comment funktioniert nicht 
 - Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen
-- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten
+- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten, DRAW
 
 allgemein:
 ____________________________
@@ -16,9 +16,8 @@ ____________________________
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!   
 ____________________________
-- Starrating - Funktionalität
+- "Experte" Rolle zuweisen
 - Commentar bewerten (daumen hoch/runter)
-- GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation -> funktionalität, button ist da
@@ -27,15 +26,13 @@ ____________________________
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> kA, sollen wir einfach lassen?
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> bei mir lokal ist es im Moment nicht mehr der Fall :)
 
 advanced_search:
-- GPS -> Coordinates (7.32587, 51.78386) || Macht es Sinn nach einem bestimmten Punkt zu suchen? 
-- am anfang keine commentare anzeigen
-- Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
+- GPS Suche
 - Bounding Box- Suche
+- am anfang keine commentare anzeigen
 - Vielleicht eine Überschrift "Suchergebnisse" zur Veranschaulichung einfügen
-- Möglichkeit, bei der URL-Suche auch nach Teilen der URL suchen
 
 mapviewer:
 - übergabe des links muss noch rein
