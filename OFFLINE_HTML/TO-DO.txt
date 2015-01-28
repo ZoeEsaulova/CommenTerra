@@ -1,6 +1,8 @@
 -----------------------------------------------
 Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com/ZoeEsaulova/CommenTerra"
 -----------------------------------------------
+
+BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/search.php
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
