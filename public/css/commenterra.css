@@ -2320,23 +2320,23 @@ meta.foundation-mq-topbar {
   border-width: 1px;
   display: block;
   font-weight: normal;
-  margin-bottom: 1.25rem;
+
   position: relative;
   padding: 0.875rem 1.5rem 0.875rem 0.875rem;
   font-size: 0.8125rem;
   transition: opacity 300ms ease-out;
-  background-color: #80ff00;
-  border-color: #6edb00;
+  background-color: #c60f13;
+  border-color: #c60f13;
   color: white; }
   .alert-box .close {
-    font-size: 1.375rem;
+    font-size: 2rem;
     padding: 9px 6px 4px;
     line-height: 0;
     position: absolute;
     top: 50%;
     margin-top: -0.6875rem;
     right: 0.25rem;
-    color: #333333;
+    color: #424242;
     opacity: 0.3;
     background: inherit; }
     .alert-box .close:hover, .alert-box .close:focus {
