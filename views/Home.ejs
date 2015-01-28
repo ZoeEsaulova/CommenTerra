@@ -425,13 +425,18 @@
                     <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
                     <!-- display stars depending on star-rating -->
-                    <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <% } %>
-                    <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                    <% } %>
-                   
+                    <% if (comments[i].dataset.rating) {%> 
+                      <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <% } %>
+                      <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <% } %>
+                    <%} else {%> 
+                      <% for (var l=0; l<5; l++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <% } %>
+                    <%} %>                  
                   </li>
                   </ul>
                   <%= comments[i].dataset.rating %>

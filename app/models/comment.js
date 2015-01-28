@@ -6,6 +6,7 @@ var Comment = require('../models/comment');
 var commentSchema = mongoose.Schema({
   title: { type: String },
   dataset: { type: mongoose.Schema.Types.ObjectId, ref: 'Dataset' }, 
+  datasetRating: { type: Number, default: 0 },
   url: String,
   text: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

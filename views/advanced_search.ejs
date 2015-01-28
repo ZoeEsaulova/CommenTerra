@@ -280,13 +280,13 @@
           <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
           <li>
             <form action="/api/v1" method="post">
-              <input type="text" name="q" id="search_keywords" placeholder="search term" />
-              <input type="text" name="url" id="search_url" placeholder="search for url" />            
-              <input type="text" name="authorName" id="search_user" placeholder="search for username" />
-              <p>
-                <div id="rating"></div>
-              </p>
-            
+            <input type="text" name="q" id="search_keywords" placeholder="<%= keywordsPH %>" />
+            <input type="text" name="url" id="search_url" placeholder="<%= urlPH %>" />            
+            <input type="text" name="username" id="search_user" placeholder="<%= userPH %>" />
+          <p>
+          <div id="rating" data-score="<%= score %>" ></div>
+          <input id="rating-input" name="datasetRating" type="hidden" value="" /> 
+          </p>
           </li>
 
           <li>            
@@ -294,7 +294,7 @@
               <li>
                 <!-- start date -->
                 <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                  <input type="text" id="datepicker1" placeholder="time frame (start)" name="startdate">
+                  <input type="text" id="datepicker1" placeholder="<%= startdatePH %>" name="startdate">
                 </div>
 
                 <!-- coordinates for searching on a specific point -->
@@ -306,7 +306,7 @@
               <li>
                 <!-- end date -->
                 <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                  <input type="text" id="datepicker2" placeholder="time frame (end)" name="enddate">
+                  <input type="text" id="datepicker2" placeholder="<%= enddatePH %>" name="enddate">
                 </div>
 
                 <!-- boundingbox search
@@ -341,11 +341,12 @@
              ordered in a grid to have a better overview of the options -->
           <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
           <form>
-            <input type="text" name="search_keywords" id="search_keywords" placeholder="search term" />
-            <input type="text" name="search_url" id="search_url" placeholder="search for url" />            
-            <input type="text" name="search_user" id="search_user" placeholder="serch for username" />
-          </form>
-          <div id="rating1"></div>
+            <input type="text" name="search_keywords" id="search_keywords" placeholder="<%= keywordsPH %>" />
+            <input type="text" name="search_url" id="search_url" placeholder="<%= urlPH %>" />            
+            <input type="text" name="search_user" id="search_user" placeholder="<%= userPH %>" />
+          
+          <div id="rating2" data-score="<%= score %>" ></div>
+          <input id="rating-input" name="datasetRating" type="hidden" value="" /> 
           <br>
           <!-- start date -->
           <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
@@ -357,7 +358,7 @@
           </div>
 
           <!-- coordinates for searching on a specific point -->
-          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="coordinates (in decimal degrees)" />
+          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="<%= gpsPH %>" />
 
           <!-- boundingbox search
                the user get a pop-up window where he/she is
@@ -377,6 +378,7 @@
             </div>
 
           <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
+          </form>
       </strong>
     </div>
 
@@ -403,11 +405,19 @@
                          it is open in the map_viewer -->
                     <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                    <!-- display stars depending on star-rating -->
+                    <% if (comments[i].dataset.rating) {%> 
+                      <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                      <% } %>
+                      <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <% } %>
+                    <%} else {%> 
+                      <% for (var l=0; l<5; l++) { %> 
+                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                      <% } %>
+                    <%} %> 
                    
                   </li>
                   </ul>
@@ -581,11 +591,20 @@
                 }
 
                 map1.on('locationfound', onLocationFound1);
-                map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
+                map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
                 map1.locate({setView: true, maxZoom: 16});
 
-                var popup = L.popup();
+                L.polygon([
+                  [51.97424, 7.59757],
+                  [51.97415, 7.59839],
+                  [51.97321, 7.59819],
+                  [51.97326, 7.59736]], {
+                    color: '#2ba6cb',
+                    fillColor: '#2ba6cb',
+                    fillOpacity: 0.5
+                  }).addTo(map1).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
+
 
                 function onMapClick1(e) {
                   popup
@@ -698,6 +717,21 @@ $('#bb').click(function() {
       $(document).ready(function(){
         $("#rating").raty({
           path: 'img',
+          score: Number($("#rating").attr('data-score')),          
+          click: function(score, evt) {
+          $("#rating-input").val(score)
+          }
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#rating2").raty({
+          path: 'img',
+          score: Number($("#rating").attr('data-score')),          
+          click: function(score, evt) {
+          $("#rating-input").val(score)
+          }
         });
       });
     </script>

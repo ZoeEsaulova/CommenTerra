@@ -28,6 +28,26 @@ router.get('/searchapi', function(req, res) {
 })
 
 router.get('/simplesearch', function(req, res) { 
+	// placeholder
+	var keywords = "search term"
+	var url = "search by url"
+	var user = "search by user"
+	var startdate = "time frame (start)"
+	var enddate = "time frame (end)"
+	var gps = "coordinates (in decimal degrees)"
+	var score = 0
+	if (req.query.q) {
+		keywords = req.query.q
+	} 
+	if (req.query.url) {
+		url = req.query.url
+	}
+	if (req.query.user) {
+		user = req.query.user
+	}
+	if (req.query.gps) {
+		gps = req.query.gps
+	}
  			
 			request(
 		    	{ method: 'GET'
@@ -114,7 +134,15 @@ router.get('/simplesearch', function(req, res) {
 				actionName: "Logout", 
 				message: req.flash('loginMessage'),
 				markers: markers,
-				query: querystring.stringify(req.query) })
+				score:score,
+				query: querystring.stringify(req.query),
+			//update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user})
 		} else {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -125,30 +153,72 @@ router.get('/simplesearch', function(req, res) {
 				actionName: "Login", 
 				markers: markers,
 				message: req.flash('loginMessage'),
-			    query: querystring.stringify(req.query) })
+			    query: querystring.stringify(req.query),
+			    //update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				score: score,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user })
 		}
 	})
 	})		
 })
 // search functionality
 router.get('/search', function(req,res) {
-
+	// placeholder
+	var keywords = "search term"
+	var url = "search by url"
+	var user = "search by user"
+	var startdate = "time frame (start)"
+	var enddate = "time frame (end)"
+	var gps = "coordinates (in decimal degrees)"
+	var score = 0
+	if (req.query.q) {
+		keywords = req.query.q
+	} 
+	if (req.query.url) {
+		url = req.query.url
+	}
+	if (req.query.user) {
+		user = req.query.user
+	}
+	if (req.query.gps) {
+		gps = req.query.gps
+	}
+	if (req.query.datasetRating) {
+		score = req.query.datasetRating
+	}
+	
 	// keyword search
-	if (!req.query.q) {		
+	if (!req.query.q) {	
+	
 		var query = Comment.find({ comment: undefined }).populate('user').populate('comments').populate('dataset')
-		for (var key in req.query) {			
-			if (key!="count" && key!="startdate" && key!="enddate" && req.query[key]) {
-				query.where(key).equals(req.query[key])
-			}		
+		if (req.query.datasetRating) {
+			query.where('datasetRating').equals(req.query.datasetRating)
 		}
+
+		if (req.query.url) {
+			var regexY = new RegExp(req.query.url, 'i');
+			query.where({ url: regexY })
+		}
+		if (req.query.authorName) {
+			var regexU = new RegExp(req.query.url, 'i');
+			query.where({ authorname: regexU })
+		}
+
 			if (req.query.startdate && req.query.enddate) {
+				startdate = req.query.startdate
+				enddate = req.query.enddate
+				console.log("Startdate?")
 				var splitdate1 = req.query.startdate.split('/')
 				var splitdate2 = req.query.enddate.split('/')
 				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
 				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
 				console.log("Start: " + start + " End: " + end)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
-						
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )						
 			}
 		
 	// search for keywords, url, user
@@ -163,61 +233,58 @@ router.get('/search', function(req,res) {
 			    regex2 = new RegExp(q2, 'i');
 			    query = Comment.find( { $and: [{comment: undefined}, {$or:[{ title: regex2 }, {text: regex2}, {url: regex2}]}]  }).
 			    populate('user').populate('dataset').populate('comments')
-
-			 if (req.query.startdate && req.query.enddate) {
-				var splitdate1 = req.query.startdate.split('/')
-				var splitdate2 = req.query.enddate.split('/')
-				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
-				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
-						
-			}
-
 		} else {
-
-		// one of the words search
+// one of the words search
 		var query = Comment.find({ comment: undefined }).populate('user').populate('dataset').populate('comments')
-			if (req.query.startdate && req.query.enddate) {
-				var splitdate1 = req.query.startdate.split('/')
-				var splitdate2 = req.query.enddate.split('/')
-				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
-				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
-
-				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
-						
-			}
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
 				query = query.where( { $or:[{ title: regexX }, {text: regexX}, {url: regexX}]  })					
 			}
-			for (var key in req.query) {	
-				if (key!="startdate" && key!="enddate" && key!="count" && key!="q" && req.query[key]) {
-					query.where(key).equals(req.query[key])
-				}	
-		
-			}
+		}
 
+		
+			if (req.query.startdate && req.query.enddate) {
+				startdate = req.query.startdate
+				enddate = req.query.enddate
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+						
+			}
+			
+			if (req.query.datasetRating) {
+			query.where('datasetRating').equals(req.query.datasetRating)
+		}
+
+		if (req.query.url) {
+			var regexY = new RegExp(req.query.url, 'i');
+			query.where({ url: regexY })
+		}
+		if (req.query.authorName) {
+			var regexU = new RegExp(req.query.url, 'i');
+			query.where({ authorname: regexU })
 		}
 	}
-
-
 
 	if (req.query.count) {
 		query.limit(Number(req.query.count))
 	}	 
-			
-	
-	
+				
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
-		var markers = ""
+		if (comments) {
+			var markers = ""
 				for (var i=0; i<comments.length; i++) {
 					if (comments[i].markerCoords[0]) {
 						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
 						
 					}
 				}
-
+		}
+		
 		if (req.isAuthenticated()) {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -229,7 +296,16 @@ router.get('/search', function(req,res) {
 				actionName: "Logout", 
 				markers: markers,
 				message: req.flash('loginMessage'),
-				query: querystring.stringify(req.query) })
+				query: querystring.stringify(req.query),
+				//update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user,
+				score: score
+				 })
 		} else {
 			res.render('advanced_search.ejs', { 
 				comments: comments, 
@@ -240,7 +316,16 @@ router.get('/search', function(req,res) {
 				actionName: "Login", 
 				markers: markers,
 				message: req.flash('loginMessage'),
-			    query: querystring.stringify(req.query) })
+			    query: querystring.stringify(req.query),
+			//update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user,
+				score: score
+			})
 		}
 	})
 })
