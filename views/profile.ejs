@@ -274,6 +274,7 @@
                   </form>
                 </div>      
 			         <%} %>
+               <li><a onclick="startJoyRide()">Start Tour</a></li>
                <li><a href="/faq">Help / FAQ</a></li>               
   					</ul> 
   				</li> 
@@ -589,9 +590,13 @@
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
       $(document).foundation();
+    </script>
+    <script>
+      function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }      
+      }
+      }
     </script>
   </body>
 

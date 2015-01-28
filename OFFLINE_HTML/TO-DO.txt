@@ -2,13 +2,11 @@
 Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com/ZoeEsaulova/CommenTerra"
 -----------------------------------------------
 
-BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/search.php
 - Server: Beispieldaten
-- Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, afvanced_search und new_comment Seiten gehts nicht.
+- Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - Login von new_comment funktioniert nicht 
-- Change Requests: Contact, Boundig "Box", FA030102, 2 Bewertungen
-- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten
+- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten, DRAW
 
 allgemein:
 ____________________________
@@ -16,26 +14,20 @@ ____________________________
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!   
 ____________________________
-- Starrating - Funktionalität
-- Commentar bewerten (daumen hoch/runter)
-- GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
-- wie lässt sich JR ausstellen? --> cookies iwie
+- "Experte" Rolle zuweisen
+- Kommentar bewerten (daumen hoch/runter)
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
-- site navi link auf: neue lokalisation -> funktionalität, button ist da
-- anonyme Benutzer nicht in blau anzeigen (Verwirrung wegen Hyperlink), sondern kursiv und grau
+- funktionalität für die neue relokalisation (button bereits in der site navi drin)
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> kA, sollen wir einfach lassen?
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> bei mir lokal ist es im Moment nicht mehr der Fall :)
 
 advanced_search:
-- GPS -> Coordinates (7.32587, 51.78386) || Macht es Sinn nach einem bestimmten Punkt zu suchen? 
-- am anfang keine commentare anzeigen
-- Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
+- GPS Suche
 - Bounding Box- Suche
-- Vielleicht eine Überschrift "Suchergebnisse" zur Veranschaulichung einfügen
-- Möglichkeit, bei der URL-Suche auch nach Teilen der URL suchen
+- am anfang keine commentare anzeigen
 
 mapviewer:
 - übergabe des links muss noch rein
@@ -44,12 +36,9 @@ _______________________________________________________________
 kann auch später erledigt werden, nachrangig!
 _______________________________________________________________
 - Code kürzen
-- Tooltipps
-- Editieren und Löschen von Kommentaren -> nicht gefordert
 
 faq:
 - anker ändern
-- warum genau mussten die flex-videos auskommentiert werden?
 
  profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
@@ -59,17 +48,16 @@ advanced_search:
 AND oder OR Verknüpfung bei der Suche verwendet
 
 about:
-- unter dem footer ist ein dicker weißer balken
-- die "||" im footer sind weiß und nicht grau
 - evtl das logo größer?
 
 
 Beispieldaten:
+BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/search.php
 
-Sensor observation service(SOS) 		http://sensorweb.demo.52north.org/PegelOnlineSOSv2.1/
+Sensor observation service(SOS) http://sensorweb.demo.52north.org/PegelOnlineSOSv2.1/
 				                http://sensorweb.demo.52north.org/52n-sos-webapp/client
 GML				                http://examples.oreilly.com/9780596008659/
 KML			                	kml-samples.googlecode.com/svn/trunk/kml/time/time-stamp-point.kml 
 			                	www-user.uni-bremen.de/koelling/kml/borabora.kml
-			                	http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS
+WMS			                	http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS
 			                	

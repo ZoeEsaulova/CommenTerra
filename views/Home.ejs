@@ -165,7 +165,7 @@
     <script>
       function setCookie() {
         if(document.getElementById("hideModal").checked == true){
-          document.cookie = "help=off";
+          document.cookie = "hilfe=off";
         } else {
           document.cookie = "help=on";
         }
@@ -182,7 +182,7 @@
         return "";
       }
       function helpModal() {
-        var c = getCookie("help");
+        var c = getCookie("hilfe");
         if(c=="" || c=="on"){
           $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
         }
@@ -190,14 +190,14 @@
     </script>
 
     <div id="ModalHelp" class="reveal-modal" data-reveal>
-      <h2><font color="#424242"><b>Hello and welcome to CommenTerra.</b></h2><h3> Click on the Site Navigation in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</h3></font><br>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</p><br>
       <p>
-        <input id="hideModal" type="checkbox">
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
         <label for="hideModal">
           <font color="#424242">&nbsp Don't show me this again</font>
         </label>
       </p>
-      <a onclick="setCookie()" style="text-align: right ;position: relative" class="close-reveal-modal">Close</a><br>
       <a class="close-reveal-modal">&#215;</a>
     </div>
   
@@ -231,7 +231,7 @@
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button class="success radius expand" type="submit">Search</button>
+                    <button id="lastStop" class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
@@ -272,7 +272,7 @@
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="profile.html">Relocate</a></li>
+              <li><a>Relocate</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
@@ -487,7 +487,7 @@
                                 <%= comments[i].comments[j].authorName %>
                               </font></a>
                             <%} else {%> 
-                              <font color="#2ba6cb">Anonymous</font>                            
+                              <font color="#424242"><em>anonymous</em></font>                            
                             <%} %>
                               <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                               <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
@@ -718,8 +718,11 @@
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
         <p>This is the map with the markers and potential layers of the comments...</p>
       </li>
+      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this is, where the comments are! Click the titles to get more information on the titles.</p>
+      </li>
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this finally is, where the comments are! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+        <p>For a shorter search use this! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
       </li>
     </ol>
 
@@ -727,10 +730,13 @@
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
       $(document).foundation();
+    </script>
+    <script>
+      function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
       }
-      
+      }
     </script>
 
 
