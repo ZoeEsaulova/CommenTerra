@@ -21,14 +21,14 @@ ____________________________
 - GPS, Bounding Box (auch um einen Teil des Geodatensatzes zu kommentieren)
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
-- site navi link auf: neue lokalisation
+- site navi link auf: neue lokalisation -> funktionalität, button ist da
 - "search for keywords" ändern in search for tags oder einfach ein leeres Feld
 - anonyme Benutzer nicht in blau anzeigen (Verwirrung wegen Hyperlink), sondern kursiv und grau
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ?
+- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> kA, sollen wir einfach lassen?
 
 advanced_search:
 - GPS -> Coordinates (7.32587, 51.78386) || Macht es Sinn nach einem bestimmten Punkt zu suchen? 
@@ -46,13 +46,11 @@ kann auch später erledigt werden, nachrangig!
 _______________________________________________________________
 - Code kürzen
 - Tooltipps
-- Editieren und Löschen von Kommentaren
-- JR immer nur für den desktop nicht für mobilen seiten anzeigen (nicht gefordert!)
+- Editieren und Löschen von Kommentaren -> nicht gefordert
 
 faq:
 - anker ändern
 - warum genau mussten die flex-videos auskommentiert werden?
-- was ist ein joyride
 
  profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
