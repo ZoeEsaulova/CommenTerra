@@ -14,7 +14,6 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
 
-    <link rel="stylesheet" href="css/labs.css" />
     <link rel="stylesheet" href="css/jquery.raty.css" />
     <script src="js/jquery.raty.js"></script>
     <script src="js/labs.js"></script>
@@ -295,7 +294,6 @@
                   </div>
 
             </form>
-                <p></p>
 
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
@@ -326,7 +324,6 @@
             <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
           </form>
           <div id="rating1"></div>
-          <p></p>
           <!-- start date -->
           <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
             <input type="text" id="datepicker3" placeholder="Start Date" name="startdate">
@@ -352,8 +349,6 @@
               <a class="close-reveal-modal">&#215;</a>
             </div>
 
-            <p></P>
-
           <!-- "safe this search"-button open a pop-up window
                generate a permalink the user can copy
                to get back to his search everytime -->              
@@ -364,8 +359,6 @@
               <p>http://localhost:80/apo/v1/search?<%= query %></p>
               <a class="close-reveal-modal">&#215;</a>
             </div>
-
-            <p></p>
 
           <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
       </strong>
@@ -382,74 +375,67 @@
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="lastStop" href="#panel<%= i %>c"><%= comments[i].title %></a>
+                <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
 
-                <div id="panel<%= i %>c" class="content">
+                <div id="panel<%= i %>c" class="content" 
+                  >
                   <div class="panel custom5" style="border-color: #424242;">
-                    <ul class="no-bullet">
-                      <li>
-                        <!-- MapViewerModal
-                             by clicking the link of the geodataset
-                             the user is asked whether he/she´d like to
-                             open it in the map_viewer -->
-                        <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                        <!--div id="mapModal" class="reveal-modal" data-reveal>
-                          <p class="lead">Do you want to use the map viewer?</p>
-                          <button href="map_viewer.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal" type="submit">Use Map Viewer</button>
-                          <button href="#" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">No use local</button>
-                          <a class="close-reveal-modal">&#215;</a>
-                        </div-->
-                        <p>
-                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
-                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                        
-                        <!-- timeframe for this geodataset -->
-                        <front>Timeframe: </font>
-
-                      </li>
-                    </ul>
-
-                    <%= comments[i].text %>
+                  <ul class="no-bullet">
+                  <li>
+                    <!-- MapViewer
+                         by clicking the link of the geodataset
+                         it is open in the map_viewer -->
+                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
-                    <ul class="no-bullet">
-                      <li>
-                        <% if (comments[i].user) {%>
-                      <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                        <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %></font></a>
-                      <%} else {%> 
-                        <font color="#2ba6cb">Anonymous</font>
-                      <%} %>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                    <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                   
+                  </li>
+                  </ul>
+                  <%= comments[i].text %> 
+                  <p>
+                  <ul class="no-bullet">
+                  <li>
+                    <% if (comments[i].user) {%>
+                    <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
+                    </font></a>
+                  <%} else {%> 
+                    <font color="#2ba6cb">Anonymous</font>
+                  <%} %>
+<!--
+<% if (comments[i].markerCoords) {%>
 
-                        <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                        <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                        &nbsp&nbsp&nbsp&nbsp
-         
-                        &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                      </li>
-                    </ul>
+  <p onload="loadMarker(<%= comments[i].markerCoords[1] %>, <%= comments[i].markerCoords[0] %>)">test</p>;
+
+<%} %>
+-->
+                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp
+                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
+                  </li>
+                  </ul>
                   </div>
                   <br>
                   <ul class="no-bullet">
-                    <li>
-                      <!-- for making a comment at a comment -->
-                      <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
-                      <div class="row">
-                        <div class="large-12 columns">
-                          <textarea name="text" placeholder="comment on this comment ..."></textarea>
-                          <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
-                        </div>
+                  <li>
+                    <!-- for making a comment at a comment -->
+                    <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <textarea name="text" placeholder="comment on this comment ..."></textarea>
+                        <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
-                    </form>
-                    </li>
+                    </div>
+                  </form>
+                  </li>
                   </ul>
 
-                  <p></P>
-
-                  <% if (comments[i].comments.length>0) {%>
-                  
+                  <% if (comments[i].comments.length>0) {%>                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">

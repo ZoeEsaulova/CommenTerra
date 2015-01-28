@@ -16,7 +16,6 @@
 
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
 
-    <link rel="stylesheet" href="css/labs.css" />
     <link rel="stylesheet" href="css/jquery.raty.css" />
     <script src="js/jquery.raty2.js"></script>
     <script src="js/labs.js"></script>
@@ -289,13 +288,11 @@
                   <option value="kml">KML</option>
                   <option value="gml">GML</option>
                 </select>
-              </label>
-              <br>          
+              </label>          
               <button class="tiny radius expand" id="validateurl" type="submit">
                 <font color="#424242">Validate URL</font>
               </button>
           </form>
-          <br>
           <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
                   <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
@@ -323,12 +320,11 @@
           <option value="gml">GML</option>
         </select>
         </label>
-      <p></p>
+
       <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
       <font color="#424242">Validate URL</font>
       </button>
       </form>
-      <p></p>
 
       <!-- show the pre defined boundingbox of the geodataset on the map 
             ! funktioniert auf klein leider nicht ! -->
@@ -349,10 +345,10 @@
     <div class="panel custom2">            
     <!--segmenting this area in two areas-->
     <form action=<%= addAction %> method="post" name="new_comment_form">
-        <ul class="large-lock-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
+        <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
           <li>
             <div class="panel custom" data-equalizer-watch>
-        <!--Comment area-->
+                <!--Comment area-->
                 <dl class="accordion" data-accordion>
                   <dd class="accordion-navigation">
                     <a href="#panel1b">
@@ -432,7 +428,7 @@
             <div class="panel custom" data-equalizer-watch>
               <!--Map-->
               <div>
-              <div class="map" id="map1" style="width: 100%; height: 730px; border-radius: 3px"></div>
+              <div class="map" id="map1" style="width: 100%; height: 755px; border-radius: 3px"></div>
               </div>
             </div>
           </li>
