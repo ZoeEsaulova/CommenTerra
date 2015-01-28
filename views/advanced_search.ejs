@@ -389,7 +389,7 @@
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
-                    <font color="#424242">anonymous</font>
+                    <font color="#424242"><em>anonymous</em></font>
                   <%} %>
 <!--
 <% if (comments[i].markerCoords) {%>
@@ -518,9 +518,6 @@
                 map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
                 map1.locate({setView: false, maxZoom: 16});
-                
-                L.marker([51.96935, 7.59588]).addTo(map1)
-                  .bindPopup("<b>Hello everyone!</b><br />This is the GEO1 in Münster.").openPopup();
 
                 L.polygon([
                   [51.97424, 7.59757],
