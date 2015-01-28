@@ -22,7 +22,6 @@ ____________________________
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation -> funktionalität, button ist da
-- "search for keywords" ändern in search for tags oder einfach ein leeres Feld
 - anonyme Benutzer nicht in blau anzeigen (Verwirrung wegen Hyperlink), sondern kursiv und grau
 
 new_comment:
