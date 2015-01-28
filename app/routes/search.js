@@ -29,12 +29,12 @@ router.get('/searchapi', function(req, res) {
 
 router.get('/simplesearch', function(req, res) { 
 	// placeholder
-	var keywords = "Search_term"
-	var url = "url"
+	var keywords = "search term"
+	var url = "search for url"
 	var user = "user"
-	var startdate = "Start_date"
-	var enddate = "End_date"
-	var gps = "GPS_coordinates"
+	var startdate = "start date"
+	var enddate = "end date"
+	var gps = "coordinates (in decimal degrees)"
 	if (req.query.q) {
 		keywords = req.query.q
 	} 
