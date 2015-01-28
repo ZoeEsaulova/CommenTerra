@@ -22,7 +22,6 @@ ____________________________
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
 zu kommentieren)
-- new_comment: Im Titel wird automatisch eine Komma gesetzt ? -> bei mir lokal ist es im Moment nicht mehr der Fall :)
 
 advanced_search:
 - GPS Suche
