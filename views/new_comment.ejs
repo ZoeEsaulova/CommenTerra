@@ -403,6 +403,7 @@
                 var locationMarker;
                 var locationCircle;
 
+                //shows the location of the device
                 function onLocationFound1(e) {
 
                   var radius1 = e.accuracy / 2;
@@ -417,15 +418,16 @@
                   }).addTo(map1);
                 }
 
-                //shows the location of the device
                 function onLocationError1(e) {
                   alert(e.message);
                 }
 
                 map1.on('locationfound', onLocationFound1);
-                map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
+                map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
 
                 map1.locate({setView: true, maxZoom: 16});
+
+                var popup = L.popup();
 
                 function onMapClick1(e) {
                   popup

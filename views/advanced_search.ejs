@@ -569,20 +569,11 @@
                 }
 
                 map1.on('locationfound', onLocationFound1);
-                map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
+                map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
 
                 map1.locate({setView: true, maxZoom: 16});
 
-                L.polygon([
-                  [51.97424, 7.59757],
-                  [51.97415, 7.59839],
-                  [51.97321, 7.59819],
-                  [51.97326, 7.59736]], {
-                    color: '#2ba6cb',
-                    fillColor: '#2ba6cb',
-                    fillOpacity: 0.5
-                  }).addTo(map1).bindPopup("This is an ordinary football-field at the WWU's sports ground.");
-
+                var popup = L.popup();
 
                 function onMapClick1(e) {
                   popup
