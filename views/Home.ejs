@@ -231,7 +231,7 @@
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button class="success radius expand" type="submit">Search</button>
+                    <button id="lastStop" class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
@@ -718,8 +718,11 @@
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
         <p>This is the map with the markers and potential layers of the comments...</p>
       </li>
+      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this is, where the comments are! Click the titles to get more information on the titles.</p>
+      </li>
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this finally is, where the comments are! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+        <p>For a shorter search use this! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
       </li>
     </ol>
 
@@ -727,10 +730,13 @@
     <script src="js/foundation/foundation.joyride.js"></script>
     <script>
       $(document).foundation();
+    </script>
+    <script>
+      function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
       }
-      
+      }
     </script>
 
 

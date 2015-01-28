@@ -16,7 +16,6 @@ ____________________________
 ____________________________
 - "Experte" Rolle zuweisen
 - Kommentar bewerten (daumen hoch/runter)
-- wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - funktionalität für die neue relokalisation (button bereits in der site navi drin)
 
