@@ -58,7 +58,7 @@
       "Scheme"
       ];
        function split( val ) {
-      return val.split( /,\s*/ );
+      return val.split( / \s*/ );
       }
       function extractLast( term ) {
       return split( term ).pop();
@@ -90,7 +90,7 @@
       terms.push( ui.item.value );
       // add placeholder to get the comma-and-space at the end
       terms.push( "" );
-      this.value = terms.join( ", " );
+      this.value = terms.join( " " );
       return false;
       }
       });
@@ -99,6 +99,14 @@
   </head>
 
   <body>
+
+    <% if (message.length > 0) { %>
+      <div data-alert class="alert-box">
+        <%= message %>
+      <a href="#" class="close">&times;</a>
+      </div>
+    <% } %>
+
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
