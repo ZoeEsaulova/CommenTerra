@@ -162,11 +162,50 @@
 
   
    <% if (markers) { %>
-       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>')">
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>'); helpModal();">
     <% } else { %>
-       <body data-ng-app="Comments" data-ng-controller="commentsController" >
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="helpModal()" >
     <% }%>
   
+    <!--Modal help (shown or disabled)-->
+    <script>
+      function setCookie() {
+        if(document.getElementById("hideModal").checked == true){
+          document.cookie = "help=off";
+        } else {
+          document.cookie = "help=on";
+        }
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+      function helpModal() {
+        var c = getCookie("help");
+        if(c=="" || c=="on"){
+          $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+        }
+      }
+    </script>
+
+    <div id="ModalHelp" class="reveal-modal" data-reveal>
+      <h2><font color="#424242"><b>Hello and welcome to CommenTerra.</b></h2><h3> Click on the Site Navigation in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</h3></font><br>
+      <p>
+        <input id="hideModal" type="checkbox">
+        <label for="hideModal">
+          <font color="#424242">&nbsp Don't show me this again</font>
+        </label>
+      </p>
+      <a onclick="setCookie()" style="text-align: right ;position: relative" class="close-reveal-modal">Close</a><br>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
   
     <!-- TO BE UPDATED. Login or Signup failed --> 
   	<% if (message.length > 0) { %>
