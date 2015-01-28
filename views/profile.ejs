@@ -480,6 +480,18 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
+                var specialIcon = L.Icon.extend({
+                  options: {
+                    shadowUrl: '/css/images/marker-shadow.png',
+                    iconAnchor:   [12, 40],
+                    shadowAnchor: [12, 40],
+                    popupAnchor:  [0, -30]
+                  }
+                });
+
+                var greenIcon = new specialIcon({iconUrl: 'css/images/marker-icon-green.png'}),
+                    redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'});
+
                 function relocate() {
 
                   map1.locate({setView: true, maxZoom: 16});
@@ -494,12 +506,12 @@
                 function onLocationFound1(e) {
                   var radius1 = e.accuracy / 2;
 
-                  locationMarker = L.marker(e.latlng).addTo(map1)
+                  locationMarker = L.marker(e.latlng, {icon: redIcon}).addTo(map1)
                   .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
 
                   locationCircle = L.circle(e.latlng, radius1, {
-                    color: '#2ba6cb',
-                    fillColor: '#2ba6cb',
+                    color: '#c60f13',
+                    fillColor: '#c60f13',
                     fillOpacity: 0.5
                   }).addTo(map1);
                 }
