@@ -115,7 +115,7 @@ router.get('/add/:url?', function(req, res) {
 
 // add a new comment with an URL   TO BE UPDATED111 - URL PARAMETER
 router.post('/add', function(req, res) {
-
+	
 	// Get form values. These rely on the "name" attributes
 	    if (req.body.startdate && req.body.enddate) {
 			var splitdate1 = req.body.startdate.split('/')
@@ -144,8 +144,12 @@ router.post('/add', function(req, res) {
 			newText = req.body.text,
 			boundingBox = [],
 			markerCoords = [],
+			rating = 0,
 			newDataset = "";
 
+			if (req.body.rating) {
+				rating = Number(req.body.rating)
+			}
 			if (coords.minx) {
 				boundingBox = [ Number(coords.minx), Number(coords.miny),  Number(coords.maxx), Number(coords.maxy) ]
 				markerCoords = [ Number(coords.minx) + (Number(coords.maxx) - Number(coords.minx))/2,
@@ -157,7 +161,7 @@ router.post('/add', function(req, res) {
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
-				newDataset = new Dataset({ url: newUrl })
+				newDataset = new Dataset({ url: newUrl, rating: rating })
         		newDataset.save()
 				//create new comment
 				if (markerCoords.length>0) {
@@ -197,6 +201,7 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
+				dataset.rating = Math.round((dataset.rating + rating) / 2)
 				//create new comment
 				if (markerCoords.length>0) {
 					var newComment = new Comment({ 
@@ -237,7 +242,7 @@ router.post('/add', function(req, res) {
 
         Dataset.findOne({ url: newUrl }).exec(function(err, dataset) {
 			if (!dataset) {
-				newDataset = new Dataset({ url: newUrl })
+				newDataset = new Dataset({ url: newUrl, rating: rating  })
         		newDataset.save()
 
         		if (markerCoords.length>0) {
@@ -271,8 +276,10 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-
+				dataset.rating = Math.round((dataset.rating + rating) / 2)
 				if (markerCoords.length>0) {
+
+					
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1, markerCoords: markerCoords, boundingBox: boundingBox })
 				} else {

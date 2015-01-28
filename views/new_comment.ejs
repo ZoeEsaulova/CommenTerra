@@ -372,7 +372,8 @@
                           <li>
                             <font color="#424242" size="4">Rating (optional):</font><br>
                             <!--five star rating-->
-                            <div id="rating"></div>
+                            <div id="rating" data-score="@Model.Company.Rating" ></div>
+                            <input id="rating-input" name="rating" type="hidden" value="test" /> 
                           </li>
                           <li>
                             <font color="#424242" size="4">Timeframe (optional):</font><br>
@@ -529,16 +530,16 @@
       $(document).ready(function(){
         $("#rating").raty({
           path: 'img',
+          score: function () {             
+                return $(this).attr('data-score');
+            },
+            click: function(score, evt) {
+          $("#rating-input").val(score)
+          }
         });
       });
     </script>
-    <script>
-      $(document).ready(function(){
-        $("#rating2").raty({
-          path: 'img',
-        });
-      });
-    </script>
+    
     <script>
       function startJoyRide(){
         $(document).foundation();
