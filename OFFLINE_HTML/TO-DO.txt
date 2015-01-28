@@ -72,4 +72,5 @@ Sensor observation service(SOS) 		http://sensorweb.demo.52north.org/PegelOnlineS
 GML				                http://examples.oreilly.com/9780596008659/
 KML			                	kml-samples.googlecode.com/svn/trunk/kml/time/time-stamp-point.kml 
 			                	www-user.uni-bremen.de/koelling/kml/borabora.kml
+			                	http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS
 			                	

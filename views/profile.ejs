@@ -148,8 +148,7 @@
        <body onload="showMarkers('<%= markers %>')">
     <% } else { %>
        <body>
-    <% }%>
-  	
+    <% }%>  	
     <!-- TOP-BAR (fixed)
        everytime you can see this strong navigation tool
        to get you everywhere -->
@@ -180,7 +179,6 @@
                 </div>
             </form>
           </li>
-
           <!-- Login -->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
@@ -207,14 +205,12 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
-
   				<li class="has-dropdown"> 
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
               <li><a href="profile.html">Relocation</a></li>
-
         			<% if ((boolean1) && (boolean3)) {%> 
         			<li><a data-reveal-id="SettingsModal">Profile Settings</a></li>
                 <!-- SettingsModal
@@ -265,9 +261,7 @@
                         </div>                      
                     </li>
                   </ul>
-
                   <button id="numero2" class="tiny radius expand" type="submit"><font color="#424242">Save Changes</font></button>
-
                     <!-- saveSettingsModal
                          confirm the change of settings
                          and information about the user -->
@@ -281,9 +275,7 @@
                   </form>
                 </div>      
 			         <%} %>
-
-               <li><a href="/faq">Help / FAQ</a></li>
-               
+               <li><a href="/faq">Help / FAQ</a></li>               
   					</ul> 
   				</li> 
   			</ul> 
@@ -291,11 +283,9 @@
   	</nav>
     </div>
 
-
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
-
 
     <!-- LARGE-UP
            use this to show the page when there is a larger display -->
@@ -334,7 +324,6 @@
         </ul>
       </div>
     </strong>
-
 
     <!-- MEDIUM-UP
            use this to show the page when there is a medium display -->
@@ -399,47 +388,38 @@
             <dl id="numero1" class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
-
                 <a id="lastStop" href="#panel<%= i %>c"><%= comments[i].title %></a>
-
                 <div id="panel<%= i %>c" class="content">
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                    <p>
+                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a><p>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-green"></i></a>
                     <a href="#"><i class="fi-star size-28 font-grey"></i></a>
-                   
                   </li>
                   </ul>
                   <%= comments[i].text %>
                   <p>
                   <ul class="no-bullet">
                   <li>
-                    <% if (comments[i].user) {%>
-                  
+                    <% if (comments[i].user) {%>                  
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
                     <font color="#2ba6cb">Anonymous</font>
                   <%} %>
-
                     <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
                     <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
                     &nbsp&nbsp&nbsp&nbsp
-                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                  
+                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>                  
                   </li>
                   </ul> 
-                </div>
-                  <br>
+                </div><br>
                   <ul class="no-bullet">
                   <li>
-
                     <!-- for making a comment at a comment -->
                     <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
                     <div class="row">
@@ -452,7 +432,6 @@
                   </li>
                   </ul>
                   <% if (comments[i].comments.length>0) {%>
-                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="panel custom5" style="border-color: #424242;">
                           <div class="content">
@@ -478,7 +457,6 @@
                 </div>
               </dd>
               <% } %>
-
             </dl>
           </div>
         </li>
@@ -486,9 +464,8 @@
           <div class="panel custom" data-equalizer-watch>
             <!-- map -->
             <div id="numero5">
-            <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+              <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
             </div>
-
           </div>
         </li>
       </ul>
@@ -625,7 +602,6 @@
         $(document).foundation('joyride', 'start');
       }      
     </script>
-
   </body>
 
 </html>
