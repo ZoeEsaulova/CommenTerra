@@ -14,12 +14,11 @@
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
 
-    <link rel="stylesheet" href="css/jquery.raty.css" />
+    <!--<link rel="stylesheet" href="css/jquery.raty.css" />-->
     <script src="js/jquery.raty.js"></script>
-    <script src="js/labs.js"></script>
+    <!--<script src="js/labs.js"></script>-->
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">    
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">-->
 
           <!-- style for rate function and stars -->
           <style>.functions .demo {
@@ -111,7 +110,7 @@
       "Scheme"
       ];
        function split( val ) {
-      return val.split( /,\s*/ );
+      return val.split( / \s*/ );
       }
       function extractLast( term ) {
       return split( term ).pop();
@@ -143,7 +142,7 @@
       terms.push( ui.item.value );
       // add placeholder to get the comma-and-space at the end
       terms.push( "" );
-      this.value = terms.join( ", " );
+      this.value = terms.join( " " );
       return false;
       }
       });
@@ -176,7 +175,7 @@
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
-                        <label> <input type="text" id="keyword" placeholder="search for keyword" name="q"> </label>
+                        <label> <input type="text" id="tags" placeholder="search term" name="q"> </label>
                         <!-- small class="error">The Keyword must be alpha-numeric with at least 3 characters!</small-->
                       </div>
                   </div>
@@ -219,7 +218,6 @@
             <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="profile.html">Relocation</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
@@ -252,9 +250,9 @@
           <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
           <li>
             <form action="/api/v1" method="post">
-              <input type="text" name="q" id="search_keywords" placeholder="keywords" />
-              <input type="text" name="url" id="search_url" placeholder="url" />            
-              <input type="text" name="authorName" id="search_user" placeholder="user" />
+              <input type="text" name="q" id="search_keywords" placeholder="search term" />
+              <input type="text" name="url" id="search_url" placeholder="search for url" />            
+              <input type="text" name="authorName" id="search_user" placeholder="search for username" />
               <p>
                 <div id="rating"></div>
               </p>
@@ -266,11 +264,11 @@
               <li>
                 <!-- start date -->
                 <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                  <input type="text" id="datepicker1" placeholder="Start Date" name="startdate">
+                  <input type="text" id="datepicker1" placeholder="time frame (start)" name="startdate">
                 </div>
 
                 <!-- coordinates for searching on a specific point -->
-                <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="GPS Coordinates" />
+                <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="coordinates (in decimal degrees)" />
 
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
               </li>
@@ -278,32 +276,25 @@
               <li>
                 <!-- end date -->
                 <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-                  <input type="text" id="datepicker2" placeholder="End Date" name="enddate">
+                  <input type="text" id="datepicker2" placeholder="time frame (end)" name="enddate">
                 </div>
 
                 <!-- boundingbox search
                      the user get a pop-up window where he/she is
                      able to define a radius. Afterwards by clicking
                      on the map the boundingbox circle appears. -->
-                <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Set Areal</font></button>
-                  <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-                    <h2>Set Areal</h2>
-                    <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
-                    <input type="text" id="radius" name=" radius" placeholder="10">
-                    <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
-                    <a class="close-reveal-modal">&#215;</a>
-                  </div>
+                <button id="numero3" href="#" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Set Polygon</font></button>
 
             </form>
 
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
-                <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save this Search</font></button>
-                <div id="permalinkModal" class="reveal-modal" data-reveal>
+                <button id="numero4" href="#" data-reveal-id="permalinkModalLarge" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save this Search</font></button>
+                <div id="permalinkModalLarge" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
-                  <p>http://localhost:80/apo/v1/search?<%= query %></p>
+                  <p><font color="#2ba6cb">http://localhost:80/apo/v1/search?<%= query %></font></p>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
 
@@ -322,11 +313,11 @@
           <form>
             <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
             <input type="text" name="search_url" id="search_url" placeholder="url..." />            
-            <input id="numero1" type="text" name="search_user" id="search_user" placeholder="users..." />
+            <input type="text" name="search_user" id="search_user" placeholder="users..." />
           </form>
           <div id="rating1"></div>
           <!-- start date -->
-          <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
+          <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
             <input type="text" id="datepicker3" placeholder="Start Date" name="startdate">
           </div>
           <!-- end date -->
@@ -341,23 +332,16 @@
                the user get a pop-up window where he/she is
                able to define a radius. Afterwards by clicking
                on the map the boundingbox circle appears. -->
-          <button id="numero3" href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Areal</button>
-            <div id="boundingBoxModal" class="reveal-modal" data-reveal>
-              <h2>Set Areal</h2>
-              <p class="lead">Please insert a radius a boundingbox circle. Given radius in kilometers.</p>
-              <input type="text" id="radius" name=" radius" placeholder="10">
-              <button href="#" class="radius close-reveal-modal expand" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;">Take</button>
-              <a class="close-reveal-modal">&#215;</a>
-            </div>
+          <button href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Polygon</button>
 
           <!-- "safe this search"-button open a pop-up window
                generate a permalink the user can copy
                to get back to his search everytime -->              
-          <button id="numero4" href="#" data-reveal-id="permalinkModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
-            <div id="permalinkModal" class="reveal-modal" data-reveal>
+          <button href="#" data-reveal-id="permalinkModalSmall" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+            <div id="permalinkModalSmall" class="reveal-modal" data-reveal>
               <h2>Permalink</h2>
               <p class="lead">You can copy this link for later searches:</p>
-              <p>http://localhost:80/apo/v1/search?<%= query %></p>
+              <p><font color="#2ba6cb">http://localhost:80/apo/v1/search?<%= query %></font></p>
               <a class="close-reveal-modal">&#215;</a>
             </div>
 
@@ -405,7 +389,7 @@
                     <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
                     </font></a>
                   <%} else {%> 
-                    <font color="#2ba6cb">Anonymous</font>
+                    <font color="#424242">anonymous</font>
                   <%} %>
 <!--
 <% if (comments[i].markerCoords) {%>
@@ -659,7 +643,7 @@ $('#bb').click(function() {
     </script>
     <script>
       $(document).ready(function(){
-        $("#rating2").raty({
+        $("#rating1").raty({
           path: 'img',
         });
       });
