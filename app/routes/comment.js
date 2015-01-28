@@ -278,7 +278,6 @@ router.post('/add', function(req, res) {
         		})
         		}
         		
-
 				newComment.save(function (err) {
 					if (err) return console.error(err)		
 				})
