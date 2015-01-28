@@ -15,6 +15,41 @@
     <script src="js/vendor/leaflet.js"></script>
     <script src="js/jquery.raty.js"></script>
 
+    <!--<script src="´js/vendor/leafletdraw/leaflet-src.js"></script>-->
+
+    <script src="js/vendor/leafletdraw/src/Leaflet.draw.js"></script>
+    <link rel="stylesheet" href="js/vendor/leafletdraw/dist/leaflet.draw.css" />
+
+    <script src="js/vendor/leafletdraw/src/Toolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/Tooltip.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/ext/GeometryUtil.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/LatLngUtil.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/Polygon.Intersect.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/Polyline.Intersect.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/draw/DrawToolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Rectangle.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/edit/EditToolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/Control.Draw.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Marker.js"></script>
+
           <!-- style for rate function and stars -->
           <style>.functions .demo {
             margin-bottom: 10px;
@@ -213,7 +248,7 @@
             <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
-              <li><a href="profile.html">Relocate</a></li>
+              <li><a id="relocate" onClick="relocate()">Relocate</a></li>
               <!-- only for logged in users -->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
@@ -286,7 +321,7 @@
                 <!-- "safe this search"-button open a pop-up window
                      generate a permalink the user can copy
                      to get back to his search everytime -->
-                <button id="numero4" href="#" data-reveal-id="permalinkModalLarge" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save this Search</font></button>
+                <button id="numero4" href="#" data-reveal-id="permalinkModalLarge" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save This Search</font></button>
                 <div id="permalinkModalLarge" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">You can copy this link for later searches:</p>
@@ -307,22 +342,23 @@
              ordered in a grid to have a better overview of the options -->
           <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
           <form>
-            <input type="text" name="search_keywords" id="search_keywords" placeholder="keywords..." />
-            <input type="text" name="search_url" id="search_url" placeholder="url..." />            
-            <input type="text" name="search_user" id="search_user" placeholder="users..." />
+            <input type="text" name="search_keywords" id="search_keywords" placeholder="search term" />
+            <input type="text" name="search_url" id="search_url" placeholder="search for url" />            
+            <input type="text" name="search_user" id="search_user" placeholder="serch for username" />
           </form>
           <div id="rating1"></div>
+          <br>
           <!-- start date -->
           <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-            <input type="text" id="datepicker3" placeholder="Start Date" name="startdate">
+            <input type="text" id="datepicker3" placeholder="time frame (start)" name="startdate">
           </div>
           <!-- end date -->
           <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-            <input type="text" id="datepicker4" placeholder="End Date" name="enddate">
+            <input type="text" id="datepicker4" placeholder="time frame (end)" name="enddate">
           </div>
 
           <!-- coordinates for searching on a specific point -->
-          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="GPS Coordinates" />
+          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="coordinates (in decimal degrees)" />
 
           <!-- boundingbox search
                the user get a pop-up window where he/she is
@@ -333,7 +369,7 @@
           <!-- "safe this search"-button open a pop-up window
                generate a permalink the user can copy
                to get back to his search everytime -->              
-          <button href="#" data-reveal-id="permalinkModalSmall" class="tiny radius expand" style="padding-bottom: 0.45rem">Save this Search</button>
+          <button href="#" data-reveal-id="permalinkModalSmall" class="tiny radius expand" style="padding-bottom: 0.45rem">Save This Search</button>
             <div id="permalinkModalSmall" class="reveal-modal" data-reveal>
               <h2>Permalink</h2>
               <p class="lead">You can copy this link for later searches:</p>
@@ -472,7 +508,7 @@
             <div class="panel custom" data-equalizer-watch>
               <!-- map -->
               <div>
-              <div class="map" id="map1" style="width: 100%; height: 1000px; border-radius: 3px"></div>
+              <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
               </div>
             </div>
           </li>
@@ -481,7 +517,7 @@
 
               <!-- script for the map on the right of the site -->
               <script>
-                //map for middle scale displays
+                //map
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
@@ -493,13 +529,36 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
+                drawnItems = L.featureGroup().addTo(map1);
+
+                map1.addControl(new L.Control.Draw({
+                  edit: { featureGroup: drawnItems }
+                }));
+
+                map1.on('draw:created', function(event) {
+                  var layer = event.layer;
+
+                  drawnItems.addLayer(layer);
+                });
+
+                function relocate() {
+
+                  map1.locate({setView: true, maxZoom: 16});
+
+                  map1.removeLayer(locationMarker);
+                  map1.removeLayer(locationCircle);
+                }
+
+                var locationMarker;
+                var locationCircle;
+
                 function onLocationFound1(e) {
                   var radius1 = e.accuracy / 2;
 
-                  L.marker(e.latlng).addTo(map1)
+                  locationMarker = L.marker(e.latlng).addTo(map1)
                   .bindPopup("You are within " + radius1 + " meters from this point").openPopup();
 
-                  L.circle(e.latlng, radius1, {
+                  locationCircle = L.circle(e.latlng, radius1, {
                     color: '#2ba6cb',
                     fillColor: '#2ba6cb',
                     fillOpacity: 0.5
@@ -513,7 +572,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
-                map1.locate({setView: false, maxZoom: 16});
+                map1.locate({setView: true, maxZoom: 16});
 
                 L.polygon([
                   [51.97424, 7.59757],
@@ -584,6 +643,12 @@ map1.on('draw:created', function (e) {
 $('#bb').click(function() {
     polygonDrawer.enable();
 });*/
+              </script>
+
+              <script>
+
+              
+
               </script>
 
 
