@@ -36,6 +36,9 @@ advanced_search:
 - Vielleicht eine Überschrift "Suchergebnisse" zur Veranschaulichung einfügen
 - Möglichkeit, bei der URL-Suche auch nach Teilen der URL suchen
 
+mapviewer:
+- übergabe des links muss noch rein
+
 _______________________________________________________________
 kann auch später erledigt werden, nachrangig!
 _______________________________________________________________
