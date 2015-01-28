@@ -14,7 +14,7 @@
     <script src="js/vendor/jquery-1.11.2.js"></script>
     <script src="css/vendor/jquery-ui.js"></script>
 
-    <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
+    <!--hier passt auto aber datepicker nicht link rel="stylesheet" href="css/vendor/jquery-ui.css" /-->
 
     <link rel="stylesheet" href="css/jquery.raty.css" />
     <script src="js/jquery.raty2.js"></script>
@@ -22,38 +22,7 @@
 
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
-
-    <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> 
-
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
-
-    <!--script>
-    jQuery(document).ready(function(){
-    jQuery("#testUrl").click(function(){
-    //var testurl = jQuery("#firstStop").val();
-    var testurl = "test";
-    jQuery.get( "/comments/" + testurl, function( data ) {
-      jQuery( "#response" ).html( data );
-      alert( "Load was performed." + data);
-    });
-    /*
-       jQuery.ajax({
-                url: "http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS",
-                type: 'GET',
-                success: function(res) {
-                    console.log(res);
-                    jQuery( "#response" ).html(res);
-                };
-                error: function(jqXHR, textStatus, err){
-                   alert('text status '+textStatus+', err '+err)
-               }
-            });*/
-    });
-    });
-    </script-->
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
     <!-- style for rate function and stars -->
     <style>
@@ -273,7 +242,6 @@
 
     <!--dark grey area-->
     <div class="panel custom">
-
     <!-- LARGE-UP
            use this to show the page when there is a larger display -->
     <strong class="show-for-large-up">
@@ -321,17 +289,14 @@
           <option value="gml">GML</option>
         </select>
         </label>
-
       <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
       <font color="#424242">Validate URL</font>
       </button>
       </form>
-
       <!-- show the pre defined boundingbox of the geodataset on the map 
             ! funktioniert auf klein leider nicht ! -->
       <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
                   <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
-
       <!--shows the response of the URL-->
       <font id="numero5" color="white" size="4">Response:</font>
       <textarea id="response" disabled="disabled" rows="7"><%= XMLresponse %></textarea>
@@ -340,7 +305,6 @@
     </div>
     </strong>
   </div>
-
 
     <!--light grey area-->
     <div class="panel custom2">            
@@ -355,8 +319,6 @@
                     <a href="#panel1b">
                       <font color="#424242" size="4">Title:</font>
                       <input id="numero2" type="text" name="title" id="title" placeholder="Title..." />
-                      
-                      <!-- <small class="error">You have to indicate a title!</small> -->
                     </a>
                     <div class="panel custom2">
                       <div id="panel1b" class="content">
@@ -391,8 +353,6 @@
                           <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
                         </dd>
                       </dl>
-                        <!--return the logged user or the anonyme unlogged user-->
-                        <!--a href=""><font color="#2ba6cb">anonyme</font></a-->
                         <p></p>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
@@ -494,8 +454,7 @@
                 }
            </script>
 
-    <div class="panel custom4" style="width: 100%; height: 2px"></div>
-    
+    <div class="panel custom4" style="width: 100%; height: 2px"></div>    
 
     <!-- FOOTER
          on every page to get more informations -->
@@ -535,8 +494,7 @@
           }
         });
       });
-    </script>
-    
+    </script>    
     <script>
       function startJoyRide(){
         $(document).foundation();
@@ -572,11 +530,6 @@
       jQuery("#testButton").click(function(){
         document.new_comment_form.submit();
       });
-    </script>  
-    <!--script>
-      jQuery("#validateurl3").click(function() {
-        showBoundingBox();
-    }
-    </script-->
+    </script>
   </body>
 </html>
