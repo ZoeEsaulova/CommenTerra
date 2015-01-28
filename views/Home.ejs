@@ -165,7 +165,7 @@
     <script>
       function setCookie() {
         if(document.getElementById("hideModal").checked == true){
-          document.cookie = "help=off";
+          document.cookie = "hilfe=off";
         } else {
           document.cookie = "help=on";
         }
@@ -182,7 +182,7 @@
         return "";
       }
       function helpModal() {
-        var c = getCookie("help");
+        var c = getCookie("hilfe");
         if(c=="" || c=="on"){
           $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
         }
@@ -190,14 +190,14 @@
     </script>
 
     <div id="ModalHelp" class="reveal-modal" data-reveal>
-      <h2><font color="#424242"><b>Hello and welcome to CommenTerra.</b></h2><h3> Click on the Site Navigation in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</h3></font><br>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</p><br>
       <p>
-        <input id="hideModal" type="checkbox">
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
         <label for="hideModal">
           <font color="#424242">&nbsp Don't show me this again</font>
         </label>
       </p>
-      <a onclick="setCookie()" style="text-align: right ;position: relative" class="close-reveal-modal">Close</a><br>
       <a class="close-reveal-modal">&#215;</a>
     </div>
   
