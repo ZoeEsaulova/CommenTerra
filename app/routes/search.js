@@ -30,11 +30,12 @@ router.get('/searchapi', function(req, res) {
 router.get('/simplesearch', function(req, res) { 
 	// placeholder
 	var keywords = "search term"
-	var url = "search for url"
-	var user = "user"
-	var startdate = "start date"
-	var enddate = "end date"
+	var url = "search by url"
+	var user = "search by user"
+	var startdate = "time frame (start)"
+	var enddate = "time frame (end)"
 	var gps = "coordinates (in decimal degrees)"
+	var score = 0
 	if (req.query.q) {
 		keywords = req.query.q
 	} 
@@ -133,6 +134,7 @@ router.get('/simplesearch', function(req, res) {
 				actionName: "Logout", 
 				message: req.flash('loginMessage'),
 				markers: markers,
+				score:score,
 				query: querystring.stringify(req.query),
 			//update placeholder 
 				keywordsPH: keywords,
@@ -155,6 +157,7 @@ router.get('/simplesearch', function(req, res) {
 			    //update placeholder 
 				keywordsPH: keywords,
 				urlPH: url,
+				score: score,
 				startdatePH: startdate,
 				enddatePH: enddate,
 				gpsPH: gps,
@@ -166,12 +169,12 @@ router.get('/simplesearch', function(req, res) {
 // search functionality
 router.get('/search', function(req,res) {
 	// placeholder
-	var keywords = "Search term"
-	var url = "url"
-	var user = "user"
-	var startdate = "Start date"
-	var enddate = "End date"
-	var gps = "GPS coordinates"
+	var keywords = "search term"
+	var url = "search by url"
+	var user = "search by user"
+	var startdate = "time frame (start)"
+	var enddate = "time frame (end)"
+	var gps = "coordinates (in decimal degrees)"
 	var score = 0
 	if (req.query.q) {
 		keywords = req.query.q
