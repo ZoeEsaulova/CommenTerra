@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CommenTerra | About Us</title>
-   <link rel="stylesheet" href="css/commenterra.css" />
+    <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
@@ -121,7 +121,7 @@
                   <div class="small-9 columns ">
                       <div class "search-field">
                         <!--search for keyword field with an autocomplete function-->
-                        <label> <input type="text" id="keyword" placeholder="search term" name="q"> </label>
+                        <label> <input type="text" id="tags" placeholder="search term" name="q"> </label>
                       </div>
                   </div>
                   <!--override the count that adds up to 12 columns-->
@@ -167,6 +167,7 @@
             <ul class="dropdown"> 
               <li><a href="/comments/add">New Comment</a></li> 
               <li><a href="/api/v1/search">Advanced Search</a></li>
+              <li><a href="profile.html">Relocate</a></li>
               <!--for the logged user is a further link to the personal "Profile" site-->
               <% if (boolean1) { %>
               <li><a href="/profile/<%= userId %>">Profile</a></li> 
