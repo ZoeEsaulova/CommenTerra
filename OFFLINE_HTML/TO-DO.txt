@@ -20,6 +20,8 @@ ____________________________
 - wie lässt sich JR ausstellen? --> cookies iwie
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 - site navi link auf: neue lokalisation
+- "search for keywords" ändern in search for tags oder einfach ein leeres Feld
+- anonyme Benutzer nicht in blau anzeigen (Verwirrung wegen Hyperlink), sondern kursiv und grau
 
 new_comment:
 - datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
@@ -31,6 +33,8 @@ advanced_search:
 - am anfang keine commentare anzeigen
 - Suche nach Datum: 1. Fehlermeldung wenn end datum vor dem start datum liegt
 - Bounding Box- Suche
+- Vielleicht eine Überschrift "Suchergebnisse" zur Veranschaulichung einfügen
+- Möglichkeit, bei der URL-Suche auch nach Teilen der URL suchen
 
 _______________________________________________________________
 kann auch später erledigt werden, nachrangig!
@@ -43,6 +47,7 @@ _______________________________________________________________
 faq:
 - anker ändern
 - warum genau mussten die flex-videos auskommentiert werden?
+- was ist ein joyride
 
  profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
