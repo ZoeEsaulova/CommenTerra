@@ -145,10 +145,12 @@ router.post('/add', function(req, res) {
 			boundingBox = [],
 			markerCoords = [],
 			rating = 0,
+			datasetRating = 0,
 			newDataset = "";
 
 			if (req.body.rating) {
 				rating = Number(req.body.rating)
+				datasetRating = Number(req.body.rating)
 			}
 			if (coords.minx) {
 				boundingBox = [ Number(coords.minx), Number(coords.miny),  Number(coords.maxx), Number(coords.maxy) ]
@@ -170,6 +172,7 @@ router.post('/add', function(req, res) {
 					text: newText, 
 					user: req.user._id,
 		 			dataset: newDataset, 
+		 			datasetRating: datasetRating,
 		 			authorName: req.user.local.username, 
 		 			url: newUrl,
 		 			markerCoords: markerCoords,
@@ -182,6 +185,7 @@ router.post('/add', function(req, res) {
 					text: newText, 
 					user: req.user._id,
 		 			dataset: newDataset, 
+		 			datasetRating: datasetRating,
 		 			authorName: req.user.local.username, 
 		 			url: newUrl,
 		 			startdate: startdate1,
@@ -202,6 +206,7 @@ router.post('/add', function(req, res) {
 				res.redirect('/')
 			} else {
 				dataset.rating = Math.round((dataset.rating + rating) / 2)
+				datasetRating = dataset.rating
 				//create new comment
 				if (markerCoords.length>0) {
 					var newComment = new Comment({ 
@@ -209,9 +214,11 @@ router.post('/add', function(req, res) {
 					text: newText, 
 					user: req.user._id,
 				 	dataset: dataset, 
+				 	datasetRating: datasetRating,
 				 	authorName: req.user.local.username,
 				 	markerCoords: markerCoords, 
 				 	boundingBox: boundingBox,
+				 	datasetRating: datasetRating,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
 				} else {
 					var newComment = new Comment({ 
@@ -219,6 +226,7 @@ router.post('/add', function(req, res) {
 					text: newText, 
 					user: req.user._id,
 				 	dataset: dataset, 
+				 	datasetRating: datasetRating,
 				 	authorName: req.user.local.username,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
 
@@ -251,6 +259,7 @@ router.post('/add', function(req, res) {
         			text: newText, 
         			dataset: newDataset, 
         			url: newUrl,
+        			datasetRating: datasetRating,
         			startdate: startdate1,
         			enddate: enddate1,
         			markerCoords: markerCoords,
@@ -263,6 +272,7 @@ router.post('/add', function(req, res) {
         			text: newText, 
         			dataset: newDataset, 
         			url: newUrl,
+        			datasetRating: datasetRating,
         			startdate: startdate1,
         			enddate: enddate1
         		})
@@ -277,14 +287,18 @@ router.post('/add', function(req, res) {
 				res.redirect('/')
 			} else {
 				dataset.rating = Math.round((dataset.rating + rating) / 2)
+				datasetRating = dataset.rating
 				if (markerCoords.length>0) {
 
 					
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
-				startdate: startdate1, enddate: enddate1, markerCoords: markerCoords, boundingBox: boundingBox })
+				startdate: startdate1, enddate: enddate1, 
+				markerCoords: markerCoords, boundingBox: boundingBox,
+				datasetRating: datasetRating })
 				} else {
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
-				startdate: startdate1, enddate: enddate1 })
+				startdate: startdate1, enddate: enddate1,
+				datasetRating: datasetRating})
 
 				}
 				
