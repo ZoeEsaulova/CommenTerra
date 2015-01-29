@@ -19,6 +19,39 @@
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.joyride.js"></script>
 
+    <script src="js/vendor/leafletdraw/src/Leaflet.draw.js"></script>
+    <link rel="stylesheet" href="js/vendor/leafletdraw/dist/leaflet.draw.css" />
+
+    <script src="js/vendor/leafletdraw/src/Toolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/Tooltip.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/ext/GeometryUtil.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/LatLngUtil.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/Polygon.Intersect.js"></script>
+    <script src="js/vendor/leafletdraw/src/ext/Polyline.Intersect.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/draw/DrawToolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="js/vendor/leafletdraw/src/draw/handler/Draw.Rectangle.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/edit/EditToolbar.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/Control.Draw.js"></script>
+
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="js/vendor/leafletdraw/src/edit/handler/Edit.Marker.js"></script>
+
     <!-- style for rate function and stars -->
     <style>
       .functions .demo {
@@ -325,7 +358,7 @@
                       <div class="name-field">
                         <font color="#424242" size="4">Title:</font>
                         <input type="text" id="title" placeholder="Title..." name="username" required>
-                        <small class="error">Please type write a title!</small>
+                        <small class="error">Please type in a title!</small>
                       </div>
                     </a>
                     <div class="panel custom2" style="border-radius: 3px">
@@ -339,7 +372,7 @@
                             <font color="#424242" size="4" id="numero4">Rating (optional):</font><br>
                             <!--five star rating-->
                             <div id="rating" data-score="@Model.Company.Rating" ></div>
-                            <input id="rating-input" name="rating" type="hidden" value="test" /> 
+                            <input id="rating-input" name="rating" type="hidden" value="" /> 
                           </li>
                           <li>
                             <font color="#424242" size="4" id="numero5">Time Frame (optional):</font><br>
@@ -359,7 +392,8 @@
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
                           <li>
-                            <button href="#" id="numero6" class="success tiny radius expand">Set Polygon</button>
+                            <a id="numero6" onClick="showToolbar()" class="success tiny radius expand button">Set Bounding-Box</a>
+                            <input type="hidden" id="set_rectangle" name="set_rectangle" value="" placeholder="bounding-box coordinates" />
                           </li>
                           <li>
                             <button id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
@@ -395,6 +429,10 @@
                 //Map for medium screens
                 var map1 = L.map('map1');
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
+                //reset coordinate input
+                map1.on('load',  function() {
+                  $("#set_rectangle").val(null);
+                });
 
                 //load and display tile layers on the map
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -416,6 +454,61 @@
 
                 var greenIcon = new specialIcon({iconUrl: 'css/images/marker-icon-green.png'}),
                     redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'});
+
+                //create featureGroup and control panels for drawing
+                var drawnItems = new L.FeatureGroup();
+                map1.addLayer(drawnItems);
+
+                var drawControlFull = new L.Control.Draw({
+                  edit: {
+                    featureGroup: drawnItems
+                  }
+                });
+
+                var drawControlEditOnly = new L.Control.Draw({
+                  edit: {
+                    featureGroup: drawnItems
+                  }, draw: false
+                });
+
+                //function to load the control panels for drawing
+                var i = false;
+
+                function showToolbar () {
+
+                if (i == false) {
+
+                map1.addControl(drawControlFull);
+
+                i = true;
+
+                } else {
+
+                }
+
+                }
+
+                //draw the rectangle and put its coordinates into an input
+                map1.on("draw:created", function (e) {
+                  var type = e.layerType;
+                  var layer = e.layer;
+
+                  if (type === 'rectangle') {
+                    layer.on('mouseover', function() {
+                      $("#set_rectangle").val(layer.getLatLngs());   
+                    });
+                  }
+
+                  layer.addTo(drawnItems);
+                  drawControlFull.removeFrom(map1);
+                  drawControlEditOnly.addTo(map1)
+                });
+
+                map1.on("draw:deleted", function(e) {
+                  drawControlEditOnly.removeFrom(map1);
+                  $("#set_rectangle").val(null);
+                  drawControlFull.addTo(map1);
+                });
 
                 function relocate() {
 
@@ -468,7 +561,7 @@
 
                 var bounds = [[xmin, ymin], [xmax, ymax]];
                 // create an orange rectangle
-                L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
+                L.rectangle(bounds, {color: "#424242", weight: 2}).addTo(map1);
 
                 // zoom the map to the rectangle bounds
                 map1.fitBounds(bounds);

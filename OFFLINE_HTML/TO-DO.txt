@@ -3,13 +3,14 @@ Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com
 -----------------------------------------------
 
 - Server: Beispieldaten
-- Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
+- Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
-- KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten, DRAW
+- KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten, DRAW
+- QUICKSEARCH: Datei o.ä. aus der Datenbank erstellen fur die autocomplete-Funktion
 
 allgemein:
 ____________________________
-- PARSING! PARSING! PARSING! : andere Formate, server response übersichtlich machen
+- PARSING! PARSING! PARSING! : andere Formate, server response übersichtlich machen!
 - PARSING! PARSING! PARSING!
 - PARSING! PARSING! PARSING!   
 ____________________________
@@ -18,16 +19,17 @@ ____________________________
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 
 new_comment:
-- datensatz soll in die "map" geladen & angezeigt werden (falls wir es haben: bounding box um einen Teil des Datensatzen
-zu kommentieren)
+- WMS/WFS einladen?
+- Bounding Box Koordinaten im Kommentar speichern
 
 advanced_search:
 - GPS Suche
 - Bounding Box- Suche
-- am anfang keine commentare anzeigen
+- am anfang keine Kommentare anzeigen
 
 mapviewer:
 - übergabe des links muss noch rein
+- WMS/WFS einladen
 
 _______________________________________________________________
 kann auch später erledigt werden, nachrangig!

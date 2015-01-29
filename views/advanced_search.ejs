@@ -15,8 +15,6 @@
     <script src="js/vendor/leaflet.js"></script>
     <script src="js/jquery.raty.js"></script>
 
-    <!--<script src="´js/vendor/leafletdraw/leaflet-src.js"></script>-->
-
     <script src="js/vendor/leafletdraw/src/Leaflet.draw.js"></script>
     <link rel="stylesheet" href="js/vendor/leafletdraw/dist/leaflet.draw.css" />
 
@@ -278,7 +276,7 @@
 
 
     <!-- upper dark gray area -->
-    <div class="panel custom">
+    <div class="panel custom" style="padding-bottom: 0em">
 
     <!-- LARGE-UP
            use this to show the page when there is a larger display -->
@@ -286,20 +284,17 @@
         <!-- input for the advanced search to get the search start
              ordered in a grid to have a better overview of the options -->
         <ul class="large-block-grid-2">
-          <h3 id="firstStop"><font color="white">&nbsp&nbspAdvanced Search</font color="white"></h3><br>
+          <h3 id="firstStop"><font color="white">&nbspAdvanced Search</font color="white"></h3>
           <li>
             <form action="/api/v1" method="post">
-            <input type="text" name="q" id="search_keywords" placeholder="<%= keywordsPH %>" />
-            <input type="text" name="url" id="search_url" placeholder="<%= urlPH %>" />            
-            <input type="text" name="authorName" id="search_user" placeholder="<%= userPH %>" />
-          <p id="numero1">
-          <div id="rating" data-score="<%= score %>" ></div>
-          <input id="rating-input" name="datasetRating" type="hidden" value="" /> 
-          </p>
+              <input type="text" name="q" placeholder="<%= keywordsPH %>" />
+              <input type="text" name="url" placeholder="<%= urlPH %>" />            
+              <input type="text" name="authorName" placeholder="<%= userPH %>" />
+              <p id="numero1">
+                <div id="rating" data-score="<%= score %>" ></div>
+                <input id="rating-input" name="datasetRating" type="text" value="" /> 
+              </p>
           </li>
-
-
-
           <li>            
             <ul class="large-block-grid-2">              
               <li>
@@ -307,41 +302,37 @@
                 <div id="numero2" data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
                   <input type="text" id="datepicker1" placeholder="<%= startdatePH %>" name="startdate">
                 </div>
-
                 <!-- coordinates for searching on a specific point -->
-                <input type="text" name="search_boundingbox" id="search_coordinats" placeholder="coordinates (in decimal degrees)" />
-
+                <input type="text" name="search_coordinates" placeholder="<%= gpsPH %>" />
+                <!-- button to initialize the search -->
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
+                <!-- hidden input for the rectangle coordinates -->
+                <input type="text" id="search_rectangle" name="search_rectangle" value="" placeholder="bounding-box coordinates" />
               </li>
-
-
               <li>
                 <!-- end date -->
                 <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
                   <input type="text" id="datepicker2" placeholder="<%= enddatePH %>" name="enddate">
                 </div>
-
-                <!-- boundingbox search
-                     the user get a pop-up window where he/she is
-                     able to define a radius. Afterwards by clicking
-                     on the map the boundingbox circle appears. -->
-                <button id="numero3" href="#" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Set Polygon</font></button>
-
+                <!-- button to initialize the bounding-box toolbar -->
+                <a id="numero3" class="tiny radius expand button" style="padding-bottom: 0.45rem" onClick="showToolbar()">
+                  <font color="#424242">Set Bounding-Box</font>
+                </a>
             </form>
-
-                <!-- "safe this search"-button open a pop-up window
+                <!-- "save this search"-button to open a pop-up window
                      generate a permalink the user can copy
-                     to get back to his search everytime -->
-                <button id="numero4" href="#" data-reveal-id="permalinkModalLarge" class="tiny radius expand" style="padding-bottom: 0.45rem"><font color="#424242">Save This Search</font></button>
+                     to get back to his search configuration everytime -->
+                <button id="numero4" href="#" data-reveal-id="permalinkModalLarge" class="tiny radius expand" style="padding-bottom: 0.45rem">
+                  <font color="#424242">Save This Search</font>
+                </button>
                 <div id="permalinkModalLarge" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
-                  <p class="lead">You can copy this link for later searches:</p>
+                  <p class="lead">Copy this link to save your search configuration and reuse it again in the future:</p>
                   <p><font color="#2ba6cb">http://localhost:80/apo/v1/search?<%= query %></font></p>
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
-
-          </li>
-        </ul>
+              </li>
+            </ul>
         </ul>
       </strong>
 
@@ -349,197 +340,197 @@
            use this to show the page on smaller displays
            for example on mobilephones -->
       <strong class="hide-for-large-up">
-          <!-- input for the advanced search to get the search start
+        <!-- input for the advanced search to get the search start
              ordered in a grid to have a better overview of the options -->
-          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
-          <form>
-            <input type="text" name="search_keywords" id="search_keywords" placeholder="<%= keywordsPH %>" />
-            <input type="text" name="search_url" id="search_url" placeholder="<%= urlPH %>" />            
-            <input type="text" name="search_user" id="search_user" placeholder="<%= userPH %>" />
+        <h3 id="firstStop"><font color="white">&nbspAdvanced Search</font color="white"></h3>
+        <form action="/api/v1" method="post">
+          <input type="text" name="q" placeholder="<%= keywordsPH %>" />
+          <input type="text" name="url" placeholder="<%= urlPH %>" />            
+          <input type="text" name="authorName" placeholder="<%= userPH %>" />
           
           <div id="rating2" data-score="<%= score %>" ></div>
-          <input id="rating-input" name="datasetRating" type="hidden" value="" /> 
+          <input id="rating-input2" name="datasetRating" type="text" value="" /> 
           <br>
           <!-- start date -->
           <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-            <input type="text" id="datepicker3" placeholder="time frame (start)" name="startdate">
+            <input type="text" id="datepicker3" placeholder="<%= startdatePH %>" name="startdate">
           </div>
           <!-- end date -->
           <div data-abide data-date="12-02-2012" data-date-format="mm-dd-yyyy" >
-            <input type="text" id="datepicker4" placeholder="time frame (end)" name="enddate">
+            <input type="text" id="datepicker4" placeholder="<%= enddatePH %>" name="enddate">
           </div>
 
           <!-- coordinates for searching on a specific point -->
-          <input type="text" name="search_coordinats" id="search_coordinats" placeholder="<%= gpsPH %>" />
+          <input type="text" name="search_coordinates" placeholder="<%= gpsPH %>" />
 
           <!-- boundingbox search
                the user get a pop-up window where he/she is
                able to define a radius. Afterwards by clicking
                on the map the boundingbox circle appears. -->
-          <button href="#" data-reveal-id="boundingBoxModal" class="tiny radius expand" style="padding-bottom: 0.45rem">Set Polygon</button>
+          <a class="tiny radius expand button" style="padding-bottom: 0.45rem" onClick="showToolbar()">
+            <font color="#424242">Set Bounding-Box</font>
+          </a>
 
-          <!-- "safe this search"-button open a pop-up window
+          <!-- "save this search"-button open a pop-up window
                generate a permalink the user can copy
                to get back to his search everytime -->              
-          <button href="#" data-reveal-id="permalinkModalSmall" class="tiny radius expand" style="padding-bottom: 0.45rem">Save This Search</button>
-            <div id="permalinkModalSmall" class="reveal-modal" data-reveal>
-              <h2>Permalink</h2>
-              <p class="lead">You can copy this link for later searches:</p>
-              <p><font color="#2ba6cb">http://localhost:80/apo/v1/search?<%= query %></font></p>
-              <a class="close-reveal-modal">&#215;</a>
-            </div>
-
-          <button href="advanced_search.html" class="tiny radius expand" style="padding-bottom: 0.45rem">Search</button>
-          </form>
+          <button href="#" data-reveal-id="permalinkModalSmall" class="tiny radius expand" style="padding-bottom: 0.45rem">
+            <font color="#424242">Save This Search</font>
+          </button>
+          <div id="permalinkModalSmall" class="reveal-modal" data-reveal>
+            <h2>Permalink</h2>
+            <p class="lead">Copy this link to save your search configuration and reuse it again in the future:</p>
+            <p><font color="#2ba6cb">http://localhost:80/apo/v1/search?<%= query %></font></p>
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+          <!-- initialize the search -->
+          <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
+          <!-- hidden input for the rectangle coordinates -->
+          <input type="text" id="search_rectangle2" name="search_rectangle" value="" placeholder="bounding-box coordinates" />
+        </form>
       </strong>
     </div>
 
     <!-- lower bright gray area -->
     <div class="panel custom2" id="numero5">
-        <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
-          <li>
-            <div class="panel custom" style="overflow: auto" data-equalizer-watch>
-            <!-- comments 
+      <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
+        <li>
+          <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+          <!-- comments 
                  orderd in a data-accordion -->
-            <dl class="accordion" data-accordion>
-              <% for(var i=0; i<comments.length; i++) {%>
+          <dl class="accordion" data-accordion>
+            <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
+              <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
 
-                <div id="panel<%= i %>c" class="content" 
-                  >
-                  <div class="panel custom5" style="border-color: #424242;">
+              <div id="panel<%= i %>c" class="content" >
+                <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
-                  <li>
+                    <li>
                     <!-- MapViewer
                          by clicking the link of the geodataset
                          it is open in the map_viewer -->
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
-                    <p>
-                    <!-- display stars depending on star-rating -->
-                    <% if (comments[i].dataset.rating) {%> 
-                      <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
-                        <i class="fi-star size-28 font-green"></i>
-                      <% } %>
-                      <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
-                        <i class="fi-star size-28 font-grey"></i>
-                      <% } %>
-                    <%} else {%> 
-                      <% for (var l=0; l<5; l++) { %> 
-                        <i class="fi-star size-28 font-grey"></i>
-                      <% } %>
-                    <%} %> 
-                   
-                  </li>
+                      <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                      <p>
+                        <!-- display stars depending on star-rating -->
+                        <% if (comments[i].dataset.rating) {%> 
+                          <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
+                            <i class="fi-star size-28 font-green"></i>
+                          <% } %>
+                          <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
+                            <i class="fi-star size-28 font-grey"></i>
+                          <% } %>
+                        <%} else {%> 
+                          <% for (var l=0; l<5; l++) { %> 
+                            <i class="fi-star size-28 font-grey"></i>
+                          <% } %>
+                        <%} %>   
+                    </li>
                   </ul>
                   <%= comments[i].text %> 
                   <p>
                   <ul class="no-bullet">
-                  <li>
-                    <% if (comments[i].user) {%>
-                    <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>
-                    </font></a>
-                  <%} else {%> 
-                    <font color="#424242"><em>anonymous</em></font>
-                  <%} %>
-<!--
-<% if (comments[i].markerCoords) {%>
-
-  <p onload="loadMarker(<%= comments[i].markerCoords[1] %>, <%= comments[i].markerCoords[0] %>)">test</p>;
-
-<%} %>
--->
-                    <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                    <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                    &nbsp&nbsp&nbsp&nbsp
-                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
-                  </li>
+                    <li>
+                      <% if (comments[i].user) {%>
+                        <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
+                        <a href="/profile/<%= comments[i].authorName %>">
+                          <font color="#2ba6cb"><%= comments[i].user.local.username %></font>
+                        </a>
+                      <%} else {%> 
+                        <font color="#424242"><em>anonymous</em></font>
+                      <%} %>
+                      <!--
+                      <% if (comments[i].markerCoords) {%>
+                        <p onload="loadMarker(<%= comments[i].markerCoords[1] %>, <%= comments[i].markerCoords[0] %>)">test</p>;
+                      <%} %>
+                      -->
+                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      &nbsp&nbsp&nbsp&nbsp
+                      &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
+                    </li>
                   </ul>
-                  </div>
-                  <br>
-                  <ul class="no-bullet">
+                </div>
+                <br>
+                <ul class="no-bullet">
                   <li>
                     <!-- for making a comment at a comment -->
                     <form action="/comments/addtothread/<%= comments[i]._id %>" method="post">
-                    <div class="row">
-                      <div class="large-12 columns">
-                        <textarea name="text" placeholder="comment on this comment ..."></textarea>
-                        <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
+                      <div class="row">
+                        <div class="large-12 columns">
+                          <textarea name="text" placeholder="comment on this comment ..."></textarea>
+                          <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
+                        </div>
+                      </div>
+                    </form>
+                  </li>
+                </ul>
+
+                <% if (comments[i].comments.length>0) {%>                  
+                  <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
+                    <div class="panel custom5" style="border-color: #424242;">
+                      <div class="content">
+                        <p><%= comments[i].comments[j].text %></p>
+                        <% if (comments[i].comments[j].user) {%>
+                          <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
+                          <a href="/profile/<%= comments[i].comments[j].authorName %>">
+                            <font color="#2ba6cb"><%= comments[i].comments[j].authorName %></font>
+                          </a>
+                        <%} else {%> 
+                          <font color="#424242"><em>anonymous</em></font>                            
+                        <%} %>
+                          <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
+                          <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                          &nbsp&nbsp&nbsp&nbsp
+                          <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                       </div>
                     </div>
-                  </form>
-                  </li>
-                  </ul>
+                    <br>
+                  <%} 
+                    %>
+                  <%} %>
+                </div>
+              </dd>
+            <% } %>
 
-                  <% if (comments[i].comments.length>0) {%>                  
-                      <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
-                      <div class="panel custom5" style="border-color: #424242;">
-                          <div class="content">
-                            <p><%= comments[i].comments[j].text %></p>
-                              <% if (comments[i].comments[j].user) {%>
-                            <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
-                              <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
-                                <%= comments[i].comments[j].authorName %>
-                              </font></a>
-                            <%} else {%> 
-                              <font color="#424242"><em>anonymous</em></font>                            
-                            <%} %>
-                              <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                              <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
-                              &nbsp&nbsp&nbsp&nbsp
-                              <font size="3"><%= comments[i].comments[j].dateString %></font>                           
+            <% if (metamaps.length > 0 ) { %> 
+              <!-- MY META MAPS -->
+              <% for(var i=0; i<metamaps.length; i++) {%>
+                <dd class="accordion-navigation">
+                  <a href="#panelm<%= i %>c">My Meta Maps comment</a>
+                  <div id="panelm<%= i %>c" class="content">
+                    <div class="panel custom5" style="border-color: #424242;">
+                    <ul class="no-bullet">
+                      <li>
+                        <a href="/mapviewer"><font color="#2ba6cb"><%= metamaps[i].itemUnderReview %></font></a>
+                        <br>
+                        <%= metamaps[i].text %>
+                      </li>   
+                </dd>
+              <%} %>
+              <% } %>
+            </dl>
+                      <li>
+                        <div class="panel custom" data-equalizer-watch>
+                          <!-- map -->
+                          <div>
+                            <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
                           </div>
                         </div>
-                        <br>
-                        <%} 
-                      %>
-                  <%} %>
+                      </li>
+                    </ul>
+                  </div>
 
-                </div>
-
-              </dd>
-              <% } %>
-
-
-<% if (metamaps.length > 0 ) { %> 
-<!-- MY META MAPS -->
-<% for(var i=0; i<metamaps.length; i++) {%>
-  <dd class="accordion-navigation">
-                <a href="#panelm<%= i %>c">My Meta Maps comment</a>
-
-                <div id="panelm<%= i %>c" class="content">
-                  <div class="panel custom5" style="border-color: #424242;">
-                  <ul class="no-bullet">
-                  <li>
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= metamaps[i].itemUnderReview %></font></a>
-                    <br>
-                    <%= metamaps[i].text %>
-                  </li>    
-  </dd>
-<%} %>
-<% } %>
-
-
-            </dl>
-          </div>
-          </li>
-          <li>
-            <div class="panel custom" data-equalizer-watch>
-              <!-- map -->
-              <div>
-              <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
-              </div>
-            </div>
-          </li>
-        </ul>
-    </div>
-
-              <!-- script for the map on the right of the site -->
+              <!-- script for the map -->
               <script>
                 //map
                 var map1 = L.map('map1');
+                //reset coordinate input
+                map1.on('load',  function() {
+                  $("#search_rectangle").val(null);
+                  $("#search_rectangle2").val(null);
+                });
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -550,6 +541,7 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
+                //create custom icons
                 var specialIcon = L.Icon.extend({
                   options: {
                     shadowUrl: '/css/images/marker-shadow.png',
@@ -562,18 +554,64 @@
                 var greenIcon = new specialIcon({iconUrl: 'css/images/marker-icon-green.png'}),
                     redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'});
 
-                drawnItems = L.featureGroup().addTo(map1);
+                //create featureGroup and control panels for drawing
+                var drawnItems = new L.FeatureGroup();
+                map1.addLayer(drawnItems);
 
-                map1.addControl(new L.Control.Draw({
-                  edit: { featureGroup: drawnItems }
-                }));
-
-                map1.on('draw:created', function(event) {
-                  var layer = event.layer;
-
-                  drawnItems.addLayer(layer);
+                var drawControlFull = new L.Control.Draw({
+                  edit: {
+                    featureGroup: drawnItems
+                  }
                 });
 
+                var drawControlEditOnly = new L.Control.Draw({
+                  edit: {
+                    featureGroup: drawnItems
+                  }, draw: false
+                });
+
+                //function to load the control panels for drawing
+                var i = false;
+
+                function showToolbar () {
+
+                if (i == false) {
+
+                map1.addControl(drawControlFull);
+
+                i = true;
+
+                } else {
+
+                }
+
+                }
+
+                //draw the rectangle and put its coordinates into an input
+                map1.on("draw:created", function (e) {
+                  var type = e.layerType;
+                  var layer = e.layer;
+
+                  if (type === 'rectangle') {
+                    layer.on('mouseover', function() {
+                      $("#search_rectangle").val(layer.getLatLngs());
+                      $("#search_rectangle2").val(layer.getLatLngs());     
+                    });
+                  }
+
+                  layer.addTo(drawnItems);
+                  drawControlFull.removeFrom(map1);
+                  drawControlEditOnly.addTo(map1)
+                });
+
+                map1.on("draw:deleted", function(e) {
+                  drawControlEditOnly.removeFrom(map1);
+                  $("#search_rectangle").val(null);
+                  $("#search_rectangle2").val(null);  
+                  drawControlFull.addTo(map1);
+                });
+
+                //relocate your position
                 function relocate() {
 
                   map1.locate({setView: true, maxZoom: 16});
@@ -585,6 +623,7 @@
                 var locationMarker;
                 var locationCircle;
 
+                //locate your position when first loading the map
                 function onLocationFound1(e) {
                   var radius1 = e.accuracy / 2;
 
@@ -609,6 +648,7 @@
 
                 var popup = L.popup();
 
+                //show the coordinates of the point you clicked on the map
                 function onMapClick1(e) {
                   popup
                   .setLatLng(e.latlng)
@@ -616,6 +656,7 @@
                   .openOn(map1);
                 }
                 
+                //load in all markers connected to a comment
                 function showMarkers(planes) {
 
                                       planes = planes.split(",");
@@ -640,7 +681,7 @@
                       .bindPopup(planes[i+2])
                       .addTo(map1);
                     }
-                    //map1.setView([51.96935, 7.59588], 7); ,    , 
+                    //map1.setView([51.96935, 7.59588], 7);
 
                     map1.fitBounds([
                       [minx-0.5, miny-0.5],
@@ -649,29 +690,6 @@
                 }
 
                 map1.on('click', onMapClick1);
-
-/*  wird der code hier noch gebraucht? - wenn nicht, dann bitte löschen
-var polygonDrawer = new L.Draw.Polyline();
-
-// Assumming you have a Leaflet map accessible
-map1.on('draw:created', function (e) {
-    var type = e.layerType,
-        layer = e.layer;
-
-    // Do whatever you want with the layer.
-    // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
-    // E.g. add it to the map
-    layer.addTo(map1);
-});
-
-$('#bb').click(function() {
-    polygonDrawer.enable();
-});*/
-              </script>
-
-              <script>
-
-              
 
               </script>
 
@@ -732,7 +750,7 @@ $('#bb').click(function() {
           path: 'img',
           score: Number($("#rating").attr('data-score')),          
           click: function(score, evt) {
-          $("#rating-input").val(score)
+          $("#rating-input2").val(score)
           }
         });
       });

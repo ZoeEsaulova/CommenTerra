@@ -214,6 +214,14 @@
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
+                var myWMS = L.tileLayer.wms("http://wfs-kbhkort.kk.dk/k101/wms", {
+                  layers: 'k101:theme-startkort',
+                  format: 'image/png',
+                  transparent: true,
+                });
+
+                myWMS.addTo(map1);
+
                 var specialIcon = L.Icon.extend({
                   options: {
                     shadowUrl: '/css/images/marker-shadow.png',
