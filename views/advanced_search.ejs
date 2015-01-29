@@ -180,14 +180,55 @@
     </script>
   </head>
 
- <% if (markers) { %>
-       <body onload="showMarkers('<%= markers %>')">
+    <% if (markers) { %>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>'); helpModal();">
     <% } else { %>
-       <body>
-    <% } %>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="helpModal()" >
+    <% }%>
+  
+    <!--Modal help (shown or disabled)-->
+    <script>
+      function setCookie() {
+        if(document.getElementById("hideModal").checked == true){
+          document.cookie = "hilfe=off";
+        } else {
+          document.cookie = "help=on";
+        }
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+      function helpModal() {
+        var c = getCookie("hilfe");
+        if(c=="" || c=="on"){
+          $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+        }
+      }
+    </script>
+
+    <div id="ModalHelp" class="reveal-modal" data-reveal>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the upper right corner to start a joyride tour which will provide you further information about the CommenTerra project and how to use it. We also have these kind of joyrides on the main "CommenTerra", on the "New Comment" and on your "Profile" page waiting for you.</p><br>
+      <p>
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
+        <label for="hideModal">
+          <font color="#424242">&nbsp Don't show me this again</font>
+        </label>
+      </p>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
     <!-- TOP-BAR (fixed)
-       everytime you can see this strong navigation tool
-       to get you everywhere -->
+    everytime you can see this strong navigation tool
+    to get you everywhere -->
 
     <% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -207,7 +248,7 @@
       </ul>
       <section class="top-bar-section"> 
         <!-- Right Nav Section --> 
-        <ul id="numero1" class="right">
+        <ul class="right" id="lastStop">
           <li class="has-form">
             <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
@@ -285,17 +326,19 @@
         <!-- input for the advanced search to get the search start
              ordered in a grid to have a better overview of the options -->
         <ul class="large-block-grid-2">
-          <h3 id="firstStop"><font color="white">Advanced Search</font color="white"></h3><br>
+          <h3 id="firstStop"><font color="white">&nbsp&nbspAdvanced Search</font color="white"></h3><br>
           <li>
             <form action="/api/v1" method="post">
             <input type="text" name="q" id="search_keywords" placeholder="<%= keywordsPH %>" />
             <input type="text" name="url" id="search_url" placeholder="<%= urlPH %>" />            
             <input type="text" name="username" id="search_user" placeholder="<%= userPH %>" />
-          <p>
+          <p id="numero1">
           <div id="rating" data-score="<%= score %>" ></div>
           <input id="rating-input" name="datasetRating" type="hidden" value="" /> 
           </p>
           </li>
+
+
 
           <li>            
             <ul class="large-block-grid-2">              
@@ -310,6 +353,7 @@
 
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
               </li>
+
 
               <li>
                 <!-- end date -->
@@ -391,7 +435,7 @@
     </div>
 
     <!-- lower bright gray area -->
-    <div class="panel custom2">
+    <div class="panel custom2" id="numero5">
         <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
           <li>
             <div class="panel custom" style="overflow: auto" data-equalizer-watch>
@@ -686,26 +730,25 @@ $('#bb').click(function() {
          as intrudation in the functionality of this page -->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
-        <p>The advanced search is very usefull to search for spezific geodatasets.</p>
+        <p>The advanced search is very usefull to search for specific geodatasets.</p>
       </li>
       <li data-id="numero1" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>Search for users, urls and for any keyword come to your mind...</p>
+        <p>Search for usersnames, URLs or for any other terms that come to your mind...</p>
       </li>
       <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>... of course you can pick a dateframe related to the geodataset.</p>
+        <p>... of course you can specify a time frame related to the geodataset.</p>
       </li>
       <li data-id="numero3" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>Optional you can clarify a boundingbox just to see whether there any comment exists.</p>
+        <p>Additionally you can search for a spatial extent via coordinates or a boundingbox.</p>
       </li>
       <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>Copy the link of your search to reuse it same days later.</p>
+        <p>Here you can copy the permalink of your search configuration to reuse it again in the future.</p>
       </li>
       <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>The resulting comments of your search are shown hier. Ordered by relevanz. For more informations klick.
-          To hide klick them again.</p>
+        <p>Your search results are shown here. For more information simply click on your desired comment. Click again to hide it.</p>
       </li>       
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>Again you can take use of the site navigation. Happy Searching!</p>
+        <p>If you want to further explore CommenTerra use the site navigation. Happy searching!</p>
       </li>
     </ol>
 
@@ -735,21 +778,7 @@ $('#bb').click(function() {
       });
     </script>
     <script>
-      $(document).ready(function(){
-        $("#rating1").raty({
-          path: 'img',
-        });
-      });
-    </script>
-    <script>
       $(document).foundation();
-    </script>
-    <script>
-      function startJoyRide(){
-      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
-        $(document).foundation('joyride', 'start');
-      }
-      }
     </script>
     <script>
       jQuery(function() {
@@ -770,6 +799,13 @@ $('#bb').click(function() {
       jQuery(function() {
         jQuery( "#datepicker4" ).datepicker();
       });
+    </script>
+    <script>
+      function startJoyRide(){
+      if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+        $(document).foundation('joyride', 'start');
+        }
+      }
     </script>
   </body>
 </html>

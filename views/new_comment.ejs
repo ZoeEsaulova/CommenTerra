@@ -151,7 +151,47 @@
     </script>
   </head>
 
-  <body>
+  <body onload="helpModal()">
+  
+    <!--Modal help (shown or disabled)-->
+    <script>
+      function setCookie() {
+        if(document.getElementById("hideModal").checked == true){
+          document.cookie = "hilfe=off";
+        } else {
+          document.cookie = "help=on";
+        }
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+      function helpModal() {
+        var c = getCookie("hilfe");
+        if(c=="" || c=="on"){
+          $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+        }
+      }
+    </script>
+
+    <div id="ModalHelp" class="reveal-modal" data-reveal>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the upper right corner to start a joyride tour which will provide you further information about the CommenTerra project and how to use it. We also have these kind of joyrides on the main "CommenTerra", on the "Advanced Search" and on your "Profile" page waiting for you.</p><br>
+      <p>
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
+        <label for="hideModal">
+          <font color="#424242">&nbsp Don't show me this again</font>
+        </label>
+      </p>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
 
     <% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -172,7 +212,7 @@
       </ul>
       <section class="top-bar-section"> 
         <!--right nav section--> 
-        <ul id="numero1" class="right">
+        <ul class="right">
           <li class="has-form">
             <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
@@ -270,7 +310,7 @@
         </li>
         <li>
           <!--shows the response of the URL-->
-          <label><font id="numero5" color="white" size="4">Response:</font><label>
+          <label><font id="numero1" color="white" size="4">Response:</font><label>
           <textarea id="response" disabled="disabled" style="height: 230px"><%= XMLresponse %></textarea>
         </li>
       </ul>
@@ -301,7 +341,7 @@
       <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
                   <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
       <!--shows the response of the URL-->
-      <label><font id="numero5" color="white" size="4">Response:</font><label>
+      <label><font color="white" size="4">Response:</font><label>
       <textarea id="response" disabled="disabled" style="height: 180px"><%= XMLresponse %></textarea>
       </li>
     </ul>
@@ -325,19 +365,19 @@
                     </a>
                     <div class="panel custom2" style="border-radius: 3px">
                       <div id="panel1b" class="content">
-                          <label><font color="#424242" size="4">URL:</font></label>
+                          <label><font id="numero3" color="#424242" size="4">URL:</font></label>
                           <input id="urlResult" type="text" name="url" value="<%= urlResult %>" readonly/> 
                         <p></p>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
                           <li>
-                            <font color="#424242" size="4">Rating (optional):</font><br>
+                            <font color="#424242" size="4" id="numero4">Rating (optional):</font><br>
                             <!--five star rating-->
                             <div id="rating" data-score="@Model.Company.Rating" ></div>
                             <input id="rating-input" name="rating" type="hidden" value="test" /> 
                           </li>
                           <li>
-                            <font color="#424242" size="4">Time Frame (optional):</font><br>
+                            <font color="#424242" size="4" id="numero5">Time Frame (optional):</font><br>
                             <!-- data binding for the starting date -->
                             <div data-abide data-date="12-02-2012" data-date-format="dd-mm-yyyy" >
                               <input type="text" id="datepicker3" placeholder="Start" name="startdate">
@@ -354,10 +394,10 @@
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
                           <li>
-                            <button href="#" id="numero3" class="success tiny radius expand">Set Polygon</button>
+                            <button href="#" id="numero6" class="success tiny radius expand">Set Polygon</button>
                           </li>
                           <li>
-                            <button id="numero4" class="success tiny radius expand" data-reveal-id="confirmModal">
+                            <button id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
                              Save
                             </button>
                             <!--pop up to confirm the submission-->
@@ -482,20 +522,30 @@
     <!--joyride: Tour to get a first impression of this site-->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="tip_location: top; prev_button: false">
-        <p>At first you have to validate your URL. When this process was successfull you can create your Comment. On the right site you will see the Geo-Dataset from your URL.</p>
+        <p>On this page you can create a comment on almost any geodataset you like. At first you have to validate your URL...</p>
       </li>
-    <li data-id="numero2" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
-    <p>Here you are able to write a title of your comment</p>
+    <li data-id="numero1" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>... when this process was successfull you can create your comment. In this textarea there is some useful information about your geodataset which we parsed for you. You can use them to make your comment more comprehensive.</p>
     </li>
-    <li data-id="numero3" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
-    <p>Here you can define a Bounding Box in the map of the right site</p>
+    <li data-id="numero2" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Here you are able to write the title of your comment. Choose wisely!</p>
+    </li>
+    <li data-id="numero3" data-text="Next" data-prev-text="Prev" data-options="tip_location: top">
+      <p>Here you can see your URL already filled in for you, in case the validation process was successful.</p>
     </li>
     <li data-id="numero4" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
-    <p>Save yout comment and see it on the "CommenTerra | Home" site</p>
+    <p>Here you can rate your geodataset.</p>
     </li>
-    <li data-id="numero5" data-text="End" data-prev-text="Prev" data-options="tip_location: top">
-      <p>Here you can see the Response from your URL</p>
+    <li data-id="numero5" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Here you can define the temporal extent of your comment ...</p>
     </li>
+    <li data-id="numero6" data-text="Next" data-prev-text="Prev" data-options="tip_location:top">
+    <p>... and here you can define the spatial extent of your comment via a bounding box directly on the map</p>
+    </li>
+    <li data-id="lastStop" data-text="End" data-prev-text="Prev" data-options="tip_location:top">
+    <p>Finally save your comment and see it on the "CommenTerra" main page</p>
+    </li>
+    
     </ol>
 
     <script>

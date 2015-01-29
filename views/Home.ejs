@@ -191,7 +191,7 @@
 
     <div id="ModalHelp" class="reveal-modal" data-reveal>
       <h2>Hello and welcome to CommenTerra.</h2>
-      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the right upper corner to start a joyride tour where you get further informations about this site. We also have those joyrides on the New Comment Site and the Advanced Search Site.</p><br>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the upper right corner to start a joyride tour which will provide you further information about the CommenTerra project and how to use it. We also have these kind of joyrides on the "New Comment", on the "Advanced Search" and on your "Profile" page waiting for you.</p><br>
       <p>
         <input id="hideModal" type="checkbox" onclick="setCookie()">
         <label for="hideModal">
@@ -231,7 +231,7 @@
                       </div>
                   </div>
                   <div class="small-3 columns end">
-                    <button id="lastStop" class="success radius expand" type="submit">Search</button>
+                    <button class="success radius expand" type="submit">Search</button>
                   </div>
                 </div>
             </form>
@@ -324,7 +324,7 @@
         <li>
           <!-- points why you should use our page -->
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Comment on almost any geodata-type</font></p></div></div>
+            <div class="large-10 columns end"><p><font color="white"><br id="lastStop">Comment on almost any geodata-type</font></p></div></div>
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
             <div class="large-10 columns end"><p><font color="white"><br>Absolutely free</font></p></div></div>
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
@@ -650,7 +650,7 @@
         <p>Hello and welcome to the CommenTerra Project...</p>
       </li>
       <li data-id="numero1" data-text="Next" data-prev-text="Prev" data-options="tip_location: bottom">
-        <p>... if you want to know more about the project and how to work with it, please see the FAQ / Help sites via our multi-functional top-bar. You will also find helpful Links at the bottom of the page.</p>
+        <p>... if you want to know more about the project and how to work with it, please see the FAQ / Help sites via our multi-functional top-bar. You will also find helpful links at the bottom of the page.</p>
       </li>
       <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
         <p>If you instead want to start right away, we won't blame you! Sign up now and enjoy all the member-privelidges and our awesome community.</p>
@@ -665,10 +665,10 @@
         <p>This is the map with the markers and potential layers of the comments...</p>
       </li>
       <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>... and this is, where the comments are! Click the titles to get more information on the titles.</p>
+        <p>... and this is, where the comments are! Click the titles to get more information about the comment and its topic.</p>
       </li>
       <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>For a shorter search use this! I hope you like our little application. Don't hesitate to contact us on any issues. For further instructions please check the FAQ / Help sites. Have fun!</p>
+        <p>We hope you like our little application. Don't hesitate to contact us on any issues. Have fun!</p>
       </li>
     </ol>
 
@@ -681,7 +681,7 @@
       function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }
+        }
       }
     </script>
 
