@@ -42,8 +42,8 @@ router.get('/simplesearch', function(req, res) {
 	if (req.query.url) {
 		url = req.query.url
 	}
-	if (req.query.user) {
-		user = req.query.user
+	if (req.query.authorName) {
+		user = req.query.authorName
 	}
 	if (req.query.gps) {
 		gps = req.query.gps
@@ -182,8 +182,8 @@ router.get('/search', function(req,res) {
 	if (req.query.url) {
 		url = req.query.url
 	}
-	if (req.query.user) {
-		user = req.query.user
+	if (req.query.authorName) {
+		user = req.query.authorName
 	}
 	if (req.query.gps) {
 		gps = req.query.gps
@@ -206,7 +206,7 @@ router.get('/search', function(req,res) {
 		}
 		if (req.query.authorName) {
 			var regexU = new RegExp(req.query.url, 'i');
-			query.where({ authorname: regexU })
+			query.where({ authorName: regexU })
 		}
 
 			if (req.query.startdate && req.query.enddate) {
@@ -265,7 +265,7 @@ router.get('/search', function(req,res) {
 		}
 		if (req.query.authorName) {
 			var regexU = new RegExp(req.query.url, 'i');
-			query.where({ authorname: regexU })
+			query.where({ authorName: regexU })
 		}
 	}
 
