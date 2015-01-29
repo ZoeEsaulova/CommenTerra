@@ -191,20 +191,22 @@
                 </div>
             </form>
           </li>
-          <!--Log-In modal-->
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
           <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
             <p class="lead">Please log in with your e-mail and your password</p>
-            <p><form data-abide>
+            <p><form data-abide action="/login" method="post">
               <div class="email-field">
-                <label>E-Mail 
+                <label>e-Mail 
                   <small>required</small>
                   <input type="email" id="email" placeholder="info@commenterra.com" name="email" required pattern="email">  
                 </label>
                 <!--exception: invalid e-mail-->
-                <small class="error">Please type in a valid e-mail-address!</small>
+                <small class="error">Please type in a valid e-mail-adress!</small>
               </div>
               <div class="password-field">
                 <label>Password 
@@ -214,7 +216,7 @@
                 <!--exception: no password-->
                 <small class="error">Please type in your password!</small>
               </div>
-              <button class="radius" type="submit">Log In</button>
+              <button id="LogInModal2" class="radius" type="submit">Log In</button>
             </form></p>
             <a class="close-reveal-modal">&#215;</a>
           </div>
