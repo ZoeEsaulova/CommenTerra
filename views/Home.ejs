@@ -429,14 +429,14 @@
                     <!-- display stars depending on star-rating -->
                     <% if (comments[i].dataset.rating) {%> 
                       <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
-                        <a href="#"><i class="fi-star size-28 font-green"></i></a>
+                        <i class="fi-star size-28 font-green"></i>
                       <% } %>
                       <% for (var l=comments[i].dataset.rating; l<5; l++) { %> 
-                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                        <i class="fi-star size-28 font-grey"></i>
                       <% } %>
                     <%} else {%> 
                       <% for (var l=0; l<5; l++) { %> 
-                        <a href="#"><i class="fi-star size-28 font-grey"></i></a>
+                        <i class="fi-star size-28 font-grey"></i>
                       <% } %>
                     <%} %>                  
                   </li>
