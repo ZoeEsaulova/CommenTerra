@@ -184,7 +184,9 @@
       function helpModal() {
         var c = getCookie("hilfe");
         if(c=="" || c=="on"){
-          $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+          if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+            $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+          }
         }
       }
     </script>
