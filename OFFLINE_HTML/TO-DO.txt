@@ -5,7 +5,6 @@ Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: home, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
-- Login von new_comment funktioniert nicht 
 - KARTE: Marker beim anclicken eines Kommentars hervorheben, mehrere MArker mit gleichen Coordinaten, DRAW
 
 allgemein:
