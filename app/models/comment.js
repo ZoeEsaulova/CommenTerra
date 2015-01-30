@@ -11,14 +11,15 @@ var commentSchema = mongoose.Schema({
   text: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   authorName: String,
-  rating: {type: Number, default: 0},
   date: { type: Date, default: Date.now },
   comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }, 
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   markerCoords: [{ type: Number }],
   boundingBox: [{ type: Number}],
   startdate: Date,
-  enddate: Date
+  enddate: Date,
+  upvotes: { type: Number, default: 0 },
+  downvotes: { type: Number, default: 0 },
 
 })
 

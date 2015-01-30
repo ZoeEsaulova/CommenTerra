@@ -12,7 +12,67 @@ var express = require('express'),
 	resp = {},
 	resptext = "No properties found. Check the format of your url",
 	coords = { minx: "", miny: "", maxx: "", maxy: "" };
+	
+// Thumb up/down rating
+router.get('/votes', function(req,res) {
+	Comment.findOne({ _id: req.query.id }).exec(function(err, comment) {
+		User.findOne({ _id: req.user._id }).exec(function(err, user) {
+			User.findOne({ "local.username": comment.authorName }).exec(function(err, author) { 				
+			var save = true
+			for (var i=0; i<user.votedUp.length; i++) {			
+					if (JSON.stringify(comment._id)==JSON.stringify(user.votedUp[i])) {
+						save = false
+						break
+					} 
+			}
+			for (var i=0; i<user.votedDown.length; i++) {
+						if (JSON.stringify(comment._id)==JSON.stringify(user.votedDown[i])) {
+							save = false
+							break
+						} 
+			}
+			if (author && save) {
+				console.log("AUTHOR:  " + author.local.username)
+				if (req.query.action=="up") {
+						author.upvotes = author.upvotes + 1 
+				}
+				if (req.query.action=="down") {
+						author.downvotes = author.downvotes - 1 
+			}
+				author.save()
+				console.log(author.upvotes + " " + author.downvotes)
+			}
 
+			if (req.query.action=="up") {
+							 
+				if (save) { 
+					user.votedUp.push(comment)
+					user.save()
+					comment.upvotes = comment.upvotes + 1
+					comment.save()
+					res.send(comment.upvotes.toString())
+				} else {
+					res.send(comment.upvotes.toString())
+				}
+				
+			}
+
+			if (req.query.action=="down") {
+					 
+					if (save) { 
+					user.votedDown.push(comment)
+					user.save()
+					comment.downvotes = comment.downvotes - 1
+					comment.save()
+					res.send(comment.downvotes.toString())
+				} else {
+					res.send(comment.downvotes.toString())
+				}
+			}		
+	})
+})
+})
+})
 /* WMS PARSER 
 *  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
 *  wfs example: 
@@ -198,7 +258,7 @@ router.post('/add', function(req, res) {
 					if (err) return console.error(err)
 				});
 				User.findOne({ _id: req.user._id }).exec(function(err, user) {
-					user.comments.push(newComment)
+					user.posts.push(newComment)
 					user.save()
 				})
 				newDataset.comments.push(newComment)
@@ -237,7 +297,7 @@ router.post('/add', function(req, res) {
 					if (err) return console.error(err)
 				});
 				User.findOne({ _id: req.user._id }).exec(function(err, user) {
-					user.comments.push(newComment)
+					user.posts.push(newComment)
 					user.save()
 				})
 				dataset.comments.push(newComment)

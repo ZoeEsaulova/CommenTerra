@@ -30,8 +30,8 @@ router.get('/searchapi', function(req, res) {
 router.get('/simplesearch', function(req, res) { 
 	// placeholder
 	var keywords = "search term"
-	var url = "search by url"
-	var user = "search by user"
+	var url = "search for url"
+	var user = "search for user"
 	var startdate = "time frame (start)"
 	var enddate = "time frame (end)"
 	var gps = "coordinates (in decimal degrees)"
@@ -170,8 +170,8 @@ router.get('/simplesearch', function(req, res) {
 router.get('/search', function(req,res) {
 	// placeholder
 	var keywords = "search term"
-	var url = "search by url"
-	var user = "search by user"
+	var url = "search for url"
+	var user = "search for user"
 	var startdate = "time frame (start)"
 	var enddate = "time frame (end)"
 	var gps = "coordinates (in decimal degrees)"
