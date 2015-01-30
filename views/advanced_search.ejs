@@ -440,13 +440,22 @@
                       <%} else {%> 
                         <font color="#424242"><em>anonymous</em></font>
                       <%} %>
-                      <!--
-                      <% if (comments[i].markerCoords) {%>
-                        <p onload="loadMarker(<%= comments[i].markerCoords[1] %>, <%= comments[i].markerCoords[0] %>)">test</p>;
-                      <%} %>
-                      -->
-                      <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                      <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                      
+                      <!-- Thumb up/down rating -->
+                  <font color="#80FF00" ><b id="upvotesValue-<%= i %>"><%= comments[i].upvotes %></b></font>
+                  <% if (boolean1) {%> 
+                    <a><i class="fi-like size-28 font-green" 
+                   onclick="thumbRating('<%= comments[i]._id %>', 'up', '<%= i %>')" ></i></a>
+                   <%} else {%> 
+                     <i class="fi-like size-28 font-green" id="thumbup"></i>
+                   <%} %>
+                  <font color="#c60f13" ><b id="downvotesValue-<%= i %>"><%= comments[i].downvotes %></b></font>
+                   <% if (boolean1) {%> 
+                   <a><i class="fi-dislike size-24 font-alert"
+                   onclick="thumbRating('<%= comments[i]._id %>', 'down', '<%= i %>')" ></i></a>
+                   <%} else {%> 
+                     <i class="fi-dislike size-24 font-alert" id="thumbdown"></i>
+                   <%} %>
                       &nbsp&nbsp&nbsp&nbsp
                       &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                     </li>
@@ -480,8 +489,24 @@
                         <%} else {%> 
                           <font color="#424242"><em>anonymous</em></font>                            
                         <%} %>
-                          <font color="#80FF00">&nbsp&nbsp&nbsp&nbsp12&nbsp&nbsp</font><a href="#"><i class="fi-like size-28 font-green"></i></a>
-                          <font color="#c60f13">&nbsp&nbsp&nbsp&nbsp0&nbsp&nbsp</font><a href="#"><i class="fi-dislike size-24 font-alert"></i></a>
+                            <!-- Thumb up/down rating -->
+                    <font color="#80FF00" ><b id="upvotesValue-<%= i %>-<%= j %>">
+                      <%= comments[i].comments[j].upvotes %></b></font>
+                    <% if (boolean1) {%> 
+                      <a><i class="fi-like size-28 font-green" onclick="thumbRating2(
+                        '<%= comments[i].comments[j]._id %>', 'up', '<%= i %>', '<%= j %>')" ></i></a>
+                    <%} else {%> 
+                      <i class="fi-like size-28 font-green" id="thumbup"></i>
+                    <%} %>
+
+                    <font color="#c60f13" ><b id="downvotesValue-<%= i %>-<%= j %>">
+                      <%= comments[i].comments[j].downvotes %></b></font>
+                    <% if (boolean1) {%> 
+                      <a><i class="fi-dislike size-24 font-alert" onclick="thumbRating2(
+                        '<%= comments[i].comments[j]._id %>', 'down', '<%= i %>', '<%= j %>')" ></i></a>
+                    <%} else {%> 
+                      <i class="fi-dislike size-24 font-alert" id="thumbdown"></i>
+                    <%} %>
                           &nbsp&nbsp&nbsp&nbsp
                           <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                       </div>
@@ -811,6 +836,30 @@
         $(document).foundation('joyride', 'start');
         }
       }
+    </script>
+        <script>
+    function thumbRating(commentId, action, i){
+      $.get("/comments/votes", { id : commentId, action: action }, function(response){
+        var score = Number(response)
+        if (action=="up") {
+          $("#upvotesValue-"+i).html(score);
+        } else {
+          $("#downvotesValue-"+i).html(score);
+        }
+      });
+    }
+    </script>
+    <script>
+    function thumbRating2(commentId, action, i, j){
+      $.get("/comments/votes", { id : commentId, action: action }, function(response){
+        var score = Number(response)
+        if (action=="up") {
+          $("#upvotesValue-"+i+"-"+j).html(score);
+        } else {
+          $("#downvotesValue-"+i+"-"+j).html(score);
+        }
+      });
+   }
     </script>
   </body>
 </html>
