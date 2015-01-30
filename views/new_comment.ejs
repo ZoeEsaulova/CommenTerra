@@ -182,6 +182,53 @@
         });
       });
     </script>
+    
+        <!--Progress-bar style-->
+    <style>
+      .ui-progressbar {
+        position: relative;
+      }
+      .progress-label {
+        position: absolute;
+        left: 50%;
+        top: 4px;
+        font-weight: bold;
+        text-shadow: 1px 1px 0 #fff;
+      }
+    </style>
+    
+    <!--Progress-bar-->
+    <script>
+      $(function() {
+        var progressbar = $( "#progressbar" ),
+        progressLabel = $( ".progress-label" );
+        progressbar.progressbar({
+          value: false,
+          change: function() {
+            progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+          },
+          complete: function() {
+            progressLabel.text( "Complete!" );
+          }
+        });
+
+        function progress() {
+          var val = progressbar.progressbar( "value" ) || 0;
+          progressbar.progressbar( "value", val + 2 );
+          if ( val < 72 ) {
+            setTimeout( progress, 1000 );
+          }
+        }
+        setTimeout( progress, 2000 );
+      });
+    </script>
+
+    <!--change the progress bar to visible-->
+    <script>
+      function visible(){
+        document.getElementById("progressbar").style.visibility='visible'
+      }
+    </script>
   </head>
 
   <body>
@@ -297,7 +344,7 @@
             <option value="gml">GML</option>
           </select>
           </label>          
-          <button class="tiny radius expand" id="validateurl" type="submit"><font color="#424242">Validate URL</font></button>
+          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible()"><font color="#424242">Validate URL</font></button>
           </form>
           <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
@@ -307,6 +354,8 @@
           <!--shows the response of the URL-->
           <label><font id="numero1" color="white" size="4">Response:</font><label>
           <textarea id="response" disabled="disabled" style="height: 230px"><%= XMLresponse %></textarea>
+          <!--Progress-bar-->
+          <div id="progressbar" style="visibility: hidden;"><div class="progress-label">Loading...</div></div>
         </li>
       </ul>
     </strong>
