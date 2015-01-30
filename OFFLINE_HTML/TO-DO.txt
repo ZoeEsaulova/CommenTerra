@@ -5,7 +5,7 @@ Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
-- KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten, DRAW
+- KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten
 - QUICKSEARCH: Datei o.ä. aus der Datenbank erstellen fur die autocomplete-Funktion
 
 allgemein:
@@ -15,12 +15,10 @@ ____________________________
 - PARSING! PARSING! PARSING!   
 ____________________________
 - "Experte" Rolle zuweisen
-- Kommentar bewerten (daumen hoch/runter)
 - Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
 
 new_comment:
 - WMS/WFS einladen?
-- Bounding Box Koordinaten im Kommentar speichern
 
 advanced_search:
 - GPS Suche
@@ -35,6 +33,7 @@ _______________________________________________________________
 kann auch später erledigt werden, nachrangig!
 _______________________________________________________________
 - Code kürzen
+- Unique username
 
 profile:
 - email anzeigen lassen, aber mit option zum ausblenden 
