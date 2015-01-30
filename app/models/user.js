@@ -26,8 +26,6 @@ var userSchema = mongoose.Schema({
     	firstname: { type: String, default: "" },
     	lastname: { type: String, default: "" },
 		country: { type: String, default: "" },
-		// TO BE UPDATED:
-		status: {type: String, enum: ['User', 'Expert', '???']},
 		upvotes: { type: Number, default: 0},
 		downvotes: { type: Number, default: 0},
 		help: { type: Boolean, default: 0 },
