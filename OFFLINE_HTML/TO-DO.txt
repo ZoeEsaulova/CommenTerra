@@ -44,6 +44,7 @@ AND oder OR Verknüpfung bei der Suche verwendet
 
 
 Beispieldaten:
+Fast alle Datenformate: https://github.com/m-mohr/my-meta-maps/wiki/Metadata-Formats
 BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/search.php
 
 Sensor observation service(SOS) http://sensorweb.demo.52north.org/PegelOnlineSOSv2.1/
