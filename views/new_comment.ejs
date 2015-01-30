@@ -435,13 +435,39 @@
                 });
 
                 //load and display tile layers on the map
-                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                var mapBox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  zIndex: 1,
                   maxZoom: 20,
-                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                  attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
+
+                var aerial = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {
+                  zIndex: 1,
+                  maxZoom: 18,
+                  attribution: 'Map data © <a href="http://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGis Map Service</a> contributors, ' +
+                    '<a href="http://www.esri.com/legal/software-license">Esri Master License Agreement</a>, ' +
+                    'Imagery © <a href="http://www.esri.com/">ESRI</a>'
+                });
+
+                var OSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  zIndex: 1,
+                  maxZoom: 20,
+                  attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,'
+                });
+
+                // crate a baseLayer-variable in which all the basemap-tile-layers are stored
+                var baseLayers = {
+                  "OSM MapBox": mapBox,
+                  "ESRI Aerial": aerial,
+                  "OSM Standard": OSM
+                };
+
+                // initialize the layer-control toolbar
+                L.control.layers(baseLayers).addTo(map1);
 
                 var specialIcon = L.Icon.extend({
                   options: {

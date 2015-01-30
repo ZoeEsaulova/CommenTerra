@@ -187,15 +187,65 @@
     </div>
 
     <!-- upper light gray area -->
-    <div class="panel custom">
-      <!-- link of the shown map -->
-      <p><font color="white">LINK</font></p>
+    <div class="panel custom" style="padding-bottom: 0em">
+      <ul class="large-block-grid-2 medium-block-grid-2 small-block-grid-1">
+        <li>
+          <!-- link of the shown map -->
+          <input type="text" id="url_map_viewer" name="url_map_viewer" value="" placeholder="URL" style="margin-bottom: 0" />
+        </li>
+        <li>
+          <nav id="map-ui" class="layer-button">
+            <a class="active" id="url-layer">Show / Hide URL-Layer</a>
+          </nav>
+        </li>
+      </ul>
     </div>
+
+    <!-- style for the button to show/hide the layer created out of the URL -->
+    <style>
+    .layer-button {
+      background:#80FF00;
+      position: relative;
+      width: 100%;
+      z-index:90;
+      border-radius:3px;
+    }
+      .layer-button a {
+        color:#424242;
+        display:block;
+        padding-top: 0.40rem;
+        padding-right: 1.25rem;
+        padding-bottom: 0.38rem;
+        padding-left: 1.25rem;
+        font-size: 1rem;
+        text-decoration:none;
+        text-align:center;
+      }
+        .layer-button a:hover {
+          background:#66cc00;
+          border-radius:3px;
+          color:#424242;
+        }
+          .layer-button a.active {
+            padding-top: 0.40rem;
+            padding-right: 1.25rem;
+            padding-bottom: 0.38rem;
+            padding-left: 1.25rem;
+            font-size: 1rem;
+            background:#80FF00;
+            border-radius:3px;
+            color:#424242;
+          }
+            .layer-button a.active:hover {
+              background:#66cc00;
+              border-radius:3px;
+            }
+      </style>
 
     <!-- lower bright gray area -->
     <div class="panel custom2">
       <div class="panel custom">
-        <!-- map -->
+        <!-- map -->  
         <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
       </div>
     </div>
@@ -206,21 +256,60 @@
                 //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
                 //load and display tile layers on the map
-                L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                var mapBox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                  zIndex: 1,
                   maxZoom: 20,
-                  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                  attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                   id: 'examples.map-i875mjb7'
                 }).addTo(map1);
 
-                var myWMS = L.tileLayer.wms("http://wfs-kbhkort.kk.dk/k101/wms", {
-                  layers: 'k101:theme-startkort',
-                  format: 'image/png',
-                  transparent: true,
+                var aerial = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {
+                  zIndex: 1,
+                  maxZoom: 18,
+                  attribution: 'Map data © <a href="http://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">ArcGis Map Service</a> contributors, ' +
+                    '<a href="http://www.esri.com/legal/software-license">Esri Master License Agreement</a>, ' +
+                    'Imagery © <a href="http://www.esri.com/">ESRI</a>'
                 });
 
-                myWMS.addTo(map1);
+                var OSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  zIndex: 1,
+                  maxZoom: 20,
+                  attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,'
+                });
+
+                // crate a baseLayer-variable in which all the basemap-tile-layers are stored
+                var baseLayers = {
+                  "OSM MapBox": mapBox,
+                  "ESRI Aerial": aerial,
+                  "OSM Standard": OSM
+                };
+
+                // initialize the layer-control toolbar
+                L.control.layers(baseLayers).addTo(map1);
+
+                // load a wms
+                //
+                // !!! HIER KANN MAN ZUR VERBESSERUNG ANSETZEN !!! (dieser WMS liegt über den USA)
+                //
+                var myWMS = L.tileLayer.wms('http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs', {
+                  zIndex: 5,
+                  format: 'image/png',
+                  transparent: true,
+                  layers: 'RAS_RIDGE_NEXRAD'
+                }).addTo(map1);
+                //
+                // !!! ... BIS HIER !!!
+                //
+
+                document.getElementById('url-layer').onclick = function () {
+                  var enable = this.className !== 'active';
+                  myWMS.setOpacity(enable ? 1 : 0);
+                  this.className = enable ? 'active' : '';
+                  return false;
+                };
 
                 var specialIcon = L.Icon.extend({
                   options: {
