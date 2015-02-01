@@ -1,32 +1,26 @@
 -----------------------------------------------
-Aktueller Stand des Servers: 24.01: "Merge branch 'master' of https://github.com/ZoeEsaulova/CommenTerra"
+Aktueller Stand des Servers: 31.01
 -----------------------------------------------
 
+allgemein:
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten
 - QUICKSEARCH: Datei o.ä. aus der Datenbank erstellen fur die autocomplete-Funktion
+- PARSING:  andere Formate, server response übersichtlich machen!
+- STYLESHEETS: 1. Wenn man einen sehr langen Link eingibt (bzw. den Permalink anzeigen lässt,
+ wobei alle Suchparameter benutzt wurden), wird keinen Zeilenumbruch gemacht und der Link geht quer durch die ganze Seite. 
+ 		2. Kommentare visuell voneinander trennen (Daniel's feedback)
+-  Datepicker: das Jahr direkt verändern
 
-allgemein:
-____________________________
-- PARSING! PARSING! PARSING! : andere Formate, server response übersichtlich machen!
-- PARSING! PARSING! PARSING!
-- PARSING! PARSING! PARSING!   
-____________________________
-- "Experte" Rolle zuweisen
-- Unterschiede zw. eingeloggten und nicht eingeloggten Nutzer
+home:
+- müssen neben der Registrierungsform nicht die Vorteile für den eingelogten Nutzer stehen?
 
 new_comment:
 - WMS/WFS einladen?
 
-advanced_search:
-- GPS Suche
-- Bounding Box- Suche
-- am anfang keine Kommentare anzeigen
-
 mapviewer:
-- übergabe des links muss noch rein
 - WMS/WFS einladen
 
 _______________________________________________________________
@@ -46,6 +40,7 @@ AND oder OR Verknüpfung bei der Suche verwendet
 Beispieldaten:
 Fast alle Datenformate: https://github.com/m-mohr/my-meta-maps/wiki/Metadata-Formats
 BEISPIELDATEN (WMS, WFS...) : http://www.geoinfomarkt.org/modules/geomonitor/search.php
+USA: http://sampleserver1.arcgisonline.com/ArcGIS/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/WMSServer?
 
 Sensor observation service(SOS) http://sensorweb.demo.52north.org/PegelOnlineSOSv2.1/
 				                http://sensorweb.demo.52north.org/52n-sos-webapp/client
