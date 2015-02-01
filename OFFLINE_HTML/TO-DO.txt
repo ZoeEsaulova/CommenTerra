@@ -48,5 +48,6 @@ GML				                http://examples.oreilly.com/9780596008659/
 KML			                	kml-samples.googlecode.com/svn/trunk/kml/time/time-stamp-point.kml 
 			                	www-user.uni-bremen.de/koelling/kml/borabora.kml
 WMS			                	http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS
-WCS								http://webmap.ornl.gov/ogcbroker/wcs?
+WCS						http://webmap.ornl.gov/ogcbroker/wcs?
+WMTS						http://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?
 			                	
