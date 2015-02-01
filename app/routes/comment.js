@@ -19,6 +19,12 @@ router.get('/votes', function(req,res) {
 		User.findOne({ _id: req.user._id }).exec(function(err, user) {
 			User.findOne({ "local.username": comment.authorName }).exec(function(err, author) { 				
 			var save = true
+			var weight = ""
+			if (user.status=="Expert") {
+				weight = 3
+			} else {
+				weight = 1
+			}
 			for (var i=0; i<user.votedUp.length; i++) {			
 					if (JSON.stringify(comment._id)==JSON.stringify(user.votedUp[i])) {
 						save = false
@@ -32,15 +38,13 @@ router.get('/votes', function(req,res) {
 						} 
 			}
 			if (author && save) {
-				console.log("AUTHOR:  " + author.local.username)
 				if (req.query.action=="up") {
-						author.upvotes = author.upvotes + 1 
+						author.upvotes = author.upvotes + weight
 				}
 				if (req.query.action=="down") {
-						author.downvotes = author.downvotes - 1 
+						author.downvotes = author.downvotes - weight 
 			}
 				author.save()
-				console.log(author.upvotes + " " + author.downvotes)
 			}
 
 			if (req.query.action=="up") {
@@ -48,7 +52,7 @@ router.get('/votes', function(req,res) {
 				if (save) { 
 					user.votedUp.push(comment)
 					user.save()
-					comment.upvotes = comment.upvotes + 1
+					comment.upvotes = comment.upvotes + weight
 					comment.save()
 					res.send(comment.upvotes.toString())
 				} else {
@@ -62,7 +66,7 @@ router.get('/votes', function(req,res) {
 					if (save) { 
 					user.votedDown.push(comment)
 					user.save()
-					comment.downvotes = comment.downvotes - 1
+					comment.downvotes = comment.downvotes - weight
 					comment.save()
 					res.send(comment.downvotes.toString())
 				} else {
@@ -204,10 +208,22 @@ router.post('/add', function(req, res) {
 			newText = req.body.text,
 			boundingBox = [],
 			markerCoords = [],
+			markerX = 0,
+			markerY = 0,
 			rating = 0,
 			datasetRating = 0,
 			newDataset = "";
 
+			if (req.body.rectangle) {
+				coords2 = createString(req.body.rectangle)
+				console.log("coords: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
+				coords = {}
+				coords["minx"] = coords2[1]
+				coords["miny"] = coords2[0]
+				coords["maxx"] = coords2[5]
+				coords["maxy"] = coords2[2]
+				console.log("coords: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
+			}
 			if (req.body.rating) {
 				rating = Number(req.body.rating)
 				datasetRating = Number(req.body.rating)
@@ -216,6 +232,9 @@ router.post('/add', function(req, res) {
 				boundingBox = [ Number(coords.minx), Number(coords.miny),  Number(coords.maxx), Number(coords.maxy) ]
 				markerCoords = [ Number(coords.minx) + (Number(coords.maxx) - Number(coords.minx))/2,
 			 					Number(coords.miny) + (Number(coords.maxy) - Number(coords.miny))/2 ]
+			 markerX = markerCoords[0]
+			 markerY = markerCoords[1]
+
 			}			    	
 	    	coords = {}
 		
@@ -236,6 +255,8 @@ router.post('/add', function(req, res) {
 		 			authorName: req.user.local.username, 
 		 			url: newUrl,
 		 			markerCoords: markerCoords,
+		 			markerX: markerX,
+		 			markerY: markerY,
 		 			boundingBox: boundingBox,
 		 			startdate: startdate1,
         			enddate: enddate1 })
@@ -265,7 +286,9 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-				dataset.rating = Math.round((dataset.rating + rating) / 2)
+				if (rating!=0) {
+					dataset.rating = Math.round((dataset.rating + rating) / 2)
+				} 				
 				datasetRating = dataset.rating
 				//create new comment
 				if (markerCoords.length>0) {
@@ -277,6 +300,8 @@ router.post('/add', function(req, res) {
 				 	datasetRating: datasetRating,
 				 	authorName: req.user.local.username,
 				 	markerCoords: markerCoords, 
+				 	markerX: markerX,
+		 			markerY: markerY,
 				 	boundingBox: boundingBox,
 				 	datasetRating: datasetRating,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
@@ -345,7 +370,9 @@ router.post('/add', function(req, res) {
 				newDataset.save()
 				res.redirect('/')
 			} else {
-				dataset.rating = Math.round((dataset.rating + rating) / 2)
+				if (rating!=0) {
+					dataset.rating = Math.round((dataset.rating + rating) / 2)
+				}			
 				datasetRating = dataset.rating
 				if (markerCoords.length>0) {
 
@@ -485,8 +512,7 @@ function findAttr(o, format) {
         	if (typeof(o[i])=="object") { 
         		if (i=="LatLonBoundingBox") {         
             	if (resp.LatLonBoundingBox==undefined) {
-            		resp["LatLonBoundingBox"] = o[i]
-            	console.log("FOUND!:   " + i, o[i])   
+            		resp["LatLonBoundingBox"] = o[i] 
             	return      	
             	}
         		}
@@ -502,18 +528,35 @@ function findAttr(o, format) {
 		if (typeof(o[i])=="string") {
 			if (i=="ows:LowerCorner") {        
             	if (resp.LowerCorner==undefined) {
-            		resp["LowerCorner"] = o[i]
-            		console.log("FOUND low!:   " + i, o[i])              	      	
+            		resp["LowerCorner"] = o[i]             	      	
             	}
         	}
         	if (i=="ows:UpperCorner") {        
             	if (resp.UpperCorner==undefined) {
-            		resp["UpperCorner"] = o[i]
-            		console.log("FOUND up!:   " + i, o[i])              	      	
+            		resp["UpperCorner"] = o[i]             	      	
             	}
         	}
 		}
 	} }
+}
+
+function createString(input) {
+	var rectangle = []
+	var rectangle2 = []
+	var bb = input.split('LatLng')
+	
+	rectangle = bb.slice(1, bb.length)
+	for (var i=0; i<rectangle.length; i++) {
+		var x = rectangle[i].split(',')[0]
+		var y = rectangle[i].split(',')[1]
+		rectangle2.push(x.slice(1,x.length))
+		rectangle2.push(y.slice(0,y.length-1))
+	}
+	for (var i=0; i<rectangle2.length; i++) {
+		console.log("coord: " + rectangle2[i])
+	}
+
+	return rectangle2
 }
 
 module.exports = router

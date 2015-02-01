@@ -15,7 +15,7 @@ var express = require('express'),
 				var markers = ""
 				for (var i=0; i<comments.length; i++) {
 					if (comments[i].markerCoords[0]) {
-						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title + ","
 						
 					}
 				}
@@ -77,7 +77,14 @@ var express = require('express'),
 				.populate('dataset')
 				.populate('comments')
 
-			query.exec(function(err,comments) {	
+			query.sort(' -date').exec(function(err,comments) {	
+				var markers = ""
+				for (var i=0; i<comments.length; i++) {
+					if (comments[i].markerCoords[0]) {
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title + ","
+						
+					}
+				}
 				res.render('profile.ejs', { 
 				user: req.user,
 				userId: req.user.local.username,
@@ -86,6 +93,7 @@ var express = require('express'),
 				boolean1: true, 
 				action: "/logout", 
 				actionName: "Logout", 
+				markers: markers,
 				message: req.flash('loginMessage'), 
 				comments: comments,
 				})

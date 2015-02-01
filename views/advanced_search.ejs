@@ -303,11 +303,11 @@
                   <input type="text" id="datepicker1" placeholder="<%= startdatePH %>" name="startdate">
                 </div>
                 <!-- coordinates for searching on a specific point -->
-                <input type="text" name="search_coordinates" placeholder="<%= gpsPH %>" />
+                <input type="text" name="gps" placeholder="<%= gpsPH %>" />
                 <!-- button to initialize the search -->
                 <button  class="tiny radius expand" style="padding-bottom: 0.45rem" type="submit"><font color="#424242">Search</font></button>
                 <!-- hidden input for the rectangle coordinates -->
-                <input type="hidden" id="search_rectangle" name="search_rectangle" value="" placeholder="bounding-box coordinates" />
+                <input type="hidden" id="search_rectangle" name="rectangle" value="" placeholder="bounding-box coordinates" />
               </li>
               <li>
                 <!-- end date -->
@@ -411,7 +411,7 @@
                     <!-- MapViewer
                          by clicking the link of the geodataset
                          it is open in the map_viewer -->
-                      <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                      <a href="/mapviewer/<%= comments[i].dataset._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                       <p>
                         <!-- display stars depending on star-rating -->
                         <% if (comments[i].dataset.rating) {%> 
@@ -433,12 +433,18 @@
                   <ul class="no-bullet">
                     <li>
                       <% if (comments[i].user) {%>
-                        <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                        <a href="/profile/<%= comments[i].authorName %>">
+                        <% if (boolean1) { %>
++                      <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
++                    <% } else {%> 
++                      <a href=""><font color="#2ba6cb">
++                    <%} %> 
                           <font color="#2ba6cb"><%= comments[i].user.local.username %></font>
+                          <% if (comments[i].user.status=="Expert") {%>
+                            (<%= comments[i].user.status %>) <%} %>
+                            &nbsp&nbsp&nbsp&nbsp
                         </a>
                       <%} else {%> 
-                        <font color="#424242"><em>anonymous</em></font>
+                        <font color="#424242"><em>anonymous</em></font>&nbsp&nbsp&nbsp&nbsp
                       <%} %>
                       
                       <!-- Thumb up/down rating -->
@@ -485,6 +491,9 @@
                           <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                           <a href="/profile/<%= comments[i].comments[j].authorName %>">
                             <font color="#2ba6cb"><%= comments[i].comments[j].authorName %></font>
+                            <% if (comments[i].comments[j].user.status=="Expert") {%>
+                              (<%= comments[i].comments[j].user.status %>) <%} %>
+                              &nbsp&nbsp&nbsp&nbsp
                           </a>
                         <%} else {%> 
                           <font color="#424242"><em>anonymous</em></font>                            
@@ -696,7 +705,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.96935, 7.59588], 13), onLocationError1);
 
-                map1.locate({setView: true, maxZoom: 16});
+                map1.locate({setView: false, maxZoom: 16});
 
                 var popup = L.popup();
 
@@ -711,13 +720,13 @@
                 //load in all markers connected to a comment
                 function showMarkers(planes) {
 
-                                      planes = planes.split(",");
+                    planes = planes.split(",");
                     var minx = 51.927967;
                     var miny = 7.576890;
                     var maxx = 52.002744;
                     var maxy = 7.669931;
-                    console.log(planes[0] + " " + planes[1])
-                    for (var i = 0; i < planes.length - 1; i=i+3) {
+                    for (var i = 0; i < planes.length-1; i=i+3) {
+                      console.log(planes.length)
                       if (Number(planes[i]) < miny) {
                         miny = Number(planes[i])
                       } else if (Number(planes[i]) > maxy) {
@@ -728,12 +737,11 @@
                       } else if (Number(planes[i+1]) > maxx) {
                         maxx = Number(planes[i+1])
                       }
-                      console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
                       marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
                       .bindPopup(planes[i+2])
                       .addTo(map1);
                     }
-                    //map1.setView([51.96935, 7.59588], 7);
+                    //map1.setView([51.96935, 7.59588], 7); ,    , 
 
                     map1.fitBounds([
                       [minx-0.5, miny-0.5],

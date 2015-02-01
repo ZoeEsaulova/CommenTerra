@@ -35,6 +35,7 @@ app.use('/api/v1/search', express.static(__dirname + '/public'));
 app.use('/api/v1/search?', express.static(__dirname + '/public'));
 app.use('/profile', express.static(__dirname + '/public'));
 app.use('/api/v1/simplesearch', express.static(__dirname + '/public'));
+app.use('/mapviewer', express.static(__dirname + '/public'));
 
 // required for passport (used for auth)
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret

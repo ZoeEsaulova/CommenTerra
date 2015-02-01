@@ -19,7 +19,15 @@ router.get('/searchapi', function(req, res) {
 		if (req.query.count) {
 		query.limit(Number(req.query.count))
 		}
-		query.sort(' -date').exec(function(err, comments) {
+		query.sort(' -date').exec(function(err, mycomments) {
+			var comments = []
+			for (var i=0; i< mycomments.length; i++) {
+				var newComment = { "id": mycomments[i]._id, 
+									"text": mycomments[i].text, 
+									"itemUnderReview": mycomments[i].url}
+				comments.push(newComment)
+			}
+			
 			res.jsonp({ resource: "http://giv-geosoft2a.uni-muenster.de/", comments: comments})	
 		})	
 	} else {
@@ -56,12 +64,9 @@ router.get('/simplesearch', function(req, res) {
 		    	}
 		  	, function (error, response, body) {
 		  		
-
-		  		console.log(body)
 		  		var metamaps = []
 		  		var json = JSON.parse(body)
 		  		metamaps = json.comments
-		  		console.log(metamaps)
 
 				var split = req.query.q.split(' '),
 	    split2 = req.query.q.split(''),
@@ -119,7 +124,7 @@ router.get('/simplesearch', function(req, res) {
 		var markers = ""
 				for (var i=0; i<comments.length; i++) {
 					if (comments[i].markerCoords[0]) {
-						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title + ","
 						
 					}
 				}
@@ -166,6 +171,7 @@ router.get('/simplesearch', function(req, res) {
 	})
 	})		
 })
+
 // search functionality
 router.get('/search', function(req,res) {
 	// placeholder
@@ -176,6 +182,51 @@ router.get('/search', function(req,res) {
 	var enddate = "time frame (end)"
 	var gps = "coordinates (in decimal degrees)"
 	var score = 0
+	if (JSON.stringify(req.query)=="{}") {
+		if (req.isAuthenticated()) {
+			res.render('advanced_search.ejs', { 
+				comments: [], 
+				metamaps: [],
+				boolean1: true, 
+				username: req.user.local.username, 
+				userId: req.user.local.username,
+				action: "/logout", 
+				actionName: "Logout", 
+				markers: [],
+				message: req.flash('loginMessage'),
+				query: querystring.stringify(req.query),
+				//update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user,
+				score: score
+				 })
+		} else {
+			res.render('advanced_search.ejs', { 
+				comments: [], 
+				boolean1: false, 
+				metamaps: [],
+				username: 'Anonymous', 
+				action: "#", 
+				actionName: "Login", 
+				markers: [],
+				message: req.flash('loginMessage'),
+			    query: querystring.stringify(req.query),
+			//update placeholder 
+				keywordsPH: keywords,
+				urlPH: url,
+				startdatePH: startdate,
+				enddatePH: enddate,
+				gpsPH: gps,
+				userPH: user,
+				score: score
+			})
+		}
+	} else {
+
 	if (req.query.q) {
 		keywords = req.query.q
 	} 
@@ -205,19 +256,25 @@ router.get('/search', function(req,res) {
 			query.where({ url: regexY })
 		}
 		if (req.query.authorName) {
-			var regexU = new RegExp(req.query.url, 'i');
-			query.where({ authorName: regexU })
+			query.where("authorName").equals(req.query.authorName)
+		}
+		if (req.query.rectangle) {
+			var bb = createString(req.query.rectangle)
+			console.log("x" + Number(bb[1]) + " " +  Number(bb[5]) )
+			console.log("y" + Number(bb[0]) + " " +  Number(bb[2]) )
+			query.where({ $and: [{ "markerX": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
+								 { "markerY": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+								]
+						})
 		}
 
 			if (req.query.startdate && req.query.enddate) {
 				startdate = req.query.startdate
 				enddate = req.query.enddate
-				console.log("Startdate?")
 				var splitdate1 = req.query.startdate.split('/')
 				var splitdate2 = req.query.enddate.split('/')
 				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
 				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
-				console.log("Start: " + start + " End: " + end)
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )						
 			}
 		
@@ -242,7 +299,15 @@ router.get('/search', function(req,res) {
 			}
 		}
 
-		
+		if (req.query.rectangle) {
+			var bb = createString(req.query.rectangle)
+			console.log("x" + Number(bb[1]) + " " +  Number(bb[5]) )
+			console.log("y" + Number(bb[0]) + " " +  Number(bb[2]) )
+			query.where({ $and: [{ "x": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
+								 { "y": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+								]
+						})
+		}
 			if (req.query.startdate && req.query.enddate) {
 				startdate = req.query.startdate
 				enddate = req.query.enddate
@@ -264,8 +329,7 @@ router.get('/search', function(req,res) {
 			query.where({ url: regexY })
 		}
 		if (req.query.authorName) {
-			var regexU = new RegExp(req.query.url, 'i');
-			query.where({ authorName: regexU })
+			query.where("authorName").equals(req.query.authorName)
 		}
 	}
 
@@ -275,19 +339,29 @@ router.get('/search', function(req,res) {
 				
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
-		if (comments) {
+		var newComments = []
+		if (req.query.gps) {
+			for (var i=0; i<comments.length; i++) {
+				if (inBoundingBox(req.query.gps, comments[i].boundingBox)) {
+					newComments.push(comments[i])
+				}
+			}
+		} else {
+			newComments = comments
+		}
+		if (newComments) {
 			var markers = ""
-				for (var i=0; i<comments.length; i++) {
-					if (comments[i].markerCoords[0]) {
-						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 
-						
+				for (var i=0; i<newComments.length; i++) {
+					if (newComments[i].markerCoords[0]) {
+							markers = markers +  newComments[i].markerCoords[0] + "," +  newComments[i].markerCoords[1] + "," + newComments[i].title + ","
+											
 					}
 				}
 		}
 		
 		if (req.isAuthenticated()) {
 			res.render('advanced_search.ejs', { 
-				comments: comments, 
+				comments: newComments, 
 				metamaps: [],
 				boolean1: true, 
 				username: req.user.local.username, 
@@ -308,7 +382,7 @@ router.get('/search', function(req,res) {
 				 })
 		} else {
 			res.render('advanced_search.ejs', { 
-				comments: comments, 
+				comments: newComments, 
 				boolean1: false, 
 				metamaps: [],
 				username: 'Anonymous', 
@@ -328,6 +402,7 @@ router.get('/search', function(req,res) {
 			})
 		}
 	})
+}
 })
 
 //get all search parameters and add them to search permalink
@@ -335,5 +410,44 @@ router.post('/', function(req,res) {
 	res.redirect('/api/v1/search?'+ querystring.stringify(req.body))
 })
 
+function createString(input) {
+	var rectangle = []
+	var rectangle2 = []
+	var bb = input.split('LatLng')
+	
+	rectangle = bb.slice(1, bb.length)
+	for (var i=0; i<rectangle.length; i++) {
+		var x = rectangle[i].split(',')[0]
+		var y = rectangle[i].split(',')[1]
+		rectangle2.push(x.slice(1,x.length))
+		rectangle2.push(y.slice(0,y.length-1))
+	}
+	for (var i=0; i<rectangle2.length; i++) {
+		console.log("coord: " + rectangle2[i])
+	}
+
+	return rectangle2
+}
+
+function inBoundingBox(marker, boundingBox) {
+	var gps = marker.split(',')
+	if (gps[0]>boundingBox[1] && gps[0]<boundingBox[3] && (gps[1]>boundingBox[0]) && (gps[1]<boundingBox[2]) ) {
+	return true
+} else {
+	return false
+}
+}
+
+/*
+7, 50 
+
+coord: 51.96496
+coord: 7.56043)
+coord: 51.96956
+coord: 7.56043)
+coord: 51.96956
+coord: 7.56927)
+coord: 51.96496
+coord: 7.56927) */
 
 module.exports = router

@@ -424,7 +424,7 @@
                     <!-- MapViewer
                          by clicking the link of the geodataset
                          it is open in the map_viewer -->
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <a href="/mapviewer/<%= comments[i].dataset._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
                     <!-- display stars depending on star-rating -->
                     <% if (comments[i].dataset.rating) {%> 
@@ -441,14 +441,16 @@
                     <%} %>                  
                   </li>
                   </ul>
-                  <%= comments[i].dataset.rating %>
                   <%= comments[i].text %> 
                   <p>
                   <ul class="no-bullet">
                   <li>
                     <% if (comments[i].user) {%>
-                    <!-- HERE SCRIPT TO POPULATE COMMENTS! -->
-                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
+                    <% if (boolean1) { %>
++                      <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
++                    <% } else {%> 
++                      <a href=""><font color="#2ba6cb">
++                    <%} %> 
                       <%= comments[i].user.local.username %>&nbsp
                       <% if (comments[i].user.status=="Expert") {%>
                       (<%= comments[i].user.status %>) <%} %>
@@ -640,7 +642,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
 
-                map1.locate({setView: true, maxZoom: 16});
+                map1.locate({setView: false, maxZoom: 16});
 
                 var popup = L.popup();
 
@@ -654,7 +656,6 @@
                 map1.on('click', onMapClick1);
 
                 function loadMarker(x, y) {
-                  console.log("xy " + x + " " + y)
                   L.marker([ x, y ]).openPopup();
                 }
 
@@ -665,8 +666,7 @@
                     var miny = 7.576890;
                     var maxx = 52.002744;
                     var maxy = 7.669931;
-                    console.log(planes[0] + " " + planes[1])
-                    for (var i = 0; i < planes.length - 1; i=i+3) {
+                    for (var i = 0; i < planes.length-1; i=i+3) {
                       if (Number(planes[i]) < miny) {
                         miny = Number(planes[i])
                       } else if (Number(planes[i]) > maxy) {
@@ -677,7 +677,6 @@
                       } else if (Number(planes[i+1]) > maxx) {
                         maxx = Number(planes[i+1])
                       }
-                      console.log(i + " " + Number(planes[i]) + " " + Number(planes[i+1]))
                       marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
                       .bindPopup(planes[i+2])
                       .addTo(map1);

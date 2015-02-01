@@ -15,6 +15,8 @@ var commentSchema = mongoose.Schema({
   comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }, 
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   markerCoords: [{ type: Number }],
+  markerX: Number,
+  markerY: Number,
   boundingBox: [{ type: Number}],
   startdate: Date,
   enddate: Date,
@@ -39,6 +41,14 @@ commentSchema.virtual('dateString').get(function () {
     var result = curr_date + " " + m_names[curr_month]  + " " + curr_year + "  " + h + ":" + m;
   }
   return result;
+})
+
+commentSchema.virtual('x').get(function () {
+  return this.markerCoords[0]
+})
+
+commentSchema.virtual('y').get(function () {
+  return this.markerCoords[1]
 })
 
 commentSchema.set('toJSON', { virtuals: true });

@@ -42,7 +42,7 @@ var userSchema = mongoose.Schema({
 userSchema.virtual('status').get(function () {
 	
 	if (this.downvotes!=0) {
-		if ((this.posts.length > 1) && (this.upvotes > 2) && (this.upvotes/this.downvotes > 0.7 )) {
+		if ((this.posts.length > 1) && (this.upvotes > 2) && (this.upvotes/Math.abs(this.downvotes) > 0.7 )) {
 		return "Expert"
 		} 
 	} else if ((this.posts.length > 1) && (this.upvotes > 2)) {

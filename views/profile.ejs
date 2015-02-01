@@ -306,7 +306,10 @@
           </li>
           <li>
             <!-- information about the user -->
-            <div><p><font color="white">Username: </font><font id="numero2" color="white" size="3"><%= pageowner.local.username %></font></p></div>
+            <div><p><font color="white">Username: </font><font id="numero2" color="white" size="3"><%= pageowner.local.username %>
+            <% if (pageowner.status=="Expert") {%>
+                            (<%= pageowner.status %>) <%} %>
+                            </font></p></div>
             <div><p><font color="white">Email: </font><font color="white" size="3"><%= pageowner.local.email %></font></p></div>
             <% if (pageowner.firstname) {%>
               <div><p><font color="white">First Name: </font><font color="white" size="3"><%= pageowner.firstname%></font></p></div>
@@ -398,7 +401,7 @@
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
-                    <a href="/mapviewer"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <a href="/mapviewer/<%= comments[i].dataset._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
                      <!-- display stars depending on star-rating -->
                     <% if (comments[i].dataset.rating) {%> 
@@ -420,7 +423,16 @@
                   <ul class="no-bullet">
                   <li>
                     <% if (comments[i].user) {%>                  
-                    <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb"><%= comments[i].user.local.username %>&nbsp&nbsp&nbsp&nbsp
+                    <% if (boolean1) { %>
++                      <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
++                    <% } else {%> 
++                      <a href=""><font color="#2ba6cb">
++                    <%} %> 
+
+                      <%= comments[i].user.local.username %>
+                      <% if (comments[i].user.status=="Expert") {%>
+                            (<%= comments[i].user.status %>) <%} %>
+                            &nbsp&nbsp&nbsp&nbsp
                     </font></a>
                   <%} else {%> 
                     <font color="#424242"><em>anonymous</em></font>&nbsp&nbsp&nbsp&nbsp
@@ -467,6 +479,9 @@
                             <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                               <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
                                 <%= comments[i].comments[j].authorName %>
+                                <% if (comments[i].comments[j].user.status=="Expert") {%>
+                                  (<%= comments[i].comments[j].user.status %>) <%} %>
+                                  &nbsp&nbsp&nbsp&nbsp
                               </font></a>
                             <%} else {%> 
                               <font color="#424242"><em>anonymous</em></font>                            
@@ -596,7 +611,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
 
-                map1.locate({setView: true, maxZoom: 16});
+                map1.locate({setView: false, maxZoom: 16});
 
                 var popup = L.popup();
 

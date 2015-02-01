@@ -4,6 +4,7 @@ module.exports = function(app, passport) {
 
 var User = require('../models/user');
 var Comment = require('../models/comment');
+var Dataset = require('../models/dataset');
 var _ = require('underscore');
 // normal routes ===============================================================
 
@@ -15,9 +16,14 @@ var _ = require('underscore');
 			var markers = ""
 				for (var i=0; i<comments.length; i++) {
 					if (comments[i].markerCoords[0]) {
-						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title 						
+						markers = markers +  comments[i].markerCoords[0] + "," +  comments[i].markerCoords[1] + "," + comments[i].title + ','					
 					}
+					console.log("Raty: " + comments[i].datasetRating + " " + comments[i].dataset.rating)
+					comments[i].datasetRating = comments[i].dataset.rating
+					console.log("Raty danach " + comments[i].datasetRating + " " + comments[i].dataset.rating)
+					comments[i].save()
 				}
+
 			
 			if (req.isAuthenticated()) {			
 				res.render('Home.ejs', { 
@@ -51,14 +57,18 @@ var _ = require('underscore');
 	});
 
 	//show map_viewer page
-	app.get('/mapviewer', function(req,res) {
-		if (req.isAuthenticated()) {
+	app.get('/mapviewer/:datasetId', function(req,res) {
+		Dataset.findOne({ "_id" : req.params.datasetId}).exec(function(err, dataset) {
+			if (req.isAuthenticated()) {
 			res.render('map_viewer.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage'), userId: req.user.local.username })
+				message: req.flash('loginMessage'), userId: req.user.local.username, url: dataset.url })
 		} else {
 			res.render('map_viewer.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-				message: req.flash('loginMessage') })
+				message: req.flash('loginMessage'), url: dataset.url })
 		} 
+
+		})
+		
 	})
 
 	//show FAQ page
