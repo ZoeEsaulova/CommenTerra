@@ -12,7 +12,7 @@ var express = require('express'),
 	resp = {},
 	resptext = "No properties found. Check the format of your url",
 	coords = { minx: "", miny: "", maxx: "", maxy: "" };
-	
+
 // Thumb up/down rating
 router.get('/votes', function(req,res) {
 	Comment.findOne({ _id: req.query.id }).exec(function(err, comment) {
@@ -77,7 +77,7 @@ router.get('/votes', function(req,res) {
 })
 })
 })
-/* WMS PARSER 
+/* PARSER 
 *  wms example: http://www.wms.nrw.de/umwelt/boden/stobo?
 *  wfs example: 
 */
@@ -85,13 +85,20 @@ router.get('/', function(req,res) {
  	var url = ""
  	resptext = "No properties found. Check the format of your url"
  	var format = req.query.select
+ 	var version = "VERSION"
+ 	/*
+ 	if (req.query.select=="wcs") {
+ 		version = "AcceptVersions"
+ 	}*/
  	// check the url format, append an GetCapability request if necessary
-	if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
+ 	if (req.query.url.indexOf("kml")!=(-1)) {
+ 		url = req.query.url
+ 	} else if (req.query.url.indexOf("?")==(-1)) {
+		url = req.query.url + "?REQUEST=GetCapabilities&" + version + "=1.1.0&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&" + version + "=1.1.0&SERVICE=" + format 
 	}
 
 	// send an GetCapabilities request 
@@ -104,7 +111,7 @@ router.get('/', function(req,res) {
   		
   		//console.log(body)
   		if (!error && body) {
-
+  			console.log(body)
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
 		  var parser = new xml2js.Parser({explicitArray : false});
 		  parser.parseString(body, function(err,result) {
@@ -537,7 +544,16 @@ function findAttr(o, format) {
             	}
         	}
 		}
-	} }
+	} } else if (format="wcs") {
+		for (i in o) {
+		if (typeof(o[i])=="object") {
+			if (i=="ows:WGS84BoundingBox") {
+				console.log("WGS84: " + o[i])
+			}
+			findAttr(o[i], format )
+		}
+		}
+	}
 }
 
 function createString(input) {

@@ -22,7 +22,7 @@ router.get('/searchapi', function(req, res) {
 		query.sort(' -date').exec(function(err, mycomments) {
 			var comments = []
 			for (var i=0; i< mycomments.length; i++) {
-				var newComment = { "id": mycomments[i]._id, 
+				var newComment = { "id": 'http://giv-geosoft2a.uni-muenster.de/api/v1/search?id=' + mycomments[i]._id, 
 									"text": mycomments[i].text, 
 									"itemUnderReview": mycomments[i].url}
 				comments.push(newComment)
@@ -251,6 +251,9 @@ router.get('/search', function(req,res) {
 			query.where('datasetRating').equals(req.query.datasetRating)
 		}
 
+		if (req.query.id) {
+			query.where({ _id: req.query.id })
+		}
 		if (req.query.url) {
 			var regexY = new RegExp(req.query.url, 'i');
 			query.where({ url: regexY })
