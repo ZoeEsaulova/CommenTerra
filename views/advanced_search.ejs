@@ -539,8 +539,23 @@
                       <li>
                         <a href="/mapviewer"><font color="#2ba6cb"><%= metamaps[i].itemUnderReview %></font></a>
                         <br>
+                        <!-- display stars depending on star-rating -->
+                    <% if (metamaps[i].rating) {%> 
+                      <% for (var k=0; k<metamaps[i].rating; k++) { %> 
+                        <i class="fi-star size-28 font-green"></i>
+                      <% } %>
+                      <% for (var l=metamaps[i].rating; l<5; l++) { %> 
+                        <i class="fi-star size-28 font-grey"></i>
+                      <% } %>
+                    <%} else {%> 
+                      <% for (var l=0; l<5; l++) { %> 
+                        <i class="fi-star size-28 font-grey"></i>
+                      <% } %>
+                    <%} %>
+                        <br>
                         <%= metamaps[i].text %>
-                      </li>   
+                      </li>  
+                      <a href=<%= metamaps[i].id %>><font color="#2ba6cb">View comment on MyMetaMaps</font></a>
                 </dd>
               <%} %>
               <% } %>

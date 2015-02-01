@@ -24,7 +24,8 @@ router.get('/searchapi', function(req, res) {
 			for (var i=0; i< mycomments.length; i++) {
 				var newComment = { "id": 'http://giv-geosoft2a.uni-muenster.de/api/v1/search?id=' + mycomments[i]._id, 
 									"text": mycomments[i].text, 
-									"itemUnderReview": mycomments[i].url}
+									"itemUnderReview": mycomments[i].url,
+									"rating": mycomments[i].datasetRating }
 				comments.push(newComment)
 			}
 			
