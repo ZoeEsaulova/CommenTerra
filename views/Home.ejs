@@ -447,10 +447,10 @@
                   <li>
                     <% if (comments[i].user) {%>
                     <% if (boolean1) { %>
-+                      <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
-+                    <% } else {%> 
-+                      <a href=""><font color="#2ba6cb">
-+                    <%} %> 
+                      <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
+                    <% } else {%> 
+                      <a href=""><font color="#2ba6cb">
+                    <%} %> 
                       <%= comments[i].user.local.username %>&nbsp
                       <% if (comments[i].user.status=="Expert") {%>
                       (<%= comments[i].user.status %>) <%} %>
