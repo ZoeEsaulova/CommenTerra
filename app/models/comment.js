@@ -18,6 +18,8 @@ var commentSchema = mongoose.Schema({
   markerX: Number,
   markerY: Number,
   boundingBox: [{ type: Number}],
+  bbLowRight: Number,
+  bbUpLeft: Number,
   startdate: Date,
   enddate: Date,
   upvotes: { type: Number, default: 0 },

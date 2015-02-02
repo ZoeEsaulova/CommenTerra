@@ -414,7 +414,8 @@
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-                <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
+                <a id="numero6" href="#panel<%= i %>c" onclick="activateMarker(
+                  <%= comments[i].markerX )"><%= comments[i].title %></a>
 
                 <div id="panel<%= i %>c" class="content" 
                   >
@@ -681,6 +682,10 @@
                       [maxx+0.5, maxy+0.5]
                   ]);
                 }
+
+              function activateMarker(x,y) {
+                greenMarker = L.marker([ Number(x), Number(y) ], {icon: greenIcon}).addTo(map1)
+              }
 
               </script>
 

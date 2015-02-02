@@ -82,24 +82,66 @@ router.get('/votes', function(req,res) {
 *  wfs example: 
 */
 router.get('/', function(req,res) {
+	
  	var url = ""
  	resptext = "No properties found. Check the format of your url"
  	var format = req.query.select
  	var version = "VERSION"
- 	/*
- 	if (req.query.select=="wcs") {
+ 	console.log("Format: " + format)
+ 	
+ 	if (req.query.select=="wcs" || req.query.select=="csw") {
  		version = "AcceptVersions"
- 	}*/
+ 	}
  	// check the url format, append an GetCapability request if necessary
  	if (req.query.url.indexOf("kml")!=(-1)) {
  		url = req.query.url
  	} else if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities&" + version + "=1.1.0&SERVICE=" + format 
+		url = req.query.url + "?REQUEST=GetRecords" + version + "=2.0.2&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&" + version + "=1.1.0&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetRecords&" + version + "=2.0.2&SERVICE=" + format 
 	}
+
+	if (req.query.select=="hgeo") {
+		console.log("HGEO")
+		var microformats = require("microformat-node"),
+    		options = {};
+    	url = req.query.url
+		microformats.parseUrl(url, options, function(err, data){
+		    //findAttr(data, format)
+		    resptext = JSON.stringify(data)
+		    if (req.isAuthenticated()) {
+	    res.render('new_comment.ejs', { 
+	    	boolean1: true, 
+	    	username: req.user.local.username,
+	    	userId:  req.user.local.username,
+	    	coords: coords,
+	    	action: "/logout", 
+	    	actionName: "Logout", 
+			message: req.flash('loginMessage'), 
+			urlValue: "", 
+			addAction: "/comments/add", 
+			// send response to clinet
+			XMLresponse: resptext ,
+			urlResult: req.query.url }) }
+	   else {
+		 res.render('new_comment.ejs', { 
+	    		boolean1: false, 
+	    		username: 'Anonymous', 
+	    		action: "#", 
+	    		actionName: "Login", 
+	    		coords: coords,
+				message: req.flash('loginMessage'), 
+				urlValue: "", 
+				addAction: "/comments/add", 
+				// send response to clinet
+				XMLresponse: resptext ,
+				urlResult: req.query.url })	
+		}
+		});
+		
+	} else {
 
 	// send an GetCapabilities request 
   	request(
@@ -109,9 +151,9 @@ router.get('/', function(req,res) {
     	}
   	, function (error, response, body) {
   		
-  		//console.log(body)
+  	
   		if (!error && body) {
-  			console.log(body)
+  			
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
 		  var parser = new xml2js.Parser({explicitArray : false});
 		  parser.parseString(body, function(err,result) {
@@ -164,6 +206,7 @@ router.get('/', function(req,res) {
 				urlResult: req.query.url })	
 		}
 	})
+}
 })
 
 // show the new_comment page
@@ -223,13 +266,11 @@ router.post('/add', function(req, res) {
 
 			if (req.body.rectangle) {
 				coords2 = createString(req.body.rectangle)
-				console.log("coords: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
 				coords = {}
 				coords["minx"] = coords2[1]
 				coords["miny"] = coords2[0]
 				coords["maxx"] = coords2[5]
 				coords["maxy"] = coords2[2]
-				console.log("coords: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
 			}
 			if (req.body.rating) {
 				rating = Number(req.body.rating)
@@ -544,14 +585,25 @@ function findAttr(o, format) {
             	}
         	}
 		}
-	} } else if (format="wcs") {
+	} } else if (format=="wcs" || format=="wmts") {
 		for (i in o) {
 		if (typeof(o[i])=="object") {
 			if (i=="ows:WGS84BoundingBox") {
-				console.log("WGS84: " + o[i])
+				if (resp.LowerCorner==undefined) {
+            		resp["LowerCorner"] = o[i]['ows:LowerCorner']             	      	
+            	}
+            	if (resp.UpperCorner==undefined) {
+            		resp["UpperCorner"] = o[i] ['ows:UpperCorner']            	      	
+            	}
+            	break
 			}
 			findAttr(o[i], format )
 		}
+		}
+	} else if (format=="hgeo") {
+		for (i in o) {
+			console.log("i: " + i + " " + o[i])
+			findAttr(o[i], format )
 		}
 	}
 }
@@ -568,9 +620,7 @@ function createString(input) {
 		rectangle2.push(x.slice(1,x.length))
 		rectangle2.push(y.slice(0,y.length-1))
 	}
-	for (var i=0; i<rectangle2.length; i++) {
-		console.log("coord: " + rectangle2[i])
-	}
+
 
 	return rectangle2
 }
