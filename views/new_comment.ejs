@@ -345,7 +345,7 @@
             <option value="gml">GML</option>
           </select>
           </label>          
-          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible()"><font color="#424242">Validate URL</font></button>
+          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible(); saveVisible();"><font color="#424242">Validate URL</font></button>
           </form>
           <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
@@ -437,7 +437,8 @@
                           </li>
                         </ul>
                         <label><font color="#424242" size="4">Comment:</font></label>
-                        <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..."></textarea>
+                        <textarea style="height:185px;resize:none;" name="text" id="message" placeholder="Comment..." required></textarea>
+                        <small class="error">Please type in at least a few words!</small>
                         <br>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
@@ -446,7 +447,7 @@
                             <input type="hidden" id="set_rectangle" name="rectangle" value="" placeholder="bounding-box coordinates" />
                           </li>
                           <li>
-                            <button type="submit" id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
+                            <button disabled type="submit" id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
                              Save
                             </button>
                             <!--pop up to confirm the submission-->
@@ -474,6 +475,14 @@
           </li>
         </ul>  
     </div>
+    
+    <script>
+    
+    function saveVisible() {
+      document.getElementById("lastStop").enabled;
+    }
+    
+    </script>
 
           <script>
                 //Map for medium screens
