@@ -7,6 +7,10 @@ allgemein:
 - Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
 - KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten
+in der ejs im accordeon wo der Titel des comments geladen wird eine onClick="functionxy()" schreiben die dann unten im map-script geladen wird.
+Dort muss eine function ausgeführt werden die den marker des kommentars anhand seiner in der Datenbank hinterlegten Koordinaten identifiziert und dann den Marker ändert,
+über: z.B. markerXY = L.marker("Datenbankkoordinaten", {icon: greenIcon}); ... irgendwie so.
+Anders herum eine markerXY.click(zugehöriger kommentar auf class="content active" schalten) ... so müsste das gehen .. hoffe, dass das mit der class funktioniert.
 - QUICKSEARCH: Datei o.ä. aus der Datenbank erstellen fur die autocomplete-Funktion
 - PARSING:  andere Formate, server response übersichtlich machen!
 - STYLESHEETS: 1. Wenn man einen sehr langen Link eingibt (bzw. den Permalink anzeigen lässt,
@@ -48,5 +52,7 @@ GML				                http://examples.oreilly.com/9780596008659/
 KML			                	kml-samples.googlecode.com/svn/trunk/kml/time/time-stamp-point.kml 
 			                	www-user.uni-bremen.de/koelling/kml/borabora.kml
 WMS			                	http://www.wms.nrw.de/umwelt/boden/stobo?REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS
-WCS								http://webmap.ornl.gov/ogcbroker/wcs?
+WCS						http://webmap.ornl.gov/ogcbroker/wcs?
+WMTS						http://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?
+WFS						http://www.pegelonline.wsv.de:80/webservices/gis/aktuell/wfs
 			                	

@@ -3313,6 +3313,10 @@ ul.pagination {
   .accordion .accordion-navigation, .accordion dd {
     border-radius: 3px;
     display: block;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #424242;
     margin-bottom: 0 !important; }
     .accordion .accordion-navigation.active > a, .accordion dd.active > a {
       background: #80FF00; }
