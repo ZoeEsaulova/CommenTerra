@@ -415,7 +415,7 @@
               <dd class="accordion-navigation">
 
                 <a id="numero6" href="#panel<%= i %>c" onclick="activateMarker(
-                  <%= comments[i].markerX )"><%= comments[i].title %></a>
+                  '<%= comments[i].markerX %>', '<%= comments[i].markerY %>')"><%= comments[i].title %></a>
 
                 <div id="panel<%= i %>c" class="content" 
                   >
@@ -603,7 +603,8 @@
                 });
 
                 var greenIcon = new specialIcon({iconUrl: 'css/images/marker-icon-green.png'}),
-                    redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'});
+                    redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'}),
+                    blueIcon = new specialIcon({iconUrl: 'css/images/marker-icon.png'});
 
                 function relocate() {
 
@@ -653,6 +654,8 @@
                   L.marker([ x, y ]).openPopup();
                 }
 
+                var markers = []
+                
                 function showMarkers(planes) {
 
                     planes = planes.split(",");
@@ -671,9 +674,10 @@
                       } else if (Number(planes[i+1]) > maxx) {
                         maxx = Number(planes[i+1])
                       }
-                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                      var marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
                       .bindPopup(planes[i+2])
                       .addTo(map1);
+                      markers.push(marker)
                     }
                     //map1.setView([51.96935, 7.59588], 7); ,    , 
 
@@ -682,9 +686,25 @@
                       [maxx+0.5, maxy+0.5]
                   ]);
                 }
+              var open = false
 
               function activateMarker(x,y) {
-                greenMarker = L.marker([ Number(x), Number(y) ], {icon: greenIcon}).addTo(map1)
+                var markerY = L.latLng(Number(x),Number(y));
+                open = !open;
+                
+                if (open) {
+                  for (var i=0; i<markers.length; i++) {
+                  if markers[i].getLatLng().equals(markerY) {
+                    markers[i].setIcon(greenIcon).openPopup()
+                  }                 
+                }
+                }   else {
+                  for (var i=0; i<markers.length; i++) {
+                  if markers[i].getLatLng().equals(markerY) {
+                    markers[i].setIcon(blueIcon).openPopup()
+                  }                 
+                }
+                }           
               }
 
               </script>
