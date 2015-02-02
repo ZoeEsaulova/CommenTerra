@@ -231,7 +231,7 @@
     </script>
   </head>
 
-  <body>
+  <body onload="saveInvisible()">
 
     <% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -345,7 +345,7 @@
             <option value="gml">GML</option>
           </select>
           </label>          
-          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible(); saveVisible();"><font color="#424242">Validate URL</font></button>
+          <button class="tiny radius expand" id="validateurl" type="submit" onclick="saveVisible(); visible();"><font color="#424242">Validate URL</font></button>
           </form>
           <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
@@ -377,7 +377,7 @@
         <option value="gml">GML</option>
       </select>
       </label>
-      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firstStop').value">
       <font color="#424242">Validate URL</font>
       </button>
       </form>
@@ -477,12 +477,21 @@
     </div>
     
     <script>
-    
-    function saveVisible() {
-      document.getElementById("lastStop").disabled = false;
-    }
-    
-    </script>
+
+			function saveVisible() {
+				var saveButton = document.getElementById("lastStop");
+    			saveButton.removeAttribute("disabled"); 
+			}
+
+		</script>
+
+		<script>
+
+		function saveInvisible() {
+			document.getElementById("lastStop").disabled = true;
+		}
+
+		</script>
 
           <script>
                 //Map for medium screens
