@@ -312,28 +312,29 @@
         <br>
           <!--send the input per e-mail to us-->
           <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data" data-abide>
-          <input type="hidden" name="antwortseite_template" value="mail_response.html">
+          <!-- redirect to another response-page than the standard formular-chef one. But you need a web-space that is reachable from anywhere in the world wide web
+          <input type="hidden" name="antwortseite_template" value="http://localhost/about"> -->
 
           <input type="hidden" name="empfaenger" value="m.twel02X§Xgmail.com,bjunge90X§Xgmail.com,ehrecke.janX§Xgmail.com,j.golz01X§Xgmail.com,zoe.esaulovaX§Xgmail.com"/>
 
               <div class="name-field">
                 <label><font color="#424242">Last Name:</font></label>
-                <input type="text" required/>
+                <input type="text" name="Last Name" required/>
                 <small class="error">Please tell us your last name!</small>
               </div>
               <div class="name-field">
                 <label><font color="#424242">First Name:</font></label>
-                <input type="text" required/>
+                <input type="text" name="First Name" required/>
                 <small class="error">Please tell us your first name!</small>
               </div>
               <div class="email-field">
                 <label><font color="#424242">E-Mail:</font></label>
-                <input type="text" pattern="email" required/>
+                <input type="text" name="E-Mail" pattern="email" required/>
                 <small class="error">Please type in a valid e-mail so we can contact you!</small>
               </div>
               <div class="name-field">
                 <label><font color="#424242">Message:</font></label>
-                <textarea style="height:270px;resize:none;" required></textarea>
+                <textarea style="height:270px;resize:none;" name="Message" required></textarea>
                 <small class="error">Please type in at least a few words!</small>
               </div>
               <p></p>
@@ -350,24 +351,25 @@
         <br>
         <br>
         <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data" data-abide>
-          <input type="hidden" name="antwortseite_template" value="mail_response.html">
+          <!-- redirect to another response-page than the standard formular-chef one. But you need a web-space that is reachable from anywhere in the world wide web
+          <input type="hidden" name="antwortseite_template" value="http://localhost/about"> -->
 
           <input type="hidden" name="empfaenger" value="m.twel02X§Xgmail.com,bjunge90X§Xgmail.com,ehrecke.janX§Xgmail.com,j.golz01X§Xgmail.com,zoe.esaulovaX§Xgmail.com"/>
           <ul class="small-block-grid-2" data-equalizer>
             <li>
               <div class="name-field">
                 <label><font color="#424242">Last Name:</font></label>
-                <input type="text" required/>
+                <input type="text" name="Last Name" required/>
                 <small class="error">Please tell us your last name!</small>
               </div>
               <div class="name-field">
                 <label><font color="#424242">First Name:</font></label>
-                <input type="text" required/>
+                <input type="text" name="First Name" required/>
                 <small class="error">Please tell us your first name!</small>
               </div>
               <div class="email-field">
                 <label><font color="#424242">E-Mail:</font></label>
-                <input type="text" pattern="email" required/>
+                <input type="text" name="E-Mail" pattern="email" required/>
                 <small class="error">Please type in a valid e-mail so we can contact you!</small>
               </div>
               <br>
@@ -378,7 +380,7 @@
             <li>
               <div class="name-field">
                 <label><font color="#424242">Message:</font></label>
-                <textarea style="height:270px;resize:none;" required></textarea>
+                <textarea style="height:270px;resize:none;" name="Message" required></textarea>
                 <small class="error">Please type in at least a few words!</small>
               </div>
             </li>
