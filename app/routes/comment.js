@@ -130,7 +130,14 @@ router.get('/', function(req,res) {
 					coords.maxx = resp.UpperCorner.split(' ')[0]
 					coords.maxy = resp.UpperCorner.split(' ')[1]
 				}
-				resptext = JSON.stringify(result)
+				var newString = JSON.stringify(result);
+				var replace1 = newString.replace(/{/g, "\n { \n")
+				var replace2 = replace1.replace(/}/g, "\n }")
+				var splitten = replace2.split(",");
+				resptext = "";
+				for(var i = 0; i < splitten.length; i++){
+					resptext += splitten[i]  + "\n";
+				}
 			  } 
   		  })
   		} 
