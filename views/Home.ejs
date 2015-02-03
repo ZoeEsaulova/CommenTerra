@@ -655,10 +655,6 @@
 
                 map1.on('click', onMapClick1);
 
-                function loadMarker(x, y) {
-                  L.marker([ x, y ]).openPopup();
-                }
-
               var markers = []
               var openArray = []
               var coordsAndBoolean = {}
@@ -738,10 +734,10 @@
                   if (markers[i].getLatLng().equals(markerY)) {
 
                      var k = i;
-                     console.log("i " + i + " k " + k + " " + openArray[k].i)
+                     console.log("i " + i + " k " + k + " " + openArray[k].index)
                   }                 
                 }
-                console.log("click: " + openArray[k].i + " " + openArray[k].open)
+                console.log("click: " + openArray[k].index + " " + openArray[k].open)
                 if (!(openArray[k].open)) {
                     markers[k].setIcon(greenIcon).openPopup();                 
                 } else {
@@ -749,7 +745,7 @@
                 }
 
                 openArray[k].open = !(openArray[k].open)
-                 console.log("nach click: " + openArray[k].i + " " + openArray[k].open)
+                 console.log("nach click: " + openArray[k].index + " " + openArray[k].open)
              
               }
               </script>

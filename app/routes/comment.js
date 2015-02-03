@@ -19,7 +19,9 @@ router.get('/marker', function(req,res) {
 	var x = s[0].slice(7,s[0].length)
 	var y = s[1].slice(1,s[1].length-1)
 	console.log("x " + x + " y " + y)
-	Comment.findOne({ $and: [ { markerY: Number(x) }, { markerX: Number(y)}] }).exec(function(err, comment) {
+	// {"$gte": start, "$lte": end } 
+	Comment.findOne({ $and: [ { markerY: {"$gte": Number(x)-0.00001, "$lte": Number(x)+0.00001 } }, 
+							  { markerX: {"$gte": Number(y)-0.00001, "$lte": Number(y)+0.00001 } }] }).exec(function(err, comment) {
 		res.send(comment._id)
 		console.log("id " + comment._id)
 	})

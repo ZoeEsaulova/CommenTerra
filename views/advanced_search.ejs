@@ -402,9 +402,10 @@
             <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
 
-              <a id="numero6" href="#panel<%= i %>c" ><%= comments[i].title %></a>
+              <a id="numero6" href="#panel<%= comments[i]._id %>" onclick="activateMarker(
+                  '<%= comments[i].markerCoords[0] %>', '<%= comments[i].markerCoords[1] %>')"><%= comments[i].title %></a>
 
-              <div id="panel<%= i %>c" class="content" >
+              <div id="panel<%= comments[i]._id %>" class="content" >
                 <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                     <li>
@@ -635,7 +636,8 @@
                 });
 
                 var greenIcon = new specialIcon({iconUrl: 'css/images/marker-icon-green.png'}),
-                    redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'});
+                    redIcon = new specialIcon({iconUrl: 'css/images/marker-icon-red.png'}),
+                    blueIcon = new specialIcon({iconUrl: 'css/images/marker-icon.png'});
 
                 //create featureGroup and control panels for drawing
                 var drawnItems = new L.FeatureGroup();
@@ -739,7 +741,12 @@
                   .openOn(map1);
                 }
                 
+                map1.on('click', onMapClick1);
                 //load in all markers connected to a comment
+                 var markers = []
+              var openArray = []
+              var coordsAndBoolean = {}
+
                 function showMarkers(planes) {
 
                     planes = planes.split(",");
@@ -748,7 +755,6 @@
                     var maxx = 52.002744;
                     var maxy = 7.669931;
                     for (var i = 0; i < planes.length-1; i=i+3) {
-                      console.log(planes.length)
                       if (Number(planes[i]) < miny) {
                         miny = Number(planes[i])
                       } else if (Number(planes[i]) > maxy) {
@@ -759,11 +765,48 @@
                       } else if (Number(planes[i+1]) > maxx) {
                         maxx = Number(planes[i+1])
                       }
-                      marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
-                      .bindPopup(planes[i+2])
-                      .addTo(map1);
+                      var marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                      .bindPopup(planes[i+2]);
+                      
+
+                      markers.push(marker)
+                     
                     }
-                    //map1.setView([51.96935, 7.59588], 7); ,    , 
+                    
+                     for (var r=0; r<markers.length; r++) {
+
+                      openArray.push({ "index": r, "open": false, "latlng": markers[r].getLatLng().toString() }); 
+
+                    }
+                    // statt l marker.getLatLng
+                    
+                    for (var l=0; l<markers.length; l++) {
+
+                      markers[l].on('click', function() {
+                        var mycoords = this.getLatLng().toString();
+                        var mymarker = this;
+                        $.get("/comments/marker", { xy: this.getLatLng().toString() }, function(response){
+                          console.log("markers length: " + markers.length)
+                          console.log("openArray length: " + openArray.length)
+                        
+                            for (var h = 0; h < openArray.length; h++) {
+                              console.log("h: " + openArray[h].latlng + " " + mycoords);
+                              if (openArray[h].latlng==mycoords) {
+                                var q = h;
+                              }
+                            }                             
+                            if (!(openArray[q].open)) {
+                              $("#panel"+response).removeClass( "content" ).addClass( "content active" );
+                              mymarker.setIcon(greenIcon).openPopup();
+                            } else {
+                              $("#panel"+response).removeClass( "content active" ).addClass( "content" );
+                              mymarker.setIcon(blueIcon).closePopup();
+                            }
+                            openArray[q].open = !(openArray[q].open)                           
+                        });
+                      });                    
+                      markers[l].addTo(map1);
+                    }
 
                     map1.fitBounds([
                       [minx-0.5, miny-0.5],
@@ -771,7 +814,27 @@
                   ]);
                 }
 
-                map1.on('click', onMapClick1);
+                function activateMarker(x,y) {
+                var markerY = L.latLng(Number(y),Number(x)); 
+              
+                for (var i=0; i<markers.length; i++) {
+                  if (markers[i].getLatLng().equals(markerY)) {
+
+                     var k = i;
+                     console.log("i " + i + " k " + k + " " + openArray[k].i)
+                  }                 
+                }
+                console.log("click: " + openArray[k].i + " " + openArray[k].open)
+                if (!(openArray[k].open)) {
+                    markers[k].setIcon(greenIcon).openPopup();                 
+                } else {
+                    markers[k].setIcon(blueIcon).closePopup();
+                }
+
+                openArray[k].open = !(openArray[k].open)
+                 console.log("nach click: " + openArray[k].i + " " + openArray[k].open)
+             
+              }            
 
               </script>
 
