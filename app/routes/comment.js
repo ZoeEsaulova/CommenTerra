@@ -184,7 +184,14 @@ router.get('/', function(req,res) {
 					coords.maxx = resp.UpperCorner.split(' ')[0]
 					coords.maxy = resp.UpperCorner.split(' ')[1]
 				}
-				resptext = JSON.stringify(result)
+				var newString = JSON.stringify(result);
+				var replace1 = newString.replace(/{/g, "\n { \n")
+				var replace2 = replace1.replace(/}/g, "\n }")
+				var splitten = replace2.split(",");
+				resptext = "";
+				for(var i = 0; i < splitten.length; i++){
+					resptext += splitten[i]  + "\n";
+				}
 			  } 
   		  })
   		} 
@@ -231,11 +238,11 @@ router.get('/add/:url?', function(req, res) {
 		if (req.isAuthenticated()) {
 			res.render('new_comment.ejs', { userId: req.user.local.username, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "Your URL will be shown here after you validate it!" })
+				urlResult: "" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "Your URL will be shown here after you validate it!" })
+				urlResult: "" })
 		}
 });
 

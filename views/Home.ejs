@@ -320,7 +320,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button id="numero2" href="/myprofile" class="tiny radius expand" type="submit"><font color="#424242">Sign Up for CommenTerra</font></button>
+              <button id="numero2" href="/myprofile" class="tiny radius expand" type="submit"><font color="#424242">Sign Up to CommenTerra</font></button>
           </form>
         </li>
         <li>
@@ -328,11 +328,11 @@
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
             <div class="large-10 columns end"><p><font color="white"><br id="lastStop">Comment on almost any geodata-type</font></p></div></div>
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Absolutely free</font></p></div></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Absolutely free & easy to use</font></p></div></div>
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Easy to use</font></p></div></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Comprehensive search-features</font></p></div></div>
             <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
-            <div class="large-10 columns end"><p><font color="white"><br>Comprehensive search-feature</font></p></div></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Sign up to CommenTerra to get access to all our awesome features</font></p></div></div>
         </li> 
       </ul>
     </div>
@@ -364,7 +364,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up to CommenTerra</button>
           </form>
         </li>
         </ul>
@@ -387,7 +387,7 @@
                 <input type="password" id="password" placeholder="Create a password" name="password" required> 
               <small class="error">Please type in a password!</small>
             </div>
-              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up for CommenTerra</button>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up to CommenTerra</button>
           </form>
         </li>
       </div>
@@ -407,7 +407,7 @@
 
       <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
         <li>
-          <div class="panel custom" style="overflow: auto" data-equalizer-watch >
+          <div class="panel custom" style="overflow: auto; max-height: 792px" data-equalizer-watch >
             <!-- comments 
                  orderd in a data-accordion -->
             <dl class="accordion" data-accordion>
@@ -491,13 +491,13 @@
                         <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
                     </div>
-                  </form>
-                  </li>
-                  </ul>
+                  </form>            
 
                   <% if (comments[i].comments.length>0) {%>                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
-                      <div class="panel custom5" style="border-color: #424242;">
+                      <div class="row">
+                      <div class="small-12 columns">
+                      <div class="panel custom5">
                           <div class="content">
                             <p><%= comments[i].comments[j].text %></p>
                               <% if (comments[i].comments[j].user) {%>
@@ -529,11 +529,16 @@
                               <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                           </div>
                         </div>
+                        </div>
+                        </div>
                         <br>
+
                         <%} 
                       %>
                   <%} %>
 
+                    </li>
+                  </ul>               
                 </div>
               </dd>
 
