@@ -137,6 +137,7 @@ router.get('/', function(req,res) {
 				resptext = "";
 				for(var i = 0; i < splitten.length; i++){
 					resptext += splitten[i]  + "\n";
+				}
 			  } 
   		  })
   		} 
