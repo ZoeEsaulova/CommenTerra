@@ -230,6 +230,13 @@
       }
     </script>
   </head>
+<!--
+  <% if (title!="") {%> 
+    <body onload="saveInvisible()">
+  <%} else {%> 
+   <body onload="saveInvisible(); loadWMS(<%= title %>)">
+  <%} %>
+-->
 
   <body onload="saveInvisible()">
 

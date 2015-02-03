@@ -10,6 +10,7 @@ var express = require('express'),
  	request = require('request'),
  	xml2js = require('xml2js'),
 	resp = {},
+	layer = {},
 	resptext = "No properties found. Check the format of your url",
 	coords = { minx: "", miny: "", maxx: "", maxy: "" };
 
@@ -102,6 +103,7 @@ router.get('/', function(req,res) {
  	var format = req.query.select
  	var version = "VERSION"
  	console.log("Format: " + format)
+ 	var title = ""
  	
  	if (req.query.select=="wcs" || req.query.select=="csw") {
  		version = "AcceptVersions"
@@ -185,11 +187,14 @@ router.get('/', function(req,res) {
 					coords.miny = resp.LowerCorner.split(' ')[1]
 					coords.maxx = resp.UpperCorner.split(' ')[0]
 					coords.maxy = resp.UpperCorner.split(' ')[1]
+				} if (layer.title) {
+					title = layer.title
 				}
 				var newString = JSON.stringify(result);
 				var replace1 = newString.replace(/{/g, "\n { \n")
 				var replace2 = replace1.replace(/}/g, "\n }")
 				var splitten = replace2.split(",");
+				console.log("LAYER? " + layer.format + " " + layer.title)
 				resptext = "";
 				for(var i = 0; i < splitten.length; i++){
 					resptext += splitten[i]  + "\n";
@@ -198,6 +203,7 @@ router.get('/', function(req,res) {
   		  })
   		} 
 	  	resp = {}
+	  	layer = {}
 	  if (req.isAuthenticated()) {
 	    res.render('new_comment.ejs', { 
 	    	boolean1: true, 
@@ -211,7 +217,9 @@ router.get('/', function(req,res) {
 			addAction: "/comments/add", 
 			// send response to clinet
 			XMLresponse: resptext ,
-			urlResult: req.query.url }) }
+			urlResult: req.query.url,
+			layerTitle: title
+			}) }
 	   else {
 		 res.render('new_comment.ejs', { 
 	    		boolean1: false, 
@@ -224,7 +232,9 @@ router.get('/', function(req,res) {
 				addAction: "/comments/add", 
 				// send response to clinet
 				XMLresponse: resptext ,
-				urlResult: req.query.url })	
+				urlResult: req.query.url,
+				layerTitle: title
+		})	
 		}
 	})
 }
@@ -581,7 +591,20 @@ router.post('/addtothread/:commentId', function(req, res) {
 function findAttr(o, format) {
 	if (format=="wms") {
 		for (i in o) {
-        	if (typeof(o[i])=="object") { 
+        	if (typeof(o[i])=="object") {
+        		/*
+        	if (i=="GetMap") {
+        		console.log("getmap " + JSON.stringify(o[i]["Format"]))
+        		if (layer.format==undefined) {
+        			layer["format"] = o[i]["Format"][0]
+        		}
+        	} */
+        	if (i=="Layer") {
+        		console.log("Layer " + o[i]["Title"])
+        		if (layer.title==undefined) {
+        			layer["title"] = o[i]["Title"]
+        		}
+        	}
         		if (i=="LatLonBoundingBox") {         
             	if (resp.LatLonBoundingBox==undefined) {
             		resp["LatLonBoundingBox"] = o[i] 
