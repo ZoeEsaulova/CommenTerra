@@ -294,6 +294,10 @@ router.post('/add', function(req, res) {
 			markerX = 0,
 			markerY = 0,
 			rating = 0,
+			xLowRight = 0,
+			yLowRight = 0,
+			xUpLeft = 0,
+			yUpLeft = 0,
 			datasetRating = 0,
 			newDataset = "";
 
@@ -315,6 +319,10 @@ router.post('/add', function(req, res) {
 			 					Number(coords.miny) + (Number(coords.maxy) - Number(coords.miny))/2 ]
 			 markerX = markerCoords[0].toFixed(5)
 			 markerY = markerCoords[1].toFixed(5)
+			 xLowRight = boundingBox[0]
+			 yLowRight = boundingBox[1]
+			 xUpLeft = boundingBox[2]
+			 yUpLeft = boundingBox[3]
 
 			}			    	
 	    	coords = {}
@@ -340,6 +348,10 @@ router.post('/add', function(req, res) {
 		 			markerY: markerY,
 		 			boundingBox: boundingBox,
 		 			startdate: startdate1,
+		 			xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
         			enddate: enddate1 })
 				} else {
 					var newComment = new Comment({ 
@@ -385,6 +397,10 @@ router.post('/add', function(req, res) {
 		 			markerY: markerY,
 				 	boundingBox: boundingBox,
 				 	datasetRating: datasetRating,
+				 	xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
 				} else {
 					var newComment = new Comment({ 
@@ -431,6 +447,10 @@ router.post('/add', function(req, res) {
         			markerCoords: markerCoords,
         			markerX: markerX,
         			markerY: markerY,
+        			xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
         			boundingBox: boundingBox
 
         		})
@@ -464,7 +484,10 @@ router.post('/add', function(req, res) {
 				startdate: startdate1, enddate: enddate1, 
 				markerCoords: markerCoords, boundingBox: boundingBox,
 				datasetRating: datasetRating, markerX: markerX,
-        			markerY: markerY })
+        			markerY: markerY, xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft, })
 				} else {
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1,

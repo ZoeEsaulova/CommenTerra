@@ -18,8 +18,10 @@ var commentSchema = mongoose.Schema({
   markerX: Number,
   markerY: Number,
   boundingBox: [{ type: Number}],
-  bbLowRight: Number,
-  bbUpLeft: Number,
+  xLowRight: Number,
+  yLowRight: Number,
+  xUpLeft: Number,
+  yUpLeft: Number,
   startdate: Date,
   enddate: Date,
   upvotes: { type: Number, default: 0 },
@@ -45,13 +47,6 @@ commentSchema.virtual('dateString').get(function () {
   return result;
 })
 
-commentSchema.virtual('x').get(function () {
-  return this.markerCoords[0]
-})
-
-commentSchema.virtual('y').get(function () {
-  return this.markerCoords[1]
-})
 
 commentSchema.set('toJSON', { virtuals: true });
 commentSchema.set('toObject', { virtuals: true });
