@@ -395,7 +395,7 @@
     <div class="panel custom2" id="numero5">
       <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
         <li>
-          <div class="panel custom" style="overflow: auto" data-equalizer-watch>
+          <div class="panel custom" style="overflow: auto; max-height: 792px" data-equalizer-watch>
           <!-- comments 
                  orderd in a data-accordion -->
           <dl class="accordion" data-accordion>
@@ -485,6 +485,7 @@
                 <% if (comments[i].comments.length>0) {%>                  
                   <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                   <div class="row">
+                    <div class="small-12 columns">
                     <div class="panel custom5">
                       <div class="content">
                         <p><%= comments[i].comments[j].text %></p>
@@ -520,6 +521,7 @@
                           &nbsp&nbsp&nbsp&nbsp
                           <font size="3"><%= comments[i].comments[j].dateString %></font>                           
                       </div>
+                    </div>
                     </div>
                     </div>
                     <br>
