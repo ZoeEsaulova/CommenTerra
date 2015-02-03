@@ -231,7 +231,7 @@
     </script>
   </head>
 
-  <body>
+  <body onload="saveInvisible()">
 
     <% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -326,7 +326,7 @@
     </div>
 
     <!--dark grey area-->
-    <div class="panel custom">
+    <div class="panel custom" style="padding-bottom: 0">
     <!-- LARGE-UP
            use this to show the page when there is a larger display -->
     <strong class="show-for-large-up">
@@ -334,20 +334,18 @@
         <li>
           <label><font color="white" size="4">URL:</font></label>
           <form action="/comments" method="get">
-  			  <input type="text" name="url" id="firstStop" placeholder="copy your URL here" value="<%= urlValue %>" />
+          <input type="text" name="url" id="firstStop" placeholder="copy your URL here" value="<%= urlValue %>" />
 
           <label><font color="white" size="4">Select the data format:</font>
           <select style="width: 100%" type="text" name="select">
             <option value="wms">WMS</option>
             <option value="wfs">WFS</option>
-            <option value="wmts">WMTS</option>
-            <option value="wcs">WCS</option>
+            <option value="kml">WCS</option>
             <option value="kml">KML</option>
             <option value="gml">GML</option>
-            <option value="hgeo">h-geo microformat</option>
           </select>
           </label>          
-          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible(); saveVisible();"><font color="#424242">Validate URL</font></button>
+          <button class="tiny radius expand" id="validateurl" type="submit" onclick="visible();"><font color="#424242">Validate URL</font></button>
           </form>
           <!-- show the pre defined boundingbox of the geodataset on the map -->
           <button class="tiny radius expand" id="showBB" onclick="showBoundingBox(
@@ -375,11 +373,12 @@
       <select style="width: 100%" type="text" name="select">
         <option value="wms">WMS</option>
         <option value="wfs">WFS</option>
+        <option value="wfs">WCS</option>
         <option value="kml">KML</option>
         <option value="gml">GML</option>
       </select>
       </label>
-      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firtStop').value">
+      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firstStop').value">
       <font color="#424242">Validate URL</font>
       </button>
       </form>
@@ -399,7 +398,7 @@
     <!--light grey area-->
     <div class="panel custom2">            
     <!--segmenting this area in two areas-->
-    <form action=<%= addAction %> method="post" name="new_comment_form" data-abide>
+    <form data-abide action=<%= addAction %> method="post" name="new_comment_form" id="new_comment_form">
         <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
           <li>
             <div class="panel custom" data-equalizer-watch>
@@ -409,14 +408,14 @@
                     <a href="#panel1b">
                       <div class="name-field">
                         <font color="#424242" size="4">Title:</font>
-                        <input type="text" id="title" placeholder="Title..." name="title" required />
+                        <input type="text" id="title" placeholder="Title..." name="title" required>
                         <small class="error">Please type in a title!</small>
                       </div>
                     </a>
                     <div class="panel custom2" style="border-radius: 3px">
                       <div id="panel1b" class="content">
                           <label><font id="numero3" color="#424242" size="4">URL:</font></label>
-                          <input id="urlResult" type="text" name="url" value="<%= urlResult %>" readonly/> 
+                          <input id="urlResult" type="text" name="url" placeholder="Please validate your URL first! It will appear here afterwards!" value="<%= urlResult %>" readonly />
                         <p></p>
                         <!--segmenting this area in two areas-->
                         <ul class="small-block-grid-2">
@@ -449,7 +448,7 @@
                             <input type="hidden" id="set_rectangle" name="rectangle" value="" placeholder="bounding-box coordinates" />
                           </li>
                           <li>
-                            <button disabled type="submit" id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
+                            <button disabled id="lastStop" class="success tiny radius expand" data-reveal-id="confirmModal">
                              Save
                             </button>
                             <!--pop up to confirm the submission-->
@@ -475,15 +474,63 @@
               </div>
             </div>
           </li>
-        </ul>  
+        </ul>
+      </form>  
     </div>
+
+    <script>
+
+    (function() {
+      $('#title, #message, #urlResult').keyup(function() {
+
+        var empty = false;
+        $('#title, #message, #urlResult').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#lastStop').attr('disabled', 'disabled');
+        } else {
+            $('#lastStop').removeAttr('disabled');
+        }
+      });
+    })()
+
+    </script>
+
+    <!-- Beispiel-Script um ein Modal mit einem onClick-Event zu öffnen -->
+
+    <script>
+
+    $(document).foundation();
+
+    function showModal() {
+
+      $('#confirmModal').foundation('reveal', 'open'));
+
+    }
+
+    </script>
+
+    <!-- Beispiel-Script um ein Button mit einem onCLick-Event zu enablen -->
     
     <script>
-    
-    function saveVisible() {
-      document.getElementById("lastStop").enabled;
+
+      function saveVisible() {
+        var saveButton = document.getElementById("lastStop");
+          saveButton.removeAttribute("disabled"); 
+      }
+
+    </script>
+
+    <script>
+
+    function saveInvisible() {
+      //document.getElementById("lastStop").disabled = true;
     }
-    
+
     </script>
 
           <script>

@@ -13,6 +13,18 @@ var express = require('express'),
 	resptext = "No properties found. Check the format of your url",
 	coords = { minx: "", miny: "", maxx: "", maxy: "" };
 
+router.get('/marker', function(req,res) {
+	console.log(req.query.xy)
+	var s = req.query.xy.split(",")
+	var x = s[0].slice(7,s[0].length)
+	var y = s[1].slice(1,s[1].length-1)
+	console.log("x " + x + " y " + y)
+	Comment.findOne({ $and: [ { markerY: Number(x) }, { markerX: Number(y)}] }).exec(function(err, comment) {
+		res.send(comment._id)
+		console.log("id " + comment._id)
+	})
+})
+
 // Thumb up/down rating
 router.get('/votes', function(req,res) {
 	Comment.findOne({ _id: req.query.id }).exec(function(err, comment) {
@@ -96,11 +108,11 @@ router.get('/', function(req,res) {
  	if (req.query.url.indexOf("kml")!=(-1)) {
  		url = req.query.url
  	} else if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetRecords" + version + "=2.0.2&SERVICE=" + format 
+		url = req.query.url + "?REQUEST=GetCapabilities" + version + "=1.0.1&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetRecords&" + version + "=2.0.2&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&" + version + "=1.0.1&SERVICE=" + format 
 	}
 
 	if (req.query.select=="hgeo") {
@@ -280,8 +292,8 @@ router.post('/add', function(req, res) {
 				boundingBox = [ Number(coords.minx), Number(coords.miny),  Number(coords.maxx), Number(coords.maxy) ]
 				markerCoords = [ Number(coords.minx) + (Number(coords.maxx) - Number(coords.minx))/2,
 			 					Number(coords.miny) + (Number(coords.maxy) - Number(coords.miny))/2 ]
-			 markerX = markerCoords[0]
-			 markerY = markerCoords[1]
+			 markerX = markerCoords[0].toFixed(5)
+			 markerY = markerCoords[1].toFixed(5)
 
 			}			    	
 	    	coords = {}
@@ -396,6 +408,8 @@ router.post('/add', function(req, res) {
         			startdate: startdate1,
         			enddate: enddate1,
         			markerCoords: markerCoords,
+        			markerX: markerX,
+        			markerY: markerY,
         			boundingBox: boundingBox
 
         		})
@@ -428,7 +442,8 @@ router.post('/add', function(req, res) {
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1, 
 				markerCoords: markerCoords, boundingBox: boundingBox,
-				datasetRating: datasetRating })
+				datasetRating: datasetRating, markerX: markerX,
+        			markerY: markerY })
 				} else {
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1,
