@@ -137,6 +137,7 @@ router.get('/', function(req,res) {
 	    	actionName: "Logout", 
 			message: req.flash('loginMessage'), 
 			urlValue: "", 
+			title: "",
 			addAction: "/comments/add", 
 			// send response to clinet
 			XMLresponse: resptext ,
@@ -150,6 +151,7 @@ router.get('/', function(req,res) {
 	    		coords: coords,
 				message: req.flash('loginMessage'), 
 				urlValue: "", 
+				title: "",
 				addAction: "/comments/add", 
 				// send response to clinet
 				XMLresponse: resptext ,
@@ -218,7 +220,7 @@ router.get('/', function(req,res) {
 			// send response to clinet
 			XMLresponse: resptext ,
 			urlResult: req.query.url,
-			layerTitle: title
+			title: title
 			}) }
 	   else {
 		 res.render('new_comment.ejs', { 
@@ -233,7 +235,7 @@ router.get('/', function(req,res) {
 				// send response to clinet
 				XMLresponse: resptext ,
 				urlResult: req.query.url,
-				layerTitle: title
+				title: title
 		})	
 		}
 	})
@@ -250,11 +252,11 @@ router.get('/add/:url?', function(req, res) {
 		if (req.isAuthenticated()) {
 			res.render('new_comment.ejs', { userId: req.user.local.username, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "" })
+				urlResult: "", title: "" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "" })
+				urlResult: "", title: "" })
 		}
 });
 
