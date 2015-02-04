@@ -84,7 +84,7 @@
   </head>
 
    <% if (markers) { %>
-       <body onload="showMarkers('<%= markers %>')">
+       <body onload="showMarkers('<%= markers %>'); showBoundingBox(<%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>);">
     <% } else { %>
        <body>
     <% }%>
@@ -177,17 +177,23 @@
 
     <!-- upper light gray area -->
     <div class="panel custom" style="padding-bottom: 0em">
-      <ul class="large-block-grid-2 medium-block-grid-2 small-block-grid-1">
+      <ul class="large-block-grid-3 medium-block-grid-3 small-block-grid-1">
         <li>
           <!-- link of the shown map -->
           <input type="text" id="url_map_viewer" name="url_map_viewer" value=<%= url %> placeholder="URL" style="margin-bottom: 0" readonly="readonly"/>
         </li>
         <li>
-          <nav id="map-ui" class="layer-button">
-            <a class="active" id="url-layer" onclick="showBoundingBox(
-                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)">Show Bounding Box</a>
-          </nav>
-        </li>
+          
+              <nav id="map-ui" class="layer-button">
+                <a class="active" id="url-layer">Show / Hide URL-Layer</a>
+              </nav>
+            </li>
+            <li>
+              <nav id="map-ui" class="layer-button">
+                <a class="active" id="bBox-layer">Show / Hide Bounding Box</a>
+              </nav>
+            </li>
+          
       </ul>
     </div>
 
@@ -279,7 +285,7 @@
 
                 // initialize the layer-control toolbar
                 L.control.layers(baseLayers).addTo(map1);
-/*
+
                 // load a wms
                 //
                 // !!! HIER KANN MAN ZUR VERBESSERUNG ANSETZEN !!! (dieser WMS liegt über den USA)
@@ -288,7 +294,7 @@
                   zIndex: 5,
                   format: 'image/png',
                   transparent: true,
-                  layers: 'RAS_RIDGE_NEXRAD'
+                  layers: 'us_states_gen'
                 }).addTo(map1);
                 //
                 // !!! ... BIS HIER !!!
@@ -300,7 +306,7 @@
                   this.className = enable ? 'active' : '';
                   return false;
                 };
-*/
+
                 var specialIcon = L.Icon.extend({
                   options: {
                     shadowUrl: '/css/images/marker-shadow.png',
@@ -362,15 +368,24 @@
 
                 // define rectangle geographical bounds
 
+                var bBox;
+
                 function showBoundingBox(xmin, ymin, xmax, ymax) {
                   console.log("SOW BB")
                 var bounds = [[xmin, ymin], [xmax, ymax]];
                 // create an orange rectangle
-                L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
+                bBox = L.rectangle(bounds, {color: "#2ba6cb", weight: 2}).addTo(map1);
 
                 // zoom the map to the rectangle bounds
                 map1.fitBounds(bounds);
                 }
+
+                document.getElementById('bBox-layer').onclick = function () {
+                  var enable = this.className !== 'active';
+                  bBox.setStyle(enable ? {opacity: 0.7, fillOpacity: 0.1} : {opacity: 0, fillOpacity: 0});
+                  this.className = enable ? 'active' : '';
+                  return false;
+                };
 
                 var markers = []
 
