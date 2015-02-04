@@ -265,12 +265,17 @@ router.get('/search', function(req,res) {
 		}
 		if (req.query.rectangle) {
 			var bb = createString(req.query.rectangle)
-			console.log("x" + Number(bb[1]) + " " +  Number(bb[5]) )
-			console.log("y" + Number(bb[0]) + " " +  Number(bb[2]) )
-			query.where({ $and: [{ "markerX": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
-								 { "markerY": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+			console.log("x " + Number(bb[1]) + " " +  Number(bb[5]) )
+			console.log("y " + Number(bb[0]) + " " +  Number(bb[2]) )
+			query.where({ $and: [{ "xUpLeft": {"$gte": Number(bb[1])}}, { "xLowRight": {"$lte": Number(bb[5]) }},
+								 { "yUpLeft": {"$gte": Number(bb[0])}}, { "yLowRight": { "$lte": Number(bb[2]) }} 
 								]
 						})
+			//query.where({ "xLowRight": {"$gte": -10000, "$lte": 1000000 }})
+			/*query.where({ $and: [{ "x": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
+								 { "y": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+								]
+						})*/
 		}
 
 			if (req.query.startdate && req.query.enddate) {
@@ -306,12 +311,16 @@ router.get('/search', function(req,res) {
 
 		if (req.query.rectangle) {
 			var bb = createString(req.query.rectangle)
-			console.log("x" + Number(bb[1]) + " " +  Number(bb[5]) )
-			console.log("y" + Number(bb[0]) + " " +  Number(bb[2]) )
-			query.where({ $and: [{ "x": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
-								 { "y": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+			console.log("x " + Number(bb[1]) + " " +  Number(bb[5]) )
+			console.log("y " + Number(bb[0]) + " " +  Number(bb[2]) )
+			query.where({ $and: [{ "xUpLeft": {"$gte": Number(bb[1])}}, { "xLowRight": {"$lte": Number(bb[5]) }},
+								 { "yUpLeft": {"$gte": Number(bb[0])}}, { "yLowRight": { "$lte": Number(bb[2]) }} 
 								]
 						})
+			/*query.where({ $and: [{ "x": {"$gte": Number(bb[1]), "$lte": Number(bb[5]) }},
+								 { "y": {"$gte": Number(bb[0]), "$lte": Number(bb[2]) }} 
+								]
+						})*/
 		}
 			if (req.query.startdate && req.query.enddate) {
 				startdate = req.query.startdate
@@ -344,14 +353,20 @@ router.get('/search', function(req,res) {
 				
 	// show advanced_search page with search results
 	query.sort(' -date').exec(function(err, comments) {
+		//console.log("??? " + comments[0].title + " " + comments[0].boundingBox[0])
 		var newComments = []
 		if (req.query.gps) {
 			for (var i=0; i<comments.length; i++) {
+
 				if (inBoundingBox(req.query.gps, comments[i].boundingBox)) {
 					newComments.push(comments[i])
 				}
 			}
-		} else {
+		} /*else if (req.query.rectangle) {
+			var bb = createString(req.query.rectangle)
+			console.log("x" + Number(bb[1]) + " " +  Number(bb[5]) )
+			console.log("y" + Number(bb[0]) + " " +  Number(bb[2]) )
+		} */else {
 			newComments = comments
 		}
 		if (newComments) {

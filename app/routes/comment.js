@@ -10,6 +10,7 @@ var express = require('express'),
  	request = require('request'),
  	xml2js = require('xml2js'),
 	resp = {},
+	layer = {},
 	resptext = "No properties found. Check the format of your url",
 	coords = { minx: "", miny: "", maxx: "", maxy: "" };
 
@@ -102,6 +103,7 @@ router.get('/', function(req,res) {
  	var format = req.query.select
  	var version = "VERSION"
  	console.log("Format: " + format)
+ 	var title = ""
  	
  	if (req.query.select=="wcs" || req.query.select=="csw") {
  		version = "AcceptVersions"
@@ -135,6 +137,7 @@ router.get('/', function(req,res) {
 	    	actionName: "Logout", 
 			message: req.flash('loginMessage'), 
 			urlValue: "", 
+			title: "",
 			addAction: "/comments/add", 
 			// send response to clinet
 			XMLresponse: resptext ,
@@ -148,6 +151,7 @@ router.get('/', function(req,res) {
 	    		coords: coords,
 				message: req.flash('loginMessage'), 
 				urlValue: "", 
+				title: "",
 				addAction: "/comments/add", 
 				// send response to clinet
 				XMLresponse: resptext ,
@@ -164,12 +168,9 @@ router.get('/', function(req,res) {
     	, gzip: true
     	}
   	, function (error, response, body) {
-  		if (error) {
-  			console.log("ERROR!")
-  			res.redirect("/")
-  		}
+  		
   	
-  		if (!error && body && response.statusCode == 200) {
+  		if (!error && body) {
   			
   		  // Parse the response XML-data ("body") as JSON, stringify JSON and save in resptext
 		  var parser = new xml2js.Parser({explicitArray : false});
@@ -188,11 +189,14 @@ router.get('/', function(req,res) {
 					coords.miny = resp.LowerCorner.split(' ')[1]
 					coords.maxx = resp.UpperCorner.split(' ')[0]
 					coords.maxy = resp.UpperCorner.split(' ')[1]
+				} if (layer.title) {
+					title = layer.title
 				}
 				var newString = JSON.stringify(result);
 				var replace1 = newString.replace(/{/g, "\n { \n")
 				var replace2 = replace1.replace(/}/g, "\n }")
 				var splitten = replace2.split(",");
+				console.log("LAYER? " + layer.format + " " + layer.title)
 				resptext = "";
 				for(var i = 0; i < splitten.length; i++){
 					resptext += splitten[i]  + "\n";
@@ -201,6 +205,7 @@ router.get('/', function(req,res) {
   		  })
   		} 
 	  	resp = {}
+	  	layer = {}
 	  if (req.isAuthenticated()) {
 	    res.render('new_comment.ejs', { 
 	    	boolean1: true, 
@@ -214,7 +219,9 @@ router.get('/', function(req,res) {
 			addAction: "/comments/add", 
 			// send response to clinet
 			XMLresponse: resptext ,
-			urlResult: req.query.url }) }
+			urlResult: req.query.url,
+			title: title
+			}) }
 	   else {
 		 res.render('new_comment.ejs', { 
 	    		boolean1: false, 
@@ -227,7 +234,9 @@ router.get('/', function(req,res) {
 				addAction: "/comments/add", 
 				// send response to clinet
 				XMLresponse: resptext ,
-				urlResult: req.query.url })	
+				urlResult: req.query.url,
+				title: title
+		})	
 		}
 	})
 }
@@ -243,11 +252,11 @@ router.get('/add/:url?', function(req, res) {
 		if (req.isAuthenticated()) {
 			res.render('new_comment.ejs', { userId: req.user.local.username, boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "" })
+				urlResult: "", title: "" })
 		} else {
 			res.render('new_comment.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
 				message: req.flash('loginMessage'), urlValue: url, addAction: "/comments/add", XMLresponse: "",
-				urlResult: "" })
+				urlResult: "", title: "" })
 		}
 });
 
@@ -285,6 +294,10 @@ router.post('/add', function(req, res) {
 			markerX = 0,
 			markerY = 0,
 			rating = 0,
+			xLowRight = 0,
+			yLowRight = 0,
+			xUpLeft = 0,
+			yUpLeft = 0,
 			datasetRating = 0,
 			newDataset = "";
 
@@ -306,6 +319,10 @@ router.post('/add', function(req, res) {
 			 					Number(coords.miny) + (Number(coords.maxy) - Number(coords.miny))/2 ]
 			 markerX = markerCoords[0].toFixed(5)
 			 markerY = markerCoords[1].toFixed(5)
+			 xLowRight = boundingBox[0]
+			 yLowRight = boundingBox[1]
+			 xUpLeft = boundingBox[2]
+			 yUpLeft = boundingBox[3]
 
 			}			    	
 	    	coords = {}
@@ -331,6 +348,10 @@ router.post('/add', function(req, res) {
 		 			markerY: markerY,
 		 			boundingBox: boundingBox,
 		 			startdate: startdate1,
+		 			xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
         			enddate: enddate1 })
 				} else {
 					var newComment = new Comment({ 
@@ -376,6 +397,10 @@ router.post('/add', function(req, res) {
 		 			markerY: markerY,
 				 	boundingBox: boundingBox,
 				 	datasetRating: datasetRating,
+				 	xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
 				 	url: newUrl, startdate: startdate1, enddate: enddate1})
 				} else {
 					var newComment = new Comment({ 
@@ -422,6 +447,10 @@ router.post('/add', function(req, res) {
         			markerCoords: markerCoords,
         			markerX: markerX,
         			markerY: markerY,
+        			xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft,
         			boundingBox: boundingBox
 
         		})
@@ -455,7 +484,10 @@ router.post('/add', function(req, res) {
 				startdate: startdate1, enddate: enddate1, 
 				markerCoords: markerCoords, boundingBox: boundingBox,
 				datasetRating: datasetRating, markerX: markerX,
-        			markerY: markerY })
+        			markerY: markerY, xLowRight: xLowRight,
+					  yLowRight: yLowRight,
+					  xUpLeft: xUpLeft,
+					  yUpLeft: yUpLeft, })
 				} else {
 					var newComment = new Comment({ title: newTitle, text: newText, dataset: dataset, url: newUrl, 
 				startdate: startdate1, enddate: enddate1,
@@ -584,7 +616,20 @@ router.post('/addtothread/:commentId', function(req, res) {
 function findAttr(o, format) {
 	if (format=="wms") {
 		for (i in o) {
-        	if (typeof(o[i])=="object") { 
+        	if (typeof(o[i])=="object") {
+        		/*
+        	if (i=="GetMap") {
+        		console.log("getmap " + JSON.stringify(o[i]["Format"]))
+        		if (layer.format==undefined) {
+        			layer["format"] = o[i]["Format"][0]
+        		}
+        	} */
+        	if (i=="Layer") {
+        		console.log("Layer " + o[i]["Title"])
+        		if (layer.title==undefined) {
+        			layer["title"] = o[i]["Title"]
+        		}
+        	}
         		if (i=="LatLonBoundingBox") {         
             	if (resp.LatLonBoundingBox==undefined) {
             		resp["LatLonBoundingBox"] = o[i] 
