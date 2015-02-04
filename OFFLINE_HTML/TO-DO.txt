@@ -12,7 +12,7 @@ Fragen & Probleme:
   Bei dem Marker weiß ich wo der Mittelpunkt ist. Aber die Ausdehnung ist doch wichtig oder? 
   Vor allem wenn man sich mit seinem Kommentar auf einen bestimmten geographischen Bereich bezieht
   Ich weiß, sehr spät, aber nur so ein Gedanke
-- 
+
 allgemein:
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
@@ -20,12 +20,6 @@ allgemein:
 - QUICKSEARCH: JSON-Datei (public/autocomplete.json) ist angelegt und wird auch korrekt ausgelesen, 
                man könnte nun zusätzlich Worte aus der DB in die JSON schreiben
 - PARSING:  andere Formate
-- STYLESHEETS: 
-	1. Wenn man einen sehr langen Link eingibt (bzw. den Permalink anzeigen lässt,
-	 wobei alle Suchparameter benutzt wurden), wird keinen Zeilenumbruch gemacht und der Link geht quer durch die ganze Seite. 
-	-> Passiert nur bei Google Chrome und Opera, bei Firefox funktioniert es richtig
-
--  Datepicker: das Jahr direkt verändern
 
 new_comment:
 - WMS/WFS einladen?
@@ -40,7 +34,9 @@ _______________________________________________________________
 - Unique username
 
 profile:
-- email anzeigen lassen, aber mit option zum ausblenden 
+- email anzeigen lassen, aber mit option zum ausblenden
+- profilbild hochladen? (code ist schon probeweise angelegt, 
+  styling gestaltet sich allerdings als schwierig, da in foundation nicht enthalten)
 
 advanced_search:
 - checkboxen: "all these words", "any of these words" : der unterschied besteht hier nur darin ob man 
