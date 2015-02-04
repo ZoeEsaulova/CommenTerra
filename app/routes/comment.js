@@ -164,7 +164,37 @@ router.get('/', function(req,res) {
     	, gzip: true
     	}
   	, function (error, response, body) {
-	    
+	    if (response.statusCode == 500) {
+	    	console.log("Status 500")
+	    	if (req.isAuthenticated()) {
+	    res.render('new_comment.ejs', { 
+	    	boolean1: true, 
+	    	username: req.user.local.username,
+	    	userId:  req.user.local.username,
+	    	coords: coords,
+	    	action: "/logout", 
+	    	actionName: "Logout", 
+			message: req.flash('loginMessage'), 
+			urlValue: "", 
+			addAction: "/comments/add", 
+			// send response to clinet
+			XMLresponse: resptext ,
+			urlResult: req.query.url }) }
+	   else {
+		 res.render('new_comment.ejs', { 
+	    		boolean1: false, 
+	    		username: 'Anonymous', 
+	    		action: "#", 
+	    		actionName: "Login", 
+	    		coords: coords,
+				message: req.flash('loginMessage'), 
+				urlValue: "", 
+				addAction: "/comments/add", 
+				// send response to clinet
+				XMLresponse: resptext ,
+				urlResult: req.query.url })	
+		}
+	    }
   	
   		if (!error && body && response.statusCode == 200) {
   			
