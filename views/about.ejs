@@ -32,70 +32,55 @@
 
     <!-- script for autocomplete function -->
     <script>
-      $(function() {
-      var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-      ];
-       function split( val ) {
-      return val.split( / \s*/ );
-      }
-      function extractLast( term ) {
-      return split( term ).pop();
-      }
-      $( "#tags" )
-      // don't navigate away from the field on tab when selecting an item
-      .bind( "keydown", function( event ) {
-      if ( event.keyCode === $.ui.keyCode.TAB &&
-      $( this ).autocomplete( "instance" ).menu.active ) {
-      event.preventDefault();
-      }
-      })
-      .autocomplete({
-      minLength: 3,
-      source: function( request, response ) {
-      // delegate back to autocomplete, but extract the last term
-      response( $.ui.autocomplete.filter(
-      availableTags, extractLast( request.term ) ) );
-      },
-      focus: function() {
-      // prevent value inserted on focus
-      return false;
-      },
-      select: function( event, ui ) {
-      var terms = split( this.value );
-      // remove the current input
-      terms.pop();
-      // add the selected item
-      terms.push( ui.item.value );
-      // add placeholder to get the comma-and-space at the end
-      terms.push( "" );
-      this.value = terms.join( " " );
-      return false;
-      }
-      });
-      });
-    </script>
+        $(function() {
+
+          var availableTags;
+          $.getJSON("autocomplete.json", function(json){
+            availableTags = json;
+          });
+
+          function split( val ) {
+            return val.split( / \s*/ );
+          }
+
+          function extractLast( term ) {
+            return split( term ).pop();
+          }
+
+          $( "#tags" )
+          // don't navigate away from the field on tab when selecting an item
+          .bind( "keydown", function( event ) {
+            if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+              event.preventDefault();
+            }
+          })
+          .autocomplete({
+            minLength: 3,
+            source: function( request, response ) {
+              // delegate back to autocomplete, but extract the last term
+              response( $.ui.autocomplete.filter(
+              availableTags, extractLast( request.term ) ) );
+            },
+            focus: function() {
+              // prevent value inserted on focus
+              return false;
+            },
+            select: function( event, ui ) {
+              var terms = split( this.value );
+              // remove the current input
+              terms.pop();
+              // add the selected item
+              terms.push( ui.item.value );
+              // add placeholder to get the comma-and-space at the end
+              terms.push( "" );
+              this.value = terms.join( " " );
+              return false;
+            }
+          });
+        });
+      </script>
+      
   </head>
 
   <body>
@@ -203,7 +188,11 @@
         </li>
         <li>
           <font size="6" color="white"><b>About Us</b></font>            
-            <p align="justify" style="line-heigh:1.9em"><font color="white">CommenTerra founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek. We maintain this Web Application since 2014. Furthermore we use open sources to create this Application. Our young company has the ambition to start a community-based interchange with datasets.</font></p>
+            <p align="justify" style="line-heigh:1.9em"><font color="white">
+            CommenTerra was founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek.
+            <br>
+            <br>
+            We maintain this Web Application since 2014. Furthermore we only used open source based components to create this Application. Our young group has the ambition to start a community-based platform to comment on and share geodatasets with others.</font></p>
             <p></p>
         </li>
         <li>
@@ -212,11 +201,12 @@
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
             (MongoDB, Express, AngularJS and NodeJS).
-            So we only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
+            <br>
+            <br>
+            We only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
             AngularJS, ExpressJS, NodeJS. Further MIT includes the Foundation 5 framework and JQuery, which we use
             for the design and some user-interactions with our Application.
-            Other components, we use, run under the GNU GPL licence, another free to use license.
-            Namely MongoDB and Git. 
+            Other components, we use, run under the GNU GPL licence (free to use); Namely MongoDB and Git. 
             <br>
           <p align="left" style="line-heigh:1.9em"><font color="white">You can find us on Github:</p>
           <a href="https://github.com/ZoeEsaulova/CommenTerra">
@@ -234,7 +224,11 @@
       <ul class="medium-block-grid-2">
         <li>
           <font size="6" color="white"><b>About Us</b></font>            
-            <p align="justify" style="line-heigh:1.9em"><font color="white">CommenTerra founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek. We maintain this Web Application since 2014. Furthermore we use open sources to create this Application. Our young company has the ambition to start a community-based interchange with datasets.</font></p>
+            <p align="justify" style="line-heigh:1.9em"><font color="white">
+            CommenTerra was founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek.
+            <br>
+            <br>
+            We maintain this Web Application since 2014. Furthermore we only used open source based components to create this Application. Our young group has the ambition to start a community-based platform to comment on and share geodatasets with others.</font></p>
             <p></p>
         </li>
         <li>
@@ -243,11 +237,12 @@
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
             (MongoDB, Express, AngularJS and NodeJS).
-            So we only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
+            <br>
+            <br>
+            We only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
             AngularJS, ExpressJS, NodeJS. Further MIT includes the Foundation 5 framework and JQuery, which we use
             for the design and some user-interactions with our Application.
-            Other components, we use, run under the GNU GPL licence, another free to use license.
-            Namely MongoDB and Git.
+            Other components, we use, run under the GNU GPL licence (free to use); Namely MongoDB and Git. 
             <br>
             <p align="left" style="line-heigh:1.9em"><font color="white">You can find us on Github:</p>
             <a href="https://github.com/ZoeEsaulova/CommenTerra">
@@ -263,18 +258,23 @@
             use this to show the page on large displays -->
       <strong class="show-for-small-only">
           <font size="6" color="white"><b>About Us</b></font>            
-            <p align="justify" style="line-heigh:1.9em"><font color="white">CommenTerra founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek. We maintain this Web Application since 2014. Furthermore we use open sources to create this Application. Our young company has the ambition to start a community-based interchange with datasets.</font></p>
+            <p align="justify" style="line-heigh:1.9em"><font color="white">
+            CommenTerra was founded by Jan Ehrecke, Zoya Esaulova, Jens Golze, Bastian Junge and Maximilian Twelsiek.
+            <br>
+            <br>
+            We maintain this Web Application since 2014. Furthermore we only used open source based components to create this Application. Our young group has the ambition to start a community-based platform to comment on and share geodatasets with others.</font></p>
             <p></p>
           <!-- licences and github repository -->
           <font size="6" color="white"><b>Licences</b></font>
            <p align="justify" style="line-heigh:1.9em"><font color="white">
             Our Application based on the MEANstack
             (MongoDB, Express, AngularJS and NodeJS).
-            So we only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
+            <br>
+            <br>
+            We only adopt open and free to use licences to our Application. Mainly the MIT-Licence, which includes
             AngularJS, ExpressJS, NodeJS. Further MIT includes the Foundation 5 framework and JQuery, which we use
             for the design and some user-interactions with our Application.
-            Other components, we use, run under the GNU GPL licence, another free to use license.
-            Namely MongoDB and Git. 
+            Other components, we use, run under the GNU GPL licence (free to use); Namely MongoDB and Git. 
             <br>
             <p align="left" style="line-heigh:1.9em"><font color="white">You can find us on Github:</p>
             <a href="https://github.com/ZoeEsaulova/CommenTerra">
@@ -286,61 +286,94 @@
     </div>
 
     <!-- lower bright gray area -->
-    <div class="panel custom2"><br>
+    <div class="panel custom2">
+      <br>
       <!-- SMALL-UP
            use this to show the page on smaller displays
            for example on mobilephones -->
       <strong class="hide-for-large-up">
         <font size="6" color="#424242">Contact Us</font>
+        <br>
+        <br>
           <!--send the input per e-mail to us-->
-          <form style="font-family:Helvetica" action="mailto:info@commenterra.de" method="post" class="clear" enctype="text/plain">
+          <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data" data-abide>
+          <!-- redirect to another response-page than the standard formular-chef one. But you need a web-space that is reachable from anywhere in the world wide web
+          <input type="hidden" name="antwortseite_template" value="http://localhost/about"> -->
 
-            <label for="name"><font color="#424242">Name:</font></label>
-            <input class="inputright" type="text" name="name" id="name"/>
-            <label for="prename"><font color="#424242">Prename:</font></label>
-            <input type="text" name="prename" id="prename"/>
-            <label for="email"><font color="#424242">E-Mail:</font></label>
-            <input style="" value="" type="text" name="email" id="email"/>
-            <label for="message"><font color="#424242">Message:</font></label>
-            <textarea style="height:203px;resize:none;" name="message" id="message"></textarea>
+          <input type="hidden" name="empfaenger" value="m.twel02X§Xgmail.com,bjunge90X§Xgmail.com,ehrecke.janX§Xgmail.com,j.golz01X§Xgmail.com,zoe.esaulovaX§Xgmail.com"/>
+
+              <div class="name-field">
+                <label><font color="#424242">Last Name:</font></label>
+                <input type="text" name="Last Name" required/>
+                <small class="error">Please tell us your last name!</small>
+              </div>
+              <div class="name-field">
+                <label><font color="#424242">First Name:</font></label>
+                <input type="text" name="First Name" required/>
+                <small class="error">Please tell us your first name!</small>
+              </div>
+              <div class="email-field">
+                <label><font color="#424242">E-Mail:</font></label>
+                <input type="text" name="E-Mail" pattern="email" required/>
+                <small class="error">Please type in a valid e-mail so we can contact you!</small>
+              </div>
+              <div class="name-field">
+                <label><font color="#424242">Message:</font></label>
+                <textarea style="height:270px;resize:none;" name="Message" required></textarea>
+                <small class="error">Please type in at least a few words!</small>
+              </div>
+              <p></p>
             <button class="tiny radius expand" type="submit">
               <font color="#424242">Send</font>
             </button>
           </form>
-        </font>
       </strong>
 
       <!-- Large-UP
            use this to show the page on large displays -->
       <strong class="show-for-large-up">
         <font size="6">Contact Us</font>
-        <p></p>
-        <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="antwortseite_template" value="mail_response.html">
+        <br>
+        <br>
+        <form style="font-family:Helvetica" action="http://www.formular-chef.de/fc.cgi" method="post" enctype="multipart/form-data" data-abide>
+          <!-- redirect to another response-page than the standard formular-chef one. But you need a web-space that is reachable from anywhere in the world wide web
+          <input type="hidden" name="antwortseite_template" value="http://localhost/about"> -->
 
-          <input type="hidden" name="empfaenger" value="m.twel02@gmail.com,bjunge90@gmail.com,ehrecke.jan@gmail.com,j.golz01@gmail.com,zoe.esaulova@gmail.com"/>
+          <input type="hidden" name="empfaenger" value="m.twel02X§Xgmail.com,bjunge90X§Xgmail.com,ehrecke.janX§Xgmail.com,j.golz01X§Xgmail.com,zoe.esaulovaX§Xgmail.com"/>
           <ul class="small-block-grid-2" data-equalizer>
             <li>
-              <label for="name"><font color="#424242">Name:</font></label>
-              <input class="inputright" type="text" name="name" id="name"/>
-              <label for="prename"><font color="#424242">Prename:</font></label>
-              <input type="text" name="prename" id="prename"/>
-              <label for="email"><font color="#424242">E-Mail:</font></label>
-              <input style="" value="" type="text" name="email" id="email"/><br>
+              <div class="name-field">
+                <label><font color="#424242">Last Name:</font></label>
+                <input type="text" name="Last Name" required/>
+                <small class="error">Please tell us your last name!</small>
+              </div>
+              <div class="name-field">
+                <label><font color="#424242">First Name:</font></label>
+                <input type="text" name="First Name" required/>
+                <small class="error">Please tell us your first name!</small>
+              </div>
+              <div class="email-field">
+                <label><font color="#424242">E-Mail:</font></label>
+                <input type="text" name="E-Mail" pattern="email" required/>
+                <small class="error">Please type in a valid e-mail so we can contact you!</small>
+              </div>
+              <br>
               <button class="tiny radius expand" type="submit">
                 <font color="#424242">Send</font>
               </button>
             </li>
             <li>
-              <label for="message">
-                <font color="#424242">Message:</font>
-              </label>
-              <textarea style="height:270px;resize:none;" name="message" id="message"></textarea>
+              <div class="name-field">
+                <label><font color="#424242">Message:</font></label>
+                <textarea style="height:270px;resize:none;" name="Message" required></textarea>
+                <small class="error">Please type in at least a few words!</small>
+              </div>
             </li>
           </ul>
         </form>
       </strong>
-    </div>
+    
+  </div>
 
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
 

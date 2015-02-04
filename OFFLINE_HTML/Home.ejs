@@ -4,17 +4,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CommenTerra | Profile</title>
+    <title>CommenTerra | Welcome</title>
     <link rel="stylesheet" href="css/commenterra.css" />
     <link rel="stylesheet" href="css/commenterra-icons.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/vendor/jquery-ui.css" />
-    <script src="js/vendor/jquery-1.11.2.js"></script>
-    <script src="css/vendor/jquery-ui.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/leaflet.js"></script>
+    <script src="js/vendor/jquery-1.11.2.js"></script>
+    <script src="js/vendor/jquery-ui.js"></script>
 
-     <!-- style for rate function and stars -->
+          <!-- style for rate function and stars -->
           <style>.functions .demo {
             margin-bottom: 10px;
           }
@@ -60,24 +60,32 @@
           }
           </style>
 
-    <!-- autocomplete style -->
-    <style>
-      .ui-autocomplete {
-      max-height: 100px;
-      overflow-y: auto;
-      /* prevent horizontal scrollbar */
-      overflow-x: hidden;
-      }
-      /* IE 6 doesn't support max-height
-      * we use height instead, but this forces the menu to always be this tall
-      */
-      * html .ui-autocomplete {
-      height: 100px;
-      }
-    </style>
+          <!-- autocomplete style -->
+          <style>
+            .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            }
+            /* IE 6 doesn't support max-height
+            * we use height instead, but this forces the menu to always be this tall
+            */
+            * html .ui-autocomplete {
+            height: 100px;
+            }
+          </style>
+<!--script type="text/javascript">
+  jQuery.ajaxSetup({
+  cache: false
+});
+  jQuery(document).ready(
+      function() {
+  jQuery("#accordion-for-large-up").load("accordion.html");
+});
+</script-->
 
-    <!-- script for autocomplete function -->
-    <script>
+      <script>
         $(function() {
 
           var availableTags;
@@ -126,39 +134,81 @@
           });
         });
       </script>
-      
-    </head>
 
-    <% if (markers) { %>
-        <body onload="showMarkers('<%= markers %>')">
+  </head>
+
+  
+   <% if (markers) { %>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="showMarkers('<%= markers %>'); helpModal();">
     <% } else { %>
-        <body>
+       <body data-ng-app="Comments" data-ng-controller="commentsController" onload="helpModal()" >
     <% }%>
+  
+    <!--Modal help (shown or disabled)-->
+    <script>
+      function setCookie() {
+        if(document.getElementById("hideModal").checked == true){
+          document.cookie = "hilfe=off";
+        } else {
+          document.cookie = "help=on";
+        }
+      }
 
-    <% if (message.length > 0) { %>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+      function helpModal() {
+        var c = getCookie("hilfe");
+        if(c=="" || c=="on"){
+          if (matchMedia('only screen and (min-width: 64.063em)').matches) {
+            $(document).ready(function(){$('#ModalHelp').foundation('reveal', 'open')});
+          }
+        }
+      }
+    </script>
+
+    <div id="ModalHelp" class="reveal-modal" data-reveal>
+      <h2>Hello and welcome to CommenTerra.</h2>
+      <p class="lead" style="text-align:justify"> Click on the "Site Navigation" in the upper right corner to start a joyride tour which will provide you further information about the CommenTerra project and how to use it. We also have these kind of joyrides on the "New Comment", on the "Advanced Search" and on your "Profile" page waiting for you.</p><br>
+      <p>
+        <input id="hideModal" type="checkbox" onclick="setCookie()">
+        <label for="hideModal">
+          <font color="#424242">&nbsp Don't show me this again</font>
+        </label>
+      </p>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+  
+    <!-- TO BE UPDATED. Login or Signup failed --> 
+  	<% if (message.length > 0) { %>
       <div data-alert class="alert-box">
         <%= message %>
       <a href="#" class="close">&times;</a>
       </div>
     <% } %>
 
-    <!-- TOP-BAR (fixed)
-       everytime you can see this strong navigation tool
-       to get you everywhere -->
     <div class="fixed">
     <nav class="top-bar" data-topbar role="navigation">
   		<ul class="title-area"> 
         <li class="name"> 
-          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
+          <h1><a href="/"> <font face="Helvetica" color="#424242" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCommenTerra</font> </a></h1> 
         </li> 
   			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone --> 
   			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li> 
   		</ul>
+
       <section class="top-bar-section"> 
   			<!-- Right Nav Section --> 
-        <ul class="right" id="lastStop">
+        <ul id="numero1" class="right">
           <li class="has-form">
-           <form action="/api/v1/simplesearch" method="get" data-abide>
+            <form action="/api/v1/simplesearch" method="get" data-abide>
                 <div class="row collapse">
                   <div class="small-9 columns ">
                       <div class "search-field">
@@ -171,8 +221,11 @@
                 </div>
             </form>
           </li>
-          <!-- Login -->
-          <li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
+
+          <!-- LogInModal
+               to get logged-in in the community network
+               only posible when you have been registed -->
+  				<li><a href=<%= action %> data-reveal-id="LogInModal"><%= actionName %></a></li>
           <% if (!boolean1) { %>
           <div id="LogInModal" class="reveal-modal" data-reveal>
             <h2>Log In</h2>
@@ -197,87 +250,20 @@
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <% } %>
+
+
   				<li class="has-dropdown"> 
   					<a href="#">Site Navigation</a> 
   					<ul class="dropdown"> 
   						<li><a href="/comments/add">New Comment</a></li> 
   						<li><a href="/api/v1/search">Advanced Search</a></li>
-  						<!--for the logged user is a further link to the personal "Profile" site-->
-					        <% if (boolean1) { %>
-					        <li><a href="/profile/<%= userId %>">Profile</a></li> 
-					        <% } %>
-        			<% if ((boolean1) && (boolean3)) {%> 
-        			<li><a data-reveal-id="SettingsModal">Profile Settings</a></li>
-                <!-- SettingsModal
-                     here the user is able to change
-                     the information about himself/herself -->
-                <div id="SettingsModal" class="reveal-modal" data-reveal>
-                  <h2>&nbspProfile Settings</h2>
-                  <p class="lead">&nbsp&nbspHere you can change your profile and the information you want to share with other users.</p>
-                  <ul class="small-block-grid-3">
-                    <li>
-                      <form action="/profile/<%= user._id %>" method="post" data-abide>
-                        <div class="small-12 columns">
-                          <label>E-Mail
-                            <input type="email" id="email" placeholder="<%= user.local.email %>" name="email" pattern="email">
-                          </label>
-                          <small class="error">Please type in a valid e-mail-adress!</small>
-                        </div>
-                        <div class="small-12 columns">
-                          <label>First Name
-                            <input type="text" id="firstname" placeholder="<%= user.firstname %>" name="firstname">
-                          </label>
-                        </div>
-                        <div class="small-12 columns">
-                          <label>Last Name
-                            <input type="text" id="lastname" placeholder="<%= user.lastname %>" name="lastname">
-                          </label>
-                        </div>        
-                    </li>
-                    <li>
-                        <div class="small-12 columns">
-                          <label>Country
-                            <input type="text" id="firstname" placeholder="<%= user.country %>" name="country">
-                          </label>
-                        </div>                       
-                        <div class="small-12 columns">
-                          <label>Profession
-                            <input type="text" id="profession" placeholder="<%= user.profession %>" name="profession">
-                          </label>
-                        </div>
-                        <div class="row large-12 columns">
-                          <label>Avatar
-                            <input type="file" placeholder="Upload File" id="avatar" name="avatar" value="Upload File" />
-                          </label>
-                        </div>                      
-                    </li>
-                    <li>                      
-                        <div class="row">
-                          <div class="large-12 columns">
-                            <label>About Me
-                              <textarea id="about" placeholder="<%= user.about %>" name="about"></textarea>
-                            </label>
-                          </div>
-                        </div>                     
-                    </li>
-                  </ul>
-                  <button class="tiny radius expand" type="submit"><font color="#424242">Save Changes</font></button>
-                    <!-- saveSettingsModal
-                         confirm the change of settings
-                         and information about the user -->
-                    <div id="saveSettingsModal" class="reveal-modal" data-reveal>
-                      <p class="lead">Are you sure to save the settings?</p>
-                      <button href="profile_?????.html" style="position: static; font-size: 1rem; line-height: normal; font-weight: normal; color: white;" class="radius close-reveal-modal">&nbsp&nbspOkay&nbsp&nbsp</button>
-                      <button href="#" class="radius" type="submit">Cancel</button>
-                      <a class="close-reveal-modal">&#215;</a>
-                    </div>
-                  <a class="close-reveal-modal">&#215;</a>
-                  </form>
-                </div>      
-			         <%} %>
-               <li><a id="relocate" onClick="relocate()">Relocate</a></li>
-               <li><a onclick="startJoyRide()">Start Tour</a></li>
-               <li><a href="/faq">Help / FAQ</a></li>               
+              <!-- only for logged in users -->
+              <% if (boolean1) { %>
+              <li><a href="/profile/<%= userId %>">Profile</a></li> 
+              <% } %>
+              <li><a id="relocate" onClick="relocate()">Relocate</a></li>
+              <li><a onclick="startJoyRide()">Start Tour</a></li>
+              <li><a href="/faq">Help / FAQ</a></li> 
   					</ul> 
   				</li> 
   			</ul> 
@@ -285,120 +271,146 @@
   	</nav>
     </div>
 
+
     <div class="fixed-under">
       <nav class="top-bar-border"></nav>
     </div>
 
+
+    <% if (!boolean1) { %>
     <!-- LARGE-UP
-           use this to show the page when there is a larger display -->
+         use this to show the page when there is a larger display -->
     <strong class="show-for-large-up">
-      <!-- upper dark gray area -->
-      <div class="panel custom">
-        <ul class="large-block-grid-3">
-          <li>
-            <img id="firstStop" src="img/empty_avatar.svg" width="205" height="205">
-          </li>
-          <li>
-            <!-- information about the user -->
-            <div><p><font color="white">Username: </font><font id="numero2" color="white" size="3"><%= pageowner.local.username %>
-            <% if (pageowner.status=="Expert") {%>
-                            (<%= pageowner.status %>) <%} %>
-                            </font></p></div>
-            <div><p><font color="white">Email: </font><font color="white" size="3"><%= pageowner.local.email %></font></p></div>
-            <% if (pageowner.firstname) {%>
-              <div><p><font color="white">First Name: </font><font color="white" size="3"><%= pageowner.firstname%></font></p></div>
-            <%} %>
-            <% if (pageowner.lastname) {%>
-              <div><p><font color="white">Last Name: </font><font color="white" size="3"><%= pageowner.lastname %></font></p></div>
-            <%} %>
-            <% if (pageowner.profession) {%>
-              <div><p><font color="white">Profession: </font><font color="white" size="3"><%= pageowner.profession %></font></p></div>
-            <%} %> 
-            <% if (pageowner.country) {%>
-              <div><p><font color="white">Country: </font><font color="white" size="3"><%= pageowner.country %></font></p></div>
-            <%} %>            
-          </li>
-          <li>
-            <% if (pageowner.about) {%>
-            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="3"><%= pageowner.about %></font></p></div>
-            <%} %>
-            <p>
-            <font color="white">User Rating: </font>
-            <font color="#80FF00" size="3">&nbsp&nbsp<%= pageowner.upvotes %>&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-            <font color="#c60f13" size="3">&nbsp&nbsp<%= pageowner.downvotes %>&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i>
-            </p>
-          </li>
-        </ul>
-      </div>
+    <!-- upper dark gray area -->
+    <div class="panel custom">  
+      <ul class="large-block-grid-3"> 
+        <li>
+          <!-- logo -->
+          <img id="firstStop" src="img/vektorlogo.svg" width="205" height="205">
+        </li> 
+        <li>
+          <!-- registration of users -->
+          <form action="/signup" method="post" data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button id="numero2" href="/myprofile" class="tiny radius expand" type="submit"><font color="#424242">Sign Up to CommenTerra</font></button>
+          </form>
+        </li>
+        <li>
+          <!-- points why you should use our page -->
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br id="lastStop">Get in contact with other users</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Absolutely free & easy to use</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Hold an overview about your comments</font></p></div></div>
+            <div class="large-12 columns"><div class="large-1 columns"><i class="fi-star size-32 font-green"></i></div>
+            <div class="large-10 columns end"><p><font color="white"><br>Become an expert</font></p></div></div>
+        </li> 
+      </ul>
+    </div>
     </strong>
-
+    
     <!-- MEDIUM-UP
-           use this to show the page when there is a medium display -->
-    <strong class="hide-for-large-up">
+        use this to show the page on smaller displays
+        for example on tablets -->
+    <strong class="show-for-medium-only">
+    <!-- upper dark gray area -->
       <div class="panel custom">
-        <ul class="medium-block-grid-2 small-block-grid-1">
-          <li>
-            <!-- information about the user -->
-            <div><p><font color="white">Username: </font><font color="white" size="3"><%= pageowner.local.username %></font></p></div>
-            <div><p><font color="white">Email: </font><font color="white" size="3"><%= pageowner.local.email %></font></p></div>
-            <% if (pageowner.firstname) {%>
-              <div><p><font color="white">First Name: </font><font color="white" size="3"><%= pageowner.firstname%></font></p></div>
-            <%} %>
-            <% if (pageowner.lastname) {%>
-              <div><p><font color="white">Last Name: </font><font color="white" size="3"><%= pageowner.lastname %></font></p></div>
-            <%} %>
-            <% if (pageowner.profession) {%>
-              <div><p><font color="white">Profession: </font><font color="white" size="3"><%= pageowner.profession %></font></p></div>
-            <%} %> 
-            <% if (pageowner.country) {%>
-              <div><p><font color="white">Country: </font><font color="white" size="3"><%= pageowner.country %></font></p></div>
-            <%} %>
-          </li>
-          <li>
-            <% if (pageowner.about) {%>
-            <div><p class="text-justify"><font color="white">About Me:</font><br><br><font color="white" size ="3"><%= pageowner.about %></font></p></div>
-            <%} %>
-            <p>
-            <font color="white">User Rating: </font>
-           <font color="#80FF00" size="3">&nbsp&nbsp<%= pageowner.upvotes %>&nbsp&nbsp</font><i class="fi-like size-28 font-green"></i>
-            <font color="#c60f13" size="3">&nbsp&nbsp<%= pageowner.downvotes %>&nbsp&nbsp</font><i class="fi-dislike size-28 font-alert"></i>
-            </p>
-          </li>
+        <ul class="small-block-grid-2">
+        <li>
+          <!-- logo -->
+            <img src="img/vektorlogo.svg" width="205" height="205">
+        </li> 
+        <li>
+          <!-- registration of users -->
+          <form data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up to CommenTerra</button>
+          </form>
+        </li>
         </ul>
       </div>
     </strong>
 
+    <strong class="show-for-small-only">
+      <div class="panel custom">
+        <!-- registration of users -->
+          <form data-abide>
+            <div class="name-field">
+                <input type="text" id="username" placeholder="Pick a username" name="username" required pattern="">
+              <small class="error">Please type in a username!</small>
+            </div>
+            <div class="email-field">
+                <input type="email" id="email" placeholder="Your e-mail" name="email" required pattern="email"> 
+              <small class="error">Please type in a valid e-mail-adress!</small>
+            </div>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Create a password" name="password" required> 
+              <small class="error">Please type in a password!</small>
+            </div>
+              <button href="/myprofile" class="tiny radius expand" type="submit">Sign Up to CommenTerra</button>
+          </form>
+        </li>
+      </div>
+    </strong>
+    <% } %>
+    
     <!-- lower bright gray area -->
     <div class="panel custom2">
-			<% if ((boolean1) && (boolean3)) {%> 
       <ul class="small-block-grid-2">
         <li>
-          <a href="/comments/add" class="success button radius expand">New Comment</a>
+          <a id="numero3" href="/comments/add" class="success button radius expand">New Comment</a>
         </li>
         <li>
-          <a href="/api/v1/search" class="success button radius expand">Advanced Search</a>
+          <a id="numero4" href="/api/v1/search" class="success button radius expand">Advanced Search</a>
         </li>
       </ul> 
-			 <%} %>      
-			 
+
       <ul class="large-block-grid-2 medium-block-grid-1 small-block-grid-1" data-equalizer>
         <li>
           <div class="panel custom" style="overflow: auto; max-height: 792px" data-equalizer-watch >
             <!-- comments 
-                   ordered in an data-accordion. only the comments
-                   of the current user -->
-            <dl id="numero1" class="accordion" data-accordion>
+                 orderd in a data-accordion -->
+            <dl class="accordion" data-accordion>
               <% for(var i=0; i<comments.length; i++) {%>
               <dd class="accordion-navigation">
-                <a href="#panel<%= comments[i]._id %>" onclick="activateMarker(
+
+                <a id="numero6" href="#panel<%= comments[i]._id %>" onclick="activateMarker(
                   '<%= comments[i].markerCoords[0] %>', '<%= comments[i].markerCoords[1] %>')"><%= comments[i].title %></a>
-                <div id="panel<%= comments[i]._id %>" class="content">
+
+                <div id="panel<%= comments[i]._id %>" class="content" 
+                  >
                   <div class="panel custom5" style="border-color: #424242;">
                   <ul class="no-bullet">
                   <li>
+                    <!-- MapViewer
+                         by clicking the link of the geodataset
+                         it is open in the map_viewer -->
                     <a href="/mapviewer/<%= comments[i].dataset._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
-                     <!-- display stars depending on star-rating -->
+                    <!-- display stars depending on star-rating -->
                     <% if (comments[i].dataset.rating) {%> 
                       <% for (var k=0; k<comments[i].dataset.rating; k++) { %> 
                         <i class="fi-star size-28 font-green"></i>
@@ -410,29 +422,28 @@
                       <% for (var l=0; l<5; l++) { %> 
                         <i class="fi-star size-28 font-grey"></i>
                       <% } %>
-                    <%} %>                   
+                    <%} %>                  
                   </li>
                   </ul>
-                  <%= comments[i].text %>
+                  <%= comments[i].text %> 
                   <p>
                   <ul class="no-bullet">
                   <li>
-                    <% if (comments[i].user) {%>                  
+                    <% if (comments[i].user) {%>
                     <% if (boolean1) { %>
                       <a href="/profile/<%= comments[i].authorName %>"><font color="#2ba6cb">
                     <% } else {%> 
                       <a href=""><font color="#2ba6cb">
                     <%} %> 
-
-                      <%= comments[i].user.local.username %>
+                      <%= comments[i].user.local.username %>&nbsp
                       <% if (comments[i].user.status=="Expert") {%>
-                            (<%= comments[i].user.status %>) <%} %>
-                            &nbsp&nbsp&nbsp&nbsp
+                      (<%= comments[i].user.status %>) <%} %>
+                      
                     </font></a>
                   <%} else {%> 
                     <font color="#424242"><em>anonymous</em></font>&nbsp&nbsp&nbsp&nbsp
                   <%} %>
-                    <!-- Thumb up/down rating -->
+                  <!-- Thumb up/down rating -->
                   <font color="#80FF00" ><b id="upvotesValue-<%= i %>"><%= comments[i].upvotes %></b></font>
                   <% if (boolean1) {%> 
                     <a><i class="fi-like size-28 font-green" 
@@ -447,11 +458,12 @@
                    <%} else {%> 
                      <i class="fi-dislike size-24 font-alert" id="thumbdown"></i>
                    <%} %>
-                    &nbsp&nbsp&nbsp&nbsp
-                     &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>                  
+                   &nbsp&nbsp&nbsp&nbsp
+                   &nbsp&nbsp&nbsp&nbsp<%= comments[i].dateString %>
                   </li>
-                  </ul> 
-                </div><br>
+                  </ul>
+                  </div>
+                  <br>
                   <ul class="no-bullet">
                   <li>
                     <!-- for making a comment at a comment -->
@@ -462,10 +474,9 @@
                         <button href="#" class="success tiny radius expand" type="submit">Send your comment</button>
                       </div>
                     </div>
-                  </form>
-                  </li>
-                  </ul>
-                  <% if (comments[i].comments.length>0) {%>
+                  </form>            
+
+                  <% if (comments[i].comments.length>0) {%>                  
                       <% for (var j=comments[i].comments.length-1; j>=0; j--) {%>
                       <div class="row">
                       <div class="small-12 columns">
@@ -473,15 +484,11 @@
                           <div class="content">
                             <p><%= comments[i].comments[j].text %></p>
                               <% if (comments[i].comments[j].user) {%>
-                            <!-- HERE SCRIPT TO POPULATE COMMENTS1 -->
                               <a href="/profile/<%= comments[i].comments[j].authorName %>"><font color="#2ba6cb">
-                                <%= comments[i].comments[j].authorName %>
-                                <% if (comments[i].comments[j].user.status=="Expert") {%>
-                                  (<%= comments[i].comments[j].user.status %>) <%} %>
-                                  &nbsp&nbsp&nbsp&nbsp
+                                <%= comments[i].comments[j].authorName %>&nbsp&nbsp&nbsp&nbsp
                               </font></a>
                             <%} else {%> 
-                              <font color="#424242"><em>anonymous</em></font>                            
+                              <font color="#424242"><em>anonymous</em></font>&nbsp&nbsp&nbsp&nbsp                           
                             <%} %>
                                 <!-- Thumb up/down rating -->
                     <font color="#80FF00" ><b id="upvotesValue-<%= i %>-<%= j %>">
@@ -508,12 +515,18 @@
                         </div>
                         </div>
                         <br>
+
                         <%} 
                       %>
                   <%} %>
+
+                    </li>
+                  </ul>               
                 </div>
               </dd>
+
               <% } %>
+
             </dl>
           </div>
         </li>
@@ -521,16 +534,17 @@
           <div class="panel custom" data-equalizer-watch>
             <!-- map -->
             <div id="numero5">
-              <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
+            <div class="map" id="map1" style="width: 100%; height: 750px; border-radius: 3px"></div>
             </div>
+
           </div>
         </li>
       </ul>
     </div>
-            <!-- script for the map on the right of the site -->
               <script>
-                //map for medium displays
+                //map
                 var map1 = L.map('map1');
+                //var map1 = L.map('map1').setView([51.96935, 7.59588], 13);
 
                 //load and display tile layers on the map
                 var mapBox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -621,7 +635,10 @@
                   .setContent("You clicked the map at " + e.latlng.toString())
                   .openOn(map1);
                 }
-                var markers = []
+
+                map1.on('click', onMapClick1);
+
+              var markers = []
               var openArray = []
               var coordsAndBoolean = {}
 
@@ -700,10 +717,10 @@
                   if (markers[i].getLatLng().equals(markerY)) {
 
                      var k = i;
-                     console.log("i " + i + " k " + k + " " + openArray[k].i)
+                     console.log("i " + i + " k " + k + " " + openArray[k].index)
                   }                 
                 }
-                console.log("click: " + openArray[k].i + " " + openArray[k].open)
+                console.log("click: " + openArray[k].index + " " + openArray[k].open)
                 if (!(openArray[k].open)) {
                     markers[k].setIcon(greenIcon).openPopup();                 
                 } else {
@@ -711,14 +728,14 @@
                 }
 
                 openArray[k].open = !(openArray[k].open)
-                 console.log("nach click: " + openArray[k].i + " " + openArray[k].open)
+                 console.log("nach click: " + openArray[k].index + " " + openArray[k].open)
              
               }
-
-                map1.on('click', onMapClick1);
               </script>
 
+
     <div class="panel custom4" style="width: 100%; height: 2px"></div>
+
 
     <!-- FOOTER
          on every page to get more informations -->
@@ -731,16 +748,29 @@
          as intrudation in the functionality of this page -->
     <ol class="joyride-list" data-joyride>
       <li data-id="firstStop" data-text="Next" data-options="prev_button: false">
-        <p>This is your profile page!</p>
+        <h5>Hi there!</h5>
+        <p>Hello and welcome to the CommenTerra Project...</p>
       </li>
-      <li data-id="numero1" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
-        <p>Useful to browse through and view your comments...</p>
+      <li data-id="numero1" data-text="Next" data-prev-text="Prev" data-options="tip_location: bottom">
+        <p>... if you want to know more about the project and how to work with it, please use the Site Navigation in our multi-functional top-bar. You will also find helpful links at the bottom of the page.</p>
       </li>
       <li data-id="numero2" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>... and to share some information about yourself with the community.</p>
-      </li>       
-      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
-        <p>Again you can use our awesome multi-functional top-bar and the site navigation, but this time you are also able to edit your profil.</p>
+        <p>If you instead want to start right away, we won't blame you! Sign up now and enjoy all the member-privelidges and our awesome community.</p>
+      </li>
+      <li data-id="numero3" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>With this button you can add a new comment on almost any geodataset you desire.</p>
+      </li>
+      <li data-id="numero4" data-button="Next" data-prev-text="Prev" data-options="tip_location: bottom; tip_animation: fade">
+        <p>And with this button you can enjoy the comfort of our awesome search-engine. Just get comfortable, while we do the research for you and get you the comments and datasets you are looking for.</p>
+      </li>
+      <li data-id="numero5" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>This is the map with the markers and potential layers of the comments...</p>
+      </li>
+      <li data-id="numero6" data-button="Next" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>... and this is, where the comments are! Click the titles to get more information about the comment and its topic.</p>
+      </li>
+      <li data-id="lastStop" data-button="End" data-prev-text="Prev" data-options="tip_location: top; tip_animation: fade">
+        <p>We hope you like our little application. Don't hesitate to contact us on any issues. Have fun!</p>
       </li>
     </ol>
 
@@ -753,10 +783,11 @@
       function startJoyRide(){
       if (matchMedia('only screen and (min-width: 64.063em)').matches) {
         $(document).foundation('joyride', 'start');
-      }
+        }
       }
     </script>
-        <script>
+
+    <script>
     function thumbRating(commentId, action, i){
       $.get("/comments/votes", { id : commentId, action: action }, function(response){
         var score = Number(response)
@@ -780,6 +811,6 @@
       });
    }
     </script>
-  </body>
 
+  </body>
 </html>

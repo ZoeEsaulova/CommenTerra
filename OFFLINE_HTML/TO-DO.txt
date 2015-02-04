@@ -1,25 +1,25 @@
 -----------------------------------------------
 Aktueller Stand des Servers: 31.01
 -----------------------------------------------
+Fragen & Probleme:
+- auf dem Server lassen sich die Suchergebnisse von MyMetaMaps nich ausklappen
+- auf dem Server erscheinen MyMetaMaps-Kommentare nur wenn man in der Quicksearch sucht
+- Wie genau funktioniert die zeitliche suche? Wenn man start UND endzeit eingibt funktioniert das sehr gut. 
+  wenn man nur eine Startzeit eingibt... was passiert dann?
+- Beim WMTS z.B. wird trotz erkannter Bounding Box kein Marker hinterlegt. 
+  Ist der Code evtl. noch nicht vollständig dafür fertig? WMS-Code Copy-Paste?
+- sollte man auf der Karte (z.b. Home.ejs) evtl zusätzlich zum Marker eines Kommentars nicht auch gleich die Boundingbox anzeigen?
+  Bei dem Marker weiß ich wo der Mittelpunkt ist. Aber die Ausdehnung ist doch wichtig oder? 
+  Vor allem wenn man sich mit seinem Kommentar auf einen bestimmten geographischen Bereich bezieht
+  Ich weiß, sehr spät, aber nur so ein Gedanke
 
 allgemein:
 - Server: Beispieldaten
 - Logout funktioniert nur von diesen Seiten: map_viewer, about, faq. Von profile, advanced_search und new_comment Seiten gehts nicht.
     --> das liegt an den Modalen, bis jetzt aber noch keine Lösung gefunden
-- KARTE: Marker beim anklicken eines Kommentars hervorheben, mehrere Marker mit gleichen Coordinaten
-in der ejs im accordeon wo der Titel des comments geladen wird eine onClick="functionxy()" schreiben die dann unten im map-script geladen wird.
-Dort muss eine function ausgeführt werden die den marker des kommentars anhand seiner in der Datenbank hinterlegten Koordinaten identifiziert und dann den Marker ändert,
-über: z.B. markerXY = L.marker("Datenbankkoordinaten", {icon: greenIcon}); ... irgendwie so.
-Anders herum eine markerXY.click(zugehöriger kommentar auf class="content active" schalten) ... so müsste das gehen .. hoffe, dass das mit der class funktioniert.
-- QUICKSEARCH: Datei o.ä. aus der Datenbank erstellen fur die autocomplete-Funktion
-- PARSING:  andere Formate, server response übersichtlich machen!
-- STYLESHEETS: 1. Wenn man einen sehr langen Link eingibt (bzw. den Permalink anzeigen lässt,
- wobei alle Suchparameter benutzt wurden), wird keinen Zeilenumbruch gemacht und der Link geht quer durch die ganze Seite. 
- 		2. Kommentare visuell voneinander trennen (Daniel's feedback)
--  Datepicker: das Jahr direkt verändern
-
-home:
-- müssen neben der Registrierungsform nicht die Vorteile für den eingelogten Nutzer stehen?
+- QUICKSEARCH: JSON-Datei (public/autocomplete.json) ist angelegt und wird auch korrekt ausgelesen, 
+               man könnte nun zusätzlich Worte aus der DB in die JSON schreiben
+- PARSING:  andere Formate
 
 new_comment:
 - WMS/WFS einladen?
@@ -34,7 +34,9 @@ _______________________________________________________________
 - Unique username
 
 profile:
-- email anzeigen lassen, aber mit option zum ausblenden 
+- email anzeigen lassen, aber mit option zum ausblenden
+- profilbild hochladen? (code ist schon probeweise angelegt, 
+  styling gestaltet sich allerdings als schwierig, da in foundation nicht enthalten)
 
 advanced_search:
 - checkboxen: "all these words", "any of these words" : der unterschied besteht hier nur darin ob man 
