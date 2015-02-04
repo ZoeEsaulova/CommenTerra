@@ -83,7 +83,11 @@
       
   </head>
 
-  <body>
+   <% if (markers) { %>
+       <body onload="showMarkers('<%= markers %>')">
+    <% } else { %>
+       <body>
+    <% }%>
 
     <% if (message.length > 0) { %>
       <div data-alert class="alert-box">
@@ -180,7 +184,8 @@
         </li>
         <li>
           <nav id="map-ui" class="layer-button">
-            <a class="active" id="url-layer">Show / Hide URL-Layer</a>
+            <a class="active" id="url-layer" onclick="showBoundingBox(
+                  <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)">Show Bounding Box</a>
           </nav>
         </li>
       </ul>
@@ -274,7 +279,7 @@
 
                 // initialize the layer-control toolbar
                 L.control.layers(baseLayers).addTo(map1);
-
+/*
                 // load a wms
                 //
                 // !!! HIER KANN MAN ZUR VERBESSERUNG ANSETZEN !!! (dieser WMS liegt über den USA)
@@ -295,7 +300,7 @@
                   this.className = enable ? 'active' : '';
                   return false;
                 };
-
+*/
                 var specialIcon = L.Icon.extend({
                   options: {
                     shadowUrl: '/css/images/marker-shadow.png',
@@ -341,7 +346,7 @@
                 map1.on('locationfound', onLocationFound1);
                 map1.on('locationerror', map1.setView([51.158119, 10.446495], 6), onLocationError1);
 
-                map1.locate({setView: true, maxZoom: 16});
+                map1.locate({setView: false, maxZoom: 16});
 
                 var popup = L.popup();
 
@@ -353,16 +358,50 @@
                 }
 
                 map1.on('click', onMapClick1);
+
+
                 // define rectangle geographical bounds
 
                 function showBoundingBox(xmin, ymin, xmax, ymax) {
-
+                  console.log("SOW BB")
                 var bounds = [[xmin, ymin], [xmax, ymax]];
                 // create an orange rectangle
                 L.rectangle(bounds, {color: "#ff7800", weight: 2}).addTo(map1);
 
                 // zoom the map to the rectangle bounds
                 map1.fitBounds(bounds);
+                }
+
+                var markers = []
+
+                function showMarkers(planes) {
+
+                    planes = planes.split(",");
+                    var minx = 51.927967;
+                    var miny = 7.576890;
+                    var maxx = 52.002744;
+                    var maxy = 7.669931;
+                    for (var i = 0; i < planes.length-1; i=i+3) {
+                      if (Number(planes[i]) < miny) {
+                        miny = Number(planes[i])
+                      } else if (Number(planes[i]) > maxy) {
+                        maxy = Number(planes[i])
+                      }
+                       if (Number(planes[i+1]) < minx) {
+                        minx = Number(planes[i+1])
+                      } else if (Number(planes[i+1]) > maxx) {
+                        maxx = Number(planes[i+1])
+                      }
+                      var marker = new L.marker( [ Number( planes[i+1]), Number(planes[i]) ] )
+                      .bindPopup(planes[i+2]).addTo(map1);
+                      markers.push(marker)
+                     
+                    }
+
+                    map1.fitBounds([
+                      [minx-0.5, miny-0.5],
+                      [maxx+0.5, maxy+0.5]
+                  ]);
                 }
     </script>
 
