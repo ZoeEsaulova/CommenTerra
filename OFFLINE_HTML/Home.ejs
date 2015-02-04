@@ -408,7 +408,7 @@
                     <!-- MapViewer
                          by clicking the link of the geodataset
                          it is open in the map_viewer -->
-                    <a href="/mapviewer/<%= comments[i]._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
+                    <a href="/mapviewer/<%= comments[i].dataset._id %>"><font color="#2ba6cb"><%= comments[i].dataset.url %></font></a>
                     <p>
                     <!-- display stars depending on star-rating -->
                     <% if (comments[i].dataset.rating) {%> 

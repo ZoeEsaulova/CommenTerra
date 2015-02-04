@@ -6,6 +6,7 @@ var User = require('../models/user');
 var Comment = require('../models/comment');
 var Dataset = require('../models/dataset');
 var _ = require('underscore');
+var coords = { minx: "", miny: "", maxx: "", maxy: "" };
 // normal routes ===============================================================
 
 	// show the home page
@@ -57,14 +58,25 @@ var _ = require('underscore');
 	});
 
 	//show map_viewer page
-	app.get('/mapviewer/:datasetId', function(req,res) {
-		Dataset.findOne({ "_id" : req.params.datasetId}).exec(function(err, dataset) {
+	app.get('/mapviewer/:commentId', function(req,res) {
+
+		Comment.findOne({ "_id" : req.params.commentId}).exec(function(err, comment) {
+			coords["minx"] = comment.xLowRight.toString()
+			coords["miny"] = comment.yLowRight.toString()
+			coords["maxx"] = comment.xUpLeft.toString()
+			coords["maxy"] = comment.yUpLeft.toString()
+			var markers = ""
+			if (comment.markerCoords[0]) {
+				markers = markers +  comment.markerCoords[0] + "," +  comment.markerCoords[1] + "," + comment.title + ','					
+			}
+			console.log("TEST 145: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
 			if (req.isAuthenticated()) {
 			res.render('map_viewer.ejs', { boolean1: true, username: req.user.local.username, action: "/logout", actionName: "Logout", 
-				message: req.flash('loginMessage'), userId: req.user.local.username, url: dataset.url })
+				message: req.flash('loginMessage'), userId: req.user.local.username, url: comment.url,
+				coords: coords, markers: markers })
 		} else {
 			res.render('map_viewer.ejs', { boolean1: false, username: 'Anonymous', action: "#", actionName: "Login", 
-				message: req.flash('loginMessage'), url: dataset.url })
+				message: req.flash('loginMessage'), url: comment.url, coords: coords, markers: markers})
 		} 
 
 		})

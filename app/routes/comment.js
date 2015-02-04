@@ -304,10 +304,12 @@ router.post('/add', function(req, res) {
 			if (req.body.rectangle) {
 				coords2 = createString(req.body.rectangle)
 				coords = {}
+
 				coords["minx"] = coords2[1]
 				coords["miny"] = coords2[0]
 				coords["maxx"] = coords2[5]
 				coords["maxy"] = coords2[2]
+				console.log("TEST 144: " + coords.minx + " " + coords.miny + " " + coords.maxx + " " + coords.maxy)
 			}
 			if (req.body.rating) {
 				rating = Number(req.body.rating)
