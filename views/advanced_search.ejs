@@ -127,7 +127,7 @@
             return split( term ).pop();
           }
 
-          $( "#tags" )
+          $( "#tags, #advanced, #advanced2" )
           // don't navigate away from the field on tab when selecting an item
           .bind( "keydown", function( event ) {
             if ( event.keyCode === $.ui.keyCode.TAB &&
@@ -272,7 +272,7 @@
           <h3 id="firstStop"><font color="white">&nbspAdvanced Search</font color="white"></h3>
           <li>
             <form action="/api/v1" method="post">
-              <input type="text" name="q" placeholder="<%= keywordsPH %>" />
+              <input id="advanced" type="text" name="q" placeholder="<%= keywordsPH %>" />
               <input type="text" name="url" placeholder="<%= urlPH %>" />            
               <input type="text" name="authorName" placeholder="<%= userPH %>" />
               <p id="numero1">
@@ -313,7 +313,7 @@
                 <div id="permalinkModalLarge" class="reveal-modal" data-reveal>
                   <h2>Permalink</h2>
                   <p class="lead">Copy this link to save your search configuration and reuse it again in the future:</p>
-                  <input type="text" style="color: #2ba6cb" value="http://localhost:80/apo/v1/search?<%= query %>" />
+                  <input type="text" style="color: #2ba6cb" value="http://giv-geosoft2a.uni-muenster.de/api/v1/search?<%= query %>" readonly />
                   <a class="close-reveal-modal">&#215;</a>
                 </div>
               </li>
@@ -329,7 +329,7 @@
              ordered in a grid to have a better overview of the options -->
         <h3 id="firstStop"><font color="white">&nbspAdvanced Search</font color="white"></h3>
         <form action="/api/v1" method="post">
-          <input type="text" name="q" placeholder="<%= keywordsPH %>" />
+          <input id="advanced2" type="text" name="q" placeholder="<%= keywordsPH %>" />
           <input type="text" name="url" placeholder="<%= urlPH %>" />            
           <input type="text" name="authorName" placeholder="<%= userPH %>" />
           
@@ -365,7 +365,7 @@
           <div id="permalinkModalSmall" class="reveal-modal" data-reveal>
             <h2>Permalink</h2>
             <p class="lead">Copy this link to save your search configuration and reuse it again in the future:</p>
-            <input type="text" style="color: #2ba6cb" value="http://localhost:80/apo/v1/search?<%= query %>" />
+            <input type="text" style="color: #2ba6cb" value="http://giv-geosoft2a.uni-muenster.de/api/v1/search?<%= query %>" readonly />
             <a class="close-reveal-modal">&#215;</a>
           </div>
           <!-- initialize the search -->
