@@ -86,8 +86,26 @@ router.get('/simplesearch', function(req, res) {
 				var splitdate2 = req.query.enddate.split('/')
 				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
 				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
-				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
 						
+			} else if (req.query.startdate) {
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.startdate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
+			} else if (req.query.enddate) {
+				var splitdate1 = req.query.enddate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
 			}
 
 		} else {
@@ -102,6 +120,22 @@ router.get('/simplesearch', function(req, res) {
 
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )
 						
+			} else if (req.query.startdate) {
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.startdate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
+			} else if (req.query.enddate) {
+				var splitdate1 = req.query.enddate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
 			}
 			for (j = 0; j < split.length; j++) { 
 				var regexX = new RegExp(split[j], 'i');
@@ -286,6 +320,22 @@ router.get('/search', function(req,res) {
 				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
 				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
 				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ { "startdate": { "$lte": start } }, { "enddate": { "$gte": start } } ] } ] }  )						
+			} else if (req.query.startdate) {
+				var splitdate1 = req.query.startdate.split('/')
+				var splitdate2 = req.query.startdate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
+			} else if (req.query.enddate) {
+				var splitdate1 = req.query.enddate.split('/')
+				var splitdate2 = req.query.enddate.split('/')
+				var start = new Date(splitdate1[2], parseInt(splitdate1[0])-1, parseInt(splitdate1[1])+1)
+				var end = new Date(splitdate2[2], parseInt(splitdate2[0])-1, parseInt(splitdate2[1])+1)
+				query.where({$or: [ { "startdate": {"$gte": start, "$lte": end } }, { $and: [ 
+					{ "startdate": { "$lte": start } }, 
+					{ "enddate": { "$gte": start } } ] } ] }  )
 			}
 		
 	// search for keywords, url, user

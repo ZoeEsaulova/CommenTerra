@@ -104,21 +104,27 @@ router.get('/', function(req,res) {
  	var version = "VERSION"
  	console.log("Format: " + format)
  	var title = ""
- 	
- 	if (req.query.select=="wcs" || req.query.select=="csw") {
- 		version = "AcceptVersions"
+ 	var nummer = "1.1.0"
+ 	var myrequest = "GetCapabilities"
+ 	if (req.query.select=="csw") {
+ 		nummer = "2.0.2"
  	}
+ 	
+ 	
+ 	/*if (req.query.select=="wcs") {
+ 		version = "AcceptVersions"
+ 	}*/
  	// check the url format, append an GetCapability request if necessary
- 	if (req.query.url.indexOf("kml")!=(-1)) {
+ 	if (req.query.url.indexOf("gml")!=(-1) || req.query.url.indexOf("kml")!=(-1)) {
  		url = req.query.url
  	} else if (req.query.url.indexOf("?")==(-1)) {
-		url = req.query.url + "?REQUEST=GetCapabilities" + version + "=1.0.1&SERVICE=" + format 
+		url = req.query.url + "?REQUEST=" + myrequest + "&" + version + "=" + nummer + "&SERVICE=" + format 
 	} else if (!(req.query.url.indexOf("GetCapabilities")==(-1))) {
 		url = req.query.url
 	} else {
-		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=GetCapabilities&" + version + "=1.0.1&SERVICE=" + format 
+		url = req.query.url.slice(0,req.query.url.indexOf("?")) + "?REQUEST=" + myrequest + "&" + version + "=" + nummer + "&SERVICE=" + format 
 	}
-
+console.log("URL: " + url)
 	if (req.query.select=="hgeo") {
 		console.log("HGEO")
 		var microformats = require("microformat-node"),
@@ -191,6 +197,41 @@ router.get('/', function(req,res) {
 					coords.maxy = resp.UpperCorner.split(' ')[1]
 				} if (layer.title) {
 					title = layer.title
+				} if (resp.lat) {
+					var lat = resp.lat.split(';')
+					var lon = resp.lon.split(';')
+					var minx = lat[0]
+					var miny = lon[0]
+					var maxx = lat[0]
+					var maxy = lon[0]
+					console.log("length " + lat.length)
+					for (var t=0; t<lat.length; t++) {
+						lat[t] = Number(lat[t].trim())
+						lon[t] = Number(lon[t].trim())
+					}
+					for (var t=0; t<lat.length; t++) {
+						//console.log("lat " + resp.lat[t])
+						//console.log("lon " + resp.lon[t])
+						if (lat[t]<minx) {
+							minx = lat[t]
+						}
+						if (lat[t]>maxx) {
+							maxx = lat[t]
+						}
+						if (lon[t]<miny) {
+							miny = lon[t]
+						}
+						if (lon[t]>maxy) {
+							maxy = lon[t]
+						}
+
+					}
+					console.log("min " + minx + " " + miny)
+					console.log("max " + maxx + " " + maxy)
+					coords.minx = miny
+					coords.miny = minx
+					coords.maxx = maxy
+					coords.maxy = maxx
 				}
 				var newString = JSON.stringify(result);
 				var replace1 = newString.replace(/{/g, "\n { \n")
@@ -614,8 +655,36 @@ router.post('/addtothread/:commentId', function(req, res) {
 	}
 });
 
+//EXAMPLES
+
+router.get('/hgeo/example1', function(req,res) {
+
+})
 //Find coordinates for bounding box and marker
 function findAttr(o, format) {
+	if (format=="gml") {
+		for (i in o) {
+			if (typeof(o[i])=="object") {
+				findAttr(o[i], format );
+			}
+			if (i=="LAT" && typeof(o[i])=="string") {
+				if (resp.lat==undefined) {
+					
+					resp["lat"] = o[i]
+        		} else {
+        			resp["lat"] = resp["lat"] + ";" + o[i]
+        		}
+        		console.log("resp.lat: " + resp.lat)
+			}
+			if (i=="LON" && typeof(o[i])=="string") {
+				if (resp.lon==undefined) {
+					resp["lon"] = o[i]
+        		} else {
+        			resp["lon"] = resp["lon"] + ";" + o[i]
+        		}
+			}
+		}
+	}
 	if (format=="wms") {
 		for (i in o) {
         	if (typeof(o[i])=="object") {
