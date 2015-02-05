@@ -183,7 +183,7 @@
     <!--Progress-bar-->
     <script>
       $(function() {
-        var progressbar = $( "#progressbar" ),
+        var progressbar = $( "#progressbar, #progressbar2" ),
         progressLabel = $( ".progress-label" );
         progressbar.progressbar({
           value: false,
@@ -210,6 +210,7 @@
     <script>
       function visible(){
         document.getElementById("progressbar").style.visibility='visible'
+        document.getElementById("progressbar2").style.visibility='visible'
       }
     </script>
   </head>
@@ -347,7 +348,7 @@
         <li>
           <!--shows the response of the URL-->
           <label><font id="numero1" color="white" size="4">Response:</font><label>
-          <textarea id="response" disabled="disabled" style="height: 230px"><%= XMLresponse %></textarea>
+          <textarea id="response" readonly style="height: 230px"><%= XMLresponse %></textarea>
           <!--Progress-bar-->
           <div id="progressbar" style="visibility: hidden;"><div class="progress-label">Loading...</div></div>
         </li>
@@ -371,7 +372,7 @@
         <option value="gml">GML</option>
       </select>
       </label>
-      <button class="tiny radius expand" id="#" type="#" onclick="document.getElementById('urlResult1').innerHTML = document.getElementById('firstStop').value">
+      <button class="tiny radius expand" id="#" type="#" onclick="visible(); document.getElementById('urlResult1').innerHTML = document.getElementById('firstStop').value;">
       <font color="#424242">Validate URL</font>
       </button>
       </form>
@@ -381,10 +382,10 @@
                   <%= coords.miny %>, <%= coords.minx %>, <%= coords.maxy %>, <%= coords.maxx %>)"><font color="#424242">Show Bounding Box</font></button>
       <!--shows the response of the URL-->
       <label><font color="white" size="4">Response:</font><label>
-      <textarea id="response" disabled="disabled" style="height: 180px"><%= XMLresponse %></textarea>
-      </li>
-    </ul>
-    </div>
+      <textarea id="response" readonly style="height: 180px"><%= XMLresponse %></textarea>
+      <!--Progress-bar-->
+      <div id="progressbar2" style="visibility: hidden;"><div class="progress-label">Loading...</div></div>
+      <p></p>
     </strong>
   </div>
 
