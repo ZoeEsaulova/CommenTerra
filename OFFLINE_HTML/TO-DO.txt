@@ -1,5 +1,5 @@
 -----------------------------------------------
-Aktueller Stand des Servers: 31.01
+Aktueller Stand des Servers: 5.02
 -----------------------------------------------
 Fragen & Probleme:
 - auf dem Server lassen sich die Suchergebnisse von MyMetaMaps nich ausklappen
