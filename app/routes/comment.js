@@ -115,7 +115,7 @@ router.get('/', function(req,res) {
  		version = "AcceptVersions"
  	}*/
  	// check the url format, append an GetCapability request if necessary
- 	if (req.query.url.indexOf("kml")!=(-1) || req.query.url.indexOf("kml")!=(-1)) {
+ 	if (req.query.url.indexOf("gml")!=(-1) || req.query.url.indexOf("kml")!=(-1)) {
  		url = req.query.url
  	} else if (req.query.url.indexOf("?")==(-1)) {
 		url = req.query.url + "?REQUEST=" + myrequest + "&" + version + "=" + nummer + "&SERVICE=" + format 
